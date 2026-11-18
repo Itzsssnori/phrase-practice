@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
 /// Bottom sheet dialog allowing the user to select their study or native language.
@@ -46,6 +47,8 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     final languages = MockDataService.sampleLanguages.where((lang) {
       if (_query.isEmpty) return true;
       final q = _query.toLowerCase();
@@ -64,14 +67,14 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Handle bar
+              // Subtle handle bar
               Center(
                 child: Container(
-                  width: 40,
+                  width: 36,
                   height: 4,
                   margin: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -82,6 +85,7 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
                 widget.title,
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
@@ -101,37 +105,50 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
                 child: ListView.separated(
                   controller: scrollController,
                   itemCount: languages.length,
-                  separatorBuilder: (context, index) => const Divider(height: 1),
+                  separatorBuilder: (context, index) => Divider(
+                    height: 1,
+                    color: isDark ? AppColors.darkDivider : AppColors.lightDivider,
+                  ),
                   itemBuilder: (context, index) {
                     final lang = languages[index];
                     final isCurrent = lang.code == widget.selectedLanguage.code;
 
-                    return ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.sm,
-                        vertical: AppSpacing.xs,
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: isCurrent
+                            ? (isDark ? AppColors.darkSecondary : AppColors.lightSecondary)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                       ),
-                      leading: Text(
-                        lang.flag,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                      title: Text(
-                        lang.name,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: 2,
                         ),
+                        leading: Text(
+                          lang.flag,
+                          style: const TextStyle(fontSize: 22),
+                        ),
+                        title: Text(
+                          lang.name,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
+                            color: isCurrent ? theme.colorScheme.primary : null,
+                          ),
+                        ),
+                        subtitle: Text(
+                          lang.nativeName,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        trailing: isCurrent
+                            ? Icon(
+                                Icons.check_rounded,
+                                color: theme.colorScheme.primary,
+                                size: AppSpacing.iconMd,
+                              )
+                            : null,
+                        onTap: () => Navigator.of(context).pop(lang),
                       ),
-                      subtitle: Text(
-                        lang.nativeName,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                      trailing: isCurrent
-                          ? Icon(
-                              Icons.check_circle_rounded,
-                              color: theme.colorScheme.primary,
-                            )
-                          : null,
-                      onTap: () => Navigator.of(context).pop(lang),
                     );
                   },
                 ),

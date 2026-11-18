@@ -1,8 +1,9 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../models/category.dart';
 import '../models/phrase.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/phrase_card.dart';
 
@@ -50,6 +51,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -64,16 +66,20 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           children: [
             // Category header card
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer.withValues(alpha: 0.4),
+                color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
                 borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
                 border: Border.all(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.15),
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  width: 1,
                 ),
               ),
               child: Column(
@@ -81,10 +87,18 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(
-                        _category.icon,
-                        color: theme.colorScheme.primary,
-                        size: AppSpacing.iconLg,
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        ),
+                        child: Icon(
+                          _category.icon,
+                          color: theme.colorScheme.primary,
+                          size: AppSpacing.iconMd,
+                        ),
                       ),
                       const SizedBox(width: AppSpacing.md),
                       Expanded(
@@ -92,6 +106,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                           _category.title,
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
+                            color: isDark ? AppColors.darkText : AppColors.lightText,
                           ),
                         ),
                       ),
@@ -100,13 +115,15 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                   const SizedBox(height: AppSpacing.sm),
                   Text(
                     _category.description,
-                    style: theme.textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Text(
-                    '${_phrases.length} phrases available for study',
+                    '${_phrases.length} phrases available for practice',
                     style: theme.textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       color: theme.colorScheme.primary,
                     ),
                   ),
@@ -119,6 +136,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
               'Phrases',
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.darkText : AppColors.lightText,
               ),
             ),
             const SizedBox(height: AppSpacing.md),

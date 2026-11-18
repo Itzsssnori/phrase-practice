@@ -1,5 +1,5 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../models/phrase.dart';
 import '../services/mock_data_service.dart';
 import '../theme/app_colors.dart';
@@ -17,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // PLACEHOLDER: Selected study language
   var _selectedLanguage = MockDataService.sampleLanguages[1]; // Spanish
   late List<Phrase> _phrases;
 
@@ -50,11 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final featuredPhrase = _phrases.first;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Phrase Practice'),
+        title: Text(
+          'Phrase Practice',
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.3,
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search_rounded),
@@ -71,11 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Language Selection Bar
+              // Top Bar: Active study language & subtle streak pill
               Row(
                 children: [
                   LanguageChip(
@@ -84,29 +93,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: _changeLanguage,
                   ),
                   const Spacer(),
-                  // Subtle calm streak tag (no loud animations)
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.md,
                       vertical: AppSpacing.xs,
                     ),
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainerHighest,
+                      color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
                       borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.local_fire_department_rounded,
-                          size: 16,
-                          color: AppColors.lightAccent,
+                          size: 15,
+                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           '${MockDataService.sampleProgress.currentStreakDays} days',
                           style: theme.textTheme.labelMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
+                            color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
                           ),
                         ),
                       ],
@@ -121,10 +130,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Phrase of the Day',
+                    'Daily Focus',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: theme.colorScheme.onSurface,
+                      color: isDark ? AppColors.darkText : AppColors.lightText,
                     ),
                   ),
                   TextButton(
@@ -150,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: _QuickActionCard(
                       icon: Icons.g_translate_rounded,
                       title: 'Translator',
-                      subtitle: 'Direct context lookup',
+                      subtitle: 'Contextual lookup',
                       onTap: () => context.push('/translator'),
                     ),
                   ),
@@ -158,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: _QuickActionCard(
                       icon: Icons.quiz_outlined,
-                      title: 'Quick Quiz',
+                      title: 'Quick Drill',
                       subtitle: 'Test 5 key phrases',
                       onTap: () => context.push('/quiz/play'),
                     ),
@@ -168,15 +177,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: AppSpacing.xl),
 
-              // Section 2: Recent Categories
+              // Section 2: Recent Topics
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Popular Topics',
+                    'Core Topics',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: theme.colorScheme.onSurface,
+                      color: isDark ? AppColors.darkText : AppColors.lightText,
                     ),
                   ),
                   TextButton(
@@ -194,19 +203,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
                 itemBuilder: (context, index) {
                   final cat = MockDataService.sampleCategories[index];
-                  return Card(
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.surface,
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                      border: Border.all(
+                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                        width: 1,
+                      ),
+                      boxShadow: isDark
+                          ? []
+                          : [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.015),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                    ),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.all(AppSpacing.md),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.lg,
+                        vertical: AppSpacing.sm,
+                      ),
                       leading: Container(
-                        width: 44,
-                        height: 44,
+                        width: 42,
+                        height: 42,
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.primaryContainer,
+                          color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                         ),
                         child: Icon(
                           cat.icon,
-                          color: theme.colorScheme.onPrimaryContainer,
+                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
                           size: AppSpacing.iconMd,
                         ),
                       ),
@@ -214,15 +243,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         cat.title,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w600,
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
                         ),
                       ),
                       subtitle: Text(
                         '${cat.phraseCount} phrases • ${(cat.progress * 100).toInt()}% mastered',
-                        style: theme.textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                        ),
                       ),
-                      trailing: const Icon(
+                      trailing: Icon(
                         Icons.chevron_right_rounded,
                         size: AppSpacing.iconMd,
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                       ),
                       onTap: () => context.push('/categories/${cat.id}'),
                     ),
@@ -253,36 +286,69 @@ class _QuickActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
-    return Card(
-      child: InkWell(
-        onTap: onTap,
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                icon,
-                color: theme.colorScheme.primary,
-                size: AppSpacing.iconLg,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              Text(
-                title,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+          width: 1,
+        ),
+        boxShadow: isDark
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.015),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                subtitle,
-                style: theme.textTheme.bodySmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+              ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                    size: AppSpacing.iconSm,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Text(
+                  title,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: isDark ? AppColors.darkText : AppColors.lightText,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontSize: 12,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ),
       ),

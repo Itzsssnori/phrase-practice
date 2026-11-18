@@ -1,6 +1,7 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
@@ -29,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -36,22 +38,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           children: [
             // User Profile Card
-            Card(
+            Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                border: Border.all(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  width: 1,
+                ),
+                boxShadow: isDark
+                    ? []
+                    : [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.015),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 28,
-                      backgroundColor: theme.colorScheme.primaryContainer,
+                      radius: 26,
+                      backgroundColor: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
                       child: Text(
                         'JD',
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
-                          color: theme.colorScheme.onPrimaryContainer,
+                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
                         ),
                       ),
                     ),
@@ -64,12 +86,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             'Demo Learner',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w700,
+                              color: isDark ? AppColors.darkText : AppColors.lightText,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'demo@phrasepractice.internal',
-                            style: theme.textTheme.bodySmall,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                            ),
                           ),
                         ],
                       ),
@@ -84,10 +109,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'Learning Preferences',
               style: theme.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.darkText : AppColors.lightText,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Card(
+            Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                border: Border.all(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  width: 1,
+                ),
+              ),
               child: Column(
                 children: [
                   ListTile(
@@ -97,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: const Icon(Icons.chevron_right_rounded),
                     onTap: _chooseLanguage,
                   ),
-                  const Divider(height: 1),
+                  Divider(height: 1, color: isDark ? AppColors.darkDivider : AppColors.lightDivider),
                   ListTile(
                     leading: const Icon(Icons.history_rounded),
                     title: const Text('Translation History'),
@@ -105,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: const Icon(Icons.chevron_right_rounded),
                     onTap: () => context.push('/translator/history'),
                   ),
-                  const Divider(height: 1),
+                  Divider(height: 1, color: isDark ? AppColors.darkDivider : AppColors.lightDivider),
                   ListTile(
                     leading: const Icon(Icons.wifi_off_rounded),
                     title: const Text('Network Error Test Screen'),
@@ -123,28 +157,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'Appearance & Notifications',
               style: theme.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.darkText : AppColors.lightText,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Card(
+            Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                border: Border.all(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  width: 1,
+                ),
+              ),
               child: Column(
                 children: [
                   ListTile(
                     leading: const Icon(Icons.brightness_medium_rounded),
                     title: const Text('Theme Mode'),
                     subtitle: const Text('System Default (Light & Dark supported)'),
-                    trailing: const Chip(
-                      label: Text('System'),
-                      padding: EdgeInsets.zero,
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                      ),
+                      child: Text(
+                        'System',
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                        ),
+                      ),
                     ),
                   ),
-                  const Divider(height: 1),
-                  SwitchListTile(
-                    secondary: const Icon(Icons.notifications_none_rounded),
-                    title: const Text('Daily Study Reminder'),
-                    subtitle: const Text('Coming in next stage'),
+                  Divider(height: 1, color: isDark ? AppColors.darkDivider : AppColors.lightDivider),
+                  const SwitchListTile(
+                    secondary: Icon(Icons.notifications_none_rounded),
+                    title: Text('Daily Study Reminder'),
+                    subtitle: Text('Coming in next stage'),
                     value: false,
-                    onChanged: null, // Disabled per rule: no fake working buttons
+                    onChanged: null,
                   ),
                 ],
               ),

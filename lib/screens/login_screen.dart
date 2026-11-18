@@ -1,5 +1,6 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_text_field.dart';
@@ -25,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleSignIn() {
-    // Stage 1: No real auth backend yet. Direct navigation for layout testing.
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Stage 1 preview: Signed in as demo user.'),
@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -45,19 +46,25 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: AppSpacing.lg,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Welcome Back',
-                style: theme.textTheme.headlineMedium,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
+                ),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 'Enter your credentials to resume your study sessions.',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),
@@ -107,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     'Don\'t have an account?',
-                    style: theme.textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                    ),
                   ),
                   TextButton(
                     onPressed: () => context.push('/register'),

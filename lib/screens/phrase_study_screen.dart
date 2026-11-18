@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import '../models/phrase.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
 import '../widgets/app_favorite_button.dart';
@@ -47,6 +48,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final phrase = _phrases[_currentIndex];
     final progressLabel = '${_currentIndex + 1} of ${_phrases.length}';
 
@@ -57,10 +59,21 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(right: AppSpacing.lg),
-              child: Text(
-                progressLabel,
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.xs,
+                ),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
+                ),
+                child: Text(
+                  progressLabel,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                  ),
                 ),
               ),
             ),
@@ -69,23 +82,24 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Linear step indicator
+              // Clean linear progress line
               ClipRRect(
                 borderRadius: BorderRadius.circular(2),
                 child: LinearProgressIndicator(
                   value: (_currentIndex + 1) / _phrases.length,
                   minHeight: 4,
-                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    theme.colorScheme.primary,
-                  ),
+                  backgroundColor: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
+                  valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                 ),
               ),
-              const SizedBox(height: AppSpacing.xxl),
+              const SizedBox(height: AppSpacing.xl),
 
               // Study Focus Area
               Expanded(
@@ -96,8 +110,26 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                       // Action buttons row (Audio & Favorite)
                       Row(
                         children: [
-                          const AppAudioButton(isAvailable: false),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                              borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                            ),
+                            child: Text(
+                              phrase.categoryId.toUpperCase(),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                              ),
+                            ),
+                          ),
                           const Spacer(),
+                          const AppAudioButton(isAvailable: false),
                           AppFavoriteButton(
                             isFavorite: phrase.isFavorite,
                             onToggle: (_) => _toggleFavorite(),
@@ -106,13 +138,14 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                       ),
                       const SizedBox(height: AppSpacing.lg),
 
-                      // Target phrase
+                      // Target Phrase
                       Text(
                         phrase.originalText,
                         style: theme.textTheme.titleMedium?.copyWith(
-                          fontSize: 22,
+                          fontSize: 21,
                           fontWeight: FontWeight.w600,
-                          color: theme.colorScheme.onSurface,
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                          height: 1.35,
                         ),
                         softWrap: true,
                       ),
@@ -121,22 +154,23 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                         const SizedBox(height: AppSpacing.xs),
                         Text(
                           phrase.phonetic!,
-                          style: theme.textTheme.bodyMedium?.copyWith(
+                          style: theme.textTheme.bodySmall?.copyWith(
                             fontStyle: FontStyle.italic,
-                            color: theme.colorScheme.onSurfaceVariant,
+                            color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                           ),
                           softWrap: true,
                         ),
                       ],
 
-                      const SizedBox(height: AppSpacing.xxl),
+                      const SizedBox(height: AppSpacing.xl),
 
-                      // Translation: Largest, highest priority text on the study screen
+                      // Translation: Visual Focus (Teal green #168B83)
                       Text(
                         'Translation',
                         style: theme.textTheme.labelMedium?.copyWith(
                           color: theme.colorScheme.primary,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -144,13 +178,14 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                       Text(
                         phrase.translatedText,
                         style: theme.textTheme.displaySmall?.copyWith(
-                          color: theme.colorScheme.onSurface,
-                          fontWeight: FontWeight.w800,
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                          fontWeight: FontWeight.w700,
+                          height: 1.25,
                         ),
                         softWrap: true,
                       ),
 
-                      const SizedBox(height: AppSpacing.xxl),
+                      const SizedBox(height: AppSpacing.xl),
 
                       // Context / Usage explanation card
                       if (phrase.contextNote != null && phrase.contextNote!.isNotEmpty)
@@ -158,9 +193,21 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           width: double.infinity,
                           padding: const EdgeInsets.all(AppSpacing.lg),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.surface,
+                            color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
                             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                            border: Border.all(color: theme.dividerColor),
+                            border: Border.all(
+                              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                              width: 1,
+                            ),
+                            boxShadow: isDark
+                                ? []
+                                : [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(alpha: 0.015),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,13 +217,14 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                                   Icon(
                                     Icons.lightbulb_outline_rounded,
                                     size: AppSpacing.iconSm,
-                                    color: theme.colorScheme.secondary,
+                                    color: theme.colorScheme.primary,
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
                                     'Usage Context',
                                     style: theme.textTheme.labelLarge?.copyWith(
                                       fontWeight: FontWeight.w700,
+                                      color: isDark ? AppColors.darkText : AppColors.lightText,
                                     ),
                                   ),
                                 ],
@@ -185,8 +233,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                               Text(
                                 phrase.contextNote!,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                  height: 1.5,
+                                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                                  height: 1.45,
                                 ),
                                 softWrap: true,
                               ),
@@ -198,7 +246,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                 ),
               ),
 
-              const SizedBox(height: AppSpacing.lg),
+              const SizedBox(height: AppSpacing.md),
 
               // Navigation buttons
               Row(

@@ -1,8 +1,9 @@
 import 'package:material_ui/material_ui.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_primary_button.dart';
 
-/// Error presentation banner/view with retry action callback.
+/// Error presentation banner/view with soft red styling and retry action.
 class AppErrorMessage extends StatelessWidget {
   final String title;
   final String message;
@@ -11,7 +12,7 @@ class AppErrorMessage extends StatelessWidget {
 
   const AppErrorMessage({
     super.key,
-    this.title = 'Something went wrong',
+    this.title = 'Unable to connect',
     required this.message,
     this.onRetry,
     this.retryLabel = 'Try Again',
@@ -20,6 +21,7 @@ class AppErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Center(
       child: Padding(
@@ -32,13 +34,13 @@ class AppErrorMessage extends StatelessWidget {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                color: theme.colorScheme.error.withValues(alpha: 0.12),
+                color: isDark ? AppColors.darkError.withValues(alpha: 0.15) : AppColors.lightErrorBackground,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.error_outline_rounded,
-                size: 32,
-                color: theme.colorScheme.error,
+                size: 30,
+                color: isDark ? AppColors.darkError : AppColors.lightError,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -46,13 +48,16 @@ class AppErrorMessage extends StatelessWidget {
               title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.darkText : AppColors.lightText,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
               message,
-              style: theme.textTheme.bodySmall,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[

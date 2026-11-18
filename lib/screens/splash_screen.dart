@@ -1,5 +1,6 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
@@ -11,28 +12,36 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xxl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: AppSpacing.lg,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
-              // Minimal logo mark
+              // Minimal, approachable logo mark
               Container(
-                width: 80,
-                height: 80,
+                width: 76,
+                height: 76,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(20),
+                  color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                    width: 1,
+                  ),
                 ),
                 child: Icon(
                   Icons.auto_stories_rounded,
-                  size: 40,
-                  color: theme.colorScheme.primary,
+                  size: 38,
+                  color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -40,14 +49,16 @@ class SplashScreen extends StatelessWidget {
                 'Phrase Practice',
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w800,
-                  letterSpacing: -0.5,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
+                  letterSpacing: -0.6,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                'Read, understand, and internalize phrases naturally.',
+                'Read, understand, and internalize phrases naturally in real context.',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  height: 1.45,
                 ),
                 textAlign: TextAlign.center,
               ),

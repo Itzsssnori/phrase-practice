@@ -1,5 +1,5 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../models/quiz.dart';
 import '../services/mock_data_service.dart';
 import '../theme/app_colors.dart';
@@ -43,6 +43,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final question = _questions[_currentIndex];
     final progress = (_currentIndex + 1) / _questions.length;
 
@@ -53,7 +54,10 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,7 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 child: LinearProgressIndicator(
                   value: progress,
                   minHeight: 4,
-                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                  backgroundColor: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
                   valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                 ),
               ),
@@ -72,7 +76,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 question.prompt,
                 style: theme.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -81,9 +85,9 @@ class _QuizScreenState extends State<QuizScreen> {
               Text(
                 question.originalPhrase,
                 style: theme.textTheme.headlineMedium?.copyWith(
-                  fontSize: 22,
+                  fontSize: 21,
                   fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.onSurface,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -96,20 +100,24 @@ class _QuizScreenState extends State<QuizScreen> {
                   itemBuilder: (context, index) {
                     final optionText = question.options[index];
                     final isSelected = _selectedOption == index;
-                    Color borderColor = theme.dividerColor;
+                    Color borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
                     Color fillColor = theme.colorScheme.surface;
 
                     if (_isAnswerSubmitted) {
                       if (index == question.correctIndex) {
-                        borderColor = AppColors.lightSuccess;
-                        fillColor = AppColors.lightSuccess.withValues(alpha: 0.1);
+                        borderColor = isDark ? AppColors.darkSuccess : AppColors.lightSuccess;
+                        fillColor = isDark
+                            ? AppColors.darkSuccess.withValues(alpha: 0.15)
+                            : AppColors.lightSuccessBackground;
                       } else if (isSelected) {
-                        borderColor = AppColors.lightError;
-                        fillColor = AppColors.lightError.withValues(alpha: 0.1);
+                        borderColor = isDark ? AppColors.darkError : AppColors.lightError;
+                        fillColor = isDark
+                            ? AppColors.darkError.withValues(alpha: 0.15)
+                            : AppColors.lightErrorBackground;
                       }
                     } else if (isSelected) {
                       borderColor = theme.colorScheme.primary;
-                      fillColor = theme.colorScheme.primaryContainer.withValues(alpha: 0.3);
+                      fillColor = isDark ? AppColors.darkSecondary : AppColors.lightSecondary;
                     }
 
                     return InkWell(
@@ -122,7 +130,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         decoration: BoxDecoration(
                           color: fillColor,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                          border: Border.all(color: borderColor, width: isSelected ? 2 : 1),
+                          border: Border.all(color: borderColor, width: isSelected ? 1.8 : 1),
                         ),
                         child: Row(
                           children: [
@@ -135,9 +143,10 @@ class _QuizScreenState extends State<QuizScreen> {
                                 border: Border.all(color: borderColor),
                               ),
                               child: Text(
-                                String.fromCharCode(65 + index), // A, B, C, D
+                                String.fromCharCode(65 + index),
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   fontWeight: FontWeight.w700,
+                                  color: isDark ? AppColors.darkText : AppColors.lightText,
                                 ),
                               ),
                             ),
@@ -147,6 +156,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 optionText,
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                   fontWeight: FontWeight.w500,
+                                  color: isDark ? AppColors.darkText : AppColors.lightText,
                                 ),
                               ),
                             ),
@@ -164,12 +174,14 @@ class _QuizScreenState extends State<QuizScreen> {
                   padding: const EdgeInsets.all(AppSpacing.md),
                   margin: const EdgeInsets.only(bottom: AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest,
+                    color: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
                     borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                   ),
                   child: Text(
                     question.explanation,
-                    style: theme.textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: isDark ? AppColors.darkText : AppColors.lightText,
+                    ),
                   ),
                 ),
               ],

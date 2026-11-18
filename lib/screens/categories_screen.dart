@@ -1,6 +1,7 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/category_card.dart';
 
@@ -11,6 +12,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final categories = MockDataService.sampleCategories;
 
     return Scaffold(
@@ -26,17 +28,23 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           children: [
             Text(
               'Browse by Topic',
-              style: theme.textTheme.headlineMedium,
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.darkText : AppColors.lightText,
+              ),
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
               'Organized by daily real-world scenarios to help you read fluently.',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),

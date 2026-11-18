@@ -1,7 +1,8 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/language_chip.dart';
@@ -16,7 +17,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // PLACEHOLDER: Initial state selections
   Language _nativeLang = MockDataService.sampleLanguages[0]; // English
   Language _targetLang = MockDataService.sampleLanguages[1]; // Spanish
 
@@ -45,6 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -52,19 +53,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: AppSpacing.lg,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Personalize Your Reading',
-                style: theme.textTheme.headlineMedium,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
+                ),
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 'Phrase Practice emphasizes immersive sentence exposure and crystal-clear translations.',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  height: 1.45,
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),
@@ -74,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 'I speak (Native)',
                 style: theme.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurface,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -91,7 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 'I want to study',
                 style: theme.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurface,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),

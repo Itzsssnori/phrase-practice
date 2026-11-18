@@ -1,7 +1,8 @@
 import 'package:material_ui/material_ui.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// Clean, minimal search input with clear trigger and optional filter icon.
+/// Clean, minimal search input with subtle borders and clear icon.
 class AppSearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
@@ -16,13 +17,14 @@ class AppSearchBar extends StatelessWidget {
     this.onChanged,
     this.onClear,
     this.onFilterTap,
-    this.hintText = 'Search phrases, translations, topics...',
+    this.hintText = 'Search phrases, translations...',
     this.autofocus = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return ConstrainedBox(
       constraints: const BoxConstraints(
@@ -34,10 +36,13 @@ class AppSearchBar extends StatelessWidget {
         autofocus: autofocus,
         style: theme.textTheme.bodyMedium,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: theme.colorScheme.surface,
           hintText: hintText,
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             Icons.search_rounded,
             size: AppSpacing.iconMd,
+            color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
           ),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
@@ -64,15 +69,24 @@ class AppSearchBar extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            borderSide: BorderSide(color: theme.dividerColor),
+            borderSide: BorderSide(
+              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+              width: 1,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            borderSide: BorderSide(color: theme.dividerColor),
+            borderSide: BorderSide(
+              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+              width: 1,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            borderSide: BorderSide(color: theme.colorScheme.primary, width: 1.5),
+            borderSide: BorderSide(
+              color: theme.colorScheme.primary,
+              width: 1.6,
+            ),
           ),
         ),
       ),

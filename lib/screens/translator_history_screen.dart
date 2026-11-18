@@ -1,6 +1,7 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
 /// Screen displaying past lookup history from the quick translator.
@@ -10,6 +11,7 @@ class TranslatorHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final historyPhrases = MockDataService.samplePhrases;
 
     return Scaffold(
@@ -31,18 +33,30 @@ class TranslatorHistoryScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView.separated(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           itemCount: historyPhrases.length,
           separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
           itemBuilder: (context, index) {
             final phrase = historyPhrases[index];
-            return Card(
+            return Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                border: Border.all(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  width: 1,
+                ),
+              ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(AppSpacing.md),
                 title: Text(
                   phrase.originalText,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w700,
+                    color: isDark ? AppColors.darkText : AppColors.lightText,
                   ),
                 ),
                 subtitle: Column(
@@ -58,7 +72,11 @@ class TranslatorHistoryScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                trailing: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 13,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                ),
                 onTap: () => context.push('/phrase-study'),
               ),
             );

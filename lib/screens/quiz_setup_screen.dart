@@ -1,6 +1,7 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_primary_button.dart';
 
@@ -19,6 +20,7 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,29 +28,35 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Reinforce Comprehension',
-                style: theme.textTheme.headlineMedium,
+                'Recall Practice',
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
+                ),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 'Short, thoughtful recall drills designed to cement phrase meaning without gamified stress.',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
               ),
-              const SizedBox(height: AppSpacing.xxl),
+              const SizedBox(height: AppSpacing.xl),
 
               // Question count selection
               Text(
-                'Number of questions',
+                'Questions',
                 style: theme.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurface,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -56,7 +64,7 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                 children: [5, 10, 15].map((count) {
                   final isSelected = _selectedCount == count;
                   return Padding(
-                    padding: const EdgeInsets.only(right: AppSpacing.md),
+                    padding: const EdgeInsets.only(right: AppSpacing.sm),
                     child: ChoiceChip(
                       label: Text('$count questions'),
                       selected: isSelected,
@@ -72,10 +80,10 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
 
               // Topic selection
               Text(
-                'Select Topic',
+                'Topic Focus',
                 style: theme.textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurface,
+                  color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -101,14 +109,25 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                  border: Border.all(color: theme.dividerColor),
+                  border: Border.all(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                    width: 1,
+                  ),
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.timer_outlined,
-                      color: theme.colorScheme.primary,
-                      size: AppSpacing.iconMd,
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                      ),
+                      child: Icon(
+                        Icons.timer_outlined,
+                        color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                        size: AppSpacing.iconSm,
+                      ),
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -118,12 +137,16 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                           Text(
                             'Untimed, calm format',
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
+                              color: isDark ? AppColors.darkText : AppColors.lightText,
                             ),
                           ),
+                          const SizedBox(height: 2),
                           Text(
                             'Take your time to understand nuances and explanation notes.',
-                            style: theme.textTheme.bodySmall,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                            ),
                           ),
                         ],
                       ),

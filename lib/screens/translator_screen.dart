@@ -1,7 +1,8 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
 import '../services/mock_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
 import '../widgets/app_favorite_button.dart';
@@ -10,7 +11,7 @@ import '../widgets/app_text_field.dart';
 import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
-/// Instant phrase translator tool (Stage 1 simulated offline mode).
+/// Instant phrase translator tool with clean, minimalist cards.
 class TranslatorScreen extends StatefulWidget {
   const TranslatorScreen({super.key});
 
@@ -42,7 +43,6 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
 
   void _translate() {
     if (_inputController.text.trim().isEmpty) return;
-    // PLACEHOLDER: Simulated contextual translation for Stage 1 UI
     setState(() {
       _simulatedTranslation = '¿Dónde está la estación de tren más cercana?';
     });
@@ -51,6 +51,7 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +66,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -86,7 +90,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.swap_horiz_rounded),
+                    icon: Icon(
+                      Icons.swap_horiz_rounded,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                    ),
                     tooltip: 'Swap languages',
                     onPressed: _swapLanguages,
                   ),
@@ -129,41 +136,66 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                   'Translation',
                   style: theme.textTheme.labelMedium?.copyWith(
                     fontWeight: FontWeight.w700,
+                    color: isDark ? AppColors.darkText : AppColors.lightText,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const AppAudioButton(isAvailable: false),
-                            const Spacer(),
-                            AppFavoriteButton(
-                              isFavorite: _isFavorite,
-                              onToggle: (val) => setState(() => _isFavorite = val),
+                Container(
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                    border: Border.all(
+                      color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                      width: 1,
+                    ),
+                    boxShadow: isDark
+                        ? []
+                        : [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.015),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
                             ),
                           ],
-                        ),
-                        const SizedBox(height: AppSpacing.sm),
-                        Text(
-                          _simulatedTranslation!,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: theme.colorScheme.primary,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const AppAudioButton(isAvailable: false),
+                          const Spacer(),
+                          AppFavoriteButton(
+                            isFavorite: _isFavorite,
+                            onToggle: (val) => setState(() => _isFavorite = val),
                           ),
-                          softWrap: true,
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        _simulatedTranslation!,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.primary,
                         ),
-                        const SizedBox(height: AppSpacing.md),
-                        Text(
+                        softWrap: true,
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      Container(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        decoration: BoxDecoration(
+                          color: isDark ? AppColors.darkAccent : AppColors.lightAccent,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        ),
+                        child: Text(
                           'Context: Frequently used when asking for public transport directions.',
-                          style: theme.textTheme.bodySmall,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: isDark ? AppColors.darkText : AppColors.lightText,
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

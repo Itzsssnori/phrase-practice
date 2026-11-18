@@ -2,7 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// Favorite button featuring subtle scale feedback and amber highlight.
+/// Favorite button featuring subtle scale feedback and warm highlight.
 class AppFavoriteButton extends StatefulWidget {
   final bool isFavorite;
   final ValueChanged<bool>? onToggle;
@@ -29,7 +29,7 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
       vsync: this,
       duration: const Duration(milliseconds: 140),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.85).animate(
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.88).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
   }
@@ -50,7 +50,8 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final activeColor = isDark ? AppColors.darkAccent : AppColors.lightAccent;
+    final activeColor = isDark ? AppColors.darkWarning : AppColors.lightWarning;
+    final inactiveColor = isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
 
     return Semantics(
       button: true,
@@ -68,9 +69,7 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
               scale: _scaleAnimation,
               child: Icon(
                 widget.isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
-                color: widget.isFavorite
-                    ? activeColor
-                    : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                color: widget.isFavorite ? activeColor : inactiveColor.withValues(alpha: 0.6),
                 size: AppSpacing.iconMd,
               ),
             ),

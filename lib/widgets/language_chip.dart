@@ -1,8 +1,9 @@
 import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// Interactive chip displaying a language flag, name, and optional picker trigger.
+/// Interactive chip displaying a language flag, name, and subtle rounded border.
 class LanguageChip extends StatelessWidget {
   final Language language;
   final VoidCallback? onTap;
@@ -20,22 +21,27 @@ class LanguageChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final bgColor = isSelected
+        ? (isDark ? AppColors.darkSecondary : AppColors.lightSecondary)
+        : theme.colorScheme.surface;
+    final borderColor = isSelected
+        ? theme.colorScheme.primary.withValues(alpha: 0.5)
+        : (isDark ? AppColors.darkBorder : AppColors.lightBorder);
+    final textColor = isSelected
+        ? theme.colorScheme.primary
+        : (isDark ? AppColors.darkText : AppColors.lightText);
 
     return ConstrainedBox(
       constraints: const BoxConstraints(
         minHeight: AppSpacing.minTouchTarget,
       ),
       child: Material(
-        color: isSelected
-            ? theme.colorScheme.primaryContainer
-            : theme.colorScheme.surface,
+        color: bgColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
-          side: BorderSide(
-            color: isSelected
-                ? theme.colorScheme.primary
-                : theme.dividerColor,
-          ),
+          side: BorderSide(color: borderColor, width: 1),
         ),
         child: InkWell(
           onTap: onTap,
@@ -56,19 +62,16 @@ class LanguageChip extends StatelessWidget {
                 Text(
                   language.name,
                   style: theme.textTheme.labelLarge?.copyWith(
-                    color: isSelected
-                        ? theme.colorScheme.onPrimaryContainer
-                        : theme.colorScheme.onSurface,
+                    color: textColor,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   ),
                 ),
                 if (showDropdownIcon) ...[
                   const SizedBox(width: AppSpacing.xs),
                   Icon(
-                    Icons.arrow_drop_down_rounded,
+                    Icons.keyboard_arrow_down_rounded,
                     size: AppSpacing.iconSm,
-                    color: isSelected
-                        ? theme.colorScheme.onPrimaryContainer
-                        : theme.colorScheme.onSurfaceVariant,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                   ),
                 ],
               ],

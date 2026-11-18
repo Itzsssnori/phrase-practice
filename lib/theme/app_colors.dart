@@ -1,55 +1,69 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Semantic colors for Phrase Practice in Light and Dark themes.
+/// Semantic colors for Phrase Practice with a minimalist, approachable palette.
 class AppColors {
   AppColors._();
 
   // --- Light Palette ---
-  static const Color lightPrimary = Color(0xFF0F766E); // Teal #0F766E
+  // Primary: Teal green #168B83
+  static const Color lightPrimary = Color(0xFF168B83);
   static const Color lightOnPrimary = Colors.white;
-  static const Color lightPrimaryContainer = Color(0xFFCCFBF1);
-  static const Color lightOnPrimaryContainer = Color(0xFF115E59);
 
-  static const Color lightAccent = Color(0xFFF59E0B); // Amber #F59E0B
-  static const Color lightOnAccent = Color(0xFF451A03);
+  // Secondary: Soft mint green #E5F5EF
+  static const Color lightSecondary = Color(0xFFE5F5EF);
+  static const Color lightOnSecondary = Color(0xFF168B83);
 
-  static const Color lightBackground = Color(0xFFF8FAFC); // #F8FAFC
-  static const Color lightSurface = Colors.white; // cards: white
-  static const Color lightSurfaceVariant = Color(0xFFF1F5F9);
+  // Background: Off-white #FAFBFA
+  static const Color lightBackground = Color(0xFFFAFBFA);
 
-  static const Color lightText = Color(0xFF0F172A); // Text #0F172A
-  static const Color lightTextSecondary = Color(0xFF64748B); // Secondary #64748B
-  static const Color lightTextTertiary = Color(0xFF94A3B8);
+  // Surface: White #FFFFFF
+  static const Color lightSurface = Color(0xFFFFFFFF);
+  static const Color lightSurfaceSubtle = Color(0xFFF4F7F6);
 
-  static const Color lightSuccess = Color(0xFF16A34A); // Success #16A34A
-  static const Color lightError = Color(0xFFDC2626); // Error #DC2626
-  static const Color lightWarning = Color(0xFFF59E0B); // Warning #F59E0B
+  // Accent: Light blue-green #E9F4F5
+  static const Color lightAccent = Color(0xFFE9F4F5);
+  static const Color lightOnAccent = Color(0xFF168B83);
 
-  static const Color lightBorder = Color(0xFFE2E8F0); // Soft neutral border
-  static const Color lightDivider = Color(0xFFF1F5F9);
+  // Primary text: Dark charcoal #202B2A
+  static const Color lightText = Color(0xFF202B2A);
 
-  // --- Dark Palette ---
-  // Matching dark version with equal contrast and same teal identity
-  static const Color darkPrimary = Color(0xFF2DD4BF); // Vibrant teal for dark background
-  static const Color darkOnPrimary = Color(0xFF042F2E);
-  static const Color darkPrimaryContainer = Color(0xFF134E4A);
-  static const Color darkOnPrimaryContainer = Color(0xFFCCFBF1);
+  // Secondary text: Muted gray #77817F
+  static const Color lightTextSecondary = Color(0xFF77817F);
+  static const Color lightTextTertiary = Color(0xFFA5AFA3);
 
-  static const Color darkAccent = Color(0xFFFBBF24); // Amber highlight
-  static const Color darkOnAccent = Color(0xFF451A03);
+  // Success & Error (Soft tones)
+  static const Color lightSuccess = Color(0xFF2E9E68);
+  static const Color lightSuccessBackground = Color(0xFFE8F7F0);
+  static const Color lightError = Color(0xFFDC4C4C);
+  static const Color lightErrorBackground = Color(0xFFFDE8E8);
+  static const Color lightWarning = Color(0xFFE59324);
 
-  static const Color darkBackground = Color(0xFF0F172A); // Deep slate
-  static const Color darkSurface = Color(0xFF1E293B); // Elevated slate cards
-  static const Color darkSurfaceVariant = Color(0xFF334155);
+  // Subtle borders & divider
+  static const Color lightBorder = Color(0xFFE5ECEB);
+  static const Color lightDivider = Color(0xFFF0F4F3);
 
-  static const Color darkText = Color(0xFFF8FAFC);
-  static const Color darkTextSecondary = Color(0xFF94A3B8);
-  static const Color darkTextTertiary = Color(0xFF64748B);
+  // --- Dark Palette (Derived matching with equal contrast) ---
+  static const Color darkPrimary = Color(0xFF2CB8AD);
+  static const Color darkOnPrimary = Color(0xFF0D3330);
 
-  static const Color darkSuccess = Color(0xFF22C55E);
-  static const Color darkError = Color(0xFFEF4444);
-  static const Color darkWarning = Color(0xFFFBBF24);
+  static const Color darkSecondary = Color(0xFF193835);
+  static const Color darkOnSecondary = Color(0xFF9EE0DA);
 
-  static const Color darkBorder = Color(0xFF334155);
-  static const Color darkDivider = Color(0xFF1E293B);
+  static const Color darkBackground = Color(0xFF121B1A);
+  static const Color darkSurface = Color(0xFF1A2624);
+  static const Color darkSurfaceSubtle = Color(0xFF233230);
+
+  static const Color darkAccent = Color(0xFF213634);
+  static const Color darkOnAccent = Color(0xFF86D5CD);
+
+  static const Color darkText = Color(0xFFF2F6F5);
+  static const Color darkTextSecondary = Color(0xFF96A4A2);
+  static const Color darkTextTertiary = Color(0xFF6B7B79);
+
+  static const Color darkSuccess = Color(0xFF45B980);
+  static const Color darkError = Color(0xFFE86666);
+  static const Color darkWarning = Color(0xFFF2A33A);
+
+  static const Color darkBorder = Color(0xFF283A37);
+  static const Color darkDivider = Color(0xFF22312E);
 }
