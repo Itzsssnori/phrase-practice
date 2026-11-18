@@ -150,7 +150,7 @@ class ProgressScreen extends StatelessWidget {
                           child: LinearProgressIndicator(
                             value: cat.progress,
                             minHeight: 5,
-                            backgroundColor: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
+                            backgroundColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
                             valueColor: AlwaysStoppedAnimation<Color>(
                               theme.colorScheme.primary,
                             ),
@@ -214,13 +214,13 @@ class _StatCard extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                 borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
               ),
               child: Icon(
                 icon,
                 size: AppSpacing.iconSm,
-                color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
               ),
             ),
             const SizedBox(height: AppSpacing.md),

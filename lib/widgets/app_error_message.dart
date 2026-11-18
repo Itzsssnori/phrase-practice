@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_primary_button.dart';
 
@@ -21,7 +20,6 @@ class AppErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Center(
       child: Padding(
@@ -34,13 +32,13 @@ class AppErrorMessage extends StatelessWidget {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkError.withValues(alpha: 0.15) : AppColors.lightErrorBackground,
+                color: theme.colorScheme.errorContainer,
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.error_outline_rounded,
+                Icons.error_outline,
                 size: 30,
-                color: isDark ? AppColors.darkError : AppColors.lightError,
+                color: theme.colorScheme.error,
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -48,7 +46,7 @@ class AppErrorMessage extends StatelessWidget {
               title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.darkText : AppColors.lightText,
+                color: theme.colorScheme.onSurface,
               ),
               textAlign: TextAlign.center,
             ),
@@ -56,7 +54,7 @@ class AppErrorMessage extends StatelessWidget {
             Text(
               message,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                color: theme.colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),
@@ -65,7 +63,7 @@ class AppErrorMessage extends StatelessWidget {
               AppPrimaryButton(
                 label: retryLabel,
                 onPressed: onRetry,
-                icon: Icons.refresh_rounded,
+                icon: Icons.refresh_outlined,
                 isFullWidth: false,
               ),
             ],

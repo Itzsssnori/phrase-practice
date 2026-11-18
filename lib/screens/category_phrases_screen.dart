@@ -75,7 +75,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                 borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
                 border: Border.all(
                   color: isDark ? AppColors.darkBorder : AppColors.lightBorder,

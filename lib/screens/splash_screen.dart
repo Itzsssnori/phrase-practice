@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
                 width: 76,
                 height: 76,
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                  color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                   borderRadius: BorderRadius.circular(22),
                   border: Border.all(
                     color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget {
                 child: Icon(
                   Icons.auto_stories_rounded,
                   size: 38,
-                  color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                  color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),

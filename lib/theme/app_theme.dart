@@ -13,14 +13,23 @@ class AppTheme {
     const colorScheme = ColorScheme.light(
       primary: AppColors.lightPrimary,
       onPrimary: AppColors.lightOnPrimary,
-      secondary: AppColors.lightSecondary,
-      onSecondary: AppColors.lightOnSecondary,
-      surface: AppColors.lightSurface,
+      primaryContainer: AppColors.lightPrimaryContainer,
+      onPrimaryContainer: AppColors.lightOnPrimaryContainer,
+      secondary: AppColors.lightPrimaryContainer,
+      onSecondary: AppColors.lightOnPrimaryContainer,
+      tertiary: AppColors.lightAccent,
+      onTertiary: AppColors.lightOnAccent,
+      tertiaryContainer: AppColors.lightAccentContainer,
+      onTertiaryContainer: AppColors.lightOnAccent,
+      surface: AppColors.lightCard,
       onSurface: AppColors.lightText,
-      surfaceContainerHighest: AppColors.lightSurfaceSubtle,
+      surfaceContainer: AppColors.lightSurface,
+      surfaceContainerHighest: AppColors.lightSurface,
       onSurfaceVariant: AppColors.lightTextSecondary,
       error: AppColors.lightError,
-      onError: Colors.white,
+      onError: AppColors.lightOnPrimary,
+      errorContainer: AppColors.lightErrorBackground,
+      onErrorContainer: AppColors.lightError,
       outline: AppColors.lightBorder,
       outlineVariant: AppColors.lightDivider,
     );
@@ -34,7 +43,7 @@ class AppTheme {
       dividerColor: AppColors.lightDivider,
       textTheme: textTheme,
 
-      // App Bar: Clean and transparent/off-white background
+      // App Bar: Solid background matching scaffold, 1px bottom border using divider color, elevation 0
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.lightBackground,
         foregroundColor: AppColors.lightText,
@@ -42,19 +51,22 @@ class AppTheme {
         scrolledUnderElevation: 0,
         centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
+        shape: const Border(
+          bottom: BorderSide(color: AppColors.lightDivider, width: 1),
+        ),
         titleTextStyle: textTheme.titleLarge?.copyWith(
           color: AppColors.lightText,
           fontWeight: FontWeight.w700,
         ),
         iconTheme: const IconThemeData(
-          color: AppColors.lightText,
+          color: AppColors.lightIconSecondary,
           size: AppSpacing.iconMd,
         ),
       ),
 
-      // Card Theme: Subtle border, gentle rounded corners, clean white surface
+      // Card Theme: Solid lightCard with 1px lightBorder and radius 16, elevation 0
       cardTheme: CardThemeData(
-        color: AppColors.lightSurface,
+        color: AppColors.lightCard,
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
@@ -63,7 +75,7 @@ class AppTheme {
         ),
       ),
 
-      // Elevated / Primary Button: Teal green #168B83, white text, 16px radius
+      // Elevated / Primary Button: primary fill, onPrimary text, radius 16
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.lightPrimary,
@@ -82,7 +94,7 @@ class AppTheme {
         ),
       ),
 
-      // Outlined / Secondary Button: Soft mint green feel or subtle border
+      // Outlined Button: surface fill, primary text, 1px border, radius 16
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.lightPrimary,
@@ -93,7 +105,7 @@ class AppTheme {
             horizontal: AppSpacing.xl,
             vertical: AppSpacing.md,
           ),
-          side: const BorderSide(color: AppColors.lightBorder, width: 1.2),
+          side: const BorderSide(color: AppColors.lightBorder, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
           ),
@@ -119,14 +131,15 @@ class AppTheme {
         ),
       ),
 
-      // Input Decoration: Clean 12px radius, soft off-white/surface fill, subtle border
+      // Input Decoration: filled with card, 1px border, radius 12, min height 48
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.lightSurface,
+        fillColor: AppColors.lightCard,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
         ),
+        constraints: const BoxConstraints(minHeight: AppSpacing.minTouchTarget),
         hintStyle: textTheme.bodyMedium?.copyWith(
           color: AppColors.lightTextTertiary,
         ),
@@ -143,7 +156,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-          borderSide: const BorderSide(color: AppColors.lightPrimary, width: 1.8),
+          borderSide: const BorderSide(color: AppColors.lightPrimary, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
@@ -151,14 +164,14 @@ class AppTheme {
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-          borderSide: const BorderSide(color: AppColors.lightError, width: 1.8),
+          borderSide: const BorderSide(color: AppColors.lightError, width: 1.5),
         ),
       ),
 
-      // Bottom Navigation Bar
+      // Bottom Navigation Bar: Solid card color, elevation 0, indicatorColor = primaryContainer
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.lightSurface,
-        indicatorColor: AppColors.lightSecondary, // Soft mint green
+        backgroundColor: AppColors.lightCard,
+        indicatorColor: AppColors.lightPrimaryContainer,
         elevation: 0,
         height: 66,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
@@ -181,31 +194,31 @@ class AppTheme {
             );
           }
           return const IconThemeData(
-            color: AppColors.lightTextSecondary,
+            color: AppColors.lightIconSecondary,
             size: AppSpacing.iconMd,
           );
         }),
       ),
 
-      // Bottom Sheet
+      // Bottom Sheet: card color, top radius 20
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.lightSurface,
+        backgroundColor: AppColors.lightCard,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppSpacing.radiusCard),
+            top: Radius.circular(20),
           ),
         ),
       ),
 
-      // Chips
+      // Chips: selectedColor = primaryContainer, side = BorderSide(color: primary, width: 1)
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.lightSurface,
-        selectedColor: AppColors.lightSecondary,
+        backgroundColor: AppColors.lightCard,
+        selectedColor: AppColors.lightPrimaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
-          side: const BorderSide(color: AppColors.lightBorder),
         ),
+        side: const BorderSide(color: AppColors.lightBorder, width: 1),
         labelStyle: textTheme.labelMedium?.copyWith(
           color: AppColors.lightText,
         ),
@@ -222,14 +235,23 @@ class AppTheme {
     const colorScheme = ColorScheme.dark(
       primary: AppColors.darkPrimary,
       onPrimary: AppColors.darkOnPrimary,
-      secondary: AppColors.darkSecondary,
-      onSecondary: AppColors.darkOnSecondary,
-      surface: AppColors.darkSurface,
+      primaryContainer: AppColors.darkPrimaryContainer,
+      onPrimaryContainer: AppColors.darkOnPrimaryContainer,
+      secondary: AppColors.darkPrimaryContainer,
+      onSecondary: AppColors.darkOnPrimaryContainer,
+      tertiary: AppColors.darkAccent,
+      onTertiary: AppColors.darkOnAccent,
+      tertiaryContainer: AppColors.darkAccentContainer,
+      onTertiaryContainer: AppColors.darkOnAccent,
+      surface: AppColors.darkCard,
       onSurface: AppColors.darkText,
-      surfaceContainerHighest: AppColors.darkSurfaceSubtle,
+      surfaceContainer: AppColors.darkSurface,
+      surfaceContainerHighest: AppColors.darkSurface,
       onSurfaceVariant: AppColors.darkTextSecondary,
       error: AppColors.darkError,
-      onError: Colors.white,
+      onError: AppColors.darkOnPrimary,
+      errorContainer: AppColors.darkErrorBackground,
+      onErrorContainer: AppColors.darkError,
       outline: AppColors.darkBorder,
       outlineVariant: AppColors.darkDivider,
     );
@@ -243,7 +265,7 @@ class AppTheme {
       dividerColor: AppColors.darkDivider,
       textTheme: textTheme,
 
-      // App Bar
+      // App Bar: Solid background matching scaffold, 1px bottom border using divider color, elevation 0
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.darkBackground,
         foregroundColor: AppColors.darkText,
@@ -251,19 +273,22 @@ class AppTheme {
         scrolledUnderElevation: 0,
         centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle.light,
+        shape: const Border(
+          bottom: BorderSide(color: AppColors.darkDivider, width: 1),
+        ),
         titleTextStyle: textTheme.titleLarge?.copyWith(
           color: AppColors.darkText,
           fontWeight: FontWeight.w700,
         ),
         iconTheme: const IconThemeData(
-          color: AppColors.darkText,
+          color: AppColors.darkIconSecondary,
           size: AppSpacing.iconMd,
         ),
       ),
 
-      // Card Theme
+      // Card Theme: Solid darkCard with 1px darkBorder and radius 16, elevation 0
       cardTheme: CardThemeData(
-        color: AppColors.darkSurface,
+        color: AppColors.darkCard,
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
@@ -272,7 +297,7 @@ class AppTheme {
         ),
       ),
 
-      // Elevated / Primary Button
+      // Elevated / Primary Button: primary fill, onPrimary text, radius 16
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.darkPrimary,
@@ -291,17 +316,18 @@ class AppTheme {
         ),
       ),
 
-      // Outlined / Secondary Button
+      // Outlined Button: surface fill, primary text, 1px border, radius 16
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.darkPrimary,
           backgroundColor: AppColors.darkSurface,
+          elevation: 0,
           minimumSize: const Size(AppSpacing.minTouchTarget, AppSpacing.minTouchTarget),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
             vertical: AppSpacing.md,
           ),
-          side: const BorderSide(color: AppColors.darkBorder, width: 1.2),
+          side: const BorderSide(color: AppColors.darkBorder, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
           ),
@@ -324,14 +350,15 @@ class AppTheme {
         ),
       ),
 
-      // Input Decoration
+      // Input Decoration: filled with card, 1px border, radius 12, min height 48
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.darkSurface,
+        fillColor: AppColors.darkCard,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
         ),
+        constraints: const BoxConstraints(minHeight: AppSpacing.minTouchTarget),
         hintStyle: textTheme.bodyMedium?.copyWith(
           color: AppColors.darkTextTertiary,
         ),
@@ -348,7 +375,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-          borderSide: const BorderSide(color: AppColors.darkPrimary, width: 1.8),
+          borderSide: const BorderSide(color: AppColors.darkPrimary, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
@@ -356,14 +383,14 @@ class AppTheme {
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-          borderSide: const BorderSide(color: AppColors.darkError, width: 1.8),
+          borderSide: const BorderSide(color: AppColors.darkError, width: 1.5),
         ),
       ),
 
-      // Navigation Bar
+      // Bottom Navigation Bar: Solid card color, elevation 0, indicatorColor = primaryContainer
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.darkSurface,
-        indicatorColor: AppColors.darkSecondary,
+        backgroundColor: AppColors.darkCard,
+        indicatorColor: AppColors.darkPrimaryContainer,
         elevation: 0,
         height: 66,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
@@ -386,31 +413,31 @@ class AppTheme {
             );
           }
           return const IconThemeData(
-            color: AppColors.darkTextSecondary,
+            color: AppColors.darkIconSecondary,
             size: AppSpacing.iconMd,
           );
         }),
       ),
 
-      // Bottom Sheet
+      // Bottom Sheet: card color, top radius 20
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.darkSurface,
+        backgroundColor: AppColors.darkCard,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppSpacing.radiusCard),
+            top: Radius.circular(20),
           ),
         ),
       ),
 
-      // Chips
+      // Chips: selectedColor = primaryContainer, side = BorderSide(color: primary, width: 1)
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.darkSurface,
-        selectedColor: AppColors.darkSecondary,
+        backgroundColor: AppColors.darkCard,
+        selectedColor: AppColors.darkPrimaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
-          side: const BorderSide(color: AppColors.darkBorder),
         ),
+        side: const BorderSide(color: AppColors.darkBorder, width: 1),
         labelStyle: textTheme.labelMedium?.copyWith(
           color: AppColors.darkText,
         ),

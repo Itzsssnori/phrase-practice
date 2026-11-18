@@ -120,12 +120,12 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                        color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                         borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                       ),
                       child: Icon(
                         Icons.timer_outlined,
-                        color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                        color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                         size: AppSpacing.iconSm,
                       ),
                     ),

@@ -26,7 +26,7 @@ class AppAudioButton extends StatelessWidget {
         child: IconButton(
           onPressed: isAvailable ? onPlay : null,
           icon: Icon(
-            isAvailable ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+            Icons.volume_up_outlined,
             size: AppSpacing.iconMd,
             color: isAvailable
                 ? theme.colorScheme.primary

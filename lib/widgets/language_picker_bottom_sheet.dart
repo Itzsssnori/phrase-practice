@@ -116,7 +116,7 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
                     return Container(
                       decoration: BoxDecoration(
                         color: isCurrent
-                            ? (isDark ? AppColors.darkSecondary : AppColors.lightSecondary)
+                            ? (isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                       ),

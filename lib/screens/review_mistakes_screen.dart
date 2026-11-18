@@ -125,7 +125,7 @@ class ReviewMistakesScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
+                          color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                         ),
                         child: Text(

@@ -1,8 +1,7 @@
 import 'package:material_ui/material_ui.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
-/// Secondary button styled with soft mint green tint (#E5F5EF) and teal text (#168B83).
+/// Secondary button styled with primaryContainer background and onPrimaryContainer text.
 class AppSecondaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
@@ -20,16 +19,21 @@ class AppSecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final bgColor = isDark ? AppColors.darkSecondary : AppColors.lightSecondary;
-    final fgColor = isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary;
+    final bgColor = theme.colorScheme.primaryContainer;
+    final fgColor = theme.colorScheme.onPrimaryContainer;
 
     final buttonContent = Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[
-          Icon(icon, size: AppSpacing.iconSm, color: fgColor),
+          Icon(
+            icon,
+            size: AppSpacing.iconSm,
+            color: onPressed == null
+                ? theme.colorScheme.onSurface.withValues(alpha: 0.38)
+                : fgColor,
+          ),
           const SizedBox(width: AppSpacing.sm),
         ],
         Text(
@@ -56,7 +60,7 @@ class AppSecondaryButton extends StatelessWidget {
           side: BorderSide(
             color: onPressed == null
                 ? theme.dividerColor
-                : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                : theme.colorScheme.primary.withValues(alpha: 0.25),
             width: 1,
           ),
         ),

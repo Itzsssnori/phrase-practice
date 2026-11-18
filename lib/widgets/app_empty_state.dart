@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_primary_button.dart';
 
@@ -23,7 +22,6 @@ class AppEmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Center(
       child: Padding(
@@ -36,7 +34,7 @@ class AppEmptyState extends StatelessWidget {
               width: 68,
               height: 68,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                color: theme.colorScheme.primaryContainer,
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -50,7 +48,7 @@ class AppEmptyState extends StatelessWidget {
               title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.darkText : AppColors.lightText,
+                color: theme.colorScheme.onSurface,
               ),
               textAlign: TextAlign.center,
             ),
@@ -58,7 +56,7 @@ class AppEmptyState extends StatelessWidget {
             Text(
               message,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                color: theme.colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),

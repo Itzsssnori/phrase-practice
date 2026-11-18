@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       vertical: AppSpacing.xs,
                     ),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                      color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                       borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
                     ),
                     child: Row(
@@ -108,14 +108,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(
                           Icons.local_fire_department_rounded,
                           size: 15,
-                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                          color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                         ),
                         const SizedBox(width: AppSpacing.xs),
                         Text(
                           '${MockDataService.sampleProgress.currentStreakDays} days',
                           style: theme.textTheme.labelMedium?.copyWith(
                             fontWeight: FontWeight.w700,
-                            color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                            color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                           ),
                         ),
                       ],
@@ -230,12 +230,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 42,
                         height: 42,
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                          color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                         ),
                         child: Icon(
                           cat.icon,
-                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                          color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                           size: AppSpacing.iconMd,
                         ),
                       ),
@@ -320,12 +320,12 @@ class _QuickActionCard extends StatelessWidget {
                   width: 38,
                   height: 38,
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                    color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                     borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                   ),
                   child: Icon(
                     icon,
-                    color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                    color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                     size: AppSpacing.iconSm,
                   ),
                 ),

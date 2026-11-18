@@ -68,12 +68,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 26,
-                      backgroundColor: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                      backgroundColor: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                       child: Text(
                         'JD',
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                          color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                         ),
                       ),
                     ),
@@ -179,14 +179,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+                        color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
                         borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                       ),
                       child: Text(
                         'System',
                         style: theme.textTheme.labelMedium?.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: isDark ? AppColors.darkOnSecondary : AppColors.lightOnSecondary,
+                          color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
                         ),
                       ),
                     ),

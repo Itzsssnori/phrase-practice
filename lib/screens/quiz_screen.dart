@@ -66,7 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 child: LinearProgressIndicator(
                   value: progress,
                   minHeight: 4,
-                  backgroundColor: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
+                  backgroundColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
                   valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                 ),
               ),
@@ -117,7 +117,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       }
                     } else if (isSelected) {
                       borderColor = theme.colorScheme.primary;
-                      fillColor = isDark ? AppColors.darkSecondary : AppColors.lightSecondary;
+                      fillColor = isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer;
                     }
 
                     return InkWell(
@@ -174,7 +174,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   padding: const EdgeInsets.all(AppSpacing.md),
                   margin: const EdgeInsets.only(bottom: AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkSurfaceSubtle : AppColors.lightSurfaceSubtle,
+                    color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
                     borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                   ),
                   child: Text(
