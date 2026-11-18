@@ -26,8 +26,9 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
       appBar: AppBar(
         title: const Text('Practice Quiz'),
       ),
+      // SingleChildScrollView prevents overflow on small screens or large fonts
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
             vertical: AppSpacing.md,
@@ -60,18 +61,17 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
-              Row(
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.sm,
                 children: [5, 10, 15].map((count) {
                   final isSelected = _selectedCount == count;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: AppSpacing.sm),
-                    child: ChoiceChip(
-                      label: Text('$count questions'),
-                      selected: isSelected,
-                      onSelected: (val) {
-                        if (val) setState(() => _selectedCount = count);
-                      },
-                    ),
+                  return ChoiceChip(
+                    label: Text('$count questions'),
+                    selected: isSelected,
+                    onSelected: (val) {
+                      if (val) setState(() => _selectedCount = count);
+                    },
                   );
                 }).toList(),
               ),
@@ -120,12 +120,16 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
+                        color: isDark
+                            ? AppColors.darkPrimaryContainer
+                            : AppColors.lightPrimaryContainer,
                         borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                       ),
                       child: Icon(
                         Icons.timer_outlined,
-                        color: isDark ? AppColors.darkOnPrimaryContainer : AppColors.lightOnPrimaryContainer,
+                        color: isDark
+                            ? AppColors.darkOnPrimaryContainer
+                            : AppColors.lightOnPrimaryContainer,
                         size: AppSpacing.iconSm,
                       ),
                     ),
@@ -145,7 +149,9 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                           Text(
                             'Take your time to understand nuances and explanation notes.',
                             style: theme.textTheme.bodySmall?.copyWith(
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
                             ),
                           ),
                         ],
@@ -155,13 +161,17 @@ class _QuizSetupScreenState extends State<QuizSetupScreen> {
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: AppSpacing.xxl),
 
+              // Begin button — no Spacer needed in scrollable layout
               AppPrimaryButton(
                 label: 'Begin Practice Session',
                 icon: Icons.play_arrow_rounded,
                 onPressed: () => context.push('/quiz/play'),
               ),
+
+              // Bottom padding so the button isn't flush with the screen edge
+              const SizedBox(height: AppSpacing.lg),
             ],
           ),
         ),

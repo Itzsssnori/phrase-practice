@@ -20,20 +20,24 @@ class QuizResultScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
-            vertical: AppSpacing.md,
+            vertical: AppSpacing.xl,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(),
+              const SizedBox(height: AppSpacing.xl),
+
+              // Success icon
               Container(
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkSuccess.withValues(alpha: 0.15) : AppColors.lightSuccessBackground,
+                  color: isDark
+                      ? AppColors.darkSuccess.withValues(alpha: 0.15)
+                      : AppColors.lightSuccessBackground,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -43,12 +47,14 @@ class QuizResultScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),
+
               Text(
                 'Session Complete',
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w700,
                   color: isDark ? AppColors.darkText : AppColors.lightText,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
@@ -60,9 +66,13 @@ class QuizResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.xl),
 
-              // Metrics card
+              // Metrics card — uses column layout to avoid horizontal overflow
               Container(
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppSpacing.lg,
+                  horizontal: AppSpacing.md,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
@@ -80,19 +90,35 @@ class QuizResultScreen extends StatelessWidget {
                           ),
                         ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _MetricItem(label: 'Accuracy', value: '100%'),
-                    Container(height: 32, width: 1, color: isDark ? AppColors.darkDivider : AppColors.lightDivider),
-                    _MetricItem(label: 'Reviewed', value: '3 phrases'),
-                    Container(height: 32, width: 1, color: isDark ? AppColors.darkDivider : AppColors.lightDivider),
-                    _MetricItem(label: 'Pace', value: 'Calm'),
-                  ],
+                child: IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: _MetricItem(label: 'Accuracy', value: '100%'),
+                      ),
+                      VerticalDivider(
+                        width: 1,
+                        thickness: 1,
+                        color: isDark ? AppColors.darkDivider : AppColors.lightDivider,
+                      ),
+                      Expanded(
+                        child: _MetricItem(label: 'Reviewed', value: '3 phrases'),
+                      ),
+                      VerticalDivider(
+                        width: 1,
+                        thickness: 1,
+                        color: isDark ? AppColors.darkDivider : AppColors.lightDivider,
+                      ),
+                      Expanded(
+                        child: _MetricItem(label: 'Pace', value: 'Calm'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: AppSpacing.xxl),
 
               AppSecondaryButton(
                 label: 'Review Notes & Explanations',
@@ -105,6 +131,7 @@ class QuizResultScreen extends StatelessWidget {
                 icon: Icons.home_rounded,
                 onPressed: () => context.go('/home'),
               ),
+              const SizedBox(height: AppSpacing.lg),
             ],
           ),
         ),
@@ -125,6 +152,7 @@ class _MetricItem extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           value,
@@ -132,6 +160,8 @@ class _MetricItem extends StatelessWidget {
             fontWeight: FontWeight.w700,
             color: theme.colorScheme.primary,
           ),
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 2),
         Text(
@@ -140,6 +170,8 @@ class _MetricItem extends StatelessWidget {
             fontSize: 11.5,
             color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
           ),
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

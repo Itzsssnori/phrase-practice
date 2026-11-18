@@ -22,10 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void _submitAnswer() {
     if (_selectedOption == null) return;
-
-    setState(() {
-      _isAnswerSubmitted = true;
-    });
+    setState(() => _isAnswerSubmitted = true);
   }
 
   void _nextQuestion() {
@@ -52,16 +49,20 @@ class _QuizScreenState extends State<QuizScreen> {
         title: Text('Question ${_currentIndex + 1} of ${_questions.length}'),
         leading: CloseButton(onPressed: () => context.pop()),
       ),
+      // Use resizeToAvoidBottomInset so soft keyboard doesn't cause overflow
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-            vertical: AppSpacing.md,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
+        child: Column(
+          children: [
+            // --- Progress bar ---
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.md,
+                AppSpacing.lg,
+                0,
+              ),
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(2),
                 child: LinearProgressIndicator(
                   value: progress,
@@ -70,132 +71,171 @@ class _QuizScreenState extends State<QuizScreen> {
                   valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                 ),
               ),
-              const SizedBox(height: AppSpacing.xl),
+            ),
+            const SizedBox(height: AppSpacing.xl),
 
-              Text(
-                question.prompt,
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            // --- Prompt label + phrase (fixed height, scrolls only if huge) ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  question.prompt,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.sm),
-
-              // Phrase being tested
-              Text(
-                question.originalPhrase,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? AppColors.darkText : AppColors.lightText,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  question.originalPhrase,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontSize: 21,
+                    fontWeight: FontWeight.w700,
+                    color: isDark ? AppColors.darkText : AppColors.lightText,
+                  ),
+                  // Allow wrapping for long phrases
+                  softWrap: true,
                 ),
               ),
-              const SizedBox(height: AppSpacing.xl),
+            ),
+            const SizedBox(height: AppSpacing.xl),
 
-              // Options
-              Expanded(
-                child: ListView.separated(
-                  itemCount: question.options.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
-                  itemBuilder: (context, index) {
-                    final optionText = question.options[index];
-                    final isSelected = _selectedOption == index;
-                    Color borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
-                    Color fillColor = theme.colorScheme.surface;
+            // --- Options list (scrollable, takes remaining space) ---
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                itemCount: question.options.length,
+                separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
+                itemBuilder: (context, index) {
+                  final optionText = question.options[index];
+                  final isSelected = _selectedOption == index;
+                  Color borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+                  Color fillColor = theme.colorScheme.surface;
 
-                    if (_isAnswerSubmitted) {
-                      if (index == question.correctIndex) {
-                        borderColor = isDark ? AppColors.darkSuccess : AppColors.lightSuccess;
-                        fillColor = isDark
-                            ? AppColors.darkSuccess.withValues(alpha: 0.15)
-                            : AppColors.lightSuccessBackground;
-                      } else if (isSelected) {
-                        borderColor = isDark ? AppColors.darkError : AppColors.lightError;
-                        fillColor = isDark
-                            ? AppColors.darkError.withValues(alpha: 0.15)
-                            : AppColors.lightErrorBackground;
-                      }
+                  if (_isAnswerSubmitted) {
+                    if (index == question.correctIndex) {
+                      borderColor = isDark ? AppColors.darkSuccess : AppColors.lightSuccess;
+                      fillColor = isDark
+                          ? AppColors.darkSuccess.withValues(alpha: 0.15)
+                          : AppColors.lightSuccessBackground;
                     } else if (isSelected) {
-                      borderColor = theme.colorScheme.primary;
-                      fillColor = isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer;
+                      borderColor = isDark ? AppColors.darkError : AppColors.lightError;
+                      fillColor = isDark
+                          ? AppColors.darkError.withValues(alpha: 0.15)
+                          : AppColors.lightErrorBackground;
                     }
+                  } else if (isSelected) {
+                    borderColor = theme.colorScheme.primary;
+                    fillColor = isDark
+                        ? AppColors.darkPrimaryContainer
+                        : AppColors.lightPrimaryContainer;
+                  }
 
-                    return InkWell(
-                      onTap: _isAnswerSubmitted
-                          ? null
-                          : () => setState(() => _selectedOption = index),
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                      child: Container(
-                        padding: const EdgeInsets.all(AppSpacing.lg),
-                        decoration: BoxDecoration(
-                          color: fillColor,
-                          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                          border: Border.all(color: borderColor, width: isSelected ? 1.8 : 1),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 28,
-                              height: 28,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: borderColor),
-                              ),
-                              child: Text(
-                                String.fromCharCode(65 + index),
-                                style: theme.textTheme.labelMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: isDark ? AppColors.darkText : AppColors.lightText,
-                                ),
+                  return InkWell(
+                    onTap: _isAnswerSubmitted
+                        ? null
+                        : () => setState(() => _selectedOption = index),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                    child: Container(
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      decoration: BoxDecoration(
+                        color: fillColor,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                        border: Border.all(color: borderColor, width: isSelected ? 1.8 : 1),
+                      ),
+                      child: Row(
+                        children: [
+                          // Letter badge
+                          Container(
+                            width: 28,
+                            height: 28,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: borderColor),
+                            ),
+                            child: Text(
+                              String.fromCharCode(65 + index),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
                               ),
                             ),
-                            const SizedBox(width: AppSpacing.md),
-                            Expanded(
-                              child: Text(
-                                optionText,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: isDark ? AppColors.darkText : AppColors.lightText,
-                                ),
+                          ),
+                          const SizedBox(width: AppSpacing.md),
+                          // Option text — Expanded prevents horizontal overflow
+                          Expanded(
+                            child: Text(
+                              optionText,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
                               ),
+                              softWrap: true,
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // --- Explanation + Action button (always visible at bottom) ---
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.sm,
+                AppSpacing.lg,
+                AppSpacing.lg,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Explanation box — only appears after submitting
+                  if (_isAnswerSubmitted) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        border: Border.all(
+                          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-
-              if (_isAnswerSubmitted) ...[
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(AppSpacing.md),
-                  margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                  decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                  ),
-                  child: Text(
-                    question.explanation,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: isDark ? AppColors.darkText : AppColors.lightText,
+                      child: Text(
+                        question.explanation,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                        ),
+                        softWrap: true,
+                      ),
                     ),
+                  ],
+                  AppPrimaryButton(
+                    label: !_isAnswerSubmitted
+                        ? 'Check Answer'
+                        : (_currentIndex < _questions.length - 1
+                            ? 'Continue'
+                            : 'See Results'),
+                    onPressed: _selectedOption == null
+                        ? null
+                        : (!_isAnswerSubmitted ? _submitAnswer : _nextQuestion),
                   ),
-                ),
-              ],
-
-              AppPrimaryButton(
-                label: !_isAnswerSubmitted
-                    ? 'Check Answer'
-                    : (_currentIndex < _questions.length - 1 ? 'Continue' : 'See Results'),
-                onPressed: _selectedOption == null
-                    ? null
-                    : (!_isAnswerSubmitted ? _submitAnswer : _nextQuestion),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
