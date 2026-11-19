@@ -127,9 +127,24 @@ final GoRouter appRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: '/phrase-study/:slug',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final slug = state.pathParameters['slug'];
+        final categoryId = state.uri.queryParameters['category'];
+        return PhraseStudyScreen(
+          initialPhraseSlug: slug,
+          categoryId: categoryId,
+        );
+      },
+    ),
+    GoRoute(
       path: '/phrase-study',
       parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state) => const PhraseStudyScreen(),
+      builder: (context, state) {
+        final categoryId = state.uri.queryParameters['category'];
+        return PhraseStudyScreen(categoryId: categoryId);
+      },
     ),
     GoRoute(
       path: '/favorites',

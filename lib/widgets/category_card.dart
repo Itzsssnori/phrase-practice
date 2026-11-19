@@ -32,11 +32,14 @@ class _CategoryCardState extends State<CategoryCard> {
     final tintIndex = widget.colorIndex ?? AppColors.categoryIdToIndex(widget.category.id);
     final tint = AppColors.getCategoryTint(tintIndex, isDark);
 
-    return AnimatedScale(
-      scale: _isPressed ? 0.98 : 1.0,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOut,
-      child: Container(
+    return Semantics(
+      button: true,
+      label: '${widget.category.title} category, ${widget.category.phraseCount} phrases available',
+      child: AnimatedScale(
+        scale: _isPressed ? 0.98 : 1.0,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
+        child: Container(
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
@@ -159,6 +162,7 @@ class _CategoryCardState extends State<CategoryCard> {
               ),
             ),
           ),
+        ),
         ),
       ),
     );

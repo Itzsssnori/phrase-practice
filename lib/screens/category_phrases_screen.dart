@@ -2,9 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import '../models/category.dart';
 import '../models/phrase.dart';
-import '../services/mock_data_service.dart';
+import '../services/browse_data_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_empty_state.dart';
+import '../widgets/app_error_message.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/app_settings_scope.dart';
 import '../widgets/phrase_card.dart';
 
 /// Screen listing all phrases under a selected category.
@@ -21,143 +25,232 @@ class CategoryPhrasesScreen extends StatefulWidget {
 }
 
 class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
-  late Category _category;
-  late List<Phrase> _phrases;
+  final _browseService = BrowseDataService.instance;
+
+  bool _isLoading = true;
+  String? _errorMessage;
+  Category? _category;
+  List<Phrase> _phrases = [];
+  String? _lastLoadedNativeCode;
 
   @override
-  void initState() {
-    super.initState();
-    _category = MockDataService.sampleCategories.firstWhere(
-      (c) => c.id == widget.categoryId,
-      orElse: () => MockDataService.sampleCategories.first,
-    );
-    _phrases = MockDataService.samplePhrases
-        .where((p) => p.categoryId == _category.id)
-        .toList();
-    if (_phrases.isEmpty) {
-      _phrases = List.from(MockDataService.samplePhrases);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final settings = AppSettingsScope.maybeOf(context);
+    final currentNative = settings?.nativeLanguageCode ?? 'en';
+
+    if (_lastLoadedNativeCode != currentNative) {
+      _loadData();
     }
   }
 
-  void _toggleFavorite(Phrase phrase) {
+  Future<void> _loadData({bool forceRefresh = false}) async {
     setState(() {
-      final index = _phrases.indexWhere((p) => p.id == phrase.id);
-      if (index != -1) {
-        _phrases[index] = phrase.copyWith(isFavorite: !phrase.isFavorite);
-      }
+      _isLoading = true;
+      _errorMessage = null;
     });
+
+    final settings = AppSettingsScope.maybeOf(context);
+    final nativeCode = settings?.nativeLanguageCode ?? 'en';
+    _lastLoadedNativeCode = nativeCode;
+
+    // 1. Fetch category metadata
+    final catResult = await _browseService.getCategories(nativeCode, forceRefresh: forceRefresh);
+    if (catResult.isSuccess && catResult.dataOrNull != null) {
+      _category = catResult.dataOrNull!.where((c) => c.id == widget.categoryId).firstOrNull;
+    }
+
+    // 2. Fetch phrases for this category
+    final phraseResult = await _browseService.getPhrasesByCategory(
+      widget.categoryId,
+      forceRefresh: forceRefresh,
+    );
+
+    if (mounted) {
+      if (phraseResult.isError) {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = phraseResult.errorMessageOrNull ?? 'Failed to load phrases.';
+        });
+      } else {
+        setState(() {
+          _phrases = phraseResult.dataOrNull ?? [];
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  void _openStudyScreen([String? phraseSlug]) {
+    final slug = phraseSlug ?? (_phrases.isNotEmpty ? _phrases.first.id : '');
+    if (slug.isNotEmpty) {
+      context.push('/phrase-study/$slug?category=${widget.categoryId}');
+    } else {
+      context.push('/phrase-study?category=${widget.categoryId}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final settings = AppSettingsScope.of(context);
+
+    final title = _category?.nameFor(settings.nativeLanguageCode) ??
+        widget.categoryId[0].toUpperCase() + widget.categoryId.substring(1);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_category.title),
+        title: Text(title),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.play_circle_outline_rounded),
-            tooltip: 'Start Category Study',
-            onPressed: () => context.push('/phrase-study'),
-          ),
+          if (_phrases.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.play_circle_outline_rounded),
+              tooltip: 'Start Category Study',
+              onPressed: () => _openStudyScreen(),
+            ),
         ],
       ),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-            vertical: AppSpacing.md,
+        child: RefreshIndicator(
+          onRefresh: () => _loadData(forceRefresh: true),
+          child: _buildBody(theme, isDark, settings.targetLanguageCode, settings.nativeLanguageCode, title),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBody(
+    ThemeData theme,
+    bool isDark,
+    String targetLang,
+    String nativeLang,
+    String categoryTitle,
+  ) {
+    if (_isLoading) {
+      return const Center(child: AppLoadingIndicator());
+    }
+
+    if (_errorMessage != null) {
+      return Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSpacing.xl),
+          child: AppErrorMessage(
+            title: 'Unable to Load Category Phrases',
+            message: _errorMessage!,
+            retryLabel: 'Try Again',
+            onRetry: () => _loadData(forceRefresh: true),
           ),
-          children: [
-            // Category header card
-            Container(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              decoration: BoxDecoration(
-                color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                border: Border.all(
-                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      );
+    }
+
+    final categoryIcon = _category?.icon ?? Icons.folder_open_outlined;
+    final categoryDescription = _category?.description ?? '$categoryTitle essential vocabulary.';
+
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.md,
+      ),
+      children: [
+        // Category Header Banner Card
+        Container(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+            border: Border.all(
+              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+              width: 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                        ),
-                        child: Icon(
-                          _category.icon,
-                          color: theme.colorScheme.primary,
-                          size: AppSpacing.iconMd,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.md),
-                      Expanded(
-                        child: Text(
-                          _category.title,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: isDark ? AppColors.darkText : AppColors.lightText,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
-                    _category.description,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                    ),
+                    child: Icon(
+                      categoryIcon,
+                      color: theme.colorScheme.primary,
+                      size: AppSpacing.iconMd,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  Text(
-                    '${_phrases.length} phrases available for practice',
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: theme.colorScheme.primary,
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Text(
+                      categoryTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: isDark ? AppColors.darkText : AppColors.lightText,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: AppSpacing.xl),
-
-            Text(
-              'Phrases',
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.darkText : AppColors.lightText,
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                categoryDescription,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                ),
               ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _phrases.length,
-              separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
-              itemBuilder: (context, index) {
-                final phrase = _phrases[index];
-                return PhraseCard(
-                  phrase: phrase,
-                  onTap: () => context.push('/phrase-study'),
-                  onFavoriteToggle: (_) => _toggleFavorite(phrase),
-                );
-              },
-            ),
-          ],
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                '${_phrases.length} phrases available for study',
+                style: theme.textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+        const SizedBox(height: AppSpacing.xl),
+
+        // Phrases Section Header
+        Text(
+          'Phrases',
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+            color: isDark ? AppColors.darkText : AppColors.lightText,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+
+        // Phrases List
+        if (_phrases.isEmpty)
+          const AppEmptyState(
+            icon: Icons.chat_bubble_outline_rounded,
+            title: 'No Phrases Available',
+            message: 'No phrases found for this category.',
+          )
+        else
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _phrases.length,
+            separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
+            itemBuilder: (context, index) {
+              final phrase = _phrases[index];
+              return PhraseCard(
+                phrase: phrase,
+                targetLanguageCode: targetLang,
+                nativeLanguageCode: nativeLang,
+                onTap: () => _openStudyScreen(phrase.id),
+              );
+            },
+          ),
+        const SizedBox(height: AppSpacing.xxl),
+      ],
     );
   }
 }
