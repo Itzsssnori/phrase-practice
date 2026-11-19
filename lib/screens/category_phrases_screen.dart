@@ -28,18 +28,16 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
   final _browseService = BrowseDataService.instance;
 
   bool _isLoading = true;
+  bool _initialLoadStarted = false;
   String? _errorMessage;
   Category? _category;
   List<Phrase> _phrases = [];
-  String? _lastLoadedNativeCode;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final settings = AppSettingsScope.maybeOf(context);
-    final currentNative = settings?.nativeLanguageCode ?? 'en';
-
-    if (_lastLoadedNativeCode != currentNative) {
+    if (!_initialLoadStarted) {
+      _initialLoadStarted = true;
       _loadData();
     }
   }
@@ -52,7 +50,6 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
 
     final settings = AppSettingsScope.maybeOf(context);
     final nativeCode = settings?.nativeLanguageCode ?? 'en';
-    _lastLoadedNativeCode = nativeCode;
 
     // 1. Fetch category metadata
     final catResult = await _browseService.getCategories(nativeCode, forceRefresh: forceRefresh);
@@ -94,9 +91,13 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final settings = AppSettingsScope.of(context);
 
-    final title = _category?.nameFor(settings.nativeLanguageCode) ??
+    // Read language settings directly in build so category names and phrase cards update immediately
+    final settings = AppSettingsScope.of(context);
+    final nativeCode = settings.nativeLanguageCode;
+    final targetCode = settings.targetLanguageCode;
+
+    final title = _category?.nameFor(nativeCode) ??
         widget.categoryId[0].toUpperCase() + widget.categoryId.substring(1);
 
     return Scaffold(
@@ -114,7 +115,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () => _loadData(forceRefresh: true),
-          child: _buildBody(theme, isDark, settings.targetLanguageCode, settings.nativeLanguageCode, title),
+          child: _buildBody(theme, isDark, targetCode, nativeCode, title),
         ),
       ),
     );
@@ -192,6 +193,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                         fontWeight: FontWeight.w700,
                         color: isDark ? AppColors.darkText : AppColors.lightText,
                       ),
+                      softWrap: true,
                     ),
                   ),
                 ],
@@ -202,6 +204,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
+                softWrap: true,
               ),
               const SizedBox(height: AppSpacing.md),
               Text(

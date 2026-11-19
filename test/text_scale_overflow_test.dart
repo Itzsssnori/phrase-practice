@@ -1,25 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phrase_practice/models/category.dart';
-import 'package:phrase_practice/models/language.dart';
 import 'package:phrase_practice/models/phrase.dart';
 import 'package:phrase_practice/models/phrase_translation.dart';
-import 'package:phrase_practice/screens/categories_screen.dart';
-import 'package:phrase_practice/screens/category_phrases_screen.dart';
-import 'package:phrase_practice/screens/phrase_study_screen.dart';
-import 'package:phrase_practice/screens/search_screen.dart';
-import 'package:phrase_practice/services/browse_data_service.dart';
-import 'package:phrase_practice/services/category_repository.dart';
-import 'package:phrase_practice/services/language_repository.dart';
 import 'package:phrase_practice/services/language_settings_controller.dart';
-import 'package:phrase_practice/services/phrase_repository.dart';
 import 'package:phrase_practice/theme/app_theme.dart';
 import 'package:phrase_practice/widgets/app_settings_scope.dart';
 import 'package:phrase_practice/widgets/category_card.dart';
 import 'package:phrase_practice/widgets/phrase_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'stage_3_browse_test.dart';
 
 void main() {
   setUp(() {
@@ -61,16 +50,6 @@ void main() {
       },
     ),
   ];
-
-  final dummyBrowseService = BrowseDataService(
-    languageRepo: MockLanguageRepository([
-      const Language(code: 'en', name: 'English', nativeName: 'English'),
-      const Language(code: 'es', name: 'Spanish', nativeName: 'Español'),
-      const Language(code: 'fil', name: 'Filipino', nativeName: 'Filipino'),
-    ]),
-    categoryRepo: MockCategoryRepository(testCategories),
-    phraseRepo: MockPhraseRepository(testPhrases),
-  );
 
   Widget wrapWithTheme({
     required Widget child,

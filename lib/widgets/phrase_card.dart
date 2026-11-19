@@ -4,6 +4,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_audio_button.dart';
 import 'app_favorite_button.dart';
+import 'app_settings_scope.dart';
 
 /// Minimalist, approachable phrase card prioritizing legibility and context.
 ///
@@ -38,13 +39,14 @@ class _PhraseCardState extends State<PhraseCard> {
     final isDark = theme.brightness == Brightness.dark;
     final tint = AppColors.getCategoryTintById(widget.phrase.categoryId, isDark);
 
+    // Read active language codes from settings scope if not explicitly passed
+    final settings = AppSettingsScope.maybeOf(context);
+    final targetCode = widget.targetLanguageCode ?? settings?.targetLanguageCode ?? 'es';
+    final nativeCode = widget.nativeLanguageCode ?? settings?.nativeLanguageCode ?? 'en';
+
     // Resolve target and native translations
-    final targetTrans = widget.targetLanguageCode != null
-        ? widget.phrase.translationFor(widget.targetLanguageCode!)
-        : null;
-    final nativeTrans = widget.nativeLanguageCode != null
-        ? widget.phrase.translationFor(widget.nativeLanguageCode!)
-        : null;
+    final targetTrans = widget.phrase.translationFor(targetCode);
+    final nativeTrans = widget.phrase.translationFor(nativeCode);
 
     final mainText = targetTrans?.text ?? widget.phrase.translatedText;
     final subText = nativeTrans?.text ?? widget.phrase.originalText;
@@ -85,26 +87,29 @@ class _PhraseCardState extends State<PhraseCard> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.sm,
-                            vertical: AppSpacing.xs,
-                          ),
-                          decoration: BoxDecoration(
-                            color: tint.background,
-                            borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                          ),
-                          child: Text(
-                            widget.phrase.categoryId.toUpperCase(),
-                            style: theme.textTheme.labelMedium?.copyWith(
-                              fontSize: 10.5,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.5,
-                              color: tint.foreground,
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs,
+                            ),
+                            decoration: BoxDecoration(
+                              color: tint.background,
+                              borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                            ),
+                            child: Text(
+                              widget.phrase.categoryId.toUpperCase(),
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                                color: tint.foreground,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
-                        const Spacer(),
+                        const SizedBox(width: AppSpacing.sm),
                         const AppAudioButton(isAvailable: false),
                         AppFavoriteButton(
                           isFavorite: widget.phrase.isFavorite,

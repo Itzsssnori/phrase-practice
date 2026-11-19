@@ -12,7 +12,7 @@ import '../widgets/app_search_bar.dart';
 import '../widgets/app_settings_scope.dart';
 import '../widgets/phrase_card.dart';
 
-/// Full-text search screen with debounce, category filtering, and accent-insensitive matching.
+/// Full-text search screen with debounce, horizontal category filtering, and accent-insensitive matching.
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -32,11 +32,29 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isLoading = false;
   String? _errorMessage;
   String _currentQuery = '';
+  bool _initialLoadStarted = false;
+
+  String? _lastNativeCode;
+  String? _lastTargetCode;
 
   @override
-  void initState() {
-    super.initState();
-    _loadCategories();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final settings = AppSettingsScope.maybeOf(context);
+    final nativeCode = settings?.nativeLanguageCode ?? 'en';
+    final targetCode = settings?.targetLanguageCode ?? 'es';
+
+    if (!_initialLoadStarted) {
+      _initialLoadStarted = true;
+      _lastNativeCode = nativeCode;
+      _lastTargetCode = targetCode;
+      _loadCategories();
+    } else if (_lastNativeCode != nativeCode || _lastTargetCode != targetCode) {
+      _lastNativeCode = nativeCode;
+      _lastTargetCode = targetCode;
+      _loadCategories();
+      _executeSearch();
+    }
   }
 
   @override
@@ -125,8 +143,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final settings = AppSettingsScope.of(context);
 
+    // Read language settings directly in build
+    final settings = AppSettingsScope.of(context);
     final targetCode = settings.targetLanguageCode;
     final nativeCode = settings.nativeLanguageCode;
 
@@ -157,13 +176,15 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
 
-            // 2. Category Filter Chips Carousel
+            // 2. Category Filter Chips (Horizontally scrollable with NO hardcoded height)
             if (_categories.isNotEmpty)
-              SizedBox(
-                height: 48,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg,
+                  vertical: AppSpacing.xs,
+                ),
+                child: Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: AppSpacing.xs),
@@ -179,11 +200,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     ..._categories.map((cat) {
                       final isSelected = _selectedCategoryId == cat.id;
+                      final catTitle = cat.nameFor(nativeCode);
                       return Padding(
                         padding: const EdgeInsets.only(right: AppSpacing.xs),
                         child: FilterChip(
                           avatar: Icon(cat.icon, size: 16),
-                          label: Text(cat.nameFor(nativeCode)),
+                          label: Text(catTitle),
                           selected: isSelected,
                           onSelected: (_) => _onCategorySelected(cat.id),
                           showCheckmark: false,
@@ -196,7 +218,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
               ),
-            const SizedBox(height: AppSpacing.sm),
+            const SizedBox(height: AppSpacing.xs),
 
             // 3. Search Results or State Prompts
             Expanded(

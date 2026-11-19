@@ -2,7 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
 import '../theme/app_spacing.dart';
 
-/// Interactive chip displaying a language flag, name, and subtle rounded border.
+/// Interactive chip displaying a single language flag, name, and subtle rounded border.
 class LanguageChip extends StatelessWidget {
   final Language language;
   final VoidCallback? onTap;
@@ -10,6 +10,7 @@ class LanguageChip extends StatelessWidget {
   final bool showDropdownIcon;
   final String? labelOverride;
   final String? semanticsLabel;
+  final String? roleLabel; // e.g. "I speak" or "I'm learning"
 
   const LanguageChip({
     super.key,
@@ -19,6 +20,7 @@ class LanguageChip extends StatelessWidget {
     this.showDropdownIcon = true,
     this.labelOverride,
     this.semanticsLabel,
+    this.roleLabel,
   });
 
   @override
@@ -31,9 +33,14 @@ class LanguageChip extends StatelessWidget {
     final iconColor = isSelected ? theme.colorScheme.onPrimaryContainer : theme.colorScheme.onSurfaceVariant;
     final labelText = labelOverride ?? language.name;
 
+    final computedSemantics = semanticsLabel ??
+        (roleLabel != null
+            ? '$roleLabel: ${language.name}. Tap to change.'
+            : 'Selected language: $labelText. Tap to change.');
+
     return Semantics(
       button: true,
-      label: semanticsLabel ?? 'Selected language: $labelText. Tap to change.',
+      label: computedSemantics,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minHeight: AppSpacing.minTouchTarget,
@@ -55,16 +62,28 @@ class LanguageChip extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (roleLabel != null) ...[
+                    Text(
+                      '$roleLabel: ',
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                   Text(
                     language.flag,
                     style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(width: AppSpacing.sm),
-                  Text(
-                    labelText,
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: textColor,
-                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                  Flexible(
+                    child: Text(
+                      labelText,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: textColor,
+                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   if (showDropdownIcon) ...[
@@ -85,7 +104,9 @@ class LanguageChip extends StatelessWidget {
   }
 }
 
-/// Specialized interactive chip displaying the active language pair (Native → Target).
+/// Specialized interactive chip displaying the active language pair (I speak → I'm learning).
+///
+/// Fully responsive across all screen widths (320px to 1280px) and text scales (up to 2.0x).
 class LanguagePairChip extends StatelessWidget {
   final Language nativeLanguage;
   final Language targetLanguage;
@@ -104,7 +125,7 @@ class LanguagePairChip extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: 'Studying ${targetLanguage.name} from ${nativeLanguage.name}. Tap to change language pair.',
+      label: "I speak ${nativeLanguage.name}. I'm learning ${targetLanguage.name}. Tap to change languages.",
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minHeight: AppSpacing.minTouchTarget,
@@ -123,46 +144,74 @@ class LanguagePairChip extends StatelessWidget {
                 horizontal: AppSpacing.md,
                 vertical: AppSpacing.sm,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 6,
+                runSpacing: 4,
                 children: [
-                  Text(
-                    nativeLanguage.flag,
-                    style: const TextStyle(fontSize: 16),
+                  // Native part: "I speak [flag] [name]"
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'I speak ',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        nativeLanguage.flag,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        nativeLanguage.name,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.onSurface,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 4),
-                  Text(
-                    nativeLanguage.code.toUpperCase(),
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 13,
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  Text(
-                    targetLanguage.flag,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    targetLanguage.name,
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.xs),
+
+                  // Direction arrow
                   Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    size: AppSpacing.iconSm,
+                    Icons.arrow_forward_rounded,
+                    size: 13,
                     color: theme.colorScheme.onSurfaceVariant,
+                  ),
+
+                  // Target part: "I'm learning [flag] [name]"
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "I'm learning ",
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        targetLanguage.flag,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        targetLanguage.name,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.xs),
+                      Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        size: AppSpacing.iconSm,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ],
                   ),
                 ],
               ),

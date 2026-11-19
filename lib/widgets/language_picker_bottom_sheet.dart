@@ -53,7 +53,7 @@ class LanguagePickerBottomSheet extends StatefulWidget {
     );
   }
 
-  /// Opens a comprehensive language pair management sheet (Target + Native + Swap).
+  /// Opens a comprehensive language pair management sheet (I speak + I'm learning + Swap).
   static Future<void> showPairPicker(BuildContext context) async {
     final settings = AppSettingsScope.of(context);
     final langResult = await BrowseDataService.instance.getLanguages();
@@ -121,9 +121,9 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
     }).toList();
 
     return DraggableScrollableSheet(
-      initialChildSize: 0.60,
+      initialChildSize: 0.65,
       minChildSize: 0.35,
-      maxChildSize: 0.85,
+      maxChildSize: 0.90,
       expand: false,
       builder: (context, scrollController) {
         return Padding(
@@ -228,7 +228,7 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
   }
 }
 
-/// Interactive modal for managing both Native and Target language preferences.
+/// Fully scrollable interactive modal for managing both "I speak" and "I'm learning" languages.
 class _LanguagePairModalContent extends StatelessWidget {
   final LanguageSettingsController settings;
   final List<Language> languages;
@@ -260,7 +260,7 @@ class _LanguagePairModalContent extends StatelessWidget {
         final targetLang = _findLang(settings.targetLanguageCode, 'es');
 
         return SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.lg,
               AppSpacing.md,
@@ -286,22 +286,24 @@ class _LanguagePairModalContent extends StatelessWidget {
 
                 Row(
                   children: [
-                    Text(
-                      'Study Language Settings',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
+                    Expanded(
+                      child: Text(
+                        'Language Settings',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                    const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.close_rounded),
+                      tooltip: 'Close',
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
-                // Pair Swap Row
+                // Pair Swap Card (Responsive layout: Wrap / Row with Flexible)
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.md),
                   decoration: BoxDecoration(
@@ -314,23 +316,26 @@ class _LanguagePairModalContent extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      // Native
+                      // "I speak" column
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Native (I speak)',
+                              'I speak',
                               style: theme.textTheme.labelSmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: AppSpacing.xs),
                             Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(nativeLang.flag, style: const TextStyle(fontSize: 18)),
                                 const SizedBox(width: AppSpacing.xs),
-                                Expanded(
+                                Flexible(
                                   child: Text(
                                     nativeLang.name,
                                     style: theme.textTheme.bodyMedium?.copyWith(
@@ -356,22 +361,25 @@ class _LanguagePairModalContent extends StatelessWidget {
                         ),
                       ),
 
-                      // Target
+                      // "I'm learning" column
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Target (I study)',
+                              "I'm learning",
                               style: theme.textTheme.labelSmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SizedBox(height: AppSpacing.xs),
                             Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Expanded(
+                                Flexible(
                                   child: Text(
                                     targetLang.name,
                                     style: theme.textTheme.bodyMedium?.copyWith(
@@ -395,9 +403,9 @@ class _LanguagePairModalContent extends StatelessWidget {
 
                 const SizedBox(height: AppSpacing.lg),
 
-                // Select Target Language Section
+                // Select Target Language Header
                 Text(
-                  'Select Language to Study',
+                  "Choose What I'm Learning",
                   style: theme.textTheme.labelMedium?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: theme.colorScheme.onSurfaceVariant,
@@ -405,44 +413,47 @@ class _LanguagePairModalContent extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
+                // Language selection list
                 ...languages.map((lang) {
                   final isTarget = lang.code == targetLang.code;
                   final isNative = lang.code == nativeLang.code;
 
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: AppSpacing.xs),
-                    decoration: BoxDecoration(
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+                    child: Material(
                       color: isTarget
                           ? (isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer)
                           : Colors.transparent,
-                      borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                      border: isTarget
-                          ? Border.all(color: theme.colorScheme.primary, width: 1)
-                          : Border.all(color: theme.dividerColor.withValues(alpha: 0.5), width: 1),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md,
-                        vertical: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        side: isTarget
+                            ? BorderSide(color: theme.colorScheme.primary, width: 1)
+                            : BorderSide(color: theme.dividerColor.withValues(alpha: 0.5), width: 1),
                       ),
-                      leading: Text(lang.flag, style: const TextStyle(fontSize: 20)),
-                      title: Text(
-                        lang.name,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: isTarget ? FontWeight.w700 : FontWeight.w500,
-                          color: isTarget ? theme.colorScheme.primary : null,
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: 0,
                         ),
+                        leading: Text(lang.flag, style: const TextStyle(fontSize: 20)),
+                        title: Text(
+                          lang.name,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: isTarget ? FontWeight.w700 : FontWeight.w500,
+                            color: isTarget ? theme.colorScheme.primary : null,
+                          ),
+                        ),
+                        subtitle: Text(
+                          isNative ? 'Current: I speak (${lang.nativeName})' : lang.nativeName,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        trailing: isTarget
+                            ? Icon(Icons.check_rounded, color: theme.colorScheme.primary)
+                            : null,
+                        onTap: () {
+                          settings.setTargetLanguage(lang.code);
+                        },
                       ),
-                      subtitle: Text(
-                        isNative ? '${lang.nativeName} (Current Native)' : lang.nativeName,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                      trailing: isTarget
-                          ? Icon(Icons.check_rounded, color: theme.colorScheme.primary)
-                          : null,
-                      onTap: () {
-                        settings.setTargetLanguage(lang.code);
-                      },
                     ),
                   );
                 }),

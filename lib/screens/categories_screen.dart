@@ -25,18 +25,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final _browseService = BrowseDataService.instance;
 
   bool _isLoading = true;
+  bool _initialLoadStarted = false;
   String? _errorMessage;
   List<Category> _categories = [];
   List<Language> _languages = [];
-  String? _lastLoadedNativeCode;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final settings = AppSettingsScope.maybeOf(context);
-    final currentNative = settings?.nativeLanguageCode ?? 'en';
-
-    if (_lastLoadedNativeCode != currentNative) {
+    if (!_initialLoadStarted) {
+      _initialLoadStarted = true;
       _loadCategories();
     }
   }
@@ -49,7 +47,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
     final settings = AppSettingsScope.maybeOf(context);
     final nativeCode = settings?.nativeLanguageCode ?? 'en';
-    _lastLoadedNativeCode = nativeCode;
 
     // Load active languages for the header chip
     final langResult = await _browseService.getLanguages(forceRefresh: forceRefresh);
@@ -88,8 +85,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final settings = AppSettingsScope.of(context);
 
+    // Read settings directly in build so CategoriesScreen updates immediately when settings change
+    final settings = AppSettingsScope.of(context);
     final nativeLang = _findLanguage(settings.nativeLanguageCode, 'en');
     final targetLang = _findLanguage(settings.targetLanguageCode, 'es');
 
@@ -148,10 +146,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         // Top row: Language switch chip accessible from Categories
         Row(
           children: [
-            LanguagePairChip(
-              nativeLanguage: nativeLang,
-              targetLanguage: targetLang,
-              onTap: () => LanguagePickerBottomSheet.showPairPicker(context),
+            Flexible(
+              child: LanguagePairChip(
+                nativeLanguage: nativeLang,
+                targetLanguage: targetLang,
+                onTap: () => LanguagePickerBottomSheet.showPairPicker(context),
+              ),
             ),
           ],
         ),
@@ -163,6 +163,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             fontWeight: FontWeight.w700,
             color: isDark ? AppColors.darkText : AppColors.lightText,
           ),
+          softWrap: true,
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
@@ -170,10 +171,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           style: theme.textTheme.bodyMedium?.copyWith(
             color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
           ),
+          softWrap: true,
         ),
         const SizedBox(height: AppSpacing.lg),
 
-        // Grid of Category Cards
+        // Grid / List of Category Cards
         if (_categories.isEmpty)
           const AppEmptyState(
             icon: Icons.folder_open_rounded,
@@ -183,19 +185,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         else
           LayoutBuilder(
             builder: (context, constraints) {
-              final isWide = constraints.maxWidth > 600;
+              final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+              final useSingleColumn = constraints.maxWidth < 520 || textScale >= 1.35;
 
-              if (isWide) {
-                return GridView.builder(
+              if (useSingleColumn) {
+                return ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: AppSpacing.md,
-                    mainAxisSpacing: AppSpacing.md,
-                    childAspectRatio: 1.6,
-                  ),
                   itemCount: _categories.length,
+                  separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
                   itemBuilder: (context, index) {
                     final cat = _categories[index];
                     return CategoryCard(
@@ -206,11 +204,19 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 );
               }
 
-              return ListView.separated(
+              final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
+              final childRatio = constraints.maxWidth > 800 ? 1.6 : 1.35;
+
+              return GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: AppSpacing.md,
+                  mainAxisSpacing: AppSpacing.md,
+                  childAspectRatio: childRatio,
+                ),
                 itemCount: _categories.length,
-                separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
                 itemBuilder: (context, index) {
                   final cat = _categories[index];
                   return CategoryCard(

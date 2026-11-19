@@ -11,6 +11,9 @@ import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
 /// Onboarding screen allowing language selection before entering the app.
+///
+/// Fully scrollable to prevent any RenderFlex overflow across all screen sizes
+/// (320px to 1280px) and extreme text scale factors (up to 2.0x).
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -22,96 +25,63 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<Language> _availableLanguages = [];
   bool _isLoading = true;
 
-  late Language _nativeLang;
-  late Language _targetLang;
-
   @override
   void initState() {
     super.initState();
-    _nativeLang = const Language(code: 'en', name: 'English', nativeName: 'English');
-    _targetLang = const Language(code: 'es', name: 'Spanish', nativeName: 'Español');
     _loadRealLanguages();
   }
 
   Future<void> _loadRealLanguages() async {
     final result = await BrowseDataService.instance.getLanguages();
     if (mounted && result.isSuccess && result.dataOrNull != null) {
-      final langs = result.dataOrNull!;
       setState(() {
-        _availableLanguages = langs;
+        _availableLanguages = result.dataOrNull!;
         _isLoading = false;
-
-        // Initialize with default or current settings
-        final settings = AppSettingsScope.maybeOf(context);
-        final nativeCode = settings?.nativeLanguageCode ?? 'en';
-        final targetCode = settings?.targetLanguageCode ?? 'es';
-
-        _nativeLang = langs.firstWhere(
-          (l) => l.code == nativeCode,
-          orElse: () => langs.firstWhere((l) => l.code == 'en', orElse: () => langs.first),
-        );
-        _targetLang = langs.firstWhere(
-          (l) => l.code == targetCode,
-          orElse: () => langs.firstWhere((l) => l.code == 'es', orElse: () => langs.last),
-        );
-
-        if (_nativeLang.code == _targetLang.code) {
-          _targetLang = langs.firstWhere((l) => l.code != _nativeLang.code, orElse: () => _targetLang);
-        }
       });
     } else {
       if (mounted) setState(() => _isLoading = false);
     }
   }
 
-  void _selectNativeLanguage() async {
+  Language _findLang(String code, String fallbackCode) {
+    return _availableLanguages.firstWhere(
+      (l) => l.code == code,
+      orElse: () => _availableLanguages.firstWhere(
+        (l) => l.code == fallbackCode,
+        orElse: () => Language(code: code, name: code, nativeName: code),
+      ),
+    );
+  }
+
+  void _selectNativeLanguage(Language currentNative) async {
     final selected = await LanguagePickerBottomSheet.show(
       context,
-      selectedLanguage: _nativeLang,
-      title: 'Select Your Native Language',
+      selectedLanguage: currentNative,
+      title: 'I speak (Native Language)',
       availableLanguages: _availableLanguages,
     );
     if (selected != null && mounted) {
-      if (selected.code == _targetLang.code) {
-        // Automatically swap languages so they are never identical
-        setState(() {
-          _targetLang = _nativeLang;
-          _nativeLang = selected;
-        });
-      } else {
-        setState(() => _nativeLang = selected);
-      }
+      final settings = AppSettingsScope.of(context);
+      await settings.setNativeLanguage(selected.code);
     }
   }
 
-  void _selectTargetLanguage() async {
+  void _selectTargetLanguage(Language currentTarget) async {
     final selected = await LanguagePickerBottomSheet.show(
       context,
-      selectedLanguage: _targetLang,
-      title: 'Select Language to Practice',
+      selectedLanguage: currentTarget,
+      title: "I'm learning (Target Language)",
       availableLanguages: _availableLanguages,
     );
     if (selected != null && mounted) {
-      if (selected.code == _nativeLang.code) {
-        // Automatically swap languages so they are never identical
-        setState(() {
-          _nativeLang = _targetLang;
-          _targetLang = selected;
-        });
-      } else {
-        setState(() => _targetLang = selected);
-      }
+      final settings = AppSettingsScope.of(context);
+      await settings.setTargetLanguage(selected.code);
     }
   }
 
   Future<void> _completeOnboarding() async {
     final settings = AppSettingsScope.of(context);
-    await settings.setLanguagePair(
-      nativeCode: _nativeLang.code,
-      targetCode: _targetLang.code,
-    );
     await settings.completeOnboarding();
-
     if (mounted) {
       context.go('/home');
     }
@@ -121,6 +91,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final settings = AppSettingsScope.of(context);
+
+    final nativeLang = _findLang(settings.nativeLanguageCode, 'en');
+    final targetLang = _findLang(settings.targetLanguageCode, 'es');
 
     return Scaffold(
       appBar: AppBar(
@@ -129,74 +103,90 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: _isLoading
             ? const Center(child: AppLoadingIndicator())
-            : Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl,
-                  vertical: AppSpacing.lg,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Personalize Your Reading',
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: isDark ? AppColors.darkText : AppColors.lightText,
+            : LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.xl,
+                      vertical: AppSpacing.lg,
+                    ),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight - (AppSpacing.lg * 2),
+                      ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Personalize Your Reading',
+                              style: theme.textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
+                              ),
+                              softWrap: true,
+                            ),
+                            const SizedBox(height: AppSpacing.sm),
+                            Text(
+                              'Phrase Practice emphasizes immersive sentence exposure and crystal-clear translations.',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                                height: 1.45,
+                              ),
+                              softWrap: true,
+                            ),
+                            const SizedBox(height: AppSpacing.xl),
+
+                            // Setting 1: "I speak"
+                            Text(
+                              'I speak',
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xs),
+                            LanguageChip(
+                              language: nativeLang,
+                              isSelected: true,
+                              roleLabel: 'I speak',
+                              onTap: () => _selectNativeLanguage(nativeLang),
+                              semanticsLabel: 'I speak ${nativeLang.name}. Tap to change.',
+                            ),
+
+                            const SizedBox(height: AppSpacing.xl),
+
+                            // Setting 2: "I'm learning"
+                            Text(
+                              "I'm learning",
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: isDark ? AppColors.darkText : AppColors.lightText,
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xs),
+                            LanguageChip(
+                              language: targetLang,
+                              isSelected: true,
+                              roleLabel: "I'm learning",
+                              onTap: () => _selectTargetLanguage(targetLang),
+                              semanticsLabel: "I'm learning ${targetLang.name}. Tap to change.",
+                            ),
+
+                            const Spacer(),
+                            const SizedBox(height: AppSpacing.xl),
+
+                            AppPrimaryButton(
+                              label: 'Start Practicing',
+                              icon: Icons.arrow_forward_rounded,
+                              onPressed: _completeOnboarding,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      'Phrase Practice emphasizes immersive sentence exposure and crystal-clear translations.',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                        height: 1.45,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.xxl),
-
-                    // Native Language
-                    Text(
-                      'I speak (Native)',
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.darkText : AppColors.lightText,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    LanguageChip(
-                      language: _nativeLang,
-                      isSelected: true,
-                      onTap: _selectNativeLanguage,
-                      semanticsLabel: 'I speak ${_nativeLang.name}. Tap to change native language.',
-                    ),
-
-                    const SizedBox(height: AppSpacing.xl),
-
-                    // Target Language
-                    Text(
-                      'I want to study',
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.darkText : AppColors.lightText,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    LanguageChip(
-                      language: _targetLang,
-                      isSelected: true,
-                      onTap: _selectTargetLanguage,
-                      semanticsLabel: 'I want to study ${_targetLang.name}. Tap to change study language.',
-                    ),
-
-                    const Spacer(),
-
-                    AppPrimaryButton(
-                      label: 'Start Practicing',
-                      icon: Icons.arrow_forward_rounded,
-                      onPressed: _completeOnboarding,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
       ),
     );

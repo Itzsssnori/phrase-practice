@@ -12,7 +12,11 @@ import 'phrase_repository.dart';
 /// and languages, so subsequent screen transitions (Home, Categories, CategoryPhrases,
 /// PhraseStudy, Search) resolve instantly with zero additional database reads.
 class BrowseDataService {
-  static final BrowseDataService instance = BrowseDataService();
+  static BrowseDataService instance = BrowseDataService();
+
+  static void setMockInstance(BrowseDataService mock) {
+    instance = mock;
+  }
 
   LanguageRepository? _customLanguageRepo;
   CategoryRepository? _customCategoryRepo;

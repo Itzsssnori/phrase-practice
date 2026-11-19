@@ -26,19 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
   final _browseService = BrowseDataService.instance;
 
   bool _isLoading = true;
+  bool _initialLoadStarted = false;
   String? _errorMessage;
-
   List<Language> _languages = [];
   List<Category> _categories = [];
-  String? _lastLoadedNativeCode;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final settings = AppSettingsScope.maybeOf(context);
-    final currentNative = settings?.nativeLanguageCode ?? 'en';
-
-    if (_lastLoadedNativeCode != currentNative) {
+    if (!_initialLoadStarted) {
+      _initialLoadStarted = true;
       _loadData();
     }
   }
@@ -51,9 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final settings = AppSettingsScope.maybeOf(context);
     final nativeCode = settings?.nativeLanguageCode ?? 'en';
-    _lastLoadedNativeCode = nativeCode;
 
-    // Load active languages
+    // 1. Load active languages
     final langResult = await _browseService.getLanguages(forceRefresh: forceRefresh);
     if (langResult.isError) {
       if (mounted) {
@@ -66,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     _languages = langResult.dataOrNull ?? [];
 
-    // Load categories translated in the native language
+    // 2. Load categories
     final catResult = await _browseService.getCategories(nativeCode, forceRefresh: forceRefresh);
     if (catResult.isError) {
       if (mounted) {
@@ -100,8 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final settings = AppSettingsScope.of(context);
 
+    // Read settings directly in build so HomeScreen rebuilds immediately when languages swap/change
+    final settings = AppSettingsScope.of(context);
     final nativeLang = _findLanguage(settings.nativeLanguageCode, 'en');
     final targetLang = _findLanguage(settings.targetLanguageCode, 'es');
 
@@ -170,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Language Pair Chip (Tapping opens Language Settings Sheet)
+          // 1. Language Pair Chip (I speak → I'm learning)
           LanguagePairChip(
             nativeLanguage: nativeLang,
             targetLanguage: targetLang,
@@ -178,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: AppSpacing.lg),
 
-          // 2. Search Bar (Navigates directly to Search screen)
+          // 2. Search Bar
           Semantics(
             button: true,
             label: 'Search phrases in ${targetLang.name} or ${nativeLang.name}',
@@ -216,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: AppSpacing.md),
 
-          // 4. Real Categories Grid
+          // 4. Real Categories: Responsive list/grid to prevent height clipping or RenderFlex overflow
           if (_categories.isEmpty)
             const AppEmptyState(
               icon: Icons.folder_open_rounded,
@@ -226,8 +223,28 @@ class _HomeScreenState extends State<HomeScreen> {
           else
             LayoutBuilder(
               builder: (context, constraints) {
-                final isWide = constraints.maxWidth > 600;
-                final crossAxisCount = isWide ? 3 : 2;
+                final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+                // On narrow screens or high text scales, use full-width list to avoid aspect ratio overflow
+                final useSingleColumn = constraints.maxWidth < 520 || textScale >= 1.35;
+
+                if (useSingleColumn) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _categories.length,
+                    separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
+                    itemBuilder: (context, index) {
+                      final cat = _categories[index];
+                      return CategoryCard(
+                        category: cat,
+                        onTap: () => context.push('/categories/${cat.id}'),
+                      );
+                    },
+                  );
+                }
+
+                final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
+                final childRatio = constraints.maxWidth > 800 ? 1.6 : 1.35;
 
                 return GridView.builder(
                   shrinkWrap: true,
@@ -236,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: AppSpacing.md,
                     mainAxisSpacing: AppSpacing.md,
-                    childAspectRatio: 1.25,
+                    childAspectRatio: childRatio,
                   ),
                   itemCount: _categories.length,
                   itemBuilder: (context, index) {
