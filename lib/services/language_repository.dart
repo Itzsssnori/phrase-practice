@@ -10,11 +10,20 @@ abstract interface class LanguageRepository {
 
 /// Cloud Firestore implementation of [LanguageRepository].
 class FirestoreLanguageRepository implements LanguageRepository {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore? _customFirestore;
   List<Language>? _cachedLanguages;
 
   FirestoreLanguageRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+      : _customFirestore = firestore;
+
+  FirebaseFirestore? get _firestore {
+    if (_customFirestore != null) return _customFirestore;
+    try {
+      return FirebaseFirestore.instance;
+    } catch (_) {
+      return null;
+    }
+  }
 
   @override
   Future<RepoResult<List<Language>>> getActiveLanguages({bool forceRefresh = false}) async {
@@ -22,8 +31,13 @@ class FirestoreLanguageRepository implements LanguageRepository {
       return RepoResult.success(_cachedLanguages!);
     }
 
+    final db = _firestore;
+    if (db == null) {
+      return const RepoResult.error('Firebase not initialized.');
+    }
+
     try {
-      final snapshot = await _firestore
+      final snapshot = await db
           .collection('languages')
           .where('isActive', isEqualTo: true)
           .get();

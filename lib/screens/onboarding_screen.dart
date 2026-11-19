@@ -181,6 +181,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               icon: Icons.arrow_forward_rounded,
                               onPressed: _completeOnboarding,
                             ),
+                            const SizedBox(height: AppSpacing.sm),
+
+                            Center(
+                              child: TextButton(
+                                onPressed: () => context.push('/login'),
+                                child: const Text('Already have an account? Sign in'),
+                              ),
+                            ),
                           ],
                         ),
                       ),

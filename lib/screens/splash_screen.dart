@@ -1,34 +1,14 @@
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_loading_indicator.dart';
-import '../widgets/app_primary_button.dart';
-import '../widgets/app_settings_scope.dart';
 
-/// Initial loading / splash screen with onboarding check.
-class SplashScreen extends StatefulWidget {
+/// Initial loading / splash screen shown while Firebase Auth and app dependencies load.
+///
+/// Route guards in [GoRouter] automatically transition to `/home` or `/onboarding`
+/// as soon as the first authentication state resolves.
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _evaluateDestination();
-    });
-  }
-
-  void _evaluateDestination() {
-    final settings = AppSettingsScope.maybeOf(context);
-    if (settings != null && settings.hasOnboarded) {
-      context.go('/home');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,22 +66,6 @@ class _SplashScreenState extends State<SplashScreen> {
               const SizedBox(height: AppSpacing.xxl),
               const AppLoadingIndicator(),
               const Spacer(),
-              AppPrimaryButton(
-                label: 'Get Started',
-                onPressed: () {
-                  final settings = AppSettingsScope.maybeOf(context);
-                  if (settings != null && settings.hasOnboarded) {
-                    context.go('/home');
-                  } else {
-                    context.go('/onboarding');
-                  }
-                },
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              TextButton(
-                onPressed: () => context.go('/login'),
-                child: const Text('Already have an account? Sign In'),
-              ),
             ],
           ),
         ),
