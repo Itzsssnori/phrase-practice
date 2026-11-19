@@ -10,6 +10,9 @@ import 'package:phrase_practice/models/phrase_translation.dart';
 import 'package:phrase_practice/models/result.dart';
 import 'package:phrase_practice/models/user_profile.dart';
 import 'package:phrase_practice/router/app_router.dart';
+import 'package:phrase_practice/screens/forgot_password_screen.dart';
+import 'package:phrase_practice/screens/login_screen.dart';
+import 'package:phrase_practice/screens/profile_screen.dart';
 import 'package:phrase_practice/services/auth_controller.dart';
 import 'package:phrase_practice/services/auth_repository.dart';
 import 'package:phrase_practice/services/auth_validators.dart';
@@ -40,15 +43,26 @@ class FakeAuthRepository implements AuthRepository {
   @override
   AuthUser? get currentUser => _current;
 
+  static final Map<String, String> _globalUids = {};
+
+  String _getUidForEmail(String email) {
+    if (email == 'maria@example.com') return 'test-uid-123';
+    return _globalUids.putIfAbsent(email, () => 'uid-${email.hashCode.abs()}');
+  }
+
   @override
   Future<RepoResult<AuthUser>> signInWithEmail({
     required String email,
     required String password,
   }) async {
-    if (email == 'error@test.com') {
+    if (email == 'error@test.com' || password == 'wrong-pass') {
       return RepoResult.error(AuthErrorMapper.mapCode('wrong-password'));
     }
-    final user = AuthUser(uid: 'test-uid-123', email: email, displayName: 'Test User');
+    if (email == 'unknown@test.com') {
+      return RepoResult.error(AuthErrorMapper.mapCode('user-not-found'));
+    }
+    final uid = _getUidForEmail(email);
+    final user = AuthUser(uid: uid, email: email, displayName: 'Test User');
     emitUser(user);
     return RepoResult.success(user);
   }
@@ -62,7 +76,8 @@ class FakeAuthRepository implements AuthRepository {
     if (email == 'existing@test.com') {
       return RepoResult.error(AuthErrorMapper.mapCode('email-already-in-use'));
     }
-    final user = AuthUser(uid: 'new-uid-456', email: email, displayName: displayName);
+    final uid = _getUidForEmail(email);
+    final user = AuthUser(uid: uid, email: email, displayName: displayName);
     emitUser(user);
     return RepoResult.success(user);
   }
@@ -590,6 +605,175 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(result, isFalse);
+    });
+  });
+
+  group('Stage 4 User Checklist Scenarios', () {
+    late FakeAuthRepository fakeAuth;
+    late FakeProfileRepository fakeProfile;
+    late LanguageSettingsController settingsController;
+
+    setUp(() async {
+      fakeAuth = FakeAuthRepository();
+      fakeProfile = FakeProfileRepository();
+      final prefs = await SharedPreferences.getInstance();
+      settingsController = LanguageSettingsController(preferences: prefs);
+      await settingsController.load();
+    });
+
+    testWidgets('LoginScreen shows identical generic error for wrong password vs unknown account', (tester) async {
+      final authController = AuthController(
+        authRepository: fakeAuth,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsController,
+      );
+      fakeAuth.emitUser(null);
+      await tester.pump();
+
+      await tester.pumpWidget(
+        AppAuthScope(
+          controller: authController,
+          child: AppSettingsScope(
+            controller: settingsController,
+            child: const MaterialApp(home: LoginScreen()),
+          ),
+        ),
+      );
+
+      // 1. Wrong password
+      await tester.enterText(find.byType(TextFormField).first, 'registered@test.com');
+      await tester.enterText(find.byType(TextFormField).last, 'wrong-pass');
+      await tester.tap(find.text('Sign In'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Incorrect email or password.'), findsOneWidget);
+
+      // 2. Unknown account
+      await tester.enterText(find.byType(TextFormField).first, 'unknown@test.com');
+      await tester.enterText(find.byType(TextFormField).last, 'some-pass-123');
+      await tester.tap(find.text('Sign In'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Incorrect email or password.'), findsOneWidget);
+    });
+
+    testWidgets('ForgotPasswordScreen shows identical neutral confirmation for registered and unknown emails', (tester) async {
+      final authController = AuthController(
+        authRepository: fakeAuth,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsController,
+      );
+      fakeAuth.emitUser(null);
+      await tester.pump();
+
+      await tester.pumpWidget(
+        AppAuthScope(
+          controller: authController,
+          child: AppSettingsScope(
+            controller: settingsController,
+            child: const MaterialApp(home: ForgotPasswordScreen()),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byType(TextFormField), 'anyuser@example.com');
+      await tester.tap(find.text('Send Reset Link'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('If an account exists for that email, we sent a reset link.'), findsOneWidget);
+    });
+
+    test('Session restoration: app initialization with existing session stays signed in', () async {
+      final existingAuth = FakeAuthRepository(
+        initialUser: const AuthUser(uid: 'persisted-uid', email: 'persisted@test.com'),
+      );
+      final controller = AuthController(
+        authRepository: existingAuth,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsController,
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      expect(controller.isSignedIn, isTrue);
+      expect(controller.isGuest, isFalse);
+      expect(controller.status, AuthStatus.signedIn);
+    });
+
+    testWidgets('Guest browsing: profile displays guest mode without forcing sign in', (tester) async {
+      final authController = AuthController(
+        authRepository: fakeAuth,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsController,
+      );
+      fakeAuth.emitUser(null);
+      await tester.pump();
+
+      await tester.pumpWidget(
+        AppAuthScope(
+          controller: authController,
+          child: AppSettingsScope(
+            controller: settingsController,
+            child: const MaterialApp(home: ProfileScreen()),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Guest Explorer'), findsOneWidget);
+      expect(find.text('Sign In'), findsOneWidget);
+      expect(find.text('Create Account'), findsOneWidget);
+      // No blocking dialog
+      expect(find.text('Sign in to use this feature'), findsNothing);
+    });
+
+    test('Multi-session language sync: changing language updates profile and syncs to new session', () async {
+      // Session A: User logs in, changes language to Filipino
+      final authA = FakeAuthRepository();
+      final prefsA = await SharedPreferences.getInstance();
+      final settingsA = LanguageSettingsController(preferences: prefsA);
+      await settingsA.load();
+
+      final controllerA = AuthController(
+        authRepository: authA,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsA,
+      );
+
+      await controllerA.register(
+        email: 'multisession@test.com',
+        password: 'password123',
+        displayName: 'Traveler',
+      );
+
+      // Change target language to Filipino in Session A
+      await settingsA.setTargetLanguage('fil');
+      await Future<void>.delayed(Duration.zero);
+
+      // Verify Firestore profile document was updated
+      expect(fakeProfile.lastUpdatedTarget, 'fil');
+
+      // Session B: Fresh device/browser session with default English/Spanish
+      SharedPreferences.setMockInitialValues({});
+      final prefsB = await SharedPreferences.getInstance();
+      final settingsB = LanguageSettingsController(preferences: prefsB);
+      await settingsB.load();
+      expect(settingsB.targetLanguageCode, 'es'); // Initially default Spanish
+
+      final authB = FakeAuthRepository();
+      final controllerB = AuthController(
+        authRepository: authB,
+        profileRepository: fakeProfile,
+        languageSettingsController: settingsB,
+      );
+
+      // User signs in on Session B
+      await controllerB.signIn(
+        email: 'multisession@test.com',
+        password: 'password123',
+      );
+
+      // Settings on Session B immediately sync to Filipino from profile
+      expect(settingsB.targetLanguageCode, 'fil');
     });
   });
 }

@@ -235,11 +235,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Container(
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
+            Material(
+              color: theme.colorScheme.surface,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                border: Border.all(
+                side: BorderSide(
                   color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                   width: 1,
                 ),
@@ -275,11 +275,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Container(
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
+            Material(
+              color: theme.colorScheme.surface,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                border: Border.all(
+                side: BorderSide(
                   color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
                   width: 1,
                 ),
