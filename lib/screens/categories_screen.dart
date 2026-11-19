@@ -2,13 +2,16 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import '../models/category.dart';
 import '../models/language.dart';
+import '../models/phrase.dart';
 import '../services/browse_data_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_auth_scope.dart';
 import '../widgets/app_empty_state.dart';
 import '../widgets/app_error_message.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/category_card.dart';
 import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
@@ -29,6 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   String? _errorMessage;
   List<Category> _categories = [];
   List<Language> _languages = [];
+  List<Phrase> _allPhrases = [];
 
   @override
   void didChangeDependencies() {
@@ -55,6 +59,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     }
 
     final result = await _browseService.getCategories(nativeCode, forceRefresh: forceRefresh);
+    final phraseResult = await _browseService.getAllPhrases(forceRefresh: forceRefresh);
+    if (phraseResult.isSuccess && phraseResult.dataOrNull != null) {
+      _allPhrases = phraseResult.dataOrNull!;
+    }
 
     if (mounted) {
       if (result.isError) {
@@ -188,6 +196,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               final textScale = MediaQuery.textScalerOf(context).scale(1.0);
               final useSingleColumn = constraints.maxWidth < 520 || textScale >= 1.35;
 
+              final auth = AppAuthScope.maybeOf(context);
+              final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+              final isSignedIn = auth != null && auth.isSignedIn;
+
               if (useSingleColumn) {
                 return ListView.separated(
                   shrinkWrap: true,
@@ -196,8 +208,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
                   itemBuilder: (context, index) {
                     final cat = _categories[index];
+                    final learnedCount = isSignedIn && userPhraseCtrl != null
+                        ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetLang.code)
+                        : null;
                     return CategoryCard(
                       category: cat,
+                      learnedCount: learnedCount,
                       onTap: () => context.push('/categories/${cat.id}'),
                     );
                   },
@@ -219,8 +235,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 itemCount: _categories.length,
                 itemBuilder: (context, index) {
                   final cat = _categories[index];
+                  final learnedCount = isSignedIn && userPhraseCtrl != null
+                      ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetLang.code)
+                      : null;
                   return CategoryCard(
                     category: cat,
+                    learnedCount: learnedCount,
                     onTap: () => context.push('/categories/${cat.id}'),
                   );
                 },

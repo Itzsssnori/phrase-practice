@@ -5,10 +5,12 @@ import '../models/phrase.dart';
 import '../services/browse_data_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_auth_scope.dart';
 import '../widgets/app_empty_state.dart';
 import '../widgets/app_error_message.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/phrase_card.dart';
 
 /// Screen listing all phrases under a selected category.
@@ -207,12 +209,28 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                 softWrap: true,
               ),
               const SizedBox(height: AppSpacing.md),
-              Text(
-                '${_phrases.length} phrases available for study',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.primary,
-                ),
+              Builder(
+                builder: (context) {
+                  final auth = AppAuthScope.maybeOf(context);
+                  final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+                  final isSignedIn = auth != null && auth.isSignedIn;
+
+                  final learnedCount = (isSignedIn && userPhraseCtrl != null)
+                      ? userPhraseCtrl.getLearnedCountForCategory(widget.categoryId, _phrases, targetLang)
+                      : null;
+
+                  final headerProgressText = learnedCount != null
+                      ? '$learnedCount of ${_phrases.length} learned'
+                      : '${_phrases.length} phrases available for study';
+
+                  return Text(
+                    headerProgressText,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: theme.colorScheme.primary,
+                    ),
+                  );
+                },
               ),
             ],
           ),

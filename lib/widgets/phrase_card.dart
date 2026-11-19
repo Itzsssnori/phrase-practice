@@ -3,8 +3,11 @@ import '../models/phrase.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_audio_button.dart';
+import 'app_auth_scope.dart';
 import 'app_favorite_button.dart';
 import 'app_settings_scope.dart';
+import 'app_user_phrase_scope.dart';
+import 'require_sign_in.dart';
 
 /// Minimalist, approachable phrase card prioritizing legibility and context.
 ///
@@ -43,6 +46,10 @@ class _PhraseCardState extends State<PhraseCard> {
     final settings = AppSettingsScope.maybeOf(context);
     final targetCode = widget.targetLanguageCode ?? settings?.targetLanguageCode ?? 'es';
     final nativeCode = widget.nativeLanguageCode ?? settings?.nativeLanguageCode ?? 'en';
+
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    final isFavorite = userPhraseCtrl?.isFavorite(widget.phrase.id) ?? widget.phrase.isFavorite;
+    final isLearned = userPhraseCtrl?.isLearned(widget.phrase.id, targetCode) ?? false;
 
     // Resolve target and native translations
     final targetTrans = widget.phrase.translationFor(targetCode);
@@ -109,11 +116,58 @@ class _PhraseCardState extends State<PhraseCard> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.sm),
+                        if (isLearned) ...[
+                          const SizedBox(width: AppSpacing.xs),
+                          Tooltip(
+                            message: 'Learned in ${targetCode.toUpperCase()}',
+                            child: Semantics(
+                              label: 'Learned',
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: theme.colorScheme.primaryContainer,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.check_rounded,
+                                  size: 13,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                        const Spacer(),
                         const AppAudioButton(isAvailable: false),
                         AppFavoriteButton(
-                          isFavorite: widget.phrase.isFavorite,
-                          onToggle: widget.onFavoriteToggle,
+                          isFavorite: isFavorite,
+                          onToggle: (fav) async {
+                            if (widget.onFavoriteToggle != null) {
+                              widget.onFavoriteToggle!(fav);
+                              return;
+                            }
+                            if (userPhraseCtrl != null) {
+                              final auth = AppAuthScope.maybeOf(context);
+                              if (auth == null || !auth.isSignedIn) {
+                                final signedIn = await requireSignIn(context);
+                                if (!signedIn) return;
+                              }
+                              final wasFav = userPhraseCtrl.isFavorite(widget.phrase.id);
+                              final res = await userPhraseCtrl.toggleFavorite(widget.phrase.id);
+                              if (wasFav && res.isSuccess && context.mounted) {
+                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text('Removed from favorites'),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: () => userPhraseCtrl.toggleFavorite(widget.phrase.id),
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          },
                         ),
                       ],
                     ),

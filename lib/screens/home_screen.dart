@@ -13,6 +13,8 @@ import '../widgets/app_error_message.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_search_bar.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_auth_scope.dart';
+import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
@@ -167,6 +169,22 @@ class _HomeScreenState extends State<HomeScreen> {
     final nativeCode = nativeLang.code;
     final targetCode = targetLang.code;
 
+    final auth = AppAuthScope.maybeOf(context);
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    final isSignedIn = auth != null && auth.isSignedIn;
+
+    final recentPhrases = <Phrase>[];
+    if (isSignedIn && userPhraseCtrl != null && userPhraseCtrl.recentPhraseIds.isNotEmpty) {
+      final phraseMap = {for (final p in _allPhrases) if (p.isActive) p.id: p};
+      for (final id in userPhraseCtrl.recentPhraseIds) {
+        final phrase = phraseMap[id];
+        if (phrase != null) {
+          recentPhrases.add(phrase);
+          if (recentPhrases.length >= 5) break;
+        }
+      }
+    }
+
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(
@@ -207,8 +225,14 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: AppSpacing.xl),
           ],
 
-          // 4. Practice by Category (compact 2-per-row grid of real categories)
-          _buildCategorySection(theme, isDark, nativeCode),
+          // 4. Continue Studying (only for signed-in users with history, max 5)
+          if (isSignedIn && recentPhrases.isNotEmpty) ...[
+            _buildRecentPhrasesSection(theme, isDark, nativeCode, targetCode, recentPhrases),
+            const SizedBox(height: AppSpacing.xl),
+          ],
+
+          // 5. Practice by Category (compact 2-per-row grid of real categories)
+          _buildCategorySection(theme, isDark, nativeCode, targetCode, isSignedIn, userPhraseCtrl),
 
           const SizedBox(height: AppSpacing.xxl),
         ],
@@ -348,9 +372,128 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // ─── Continue Studying Section ────────────────────────────────────────
+
+  Widget _buildRecentPhrasesSection(
+    ThemeData theme,
+    bool isDark,
+    String nativeCode,
+    String targetCode,
+    List<Phrase> recentPhrases,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'CONTINUE STUDYING',
+          style: theme.textTheme.labelSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.8,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: recentPhrases.length,
+          separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.sm),
+          itemBuilder: (context, index) {
+            final phrase = recentPhrases[index];
+            final targetTrans = phrase.translationFor(targetCode);
+            final nativeTrans = phrase.translationFor(nativeCode);
+            final mainText = targetTrans?.text ?? phrase.translatedText;
+            final subText = nativeTrans?.text ?? phrase.originalText;
+            final tint = AppColors.getCategoryTintById(phrase.categoryId, isDark);
+
+            return Material(
+              color: theme.colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                side: BorderSide(color: theme.dividerColor),
+              ),
+              child: InkWell(
+                onTap: () => context.push(
+                  '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
+                ),
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.xs,
+                        ),
+                        decoration: BoxDecoration(
+                          color: tint.background,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        ),
+                        child: Text(
+                          phrase.categoryId.toUpperCase(),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: tint.foreground,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              mainText,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: theme.colorScheme.onSurface,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            if (subText.isNotEmpty && subText != mainText) ...[
+                              const SizedBox(height: 2),
+                              Text(
+                                subText,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      Icon(
+                        Icons.chevron_right_rounded,
+                        size: 20,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   // ─── Compact Category Grid ────────────────────────────────────────────
 
-  Widget _buildCategorySection(ThemeData theme, bool isDark, String nativeCode) {
+  Widget _buildCategorySection(
+    ThemeData theme,
+    bool isDark,
+    String nativeCode,
+    String targetCode,
+    bool isSignedIn,
+    dynamic userPhraseCtrl,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -407,11 +550,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: _categories.length,
                 itemBuilder: (context, index) {
                   final cat = _categories[index];
+                  final learnedCount = isSignedIn && userPhraseCtrl != null
+                      ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetCode) as int
+                      : null;
+
                   return _CompactCategoryTile(
                     category: cat,
                     nativeCode: nativeCode,
                     isDark: isDark,
                     colorIndex: index,
+                    learnedCount: learnedCount,
                     onTap: () => context.push('/categories/${cat.id}'),
                   );
                 },
@@ -432,6 +580,7 @@ class _CompactCategoryTile extends StatelessWidget {
   final String nativeCode;
   final bool isDark;
   final int colorIndex;
+  final int? learnedCount;
   final VoidCallback? onTap;
 
   const _CompactCategoryTile({
@@ -439,6 +588,7 @@ class _CompactCategoryTile extends StatelessWidget {
     required this.nativeCode,
     required this.isDark,
     required this.colorIndex,
+    this.learnedCount,
     this.onTap,
   });
 
@@ -450,9 +600,13 @@ class _CompactCategoryTile extends StatelessWidget {
     final effectiveNativeCode = settings?.nativeLanguageCode ?? nativeCode;
     final title = category.nameFor(effectiveNativeCode);
 
+    final progressText = learnedCount != null
+        ? '$learnedCount of ${category.phraseCount} learned'
+        : '${category.phraseCount} phrases';
+
     return Semantics(
       button: true,
-      label: '$title, ${category.phraseCount} phrases',
+      label: '$title, $progressText',
       child: Material(
         color: theme.colorScheme.surface,
         shape: RoundedRectangleBorder(
@@ -493,7 +647,7 @@ class _CompactCategoryTile extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
-                  '${category.phraseCount} phrases',
+                  progressText,
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),

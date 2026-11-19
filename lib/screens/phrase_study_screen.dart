@@ -5,6 +5,7 @@ import '../models/phrase_translation.dart';
 import '../services/browse_data_service.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
+import '../widgets/app_auth_scope.dart';
 import '../widgets/app_empty_state.dart';
 import '../widgets/app_error_message.dart';
 import '../widgets/app_favorite_button.dart';
@@ -12,6 +13,8 @@ import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_user_phrase_scope.dart';
+import '../widgets/require_sign_in.dart';
 
 /// Interactive study screen with recall mode, text-size scaling, and full-context cards.
 class PhraseStudyScreen extends StatefulWidget {
@@ -44,6 +47,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   bool _recallMode = false;
   bool _isTranslationRevealed = false;
   bool _isPronunciationRevealed = false;
+  final Set<String> _recordedRecentPhrases = {};
 
   @override
   void initState() {
@@ -259,6 +263,12 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     }
 
     final phrase = _categoryPhrases[_currentIndex];
+    _recordRecentViewIfNeeded(phrase.id);
+
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    final isFav = userPhraseCtrl?.isFavorite(phrase.id) ?? false;
+    final isLearned = userPhraseCtrl?.isLearned(phrase.id, targetLangCode) ?? false;
+
     final targetTrans = phrase.translationFor(targetLangCode) ??
         phrase.translationFor('es') ??
         phrase.translations.values.firstOrNull ??
@@ -371,11 +381,12 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(width: AppSpacing.sm),
+                              _buildLearnedToggle(theme, isDark, isLearned, phrase.id, targetLangCode),
                               const Spacer(),
-                              const AppFavoriteButton(
-                                isFavorite: false,
-                                isDisabled: true,
-                                disabledTooltip: 'Coming soon',
+                              AppFavoriteButton(
+                                isFavorite: isFav,
+                                onToggle: (_) => _handleFavoriteToggle(phrase.id),
                               ),
                             ],
                           ),
@@ -678,5 +689,113 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
         ),
       ),
     );
+  }
+
+  void _recordRecentViewIfNeeded(String phraseId) {
+    if (_recordedRecentPhrases.contains(phraseId)) return;
+    _recordedRecentPhrases.add(phraseId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final auth = AppAuthScope.maybeOf(context);
+      if (auth != null && auth.isSignedIn) {
+        final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+        userPhraseCtrl?.recordRecentView(phraseId);
+      }
+    });
+  }
+
+  Widget _buildLearnedToggle(
+    ThemeData theme,
+    bool isDark,
+    bool isLearned,
+    String phraseId,
+    String targetLangCode,
+  ) {
+    final label = isLearned ? 'Learned' : 'Mark as learned';
+    return Semantics(
+      button: true,
+      label: isLearned ? 'Marked as learned. Tap to unmark.' : 'Tap to mark as learned',
+      child: Tooltip(
+        message: isLearned
+            ? 'Learned in ${targetLangCode.toUpperCase()}'
+            : 'Mark as learned in ${targetLangCode.toUpperCase()}',
+        child: Material(
+          color: isLearned ? theme.colorScheme.primary : Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+            side: BorderSide(
+              color: isLearned ? theme.colorScheme.primary : theme.dividerColor,
+              width: 1,
+            ),
+          ),
+          child: InkWell(
+            onTap: () => _handleLearnedToggle(phraseId, targetLangCode),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    isLearned ? Icons.check_rounded : Icons.check_circle_outline_rounded,
+                    size: 14,
+                    color: isLearned ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    label,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      fontWeight: isLearned ? FontWeight.w700 : FontWeight.w500,
+                      fontSize: 11.5,
+                      color: isLearned ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _handleLearnedToggle(String phraseId, String targetLangCode) async {
+    final auth = AppAuthScope.maybeOf(context);
+    if (auth == null || !auth.isSignedIn) {
+      final signedIn = await requireSignIn(context);
+      if (!mounted || !signedIn) return;
+    }
+    if (!mounted) return;
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    await userPhraseCtrl?.toggleLearned(phraseId, targetLangCode);
+  }
+
+  Future<void> _handleFavoriteToggle(String phraseId) async {
+    final auth = AppAuthScope.maybeOf(context);
+    if (auth == null || !auth.isSignedIn) {
+      final signedIn = await requireSignIn(context);
+      if (!mounted || !signedIn) return;
+    }
+    if (!mounted) return;
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    if (userPhraseCtrl != null) {
+      final wasFav = userPhraseCtrl.isFavorite(phraseId);
+      final res = await userPhraseCtrl.toggleFavorite(phraseId);
+      if (wasFav && res.isSuccess && mounted) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Removed from favorites'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () => userPhraseCtrl.toggleFavorite(phraseId),
+            ),
+          ),
+        );
+      }
+    }
   }
 }
