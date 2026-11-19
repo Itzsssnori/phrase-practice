@@ -266,6 +266,7 @@ class _CategoryPhrasesScreenState extends State<CategoryPhrasesScreen> {
                 phrase: phrase,
                 targetLanguageCode: targetLang,
                 nativeLanguageCode: nativeLang,
+                showCategory: false,
                 onTap: () => _openStudyScreen(phrase.id),
               );
             },

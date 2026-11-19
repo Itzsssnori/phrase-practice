@@ -10,6 +10,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_empty_state.dart';
 import '../widgets/app_error_message.dart';
+import '../widgets/app_favorite_button.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_search_bar.dart';
 import '../widgets/app_settings_scope.dart';
@@ -219,18 +220,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.xl),
+          const SizedBox(height: AppSpacing.lg),
 
           // 3. Featured Daily Phrase (only shown if a real phrase was loaded)
           if (_dailyPhrase != null) ...[
             _buildDailyPhraseCard(theme, isDark, nativeCode, targetCode),
-            const SizedBox(height: AppSpacing.xl),
+            const SizedBox(height: AppSpacing.lg),
           ],
 
           // 4. Continue Studying (only for signed-in users with history, max 5)
           if (isSignedIn && recentPhrases.isNotEmpty) ...[
             _buildRecentPhrasesSection(theme, isDark, nativeCode, targetCode, recentPhrases),
-            const SizedBox(height: AppSpacing.xl),
+            const SizedBox(height: AppSpacing.lg),
           ],
 
           // 5. Practice by Category (compact 2-per-row grid of real categories)
@@ -264,6 +265,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final tint = AppColors.getCategoryTintById(phrase.categoryId, isDark);
 
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    final isFav = userPhraseCtrl?.isFavorite(phrase.id) ?? false;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -276,100 +280,128 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
-        Material(
-          color: theme.colorScheme.surface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            side: BorderSide(color: theme.dividerColor),
-          ),
-          child: InkWell(
-            onTap: () => context.push(
-              '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
+        SizedBox(
+          width: double.infinity,
+          child: Material(
+            color: theme.colorScheme.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+              side: BorderSide(color: theme.dividerColor),
             ),
-            borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Category badge
-                  if (categoryName != null) ...[
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.sm,
-                        vertical: AppSpacing.xs,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tint.background,
-                        borderRadius: BorderRadius.circular(AppSpacing.xs),
-                      ),
-                      child: Text(
-                        categoryName,
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: tint.foreground,
-                          letterSpacing: 0.5,
-                          fontSize: 10,
+            child: InkWell(
+              onTap: () => context.push(
+                '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
+              ),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Top row: Category badge and Favorite icon
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (categoryName != null)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs,
+                            ),
+                            decoration: BoxDecoration(
+                              color: tint.background,
+                              borderRadius: BorderRadius.circular(AppSpacing.xs),
+                            ),
+                            child: Text(
+                              categoryName,
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: tint.foreground,
+                                letterSpacing: 0.5,
+                                fontSize: 10,
+                              ),
+                            ),
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        AppFavoriteButton(
+                          isFavorite: isFav,
+                          onToggle: (_) async {
+                            if (userPhraseCtrl != null) {
+                              final auth = AppAuthScope.maybeOf(context);
+                              if (auth == null || !auth.isSignedIn) {
+                                final signedIn = await requireSignIn(context);
+                                if (!signedIn) return;
+                              }
+                              await userPhraseCtrl.toggleFavorite(phrase.id);
+                            }
+                          },
                         ),
-                      ),
+                      ],
                     ),
                     const SizedBox(height: AppSpacing.md),
+
+                    // Target language phrase (large)
+                    if (targetTranslation != null)
+                      Text(
+                        targetTranslation.text,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.onSurface,
+                          height: 1.3,
+                        ),
+                      ),
+                    if (targetTranslation?.pronunciation != null) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        targetTranslation!.pronunciation!,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          fontStyle: FontStyle.italic,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: AppSpacing.sm),
+
+                    // Native language translation
+                    if (nativeTranslation != null)
+                      Text(
+                        '"${nativeTranslation.text}"',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                        ),
+                      ),
+
+                    // Usage note
+                    if (nativeTranslation?.meaningNote != null &&
+                        nativeTranslation!.meaningNote!.isNotEmpty) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        nativeTranslation.meaningNote!,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+
+                    const SizedBox(height: AppSpacing.md),
+
+                    // Bottom row: "View phrase details →"
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'View phrase details →',
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
-
-                  // Target language phrase (large)
-                  if (targetTranslation != null)
-                    Text(
-                      targetTranslation.text,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: theme.colorScheme.onSurface,
-                        height: 1.3,
-                      ),
-                    ),
-                  if (targetTranslation?.pronunciation != null) ...[
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      targetTranslation!.pronunciation!,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        fontStyle: FontStyle.italic,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: AppSpacing.sm),
-
-                  // Native language translation
-                  if (nativeTranslation != null)
-                    Text(
-                      '"${nativeTranslation.text}"',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                      ),
-                    ),
-
-                  // Usage note
-                  if (nativeTranslation?.meaningNote != null &&
-                      nativeTranslation!.meaningNote!.isNotEmpty) ...[
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      nativeTranslation.meaningNote!,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-
-                  const SizedBox(height: AppSpacing.md),
-
-                  // "View phrase details" link
-                  Text(
-                    'View phrase details →',
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

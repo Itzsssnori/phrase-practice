@@ -19,6 +19,7 @@ class PhraseCard extends StatefulWidget {
   final ValueChanged<bool>? onFavoriteToggle;
   final String? targetLanguageCode;
   final String? nativeLanguageCode;
+  final bool showCategory;
 
   const PhraseCard({
     super.key,
@@ -27,6 +28,7 @@ class PhraseCard extends StatefulWidget {
     this.onFavoriteToggle,
     this.targetLanguageCode,
     this.nativeLanguageCode,
+    this.showCategory = true,
   });
 
   @override
@@ -68,6 +70,7 @@ class _PhraseCardState extends State<PhraseCard> {
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
         child: Container(
+          width: double.infinity,
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
@@ -86,38 +89,109 @@ class _PhraseCardState extends State<PhraseCard> {
               borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Top Action & Category bar
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.sm,
-                              vertical: AppSpacing.xs,
-                            ),
-                            decoration: BoxDecoration(
-                              color: tint.background,
-                              borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                            ),
-                            child: Text(
-                              widget.phrase.categoryId.toUpperCase(),
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                fontSize: 10.5,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.5,
-                                color: tint.foreground,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (widget.showCategory) ...[
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: AppSpacing.xs,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              decoration: BoxDecoration(
+                                color: tint.background,
+                                borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                              ),
+                              child: Text(
+                                widget.phrase.categoryId.toUpperCase(),
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
+                                  color: tint.foreground,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
+                            const SizedBox(height: AppSpacing.xs),
+                          ],
+
+                          // Main Text: Target Language Translation (largest focus)
+                          Text(
+                            mainText,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.w700,
+                              height: 1.3,
+                            ),
+                            softWrap: true,
                           ),
-                        ),
+
+                          // Sub Text: Native Language Phrase
+                          if (subText.isNotEmpty && subText != mainText) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              subText,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: theme.colorScheme.onSurface,
+                                height: 1.3,
+                              ),
+                              softWrap: true,
+                            ),
+                          ],
+
+                          // Pronunciation in small text
+                          if (pronunciation != null && pronunciation.isNotEmpty) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              pronunciation,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                fontStyle: FontStyle.italic,
+                                color: theme.colorScheme.onSurfaceVariant,
+                                fontSize: 12.0,
+                              ),
+                              softWrap: true,
+                            ),
+                          ],
+
+                          // Meaning / Context Note if available
+                          if (note != null && note.isNotEmpty) ...[
+                            const SizedBox(height: AppSpacing.xs),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: AppSpacing.xs,
+                              ),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.surfaceContainerHighest,
+                                borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                              ),
+                              child: Text(
+                                note,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  fontSize: 11.5,
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                  height: 1.3,
+                                ),
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                         if (isLearned) ...[
-                          const SizedBox(width: AppSpacing.xs),
                           Tooltip(
                             message: 'Learned in ${targetCode.toUpperCase()}',
                             child: Semantics(
@@ -136,8 +210,8 @@ class _PhraseCardState extends State<PhraseCard> {
                               ),
                             ),
                           ),
+                          const SizedBox(width: AppSpacing.xs),
                         ],
-                        const Spacer(),
                         const AppAudioButton(isAvailable: false),
                         AppFavoriteButton(
                           isFavorite: isFavorite,
@@ -180,71 +254,6 @@ class _PhraseCardState extends State<PhraseCard> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.md),
-
-                    // Main Text: Target Language Translation (largest focus)
-                    Text(
-                      mainText,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.w700,
-                        height: 1.3,
-                      ),
-                      softWrap: true,
-                    ),
-
-                    // Sub Text: Native Language Phrase
-                    if (subText.isNotEmpty && subText != mainText) ...[
-                      const SizedBox(height: AppSpacing.xs),
-                      Text(
-                        subText,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: theme.colorScheme.onSurfaceVariant,
-                          height: 1.35,
-                        ),
-                        softWrap: true,
-                      ),
-                    ],
-
-                    // Pronunciation in small text
-                    if (pronunciation != null && pronunciation.isNotEmpty) ...[
-                      const SizedBox(height: AppSpacing.xs),
-                      Text(
-                        pronunciation,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontSize: 12.0,
-                        ),
-                        softWrap: true,
-                      ),
-                    ],
-
-                    // Meaning / Context Note if available
-                    if (note != null && note.isNotEmpty) ...[
-                      const SizedBox(height: AppSpacing.md),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.md,
-                          vertical: AppSpacing.sm,
-                        ),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                        ),
-                        child: Text(
-                          note,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            fontSize: 12.5,
-                            color: theme.colorScheme.onSurface,
-                            height: 1.4,
-                          ),
-                          softWrap: true,
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
