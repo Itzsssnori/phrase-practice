@@ -5,10 +5,12 @@ import 'firebase_options.dart';
 import 'router/app_router.dart';
 import 'services/auth_controller.dart';
 import 'services/language_settings_controller.dart';
+import 'services/quiz_controller.dart';
 import 'services/user_phrase_controller.dart';
 import 'theme/app_theme.dart';
 import 'widgets/app_auth_scope.dart';
 import 'widgets/app_error_message.dart';
+import 'widgets/app_quiz_scope.dart';
 import 'widgets/app_settings_scope.dart';
 import 'widgets/app_user_phrase_scope.dart';
 
@@ -35,11 +37,14 @@ Future<void> main() async {
     authController: authController,
   );
 
+  final quizController = QuizController();
+
   runApp(PhrasePracticeApp(
     initializationError: initError,
     settingsController: settingsController,
     authController: authController,
     userPhraseController: userPhraseController,
+    quizController: quizController,
   ));
 }
 
@@ -49,6 +54,7 @@ class PhrasePracticeApp extends StatefulWidget {
   final LanguageSettingsController? settingsController;
   final AuthController? authController;
   final UserPhraseController? userPhraseController;
+  final QuizController? quizController;
 
   const PhrasePracticeApp({
     super.key,
@@ -56,6 +62,7 @@ class PhrasePracticeApp extends StatefulWidget {
     this.settingsController,
     this.authController,
     this.userPhraseController,
+    this.quizController,
   });
 
   @override
@@ -66,6 +73,7 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
   late final LanguageSettingsController _settingsController;
   late final AuthController _authController;
   late final UserPhraseController _userPhraseController;
+  late final QuizController _quizController;
   late final GoRouter _router;
 
   @override
@@ -76,6 +84,7 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
         AuthController(languageSettingsController: _settingsController);
     _userPhraseController = widget.userPhraseController ??
         UserPhraseController(authController: _authController);
+    _quizController = widget.quizController ?? QuizController();
     _router = createAppRouter(
       authController: _authController,
       settingsController: _settingsController,
@@ -91,23 +100,26 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
           controller: _settingsController,
           child: AppUserPhraseScope(
             controller: _userPhraseController,
-            child: MaterialApp(
-              title: 'Phrase Practice',
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.system,
-              home: Scaffold(
-                appBar: AppBar(
-                  title: const Text('Offline Mode'),
-                ),
-                body: SafeArea(
-                  child: AppErrorMessage(
-                    title: 'Database Connection Notice',
-                    message:
-                        'Firebase could not be initialized on this platform:\n${widget.initializationError}\n\nYou can continue exploring offline screens.',
-                    retryLabel: 'Retry Initialization',
-                    onRetry: () => main(),
+            child: AppQuizScope(
+              controller: _quizController,
+              child: MaterialApp(
+                title: 'Phrase Practice',
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: ThemeMode.system,
+                home: Scaffold(
+                  appBar: AppBar(
+                    title: const Text('Offline Mode'),
+                  ),
+                  body: SafeArea(
+                    child: AppErrorMessage(
+                      title: 'Database Connection Notice',
+                      message:
+                          'Firebase could not be initialized on this platform:\n${widget.initializationError}\n\nYou can continue exploring offline screens.',
+                      retryLabel: 'Retry Initialization',
+                      onRetry: () => main(),
+                    ),
                   ),
                 ),
               ),
@@ -123,13 +135,16 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
         controller: _settingsController,
         child: AppUserPhraseScope(
           controller: _userPhraseController,
-          child: MaterialApp.router(
-            title: 'Phrase Practice',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
-            routerConfig: _router,
+          child: AppQuizScope(
+            controller: _quizController,
+            child: MaterialApp.router(
+              title: 'Phrase Practice',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.system,
+              routerConfig: _router,
+            ),
           ),
         ),
       ),

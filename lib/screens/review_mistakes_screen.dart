@@ -1,18 +1,76 @@
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
-import '../models/quiz.dart';
-import '../services/mock_data_service.dart';
+import '../models/phrase.dart';
+import '../services/browse_data_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_empty_state.dart';
+import '../widgets/app_loading_indicator.dart';
+import '../widgets/app_primary_button.dart';
+import '../widgets/app_quiz_scope.dart';
+import '../widgets/phrase_card.dart';
 
-/// Screen detailing incorrect answers and explanations from recent quizzes.
-class ReviewMistakesScreen extends StatelessWidget {
+/// Screen detailing incorrect answers from the most recent quiz round,
+/// rendering them as interactive phrase cards and offering focused repeat drills.
+class ReviewMistakesScreen extends StatefulWidget {
   const ReviewMistakesScreen({super.key});
 
   @override
+  State<ReviewMistakesScreen> createState() => _ReviewMistakesScreenState();
+}
+
+class _ReviewMistakesScreenState extends State<ReviewMistakesScreen> {
+  final _browseService = BrowseDataService.instance;
+  List<Phrase> _allPhrases = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllPhrases();
+  }
+
+  Future<void> _loadAllPhrases() async {
+    final res = await _browseService.getAllPhrases();
+    if (mounted && res.isSuccess) {
+      setState(() => _allPhrases = res.dataOrNull ?? []);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final quizCtrl = AppQuizScope.maybeOf(context);
+
+    // Protection against direct access or browser refresh
+    if (quizCtrl == null || quizCtrl.lastResult == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) context.go('/quiz');
+      });
+      return const Scaffold(
+        body: Center(child: AppLoadingIndicator()),
+      );
+    }
+
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final List<QuizQuestion> reviewList = [MockDataService.sampleQuestions.first];
+
+    final result = quizCtrl.lastResult!;
+    final mistakes = result.mistakes;
+    final targetCode = result.targetLanguageCode;
+
+    if (mistakes.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Review Mistakes')),
+        body: SafeArea(
+          child: AppEmptyState(
+            icon: Icons.check_circle_outline_rounded,
+            title: 'No Mistakes to Review',
+            message: 'You scored 100% on your last session. Keep up the excellent work!',
+            actionLabel: 'Return to Quiz',
+            onAction: () => context.go('/quiz'),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -34,112 +92,93 @@ class ReviewMistakesScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              'Understanding why a phrase works in context prevents recurring slips.',
+              'Understanding why a phrase works in context prevents recurring slips. Tap any card to view full context notes.',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
               ),
             ),
+            const SizedBox(height: AppSpacing.lg),
+
+            // "Practice these again" Primary Action
+            AppPrimaryButton(
+              label: 'Practice These Again',
+              icon: Icons.replay_rounded,
+              onPressed: () {
+                final started = quizCtrl.practiceMistakes(_allPhrases);
+                if (started && mounted) {
+                  context.pushReplacement('/quiz/play');
+                }
+              },
+            ),
             const SizedBox(height: AppSpacing.xl),
 
+            // Missed Phrases as PhraseCard widgets
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: reviewList.length,
-              separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.lg),
+              itemCount: mistakes.length,
+              separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
               itemBuilder: (context, index) {
-                final item = reviewList[index];
-                return Container(
-                  padding: const EdgeInsets.all(AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                    border: Border.all(
-                      color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                      width: 1,
-                    ),
-                    boxShadow: isDark
-                        ? []
-                        : [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.015),
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.sm,
-                              vertical: 3,
-                            ),
-                            decoration: BoxDecoration(
-                              color: isDark ? AppColors.darkError.withValues(alpha: 0.15) : AppColors.lightErrorBackground,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Text(
-                              'Phrase ${index + 1}',
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: isDark ? AppColors.darkError : AppColors.lightError,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ],
+                final mistake = mistakes[index];
+                final phrase = mistake.phrase;
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Answer comparison badge
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md,
+                        vertical: AppSpacing.xs,
                       ),
-                      const SizedBox(height: AppSpacing.md),
-                      Text(
-                        item.originalPhrase,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? AppColors.darkError.withValues(alpha: 0.12)
+                            : AppColors.lightErrorBackground,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(AppSpacing.radiusCard),
+                          topRight: Radius.circular(AppSpacing.radiusCard),
+                        ),
+                        border: Border.all(
+                          color: isDark ? AppColors.darkError : AppColors.lightError,
                         ),
                       ),
-                      const SizedBox(height: AppSpacing.sm),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
                           Icon(
-                            Icons.check_circle_outline_rounded,
-                            size: 18,
-                            color: isDark ? AppColors.darkSuccess : AppColors.lightSuccess,
+                            Icons.close_rounded,
+                            size: 16,
+                            color: isDark ? AppColors.darkError : AppColors.lightError,
                           ),
-                          const SizedBox(width: AppSpacing.sm),
+                          const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              'Correct meaning: ${item.options[item.correctIndex]}',
-                              style: theme.textTheme.bodyMedium?.copyWith(
+                              'Your answer: ${mistake.selectedAnswer}',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: isDark ? AppColors.darkError : AppColors.lightError,
                                 fontWeight: FontWeight.w600,
-                                color: isDark ? AppColors.darkSuccess : AppColors.lightSuccess,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: AppSpacing.md),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(AppSpacing.md),
-                        decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                        ),
-                        child: Text(
-                          item.explanation,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: isDark ? AppColors.darkText : AppColors.lightText,
-                          ),
-                        ),
+                    ),
+
+                    // Standard interactive PhraseCard
+                    PhraseCard(
+                      phrase: phrase,
+                      targetLanguageCode: targetCode,
+                      onTap: () => context.push(
+                        '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
             ),
+            const SizedBox(height: AppSpacing.xxl),
           ],
         ),
       ),
