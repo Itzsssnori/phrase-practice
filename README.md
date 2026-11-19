@@ -204,13 +204,13 @@ lead's approval.
 
 ### Stage 2 checklist (lead)
 
-- [ ] Rules reviewed and tested in the Rules Playground
-- [ ] Rules and indexes deployed
-- [ ] Seed script run against the Firebase project, service account key deleted
-- [ ] `/debug/data` shows real languages, categories, and phrases
-- [ ] Spanish phrases revised to neutral Latin American Spanish
-- [ ] Spanish and Filipino phrases reviewed by a speaker
-- [ ] Merged into `main`
+- [x] Rules reviewed and tested in the Rules Playground / API deny checks
+- [x] Rules and indexes deployed
+- [x] Seed script run against the Firebase project, service account key deleted
+- [x] `/debug/data` verified with real languages, categories, and phrases
+- [x] Spanish phrases revised to neutral Latin American Spanish
+- [ ] Spanish and Filipino phrases reviewed by a native speaker
+- [x] Merged into `main`
 
 ### Not started
 
@@ -272,11 +272,9 @@ merged into `main`.
 
 ## 10. Who does what
 
-Replace the placeholders with real names and GitHub handles.
+### Nori (Project Lead)
 
-### Project lead: `@lead`
-
-- **Stage 2** (data foundation), **Stage 8** (AI translator), **Stage 10** (final design and QA)
+- **Stage 2** (data foundation), **Stage 8** (Gemini AI translator), **Stage 10** (final design and QA)
 - Owns the shared files: `lib/theme/`, `lib/router/`, `lib/models/`,
   `firestore.rules`, `firestore.indexes.json`, and `tools/seed/`
 - Only the lead changes the database structure or security rules.
@@ -284,13 +282,13 @@ Replace the placeholders with real names and GitHub handles.
 - Owns the Firebase project and its console access
 - Reviews and merges all pull requests
 
-### Collaborator A: `@collaborator-a`
+### Enzo
 
 - **Stage 3:** real data, browse, search, language picker
 - **Stage 5:** favorites and learning history
 - **Stage 9:** text-to-speech
 
-### Collaborator B: `@collaborator-b`
+### Charm
 
 - **Stage 4:** auth
 - **Stage 6:** quiz
