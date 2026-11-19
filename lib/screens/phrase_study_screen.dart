@@ -286,7 +286,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     final pronunciation = targetTrans.pronunciation;
     final targetExample = targetTrans.exampleSentence;
     final nativeExample = nativeTrans.exampleSentence;
-    final meaningNote = targetTrans.meaningNote ?? nativeTrans.meaningNote;
+    // Notes explain what the phrase means — always show in native language.
+    final meaningNote = nativeTrans.meaningNote ?? targetTrans.meaningNote;
 
     return Scaffold(
       appBar: AppBar(

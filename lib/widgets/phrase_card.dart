@@ -60,7 +60,8 @@ class _PhraseCardState extends State<PhraseCard> {
     final mainText = targetTrans?.text ?? widget.phrase.translatedText;
     final subText = nativeTrans?.text ?? widget.phrase.originalText;
     final pronunciation = targetTrans?.pronunciation ?? widget.phrase.phonetic;
-    final note = targetTrans?.meaningNote ?? widget.phrase.contextNote;
+    // Notes explain meaning — always show in the native language.
+    final note = nativeTrans?.meaningNote ?? widget.phrase.contextNote;
 
     return Semantics(
       button: true,
