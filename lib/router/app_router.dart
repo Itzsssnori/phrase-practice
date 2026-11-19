@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/categories_screen.dart';
 import '../screens/category_phrases_screen.dart';
+import '../screens/debug_data_screen.dart';
 import '../screens/error_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../screens/forgot_password_screen.dart';
@@ -169,5 +171,11 @@ final GoRouter appRouter = GoRouter(
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state) => const ErrorScreen(),
     ),
+    if (kDebugMode)
+      GoRoute(
+        path: '/debug/data',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const DebugDataScreen(),
+      ),
   ],
 );

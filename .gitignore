@@ -46,3 +46,14 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Firebase & Secret Service Account Keys (Never commit credentials)
+*serviceAccount*.json
+*service-account*.json
+*credentials*.json
+tools/seed/serviceAccountKey.json
+tools/seed/keys/
+tools/seed/node_modules/
+.env
+.env.*
+

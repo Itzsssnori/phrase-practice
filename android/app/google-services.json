@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967361632605",
+    "project_id": "phrase-practice",
+    "storage_bucket": "phrase-practice.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967361632605:android:6758333216cb03aa42b0b4",
+        "android_client_info": {
+          "package_name": "com.example.phrase_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967361632605-fmptn1e1shusucsl77nloir59fcketm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKs9fq00UevRay4YUYhut_Tz2psXGs2IA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967361632605-fmptn1e1shusucsl77nloir59fcketm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

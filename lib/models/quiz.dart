@@ -1,3 +1,5 @@
+export 'quiz_attempt.dart';
+
 /// Question model for practice quizzes.
 class QuizQuestion {
   final String id;

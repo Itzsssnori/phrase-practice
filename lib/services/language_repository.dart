@@ -1,0 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/language.dart';
+import '../models/result.dart';
+
+/// Abstract contract for language retrieval.
+abstract interface class LanguageRepository {
+  /// Fetches all active languages available for study or UI selection.
+  Future<RepoResult<List<Language>>> getActiveLanguages();
+}
+
+/// Cloud Firestore implementation of [LanguageRepository].
+class FirestoreLanguageRepository implements LanguageRepository {
+  final FirebaseFirestore _firestore;
+
+  FirestoreLanguageRepository({FirebaseFirestore? firestore})
+      : _firestore = firestore ?? FirebaseFirestore.instance;
+
+  @override
+  Future<RepoResult<List<Language>>> getActiveLanguages() async {
+    try {
+      final snapshot = await _firestore
+          .collection('languages')
+          .where('isActive', isEqualTo: true)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return const RepoResult.empty('No active languages found in database.');
+      }
+
+      final languages = snapshot.docs
+          .map((doc) => Language.fromMap(doc.id, doc.data()))
+          .toList();
+
+      return RepoResult.success(languages);
+    } on FirebaseException catch (e, stack) {
+      return RepoResult.error(
+        e.message ?? 'Firestore error while loading languages (${e.code})',
+        e,
+        stack,
+      );
+    } catch (e, stack) {
+      return RepoResult.error('Unexpected error while loading languages: $e', e, stack);
+    }
+  }
+}

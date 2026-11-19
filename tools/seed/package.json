@@ -1,0 +1,16 @@
+{
+  "name": "phrase-practice-seed",
+  "version": "1.0.0",
+  "description": "Firestore database seed and verification scripts for Phrase Practice",
+  "main": "seed.js",
+  "scripts": {
+    "verify": "node verify.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

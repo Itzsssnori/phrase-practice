@@ -1,0 +1,23 @@
+[
+  {
+    "code": "en",
+    "name": "English",
+    "nativeName": "English",
+    "script": "Latin",
+    "isActive": true
+  },
+  {
+    "code": "es",
+    "name": "Spanish",
+    "nativeName": "Español",
+    "script": "Latin",
+    "isActive": true
+  },
+  {
+    "code": "fil",
+    "name": "Filipino",
+    "nativeName": "Filipino",
+    "script": "Latin",
+    "isActive": true
+  }
+]

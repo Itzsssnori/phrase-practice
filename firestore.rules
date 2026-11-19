@@ -1,0 +1,87 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for authentication and ownership verification
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidLanguageCode(code) {
+      return code is string && code.size() >= 2 && code.size() <= 10;
+    }
+
+    // Validates that user document writes only contain authorized fields and valid data types.
+    // Allowed fields: displayName, nativeLanguageCode, targetLanguageCode, preferences, createdAt.
+    function isValidUserPayload(data) {
+      let allowedFields = ['displayName', 'nativeLanguageCode', 'targetLanguageCode', 'preferences', 'createdAt'];
+      return data.keys().hasOnly(allowedFields) &&
+             (!('displayName' in data) || data.displayName == null || (data.displayName is string && data.displayName.size() <= 100)) &&
+             (!('nativeLanguageCode' in data) || isValidLanguageCode(data.nativeLanguageCode)) &&
+             (!('targetLanguageCode' in data) || isValidLanguageCode(data.targetLanguageCode)) &&
+             (!('preferences' in data) || data.preferences is map) &&
+             (!('createdAt' in data) || data.createdAt is timestamp);
+    }
+
+    // 1. Languages: Publicly readable for all clients; writes prohibited from client SDKs.
+    match /languages/{code} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 2. Categories: Thematic groups; publicly readable; client writes prohibited.
+    match /categories/{slug} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 3. Phrases: Curated study phrases and embedded translations; publicly readable; client writes prohibited.
+    match /phrases/{slug} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 4. User profile and explicit private subcollections:
+    // Read and write operations strictly permitted only when the caller is authenticated as the owner.
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) && isValidUserPayload(request.resource.data);
+      allow delete: if isOwner(userId);
+
+      // Bookmarked favorites
+      match /favorites/{phraseId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Mastered / learned phrases
+      match /learnedPhrases/{phraseId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Recently reviewed phrases queue
+      match /recentPhrases/{phraseId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Completed quiz session logs and scores
+      match /quizAttempts/{attemptId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Personal translation query history
+      match /translationHistory/{id} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // 5. Default: Deny all reads and writes to unspecified collections or paths.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

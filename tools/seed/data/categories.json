@@ -1,0 +1,57 @@
+[
+  {
+    "slug": "greetings",
+    "sortOrder": 1,
+    "iconKey": "greetings",
+    "isActive": true,
+    "names": {
+      "en": "Greetings",
+      "es": "Saludos",
+      "fil": "Mga Pagbati"
+    }
+  },
+  {
+    "slug": "food",
+    "sortOrder": 2,
+    "iconKey": "food",
+    "isActive": true,
+    "names": {
+      "en": "Food and Dining",
+      "es": "Comida y Restaurantes",
+      "fil": "Pagkain at Kainan"
+    }
+  },
+  {
+    "slug": "directions",
+    "sortOrder": 3,
+    "iconKey": "directions",
+    "isActive": true,
+    "names": {
+      "en": "Directions",
+      "es": "Direcciones",
+      "fil": "Direksyon"
+    }
+  },
+  {
+    "slug": "travel",
+    "sortOrder": 4,
+    "iconKey": "travel",
+    "isActive": true,
+    "names": {
+      "en": "Travel",
+      "es": "Viajes",
+      "fil": "Paglalakbay"
+    }
+  },
+  {
+    "slug": "emergencies",
+    "sortOrder": 5,
+    "iconKey": "emergencies",
+    "isActive": true,
+    "names": {
+      "en": "Emergencies",
+      "es": "Emergencias",
+      "fil": "Mga Emergency"
+    }
+  }
+]
