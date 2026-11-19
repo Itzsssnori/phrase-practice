@@ -4,10 +4,31 @@ import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
+import '../widgets/app_settings_scope.dart';
 
-/// Initial loading / splash screen.
-class SplashScreen extends StatelessWidget {
+/// Initial loading / splash screen with onboarding check.
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _evaluateDestination();
+    });
+  }
+
+  void _evaluateDestination() {
+    final settings = AppSettingsScope.maybeOf(context);
+    if (settings != null && settings.hasOnboarded) {
+      context.go('/home');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +88,14 @@ class SplashScreen extends StatelessWidget {
               const Spacer(),
               AppPrimaryButton(
                 label: 'Get Started',
-                onPressed: () => context.go('/onboarding'),
+                onPressed: () {
+                  final settings = AppSettingsScope.maybeOf(context);
+                  if (settings != null && settings.hasOnboarded) {
+                    context.go('/home');
+                  } else {
+                    context.go('/onboarding');
+                  }
+                },
               ),
               const SizedBox(height: AppSpacing.sm),
               TextButton(

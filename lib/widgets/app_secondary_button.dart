@@ -36,13 +36,16 @@ class AppSecondaryButton extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
         ],
-        Text(
-          label,
-          style: theme.textTheme.labelLarge?.copyWith(
-            color: onPressed == null
-                ? theme.colorScheme.onSurface.withValues(alpha: 0.38)
-                : fgColor,
-            fontWeight: FontWeight.w600,
+        Flexible(
+          child: Text(
+            label,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: onPressed == null
+                  ? theme.colorScheme.onSurface.withValues(alpha: 0.38)
+                  : fgColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],
@@ -68,11 +71,8 @@ class AppSecondaryButton extends StatelessWidget {
           onTap: onPressed,
           borderRadius: BorderRadius.circular(AppSpacing.radiusButton),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.xl,
-              vertical: AppSpacing.md,
-            ),
-            child: buttonContent,
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            child: Center(child: buttonContent),
           ),
         ),
       ),

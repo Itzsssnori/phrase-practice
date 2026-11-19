@@ -41,12 +41,15 @@ class AppPrimaryButton extends StatelessWidget {
           Icon(icon, size: AppSpacing.iconSm),
           const SizedBox(width: AppSpacing.sm),
         ],
-        Text(
-          label,
-          style: theme.textTheme.labelLarge?.copyWith(
-            color: onPressed == null
-                ? theme.colorScheme.onSurface.withValues(alpha: 0.38)
-                : theme.colorScheme.onPrimary,
+        Flexible(
+          child: Text(
+            label,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: onPressed == null
+                  ? theme.colorScheme.onSurface.withValues(alpha: 0.38)
+                  : theme.colorScheme.onPrimary,
+            ),
           ),
         ),
       ],

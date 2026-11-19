@@ -5,18 +5,23 @@ import '../models/result.dart';
 /// Abstract contract for language retrieval.
 abstract interface class LanguageRepository {
   /// Fetches all active languages available for study or UI selection.
-  Future<RepoResult<List<Language>>> getActiveLanguages();
+  Future<RepoResult<List<Language>>> getActiveLanguages({bool forceRefresh = false});
 }
 
 /// Cloud Firestore implementation of [LanguageRepository].
 class FirestoreLanguageRepository implements LanguageRepository {
   final FirebaseFirestore _firestore;
+  List<Language>? _cachedLanguages;
 
   FirestoreLanguageRepository({FirebaseFirestore? firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
-  Future<RepoResult<List<Language>>> getActiveLanguages() async {
+  Future<RepoResult<List<Language>>> getActiveLanguages({bool forceRefresh = false}) async {
+    if (!forceRefresh && _cachedLanguages != null && _cachedLanguages!.isNotEmpty) {
+      return RepoResult.success(_cachedLanguages!);
+    }
+
     try {
       final snapshot = await _firestore
           .collection('languages')
@@ -31,6 +36,7 @@ class FirestoreLanguageRepository implements LanguageRepository {
           .map((doc) => Language.fromMap(doc.id, doc.data()))
           .toList();
 
+      _cachedLanguages = languages;
       return RepoResult.success(languages);
     } on FirebaseException catch (e, stack) {
       return RepoResult.error(

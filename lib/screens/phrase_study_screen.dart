@@ -1,29 +1,46 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/phrase.dart';
-import '../services/mock_data_service.dart';
+import '../models/phrase_translation.dart';
+import '../services/browse_data_service.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
+import '../widgets/app_empty_state.dart';
+import '../widgets/app_error_message.dart';
 import '../widgets/app_favorite_button.dart';
+import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_secondary_button.dart';
+import '../widgets/app_settings_scope.dart';
 
-/// Immersive, content-first phrase study screen with recall practice and adjustable typography.
+/// Interactive study screen with recall mode, text-size scaling, and full-context cards.
 class PhraseStudyScreen extends StatefulWidget {
-  const PhraseStudyScreen({super.key});
+  final String? initialPhraseSlug;
+  final String? categoryId;
+
+  const PhraseStudyScreen({
+    super.key,
+    this.initialPhraseSlug,
+    this.categoryId,
+  });
 
   @override
   State<PhraseStudyScreen> createState() => _PhraseStudyScreenState();
 }
 
 class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
-  static const String _keyTextSize = 'study_text_size';
+  static const String _keyTextSize = 'study_text_size_index';
   static const String _keyRecallMode = 'study_recall_mode';
 
-  int _currentIndex = 0;
-  late List<Phrase> _phrases;
+  final _browseService = BrowseDataService.instance;
 
-  int _textSizeIndex = 0; // 0: Default, 1: Large (+4/+2/+2), 2: XLarge (+8/+4/+4)
+  bool _isLoading = true;
+  String? _errorMessage;
+  List<Phrase> _categoryPhrases = [];
+  int _currentIndex = 0;
+
+  // Study screen state
+  int _textSizeIndex = 0; // 0: Default, 1: Large (+4), 2: Extra Large (+8)
   bool _recallMode = false;
   bool _isTranslationRevealed = false;
   bool _isPronunciationRevealed = false;
@@ -31,8 +48,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   @override
   void initState() {
     super.initState();
-    _phrases = List.from(MockDataService.samplePhrases);
     _loadPreferences();
+    _loadStudyPhrases();
   }
 
   Future<void> _loadPreferences() async {
@@ -43,6 +60,74 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
         _recallMode = prefs.getBool(_keyRecallMode) ?? false;
       });
     }
+  }
+
+  Future<void> _loadStudyPhrases({bool forceRefresh = false}) async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    final targetSlug = widget.initialPhraseSlug;
+    final explicitCat = widget.categoryId;
+
+    // 1. If explicit category is provided, load that category
+    if (explicitCat != null && explicitCat.isNotEmpty) {
+      final result = await _browseService.getPhrasesByCategory(explicitCat, forceRefresh: forceRefresh);
+      if (result.isError) {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+            _errorMessage = result.errorMessageOrNull ?? 'Failed to load category phrases.';
+          });
+        }
+        return;
+      }
+
+      _categoryPhrases = result.dataOrNull ?? [];
+    } else if (targetSlug != null && targetSlug.isNotEmpty) {
+      // 2. If phrase slug is provided without category, fetch the phrase to discover its category
+      final phraseResult = await _browseService.getPhraseBySlug(targetSlug);
+      if (phraseResult.isSuccess && phraseResult.dataOrNull != null) {
+        final phrase = phraseResult.dataOrNull!;
+        final catResult = await _browseService.getPhrasesByCategory(phrase.categoryId, forceRefresh: forceRefresh);
+        _categoryPhrases = catResult.dataOrNull ?? [phrase];
+      } else {
+        // Fallback: load all phrases
+        final allResult = await _browseService.getAllPhrases(forceRefresh: forceRefresh);
+        _categoryPhrases = allResult.dataOrNull ?? [];
+      }
+    } else {
+      // 3. Fallback: load all phrases
+      final allResult = await _browseService.getAllPhrases(forceRefresh: forceRefresh);
+      _categoryPhrases = allResult.dataOrNull ?? [];
+    }
+
+    if (!mounted) return;
+
+    if (_categoryPhrases.isEmpty) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'No study phrases found.';
+      });
+      return;
+    }
+
+    // Determine initial index based on target slug
+    int initialIdx = 0;
+    if (targetSlug != null && targetSlug.isNotEmpty) {
+      final found = _categoryPhrases.indexWhere((p) => p.id == targetSlug);
+      if (found != -1) {
+        initialIdx = found;
+      }
+    }
+
+    setState(() {
+      _currentIndex = initialIdx;
+      _isLoading = false;
+      _isTranslationRevealed = false;
+      _isPronunciationRevealed = false;
+    });
   }
 
   Future<void> _cycleTextSize() async {
@@ -64,7 +149,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   }
 
   void _nextPhrase() {
-    if (_currentIndex < _phrases.length - 1) {
+    if (_currentIndex < _categoryPhrases.length - 1) {
       setState(() {
         _currentIndex++;
         _isTranslationRevealed = false;
@@ -131,13 +216,71 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final phrase = _phrases[_currentIndex];
+    final settings = AppSettingsScope.of(context);
 
-    final progressValue = (_currentIndex + 1) / _phrases.length;
+    final targetLangCode = settings.targetLanguageCode;
+    final nativeLangCode = settings.nativeLanguageCode;
+
+    if (_isLoading) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Phrase Study')),
+        body: const Center(child: AppLoadingIndicator()),
+      );
+    }
+
+    if (_errorMessage != null) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Phrase Study')),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.xl),
+            child: AppErrorMessage(
+              title: 'Unable to Load Phrase',
+              message: _errorMessage!,
+              retryLabel: 'Try Again',
+              onRetry: () => _loadStudyPhrases(forceRefresh: true),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (_categoryPhrases.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Phrase Study')),
+        body: const Center(
+          child: AppEmptyState(
+            icon: Icons.chat_bubble_outline_rounded,
+            title: 'No Phrases Available',
+            message: 'No study phrases are available right now.',
+          ),
+        ),
+      );
+    }
+
+    final phrase = _categoryPhrases[_currentIndex];
+    final targetTrans = phrase.translationFor(targetLangCode) ??
+        phrase.translationFor('es') ??
+        phrase.translations.values.firstOrNull ??
+        PhraseTranslation(text: phrase.translatedText);
+    final nativeTrans = phrase.translationFor(nativeLangCode) ??
+        phrase.translationFor('en') ??
+        PhraseTranslation(text: phrase.originalText);
+
+    final progressValue = (_currentIndex + 1) / _categoryPhrases.length;
+    final languageLabel = targetLangCode.toUpperCase();
+
+    // Determine available data fields (hide if empty)
+    final mainTranslatedText = targetTrans.text;
+    final nativePhraseText = nativeTrans.text;
+    final pronunciation = targetTrans.pronunciation;
+    final targetExample = targetTrans.exampleSentence;
+    final nativeExample = nativeTrans.exampleSentence;
+    final meaningNote = targetTrans.meaningNote ?? nativeTrans.meaningNote;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Spanish'),
+        title: Text('${targetLangCode.toUpperCase()} Study'),
         actions: [
           Tooltip(
             message: _textSizeTooltip,
@@ -173,7 +316,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Thin 4px linear progress indicator animated on phrase changes
+            // Linear progress indicator across the category
             TweenAnimationBuilder<double>(
               duration: const Duration(milliseconds: 250),
               curve: Curves.easeInOut,
@@ -193,7 +336,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Card 1 — Translation focus card
+                    // Field 1 & 5: Target Language Focus Card (Translation + Language Badge)
                     Container(
                       padding: const EdgeInsets.all(AppSpacing.lg),
                       decoration: BoxDecoration(
@@ -219,7 +362,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                                   borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                                 ),
                                 child: Text(
-                                  'ES',
+                                  languageLabel,
                                   style: theme.textTheme.labelMedium?.copyWith(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 11,
@@ -229,8 +372,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                                 ),
                               ),
                               const Spacer(),
-                              AppFavoriteButton(
-                                isFavorite: phrase.isFavorite,
+                              const AppFavoriteButton(
+                                isFavorite: false,
                                 isDisabled: true,
                                 disabledTooltip: 'Coming soon',
                               ),
@@ -238,7 +381,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           ),
                           const SizedBox(height: AppSpacing.lg),
 
-                          // Translation / Recall display
+                          // Translation / Recall display (Field 1: Target language in largest text)
                           if (_recallMode && !_isTranslationRevealed) ...[
                             Semantics(
                               label: 'Translation hidden. Tap to reveal.',
@@ -285,9 +428,9 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                             ),
                           ] else ...[
                             Semantics(
-                              label: 'Translation revealed.',
+                              label: 'Translation: $mainTranslatedText',
                               child: Text(
-                                phrase.translatedText,
+                                mainTranslatedText,
                                 style: (theme.textTheme.displaySmall ?? const TextStyle()).copyWith(
                                   fontSize: (theme.textTheme.displaySmall?.fontSize ?? 26.0) + _translationOffset,
                                   color: theme.colorScheme.primary,
@@ -307,7 +450,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
 
                     const SizedBox(height: AppSpacing.lg),
 
-                    // Card 2 — Source phrase card
+                    // Field 2 & 3: Source Native Phrase & Pronunciation
                     Container(
                       padding: const EdgeInsets.all(AppSpacing.lg),
                       decoration: BoxDecoration(
@@ -322,7 +465,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            phrase.originalText,
+                            nativePhraseText,
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: theme.colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w600,
@@ -330,7 +473,9 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                             ),
                             softWrap: true,
                           ),
-                          if (phrase.phonetic != null && phrase.phonetic!.isNotEmpty) ...[
+
+                          // Field 3: Pronunciation (hide if empty or null)
+                          if (pronunciation != null && pronunciation.isNotEmpty) ...[
                             const SizedBox(height: AppSpacing.sm),
                             if (_recallMode && !_isPronunciationRevealed) ...[
                               Semantics(
@@ -377,9 +522,9 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                               ),
                             ] else ...[
                               Semantics(
-                                label: 'Pronunciation: ${phrase.phonetic}',
+                                label: 'Pronunciation: $pronunciation',
                                 child: Text(
-                                  phrase.phonetic!,
+                                  pronunciation,
                                   style: (theme.textTheme.bodySmall ?? const TextStyle()).copyWith(
                                     fontSize: (theme.textTheme.bodySmall?.fontSize ?? 13.0) + _pronunciationOffset,
                                     fontStyle: FontStyle.italic,
@@ -394,45 +539,100 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: AppSpacing.lg),
+                    // Field 4: Example Sentence Card (hide if both target and native examples are empty)
+                    if ((targetExample != null && targetExample.isNotEmpty) ||
+                        (nativeExample != null && nativeExample.isNotEmpty)) ...[
+                      const SizedBox(height: AppSpacing.lg),
+                      Container(
+                        padding: const EdgeInsets.all(AppSpacing.lg),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surface,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                          border: Border.all(
+                            color: theme.dividerColor,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Example',
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.4,
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xs),
 
-                    // Card 3 — Example sentence card
-                    Container(
-                      padding: const EdgeInsets.all(AppSpacing.lg),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surface,
-                        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-                        border: Border.all(
-                          color: theme.dividerColor,
-                          width: 1,
+                            if (targetExample != null && targetExample.isNotEmpty)
+                              Text(
+                                '“$targetExample”',
+                                style: (theme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
+                                  fontSize: (theme.textTheme.bodyMedium?.fontSize ?? 15.0) + _exampleOffset,
+                                  color: theme.colorScheme.onSurface,
+                                  height: 1.45,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                softWrap: true,
+                              ),
+
+                            // Smaller line for native example if present
+                            if (nativeExample != null && nativeExample.isNotEmpty) ...[
+                              const SizedBox(height: AppSpacing.xs),
+                              Text(
+                                nativeExample,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                  height: 1.35,
+                                ),
+                                softWrap: true,
+                              ),
+                            ],
+                          ],
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Example',
-                            style: theme.textTheme.labelMedium?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.4,
-                            ),
+                    ],
+
+                    // Meaning Note Card under "Notes" heading (hide if empty)
+                    if (meaningNote != null && meaningNote.isNotEmpty) ...[
+                      const SizedBox(height: AppSpacing.lg),
+                      Container(
+                        padding: const EdgeInsets.all(AppSpacing.lg),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surface,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                          border: Border.all(
+                            color: theme.dividerColor,
+                            width: 1,
                           ),
-                          const SizedBox(height: AppSpacing.xs),
-                          Text(
-                            phrase.contextNote != null && phrase.contextNote!.isNotEmpty
-                                ? '“${phrase.translatedText}” — ${phrase.contextNote} [PLACEHOLDER EXAMPLE]'
-                                : '“${phrase.translatedText}” [PLACEHOLDER EXAMPLE]',
-                            style: (theme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
-                              fontSize: (theme.textTheme.bodyMedium?.fontSize ?? 15.0) + _exampleOffset,
-                              color: theme.colorScheme.onSurface,
-                              height: 1.45,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Notes',
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: theme.colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.4,
+                              ),
                             ),
-                            softWrap: true,
-                          ),
-                        ],
+                            const SizedBox(height: AppSpacing.xs),
+                            Text(
+                              meaningNote,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                fontSize: 13.5,
+                                color: theme.colorScheme.onSurface,
+                                height: 1.45,
+                              ),
+                              softWrap: true,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),
@@ -462,11 +662,11 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: AppPrimaryButton(
-                      label: _currentIndex < _phrases.length - 1 ? 'Next' : 'Done',
-                      icon: _currentIndex < _phrases.length - 1
+                      label: _currentIndex < _categoryPhrases.length - 1 ? 'Next' : 'Done',
+                      icon: _currentIndex < _categoryPhrases.length - 1
                           ? Icons.chevron_right_outlined
                           : Icons.check_outlined,
-                      onPressed: _currentIndex < _phrases.length - 1
+                      onPressed: _currentIndex < _categoryPhrases.length - 1
                           ? _nextPhrase
                           : () => Navigator.of(context).pop(),
                     ),

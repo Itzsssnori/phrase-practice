@@ -4,6 +4,9 @@ import '../models/result.dart';
 
 /// Abstract contract for phrase queries and in-memory search.
 abstract interface class PhraseRepository {
+  /// Fetches all active phrases across all categories, ordered by sortOrder.
+  Future<RepoResult<List<Phrase>>> getAllPhrases();
+
   /// Fetches active phrases belonging to [categoryId], ordered by sortOrder.
   Future<RepoResult<List<Phrase>>> getPhrasesByCategory(String categoryId);
 
@@ -28,8 +31,54 @@ class FirestorePhraseRepository implements PhraseRepository {
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
+  Future<RepoResult<List<Phrase>>> getAllPhrases() async {
+    try {
+      if (_cachedActivePhrases != null) {
+        return RepoResult.success(_cachedActivePhrases!);
+      }
+
+      final snapshot = await _firestore
+          .collection('phrases')
+          .where('isActive', isEqualTo: true)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return const RepoResult.empty('No active phrases found in database.');
+      }
+
+      final phrases = snapshot.docs
+          .map((doc) => Phrase.fromMap(doc.id, doc.data()))
+          .toList();
+
+      phrases.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+      _cachedActivePhrases = phrases;
+      return RepoResult.success(phrases);
+    } on FirebaseException catch (e, stack) {
+      return RepoResult.error(
+        e.message ?? 'Firestore error fetching phrases (${e.code})',
+        e,
+        stack,
+      );
+    } catch (e, stack) {
+      return RepoResult.error('Unexpected error fetching phrases: $e', e, stack);
+    }
+  }
+
+  @override
   Future<RepoResult<List<Phrase>>> getPhrasesByCategory(String categoryId) async {
     try {
+      // Reuse cached phrases if already loaded into memory
+      if (_cachedActivePhrases != null) {
+        final matches = _cachedActivePhrases!
+            .where((p) => p.categoryId == categoryId && p.isActive)
+            .toList();
+        matches.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+        if (matches.isEmpty) {
+          return RepoResult.empty('No phrases found for category "$categoryId".');
+        }
+        return RepoResult.success(matches);
+      }
+
       final snapshot = await _firestore
           .collection('phrases')
           .where('categoryId', isEqualTo: categoryId)
@@ -60,6 +109,13 @@ class FirestorePhraseRepository implements PhraseRepository {
   @override
   Future<RepoResult<Phrase>> getPhraseById(String id) async {
     try {
+      if (_cachedActivePhrases != null) {
+        final cached = _cachedActivePhrases!.where((p) => p.id == id).firstOrNull;
+        if (cached != null) {
+          return RepoResult.success(cached);
+        }
+      }
+
       final doc = await _firestore.collection('phrases').doc(id).get();
 
       if (!doc.exists || doc.data() == null) {
