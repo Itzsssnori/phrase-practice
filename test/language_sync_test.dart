@@ -93,7 +93,7 @@ void main() {
   }
 
   group('Language Synchronization Across Screens', () {
-    testWidgets('HomeScreen category title and language subtitle immediately reflect language swaps', (tester) async {
+    testWidgets('HomeScreen category title and language chip immediately reflect language swaps', (tester) async {
       final controller = LanguageSettingsController();
       await controller.load();
       // Default: native = 'en' ("Greetings"), target = 'es' ("Spanish")
@@ -103,8 +103,9 @@ void main() {
 
       // Check English category title in the compact grid
       expect(find.text('Greetings'), findsOneWidget);
-      // App bar subtitle shows "English to Spanish"
-      expect(find.text('English to Spanish'), findsOneWidget);
+      // LanguagePairChip shows native and target language names
+      expect(find.text('English'), findsOneWidget);
+      expect(find.text('Spanish'), findsOneWidget);
 
       // Change native language to Spanish ('es') and target to English ('en')
       await controller.setLanguagePair(nativeCode: 'es', targetCode: 'en');
@@ -216,6 +217,22 @@ void main() {
 
       expect(find.text('Saludos'), findsOneWidget);
       expect(find.text('Greetings'), findsNothing);
+    });
+
+    testWidgets('HomeScreen Daily Focus Phrase displays real loaded phrase and details link', (tester) async {
+      final controller = LanguageSettingsController();
+      await controller.load();
+      await controller.setLanguagePair(nativeCode: 'en', targetCode: 'es');
+
+      await tester.pumpWidget(createTestWidget(child: const HomeScreen(), controller: controller));
+      await tester.pumpAndSettle();
+
+      // Featured Daily Phrase card should be present with real data from mock repository
+      expect(find.text('FEATURED DAILY PHRASE'), findsOneWidget);
+      expect(find.text('GREETINGS'), findsOneWidget);
+      expect(find.text('Hola'), findsOneWidget);
+      expect(find.text('"Hello"'), findsOneWidget);
+      expect(find.text('View phrase details →'), findsOneWidget);
     });
   });
 }

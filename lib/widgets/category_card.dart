@@ -29,7 +29,6 @@ class _CategoryCardState extends State<CategoryCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final percentage = (widget.category.progress * 100).round();
     final tintIndex = widget.colorIndex ?? AppColors.categoryIdToIndex(widget.category.id);
     final tint = AppColors.getCategoryTint(tintIndex, isDark);
 
@@ -132,35 +131,6 @@ class _CategoryCardState extends State<CategoryCard> {
                         softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-
-                    if (widget.category.progress > 0) ...[
-                      const SizedBox(height: AppSpacing.md),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(4),
-                              child: LinearProgressIndicator(
-                                value: widget.category.progress,
-                                minHeight: 4,
-                                backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  theme.colorScheme.primary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: AppSpacing.sm),
-                          Text(
-                            '$percentage%',
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ],

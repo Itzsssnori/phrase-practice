@@ -13,9 +13,11 @@ import '../widgets/app_error_message.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_search_bar.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
-/// Main home screen: daily focus phrase, compact category grid, and quick-action cards.
+/// Main home screen focusing on daily study focus, search, language context,
+/// and categorized phrase browsing.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     _categories = catResult.dataOrNull ?? [];
 
-    // 3. Load all phrases for the daily focus
+    // 3. Load phrases to select the daily focus phrase
     final phraseResult = await _browseService.getAllPhrases(forceRefresh: forceRefresh);
     if (phraseResult.isSuccess && phraseResult.dataOrNull != null) {
       _allPhrases = phraseResult.dataOrNull!;
@@ -90,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// Picks a deterministic "daily" phrase based on the current date,
-  /// so it stays the same throughout the day but changes tomorrow.
+  /// Deterministically picks a daily phrase from the loaded phrase collection
+  /// using the current date as a seed so it remains consistent throughout the day.
   void _pickDailyPhrase() {
     if (_allPhrases.isEmpty) return;
     final now = DateTime.now();
@@ -121,49 +123,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: AppSpacing.lg,
-        title: GestureDetector(
-          onTap: () => LanguagePickerBottomSheet.showPairPicker(context),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Phrase Practice',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -0.3,
-                ),
-              ),
-              Text(
-                '${nativeLang.name} to ${targetLang.name}',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
+        title: Text(
+          'Phrase Practice',
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.3,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: CircleAvatar(
-              radius: 16,
-              backgroundColor: theme.colorScheme.primary,
-              child: Text(
-                nativeLang.name.isNotEmpty
-                    ? nativeLang.name[0].toUpperCase() + targetLang.name[0].toUpperCase()
-                    : 'PP',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onPrimary,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 10,
-                ),
-              ),
-            ),
-            tooltip: 'Profile & Settings',
-            onPressed: () => context.go('/profile'),
-          ),
-          const SizedBox(width: AppSpacing.sm),
-        ],
       ),
       body: SafeArea(
         child: RefreshIndicator(
@@ -210,7 +176,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Search Bar
+          // 1. Language Pair Chip (I speak -> I'm learning)
+          LanguagePairChip(
+            nativeLanguage: nativeLang,
+            targetLanguage: targetLang,
+            onTap: () => LanguagePickerBottomSheet.showPairPicker(context),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+
+          // 2. Search Bar (navigates to real search screen)
           Semantics(
             button: true,
             label: 'Search phrases in ${targetLang.name} or ${nativeLang.name}',
@@ -219,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
               child: IgnorePointer(
                 child: AppSearchBar(
-                  hintText: 'Search ${nativeLang.name} or ${targetLang.name} phrases',
+                  hintText: 'Search in ${targetLang.name} or ${nativeLang.name}...',
                   onChanged: (_) {},
                 ),
               ),
@@ -227,19 +201,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: AppSpacing.xl),
 
-          // 2. Featured Daily Phrase
-          if (_dailyPhrase != null)
+          // 3. Featured Daily Phrase (only shown if a real phrase was loaded)
+          if (_dailyPhrase != null) ...[
             _buildDailyPhraseCard(theme, isDark, nativeCode, targetCode),
+            const SizedBox(height: AppSpacing.xl),
+          ],
 
-          const SizedBox(height: AppSpacing.xl),
-
-          // 3. Practice by Category
+          // 4. Practice by Category (compact 2-per-row grid of real categories)
           _buildCategorySection(theme, isDark, nativeCode),
-
-          const SizedBox(height: AppSpacing.xl),
-
-          // 4. Quick Actions: AI Translator & Practice/Review
-          _buildQuickActions(theme, isDark),
 
           const SizedBox(height: AppSpacing.xxl),
         ],
@@ -277,21 +246,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
+        Material(
+          color: theme.colorScheme.surface,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            border: Border.all(color: theme.dividerColor),
+            side: BorderSide(color: theme.dividerColor),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Category badge + bookmark row
-              Row(
+          child: InkWell(
+            onTap: () => context.push(
+              '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
+            ),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (categoryName != null)
+                  // Category badge
+                  if (categoryName != null) ...[
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: AppSpacing.sm,
@@ -311,75 +283,65 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                  const Spacer(),
-                  Icon(
-                    phrase.isFavorite ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-                    color: theme.colorScheme.onSurfaceVariant,
-                    size: AppSpacing.iconMd,
+                    const SizedBox(height: AppSpacing.md),
+                  ],
+
+                  // Target language phrase (large)
+                  if (targetTranslation != null)
+                    Text(
+                      targetTranslation.text,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: theme.colorScheme.onSurface,
+                        height: 1.3,
+                      ),
+                    ),
+                  if (targetTranslation?.pronunciation != null) ...[
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      targetTranslation!.pronunciation!,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontStyle: FontStyle.italic,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: AppSpacing.sm),
+
+                  // Native language translation
+                  if (nativeTranslation != null)
+                    Text(
+                      '"${nativeTranslation.text}"',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      ),
+                    ),
+
+                  // Usage note
+                  if (nativeTranslation?.meaningNote != null &&
+                      nativeTranslation!.meaningNote!.isNotEmpty) ...[
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      nativeTranslation.meaningNote!,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+
+                  const SizedBox(height: AppSpacing.md),
+
+                  // "View phrase details" link
+                  Text(
+                    'View phrase details →',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: theme.colorScheme.primary,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.md),
-
-              // Target language phrase (large)
-              if (targetTranslation != null)
-                Text(
-                  targetTranslation.text,
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: theme.colorScheme.onSurface,
-                    height: 1.3,
-                  ),
-                ),
-              if (targetTranslation?.pronunciation != null) ...[
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  targetTranslation!.pronunciation!,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontStyle: FontStyle.italic,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-              const SizedBox(height: AppSpacing.sm),
-
-              // Native language translation
-              if (nativeTranslation != null)
-                Text(
-                  '"${nativeTranslation.text}"',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                  ),
-                ),
-
-              // Usage note
-              if (nativeTranslation?.meaningNote != null &&
-                  nativeTranslation!.meaningNote!.isNotEmpty) ...[
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  nativeTranslation.meaningNote!,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-
-              const SizedBox(height: AppSpacing.md),
-
-              // "View phrase details" link
-              GestureDetector(
-                onTap: () => context.push(
-                  '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
-                ),
-                child: Text(
-                  'View phrase details →',
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ],
@@ -459,36 +421,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
-  // ─── Quick Action Cards ───────────────────────────────────────────────
-
-  Widget _buildQuickActions(ThemeData theme, bool isDark) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // AI Translator card
-        _QuickActionCard(
-          icon: Icons.translate_rounded,
-          title: 'AI Phrase Translator',
-          subtitle: 'Write a sentence and get a natural translation with pronunciation guide.',
-          actionLabel: 'Open Translator',
-          onTap: () => context.push('/translator'),
-          isDark: isDark,
-        ),
-        const SizedBox(height: AppSpacing.md),
-
-        // Practice & Review card
-        _QuickActionCard(
-          icon: Icons.quiz_rounded,
-          title: 'Practice & Review',
-          subtitle: 'Test your recall on learned phrases with quick quizzes.',
-          actionLabel: 'Start Quiz',
-          onTap: () => context.push('/quiz/play'),
-          isDark: isDark,
-        ),
-      ],
-    );
-  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -514,7 +446,6 @@ class _CompactCategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final tint = AppColors.getCategoryTint(colorIndex, isDark);
-    // Read native language dynamically
     final settings = AppSettingsScope.maybeOf(context);
     final effectiveNativeCode = settings?.nativeLanguageCode ?? nativeCode;
     final title = category.nameFor(effectiveNativeCode);
@@ -570,95 +501,6 @@ class _CompactCategoryTile extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// Quick Action Card for Translator / Quiz
-// ═══════════════════════════════════════════════════════════════════════════
-
-class _QuickActionCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String actionLabel;
-  final VoidCallback onTap;
-  final bool isDark;
-
-  const _QuickActionCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.actionLabel,
-    required this.onTap,
-    required this.isDark,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Material(
-      color: theme.colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-        side: BorderSide(color: theme.dividerColor),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkPrimaryContainer : AppColors.lightPrimaryContainer,
-                  borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                ),
-                child: Icon(
-                  icon,
-                  color: theme.colorScheme.primary,
-                  size: AppSpacing.iconMd,
-                ),
-              ),
-              const SizedBox(width: AppSpacing.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      subtitle,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 16,
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ],
           ),
         ),
       ),
