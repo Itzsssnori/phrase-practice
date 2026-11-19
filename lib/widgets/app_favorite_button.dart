@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 
 /// Favorite button featuring subtle 0.9 scale feedback (150ms) and warm amber highlight.
@@ -44,19 +43,22 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
     super.dispose();
   }
 
-  void _handleTap() async {
-    await _controller.forward();
-    await _controller.reverse();
-    if (!widget.isDisabled && widget.onToggle != null) {
-      widget.onToggle!(widget.isFavorite);
-    }
+  void _handleTap() {
+    if (widget.isDisabled || widget.onToggle == null) return;
+    _controller.forward().then((_) {
+      if (mounted) _controller.reverse();
+    });
+    widget.onToggle!(widget.isFavorite);
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final activeColor = theme.colorScheme.accent;
+    final activeColor = theme.colorScheme.error;
     final inactiveColor = theme.colorScheme.onSurfaceVariant;
+    final tooltipText = widget.isDisabled
+        ? (widget.disabledTooltip ?? 'Disabled')
+        : (widget.isFavorite ? 'Remove from favorites' : 'Add to favorites');
 
     Widget button = Semantics(
       button: true,
@@ -67,13 +69,13 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
           minHeight: AppSpacing.minTouchTarget,
         ),
         child: InkResponse(
-          onTap: _handleTap,
+          onTap: widget.isDisabled ? null : _handleTap,
           radius: AppSpacing.minTouchTarget / 2,
           child: Center(
             child: ScaleTransition(
               scale: _scaleAnimation,
               child: Icon(
-                widget.isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
+                widget.isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
                 color: widget.isFavorite ? activeColor : inactiveColor.withValues(alpha: 0.6),
                 size: AppSpacing.iconMd,
               ),
@@ -83,13 +85,9 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
       ),
     );
 
-    if (widget.isDisabled && widget.disabledTooltip != null) {
-      button = Tooltip(
-        message: widget.disabledTooltip!,
-        child: button,
-      );
-    }
-
-    return button;
+    return Tooltip(
+      message: tooltipText,
+      child: button,
+    );
   }
 }

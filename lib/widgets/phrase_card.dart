@@ -3,8 +3,11 @@ import '../models/phrase.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_audio_button.dart';
+import 'app_auth_scope.dart';
 import 'app_favorite_button.dart';
 import 'app_settings_scope.dart';
+import 'app_user_phrase_scope.dart';
+import 'require_sign_in.dart';
 
 /// Minimalist, approachable phrase card prioritizing legibility and context.
 ///
@@ -16,6 +19,7 @@ class PhraseCard extends StatefulWidget {
   final ValueChanged<bool>? onFavoriteToggle;
   final String? targetLanguageCode;
   final String? nativeLanguageCode;
+  final bool showCategory;
 
   const PhraseCard({
     super.key,
@@ -24,6 +28,7 @@ class PhraseCard extends StatefulWidget {
     this.onFavoriteToggle,
     this.targetLanguageCode,
     this.nativeLanguageCode,
+    this.showCategory = true,
   });
 
   @override
@@ -44,6 +49,10 @@ class _PhraseCardState extends State<PhraseCard> {
     final targetCode = widget.targetLanguageCode ?? settings?.targetLanguageCode ?? 'es';
     final nativeCode = widget.nativeLanguageCode ?? settings?.nativeLanguageCode ?? 'en';
 
+    final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
+    final isFavorite = userPhraseCtrl?.isFavorite(widget.phrase.id) ?? widget.phrase.isFavorite;
+    final isLearned = userPhraseCtrl?.isLearned(widget.phrase.id, targetCode) ?? false;
+
     // Resolve target and native translations
     final targetTrans = widget.phrase.translationFor(targetCode);
     final nativeTrans = widget.phrase.translationFor(nativeCode);
@@ -61,6 +70,7 @@ class _PhraseCardState extends State<PhraseCard> {
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
         child: Container(
+          width: double.infinity,
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
@@ -83,46 +93,105 @@ class _PhraseCardState extends State<PhraseCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Top Action & Category bar
+                    // Top Row: Category Chip on left (if showCategory), Actions on top-right
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Flexible(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSpacing.sm,
-                              vertical: AppSpacing.xs,
-                            ),
-                            decoration: BoxDecoration(
-                              color: tint.background,
-                              borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                            ),
-                            child: Text(
-                              widget.phrase.categoryId.toUpperCase(),
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                fontSize: 10.5,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.5,
-                                color: tint.foreground,
+                        if (widget.showCategory)
+                          Flexible(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: AppSpacing.xs,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              decoration: BoxDecoration(
+                                color: tint.background,
+                                borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                              ),
+                              child: Text(
+                                widget.phrase.categoryId.toUpperCase(),
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
+                                  color: tint.foreground,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        const Spacer(),
+                        if (isLearned) ...[
+                          Tooltip(
+                            message: 'Learned in ${targetCode.toUpperCase()}',
+                            child: Semantics(
+                              label: 'Learned',
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: theme.colorScheme.primaryContainer,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.check_rounded,
+                                  size: 13,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
+                          const SizedBox(width: AppSpacing.xs),
+                        ],
                         const AppAudioButton(isAvailable: false),
                         AppFavoriteButton(
-                          isFavorite: widget.phrase.isFavorite,
-                          onToggle: widget.onFavoriteToggle,
+                          isFavorite: isFavorite,
+                          onToggle: (fav) async {
+                            if (widget.onFavoriteToggle != null) {
+                              widget.onFavoriteToggle!(fav);
+                              return;
+                            }
+                            if (userPhraseCtrl != null) {
+                              final auth = AppAuthScope.maybeOf(context);
+                              if (auth == null || !auth.isSignedIn) {
+                                final signedIn = await requireSignIn(context);
+                                if (!signedIn) return;
+                              }
+                              final wasFav = userPhraseCtrl.isFavorite(widget.phrase.id);
+                              final res = await userPhraseCtrl.toggleFavorite(widget.phrase.id);
+                              if (!context.mounted) return;
+                              if (res.isError) {
+                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(res.errorMessageOrNull ?? 'Could not update favorite.'),
+                                    backgroundColor: Theme.of(context).colorScheme.error,
+                                  ),
+                                );
+                              } else if (wasFav && res.isSuccess) {
+                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text('Removed from favorites'),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: () => userPhraseCtrl.toggleFavorite(widget.phrase.id),
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          },
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.md),
+                    const SizedBox(height: AppSpacing.sm),
 
                     // Main Text: Target Language Translation (largest focus)
                     Text(
                       mainText,
-                      style: theme.textTheme.titleLarge?.copyWith(
+                      style: theme.textTheme.titleMedium?.copyWith(
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.w700,
                         height: 1.3,
@@ -132,13 +201,13 @@ class _PhraseCardState extends State<PhraseCard> {
 
                     // Sub Text: Native Language Phrase
                     if (subText.isNotEmpty && subText != mainText) ...[
-                      const SizedBox(height: AppSpacing.xs),
+                      const SizedBox(height: 2),
                       Text(
                         subText,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w500,
-                          color: theme.colorScheme.onSurfaceVariant,
-                          height: 1.35,
+                          color: theme.colorScheme.onSurface,
+                          height: 1.3,
                         ),
                         softWrap: true,
                       ),
@@ -146,7 +215,7 @@ class _PhraseCardState extends State<PhraseCard> {
 
                     // Pronunciation in small text
                     if (pronunciation != null && pronunciation.isNotEmpty) ...[
-                      const SizedBox(height: AppSpacing.xs),
+                      const SizedBox(height: 2),
                       Text(
                         pronunciation,
                         style: theme.textTheme.bodySmall?.copyWith(
@@ -160,12 +229,12 @@ class _PhraseCardState extends State<PhraseCard> {
 
                     // Meaning / Context Note if available
                     if (note != null && note.isNotEmpty) ...[
-                      const SizedBox(height: AppSpacing.md),
+                      const SizedBox(height: AppSpacing.xs),
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.md,
-                          vertical: AppSpacing.sm,
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.xs,
                         ),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.surfaceContainerHighest,
@@ -174,9 +243,9 @@ class _PhraseCardState extends State<PhraseCard> {
                         child: Text(
                           note,
                           style: theme.textTheme.bodySmall?.copyWith(
-                            fontSize: 12.5,
-                            color: theme.colorScheme.onSurface,
-                            height: 1.4,
+                            fontSize: 11.5,
+                            color: theme.colorScheme.onSurfaceVariant,
+                            height: 1.3,
                           ),
                           softWrap: true,
                         ),

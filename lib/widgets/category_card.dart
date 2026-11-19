@@ -10,12 +10,14 @@ class CategoryCard extends StatefulWidget {
   final Category category;
   final VoidCallback? onTap;
   final int? colorIndex;
+  final int? learnedCount;
 
   const CategoryCard({
     super.key,
     required this.category,
     this.onTap,
     this.colorIndex,
+    this.learnedCount,
   });
 
   @override
@@ -37,9 +39,13 @@ class _CategoryCardState extends State<CategoryCard> {
     final nativeCode = settings?.nativeLanguageCode ?? 'en';
     final categoryTitle = widget.category.nameFor(nativeCode);
 
+    final progressText = widget.learnedCount != null
+        ? '${widget.learnedCount} of ${widget.category.phraseCount} learned'
+        : '${widget.category.phraseCount} phrases';
+
     return Semantics(
       button: true,
-      label: '$categoryTitle category, ${widget.category.phraseCount} phrases available',
+      label: '$categoryTitle category, $progressText',
       child: AnimatedScale(
         scale: _isPressed ? 0.98 : 1.0,
         duration: const Duration(milliseconds: 100),
@@ -97,7 +103,7 @@ class _CategoryCardState extends State<CategoryCard> {
                             borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
                           ),
                           child: Text(
-                            '${widget.category.phraseCount} phrases',
+                            progressText,
                             style: theme.textTheme.labelMedium?.copyWith(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w500,

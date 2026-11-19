@@ -94,12 +94,14 @@ Bookmarked phrases for quick recall. Document ID is the phrase slug.
 
 ---
 
-### `users/{uid}/learnedPhrases/{phraseId}`
-Mastered phrases. Document ID is the phrase slug.
+### `users/{uid}/learnedPhrases/{phraseSlug}__{targetLanguageCode}`
+Mastered phrases tracked per target language. Document ID is composite: `{phraseSlug}__{targetLanguageCode}`.
 
 | Field | Type | Description |
 |---|---|---|
-| `learnedAt` | timestamp | Timestamp when phrase was marked as learned |
+| `phraseId` | string | The phrase slug referencing `phrases/{slug}` |
+| `targetLanguageCode` | string | Language code in which the phrase was mastered (e.g., "es", "fil") |
+| `learnedAt` | timestamp | Server timestamp when phrase was marked as learned |
 
 ---
 
