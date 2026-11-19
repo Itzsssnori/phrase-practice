@@ -17,6 +17,8 @@ import '../widgets/app_auth_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
+import '../widgets/phrase_card.dart';
+import '../widgets/require_sign_in.dart';
 
 /// Main home screen focusing on daily study focus, search, language context,
 /// and categorized phrase browsing.
@@ -233,6 +235,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // 5. Practice by Category (compact 2-per-row grid of real categories)
           _buildCategorySection(theme, isDark, nativeCode, targetCode, isSignedIn, userPhraseCtrl),
+          const SizedBox(height: AppSpacing.xl),
+
+          // 6. Favorites (directly below the list or grid of categories)
+          _buildFavoritesSection(theme, isDark, nativeCode, targetCode, auth, userPhraseCtrl, isSignedIn),
 
           const SizedBox(height: AppSpacing.xxl),
         ],
@@ -476,6 +482,222 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // ─── Favorites Section ───────────────────────────────────────────────
+
+  Widget _buildFavoritesSection(
+    ThemeData theme,
+    bool isDark,
+    String nativeCode,
+    String targetCode,
+    dynamic auth,
+    dynamic userPhraseCtrl,
+    bool isSignedIn,
+  ) {
+    final headingStyle = theme.textTheme.labelSmall?.copyWith(
+      fontWeight: FontWeight.w700,
+      letterSpacing: 0.8,
+      color: theme.colorScheme.onSurfaceVariant,
+    );
+
+    Widget buildHeading({bool showSeeAll = false}) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(child: Text('FAVORITES', style: headingStyle)),
+          if (showSeeAll)
+            Semantics(
+              button: true,
+              label: 'See all favorites',
+              child: GestureDetector(
+                onTap: () => context.push('/favorites'),
+                child: Text(
+                  'See all',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      );
+    }
+
+    // --- Guest ---
+    if (!isSignedIn) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildHeading(),
+          const SizedBox(height: AppSpacing.sm),
+          Semantics(
+            label: 'Sign in to save favorite phrases',
+            child: Material(
+              color: theme.colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                side: BorderSide(color: theme.dividerColor),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.favorite_border_rounded,
+                      color: theme.colorScheme.onSurfaceVariant,
+                      size: AppSpacing.iconMd,
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: Text(
+                        'Sign in to save phrases',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    FilledButton(
+                      onPressed: () async => requireSignIn(context),
+                      style: FilledButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: AppSpacing.xs,
+                        ),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: const Text('Sign In'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    // --- Signed in: loading ---
+    if (userPhraseCtrl != null && (userPhraseCtrl.isLoading as bool) == true) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildHeading(),
+          const SizedBox(height: AppSpacing.sm),
+          const Center(child: AppLoadingIndicator()),
+        ],
+      );
+    }
+
+    // --- Signed in: error ---
+    if (userPhraseCtrl != null && (userPhraseCtrl.errorMessage as String?) != null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildHeading(),
+          const SizedBox(height: AppSpacing.sm),
+          AppErrorMessage(
+            title: 'Could not load favorites',
+            message: userPhraseCtrl.errorMessage as String,
+            retryLabel: 'Retry',
+            onRetry: () {
+              final uid = (auth?.user?.uid) as String?;
+              if (uid != null) {
+                (userPhraseCtrl).loadForUser(uid);
+              }
+            },
+          ),
+        ],
+      );
+    }
+
+    // Resolve up to 5 most-recently-added favorites from loaded phrases
+    final phraseMap = {for (final p in _allPhrases) if (p.isActive) p.id: p};
+    final favIds = userPhraseCtrl != null
+        ? (userPhraseCtrl.favoritePhraseIds as List<String>)
+        : const <String>[];
+    final favPhrases = <Phrase>[];
+    for (final id in favIds) {
+      final p = phraseMap[id];
+      if (p != null) {
+        favPhrases.add(p);
+        if (favPhrases.length >= 5) break;
+      }
+    }
+
+    // --- Signed in: empty ---
+    if (favPhrases.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildHeading(),
+          const SizedBox(height: AppSpacing.sm),
+          Semantics(
+            label: 'No favorites yet. Tap the heart on any phrase to save it here.',
+            child: Material(
+              color: theme.colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+                side: BorderSide(color: theme.dividerColor),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg,
+                  vertical: AppSpacing.md,
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.favorite_border_rounded,
+                      color: theme.colorScheme.onSurfaceVariant,
+                      size: AppSpacing.iconMd,
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Flexible(
+                      child: Text(
+                        'Tap the heart on any phrase to save it here',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    // --- Signed in: populated (up to 5) ---
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildHeading(showSeeAll: true),
+        const SizedBox(height: AppSpacing.md),
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: favPhrases.length,
+          separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
+          itemBuilder: (context, index) {
+            final phrase = favPhrases[index];
+            return PhraseCard(
+              phrase: phrase,
+              targetLanguageCode: targetCode,
+              nativeLanguageCode: nativeCode,
+              onTap: () => context.push(
+                '/phrase-study/${phrase.id}?category=${phrase.categoryId}',
               ),
             );
           },

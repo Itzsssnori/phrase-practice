@@ -11,9 +11,11 @@ import 'package:phrase_practice/services/language_settings_controller.dart';
 import 'package:phrase_practice/services/user_phrase_controller.dart';
 import 'package:phrase_practice/services/user_phrase_repository.dart';
 import 'package:phrase_practice/screens/favorites_screen.dart';
+import 'package:phrase_practice/screens/home_screen.dart';
 import 'package:phrase_practice/widgets/app_auth_scope.dart';
 import 'package:phrase_practice/widgets/app_settings_scope.dart';
 import 'package:phrase_practice/widgets/app_user_phrase_scope.dart';
+import 'package:phrase_practice/widgets/phrase_card.dart';
 
 import 'stage_3_browse_test.dart';
 import 'stage_4_auth_test.dart';
@@ -444,7 +446,7 @@ void main() {
   // 3. Widget tests – FavoritesScreen states
   // =========================================================================
   group('FavoritesScreen', () {
-    Widget _buildFavoritesApp({
+    Widget buildFavoritesApp({
       required UserPhraseController userPhraseCtrl,
       required AuthController authCtrl,
     }) {
@@ -468,7 +470,7 @@ void main() {
       final authCtrl = await _makeAuthController(); // no uid → guest
       final ctrl = UserPhraseController(repository: repo);
 
-      await tester.pumpWidget(_buildFavoritesApp(
+      await tester.pumpWidget(buildFavoritesApp(
         userPhraseCtrl: ctrl,
         authCtrl: authCtrl,
       ));
@@ -484,7 +486,7 @@ void main() {
       final ctrl = UserPhraseController(repository: repo);
       await ctrl.loadForUser('uid-load');
 
-      await tester.pumpWidget(_buildFavoritesApp(
+      await tester.pumpWidget(buildFavoritesApp(
         userPhraseCtrl: ctrl,
         authCtrl: authCtrl,
       ));
@@ -501,7 +503,7 @@ void main() {
       final ctrl = UserPhraseController(repository: repo);
       await ctrl.loadForUser('uid-err');
 
-      await tester.pumpWidget(_buildFavoritesApp(
+      await tester.pumpWidget(buildFavoritesApp(
         userPhraseCtrl: ctrl,
         authCtrl: authCtrl,
       ));
@@ -536,6 +538,165 @@ void main() {
       await ctrl.loadForUser('uid-orphan');
 
       expect(ctrl.recentPhraseIds, contains('orphan-recent-1'));
+    });
+  });
+
+  // =========================================================================
+  // 5. Bug-fix regression tests
+  // =========================================================================
+  group('Bug fixes – favorite flow', () {
+    test('toggleFavorite returns RepoResult.error on write failure (not silent)', () async {
+      final repo = FakeUserPhraseRepository()..failFavoriteWrites = true;
+      final ctrl = await _makeController(repo, uid: 'uid-bugfix');
+
+      final result = await ctrl.toggleFavorite('slug-x');
+
+      expect(result.isError, isTrue,
+          reason: 'Write failure must be surfaced as RepoResult.error, not silently swallowed');
+      expect(result.errorMessageOrNull, isNotNull);
+    });
+
+    test('toggleFavorite error message is non-empty string', () async {
+      final repo = FakeUserPhraseRepository()..failFavoriteWrites = true;
+      final ctrl = await _makeController(repo, uid: 'uid-bugfix');
+
+      final result = await ctrl.toggleFavorite('slug-y');
+
+      expect(result.errorMessageOrNull!.isNotEmpty, isTrue);
+    });
+
+    test('state reverts after failed add and in-flight guard is cleared', () async {
+      final repo = FakeUserPhraseRepository()..failFavoriteWrites = true;
+      final ctrl = await _makeController(repo, uid: 'uid-bugfix');
+
+      await ctrl.toggleFavorite('slug-z');
+
+      // State must be reverted
+      expect(ctrl.isFavorite('slug-z'), isFalse);
+      // In-flight guard must be cleared so a subsequent call works
+      repo.failFavoriteWrites = false;
+      await ctrl.toggleFavorite('slug-z');
+      expect(ctrl.isFavorite('slug-z'), isTrue,
+          reason: 'In-flight guard must be cleared after failure so retry succeeds');
+    });
+
+    test('controller notifies listeners after loadForUser completes', () async {
+      final repo = FakeUserPhraseRepository();
+      repo._favorites['uid-notify'] = ['fav-slug-1'];
+      final ctrl = UserPhraseController(repository: repo);
+
+      var notifyCount = 0;
+      ctrl.addListener(() => notifyCount++);
+
+      await ctrl.loadForUser('uid-notify');
+
+      expect(notifyCount, greaterThanOrEqualTo(2),
+          reason: 'Controller must call notifyListeners at load start and load end');
+      expect(ctrl.isFavorite('fav-slug-1'), isTrue);
+    });
+
+    test('clear() triggers notifyListeners so UI can rebuild', () async {
+      final repo = FakeUserPhraseRepository();
+      final ctrl = await _makeController(repo, uid: 'uid-clear');
+      await ctrl.toggleFavorite('slug-clear');
+
+      var notified = false;
+      ctrl.addListener(() => notified = true);
+
+      ctrl.clear();
+
+      expect(notified, isTrue, reason: 'clear() must call notifyListeners');
+      expect(ctrl.favoritePhraseIds, isEmpty);
+    });
+  });
+
+  // =========================================================================
+  // 6. HomeScreen Favorites section tests
+  // =========================================================================
+  group('HomeScreen – Favorites section', () {
+    Widget buildHomeApp({
+      required UserPhraseController userPhraseCtrl,
+      required AuthController authCtrl,
+    }) {
+      return AppAuthScope(
+        controller: authCtrl,
+        child: AppSettingsScope(
+          controller: LanguageSettingsController(),
+          child: AppUserPhraseScope(
+            controller: userPhraseCtrl,
+            child: const MaterialApp(
+              home: HomeScreen(),
+            ),
+          ),
+        ),
+      );
+    }
+
+    testWidgets('Guest sees sign-in prompt card with Sign In button', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final repo = FakeUserPhraseRepository();
+      final authCtrl = await _makeAuthController(); // guest
+      final userPhraseCtrl = UserPhraseController(repository: repo);
+
+      await tester.pumpWidget(buildHomeApp(
+        userPhraseCtrl: userPhraseCtrl,
+        authCtrl: authCtrl,
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('FAVORITES'), findsOneWidget);
+      expect(find.text('Sign in to save phrases'), findsOneWidget);
+      expect(find.text('Sign In'), findsOneWidget);
+    });
+
+    testWidgets('Signed in with no favorites sees quiet empty-state card', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final repo = FakeUserPhraseRepository();
+      final authCtrl = await _makeAuthController(uid: 'uid-empty-fav');
+      final userPhraseCtrl = UserPhraseController(repository: repo);
+      await userPhraseCtrl.loadForUser('uid-empty-fav');
+
+      await tester.pumpWidget(buildHomeApp(
+        userPhraseCtrl: userPhraseCtrl,
+        authCtrl: authCtrl,
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('FAVORITES'), findsOneWidget);
+      expect(
+        find.text('Tap the heart on any phrase to save it here'),
+        findsOneWidget,
+      );
+      expect(find.text('See all'), findsNothing);
+    });
+
+    testWidgets('Signed in with favorites displays phrase cards and See all link', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final testPhrases = [
+        _makePhrase('fav-1', categoryId: 'greetings'),
+        _makePhrase('fav-2', categoryId: 'greetings'),
+      ];
+      BrowseDataService.setMockInstance(BrowseDataService(
+        languageRepo: MockLanguageRepository([]),
+        categoryRepo: MockCategoryRepository([]),
+        phraseRepo: MockPhraseRepository(testPhrases),
+      ));
+
+      final repo = FakeUserPhraseRepository();
+      repo._favorites['uid-with-fav'] = ['fav-1', 'fav-2'];
+      final authCtrl = await _makeAuthController(uid: 'uid-with-fav');
+      final userPhraseCtrl = UserPhraseController(repository: repo);
+      await userPhraseCtrl.loadForUser('uid-with-fav');
+
+      await tester.pumpWidget(buildHomeApp(
+        userPhraseCtrl: userPhraseCtrl,
+        authCtrl: authCtrl,
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('FAVORITES'), findsOneWidget);
+      expect(find.text('See all'), findsOneWidget);
+      expect(find.byType(PhraseCard), findsNWidgets(2));
     });
   });
 }

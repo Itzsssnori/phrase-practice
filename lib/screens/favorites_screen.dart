@@ -241,7 +241,16 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           ),
                           onFavoriteToggle: (_) async {
                             final res = await userPhraseCtrl.toggleFavorite(phrase.id);
-                            if (res.isSuccess && context.mounted) {
+                            if (!context.mounted) return;
+                            if (res.isError) {
+                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(res.errorMessageOrNull ?? 'Could not update favorite.'),
+                                  backgroundColor: Theme.of(context).colorScheme.error,
+                                ),
+                              );
+                            } else if (res.isSuccess) {
                               ScaffoldMessenger.of(context).hideCurrentSnackBar();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

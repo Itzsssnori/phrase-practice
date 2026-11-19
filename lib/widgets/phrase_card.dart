@@ -154,7 +154,16 @@ class _PhraseCardState extends State<PhraseCard> {
                               }
                               final wasFav = userPhraseCtrl.isFavorite(widget.phrase.id);
                               final res = await userPhraseCtrl.toggleFavorite(widget.phrase.id);
-                              if (wasFav && res.isSuccess && context.mounted) {
+                              if (!context.mounted) return;
+                              if (res.isError) {
+                                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(res.errorMessageOrNull ?? 'Could not update favorite.'),
+                                    backgroundColor: Theme.of(context).colorScheme.error,
+                                  ),
+                                );
+                              } else if (wasFav && res.isSuccess) {
                                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

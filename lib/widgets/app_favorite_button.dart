@@ -43,12 +43,12 @@ class _AppFavoriteButtonState extends State<AppFavoriteButton>
     super.dispose();
   }
 
-  void _handleTap() async {
-    await _controller.forward();
-    await _controller.reverse();
-    if (!widget.isDisabled && widget.onToggle != null) {
-      widget.onToggle!(widget.isFavorite);
-    }
+  void _handleTap() {
+    if (widget.isDisabled || widget.onToggle == null) return;
+    _controller.forward().then((_) {
+      if (mounted) _controller.reverse();
+    });
+    widget.onToggle!(widget.isFavorite);
   }
 
   @override

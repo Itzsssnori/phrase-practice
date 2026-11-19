@@ -784,7 +784,16 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     if (userPhraseCtrl != null) {
       final wasFav = userPhraseCtrl.isFavorite(phraseId);
       final res = await userPhraseCtrl.toggleFavorite(phraseId);
-      if (wasFav && res.isSuccess && mounted) {
+      if (!mounted) return;
+      if (res.isError) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(res.errorMessageOrNull ?? 'Could not update favorite.'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      } else if (wasFav && res.isSuccess) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
