@@ -20,16 +20,26 @@ abstract interface class ProfileRepository {
     Map<String, dynamic> preferences,
   );
 
+  /// Creates a initial user profile document strictly matching the allowed fields in firestore.rules.
+  Future<RepoResult<UserProfile>> createProfile({
+    required String uid,
+    String? displayName,
+    required String nativeLanguageCode,
+    required String targetLanguageCode,
+  });
+
   /// Saves or creates a full user profile document with merge.
   Future<RepoResult<void>> createOrUpdateProfile(UserProfile profile);
 }
 
 /// Cloud Firestore implementation of [ProfileRepository].
 class FirestoreProfileRepository implements ProfileRepository {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore? _customFirestore;
 
   FirestoreProfileRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+      : _customFirestore = firestore;
+
+  FirebaseFirestore get _firestore => _customFirestore ?? FirebaseFirestore.instance;
 
   @override
   Future<RepoResult<UserProfile>> getUserProfile(String uid) async {
@@ -96,6 +106,46 @@ class FirestoreProfileRepository implements ProfileRepository {
       );
     } catch (e, stack) {
       return RepoResult.error('Unexpected error updating preferences: $e', e, stack);
+    }
+  }
+
+  @override
+  Future<RepoResult<UserProfile>> createProfile({
+    required String uid,
+    String? displayName,
+    required String nativeLanguageCode,
+    required String targetLanguageCode,
+  }) async {
+    try {
+      final cleanName = displayName?.trim();
+      final data = <String, dynamic>{
+        if (cleanName != null && cleanName.isNotEmpty) 'displayName': cleanName,
+        'nativeLanguageCode': nativeLanguageCode,
+        'targetLanguageCode': targetLanguageCode,
+        'preferences': <String, dynamic>{},
+        'createdAt': FieldValue.serverTimestamp(),
+      };
+
+      await _firestore.collection('users').doc(uid).set(data);
+
+      final profile = UserProfile(
+        uid: uid,
+        displayName: cleanName,
+        nativeLanguageCode: nativeLanguageCode,
+        targetLanguageCode: targetLanguageCode,
+        preferences: const {},
+        createdAt: DateTime.now(),
+      );
+
+      return RepoResult.success(profile);
+    } on FirebaseException catch (e, stack) {
+      return RepoResult.error(
+        e.message ?? 'Firestore error creating profile (${e.code})',
+        e,
+        stack,
+      );
+    } catch (e, stack) {
+      return RepoResult.error('Unexpected error creating profile: $e', e, stack);
     }
   }
 

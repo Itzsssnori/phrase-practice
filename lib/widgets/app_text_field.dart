@@ -14,6 +14,11 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final bool autofocus;
   final int maxLines;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
+  final Iterable<String>? autofillHints;
+  final FocusNode? focusNode;
+  final bool enabled;
 
   const AppTextField({
     super.key,
@@ -28,6 +33,11 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.autofocus = false,
     this.maxLines = 1,
+    this.textInputAction,
+    this.onFieldSubmitted,
+    this.autofillHints,
+    this.focusNode,
+    this.enabled = true,
   });
 
   @override
@@ -60,6 +70,11 @@ class AppTextField extends StatelessWidget {
             onChanged: onChanged,
             autofocus: autofocus,
             maxLines: maxLines,
+            textInputAction: textInputAction,
+            onFieldSubmitted: onFieldSubmitted,
+            autofillHints: autofillHints,
+            focusNode: focusNode,
+            enabled: enabled,
             style: theme.textTheme.bodyMedium,
             decoration: InputDecoration(
               hintText: hintText,

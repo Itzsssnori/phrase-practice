@@ -22,13 +22,15 @@ abstract interface class PhraseRepository {
 
 /// Cloud Firestore implementation of [PhraseRepository] with in-memory caching for local search.
 class FirestorePhraseRepository implements PhraseRepository {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore? _customFirestore;
 
   // In-memory cache for search operations
   List<Phrase>? _cachedActivePhrases;
 
   FirestorePhraseRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+      : _customFirestore = firestore;
+
+  FirebaseFirestore get _firestore => _customFirestore ?? FirebaseFirestore.instance;
 
   @override
   Future<RepoResult<List<Phrase>>> getAllPhrases() async {

@@ -10,11 +10,13 @@ abstract interface class CategoryRepository {
 
 /// Cloud Firestore implementation of [CategoryRepository].
 class FirestoreCategoryRepository implements CategoryRepository {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore? _customFirestore;
   List<QueryDocumentSnapshot<Map<String, dynamic>>>? _cachedCategoryDocs;
 
   FirestoreCategoryRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+      : _customFirestore = firestore;
+
+  FirebaseFirestore get _firestore => _customFirestore ?? FirebaseFirestore.instance;
 
   @override
   Future<RepoResult<List<Category>>> getCategories(String languageCode, {bool forceRefresh = false}) async {
