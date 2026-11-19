@@ -89,16 +89,17 @@ class _PhraseCardState extends State<PhraseCard> {
               borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (widget.showCategory) ...[
-                            Container(
+                    // Top Row: Category Chip on left (if showCategory), Actions on top-right
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (widget.showCategory)
+                          Flexible(
+                            child: Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.sm,
                                 vertical: AppSpacing.xs,
@@ -118,79 +119,10 @@ class _PhraseCardState extends State<PhraseCard> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.xs),
-                          ],
-
-                          // Main Text: Target Language Translation (largest focus)
-                          Text(
-                            mainText,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: theme.colorScheme.primary,
-                              fontWeight: FontWeight.w700,
-                              height: 1.3,
-                            ),
-                            softWrap: true,
-                          ),
-
-                          // Sub Text: Native Language Phrase
-                          if (subText.isNotEmpty && subText != mainText) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              subText,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: theme.colorScheme.onSurface,
-                                height: 1.3,
-                              ),
-                              softWrap: true,
-                            ),
-                          ],
-
-                          // Pronunciation in small text
-                          if (pronunciation != null && pronunciation.isNotEmpty) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              pronunciation,
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                fontStyle: FontStyle.italic,
-                                color: theme.colorScheme.onSurfaceVariant,
-                                fontSize: 12.0,
-                              ),
-                              softWrap: true,
-                            ),
-                          ],
-
-                          // Meaning / Context Note if available
-                          if (note != null && note.isNotEmpty) ...[
-                            const SizedBox(height: AppSpacing.xs),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppSpacing.sm,
-                                vertical: AppSpacing.xs,
-                              ),
-                              decoration: BoxDecoration(
-                                color: theme.colorScheme.surfaceContainerHighest,
-                                borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-                              ),
-                              child: Text(
-                                note,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  fontSize: 11.5,
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                  height: 1.3,
-                                ),
-                                softWrap: true,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        const Spacer(),
                         if (isLearned) ...[
                           Tooltip(
                             message: 'Learned in ${targetCode.toUpperCase()}',
@@ -254,6 +186,71 @@ class _PhraseCardState extends State<PhraseCard> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: AppSpacing.sm),
+
+                    // Main Text: Target Language Translation (largest focus)
+                    Text(
+                      mainText,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.w700,
+                        height: 1.3,
+                      ),
+                      softWrap: true,
+                    ),
+
+                    // Sub Text: Native Language Phrase
+                    if (subText.isNotEmpty && subText != mainText) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        subText,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: theme.colorScheme.onSurface,
+                          height: 1.3,
+                        ),
+                        softWrap: true,
+                      ),
+                    ],
+
+                    // Pronunciation in small text
+                    if (pronunciation != null && pronunciation.isNotEmpty) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        pronunciation,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          fontStyle: FontStyle.italic,
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontSize: 12.0,
+                        ),
+                        softWrap: true,
+                      ),
+                    ],
+
+                    // Meaning / Context Note if available
+                    if (note != null && note.isNotEmpty) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.xs,
+                        ),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                        ),
+                        child: Text(
+                          note,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            fontSize: 11.5,
+                            color: theme.colorScheme.onSurfaceVariant,
+                            height: 1.3,
+                          ),
+                          softWrap: true,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

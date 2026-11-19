@@ -652,7 +652,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    // Resolve up to 5 most-recently-added favorites from loaded phrases
+    // Resolve up to 3 most-recently-added favorites from loaded phrases
     final phraseMap = {for (final p in _allPhrases) if (p.isActive) p.id: p};
     final favIds = userPhraseCtrl != null
         ? (userPhraseCtrl.favoritePhraseIds as List<String>)
@@ -662,7 +662,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final p = phraseMap[id];
       if (p != null) {
         favPhrases.add(p);
-        if (favPhrases.length >= 5) break;
+        if (favPhrases.length >= 3) break;
       }
     }
 

@@ -698,5 +698,39 @@ void main() {
       expect(find.text('See all'), findsOneWidget);
       expect(find.byType(PhraseCard), findsNWidgets(2));
     });
+
+    testWidgets('Signed in with 5 favorites displays at most 3 on Home screen', (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final testPhrases = [
+        _makePhrase('fav-1', categoryId: 'greetings'),
+        _makePhrase('fav-2', categoryId: 'greetings'),
+        _makePhrase('fav-3', categoryId: 'greetings'),
+        _makePhrase('fav-4', categoryId: 'greetings'),
+        _makePhrase('fav-5', categoryId: 'greetings'),
+      ];
+      BrowseDataService.setMockInstance(BrowseDataService(
+        languageRepo: MockLanguageRepository([]),
+        categoryRepo: MockCategoryRepository([]),
+        phraseRepo: MockPhraseRepository(testPhrases),
+      ));
+
+      final repo = FakeUserPhraseRepository();
+      repo._favorites['uid-with-5-favs'] = ['fav-1', 'fav-2', 'fav-3', 'fav-4', 'fav-5'];
+      final authCtrl = await _makeAuthController(uid: 'uid-with-5-favs');
+      final userPhraseCtrl = UserPhraseController(repository: repo);
+      await userPhraseCtrl.loadForUser('uid-with-5-favs');
+
+      await tester.pumpWidget(buildHomeApp(
+        userPhraseCtrl: userPhraseCtrl,
+        authCtrl: authCtrl,
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('FAVORITES'), findsOneWidget);
+      expect(find.text('See all'), findsOneWidget);
+      // Only 3 phrase cards should be displayed on Home, while all 5 are in the controller/favorites
+      expect(find.byType(PhraseCard), findsNWidgets(3));
+      expect(userPhraseCtrl.favoritePhraseIds.length, 5);
+    });
   });
 }
