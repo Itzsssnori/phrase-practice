@@ -93,7 +93,7 @@ void main() {
   }
 
   group('Language Synchronization Across Screens', () {
-    testWidgets('HomeScreen category title and language chip immediately reflect language swaps', (tester) async {
+    testWidgets('HomeScreen category title and language subtitle immediately reflect language swaps', (tester) async {
       final controller = LanguageSettingsController();
       await controller.load();
       // Default: native = 'en' ("Greetings"), target = 'es' ("Spanish")
@@ -101,9 +101,10 @@ void main() {
       await tester.pumpWidget(createTestWidget(child: const HomeScreen(), controller: controller));
       await tester.pumpAndSettle();
 
-      // Check English category title
+      // Check English category title in the compact grid
       expect(find.text('Greetings'), findsOneWidget);
-      expect(find.text('Spanish'), findsOneWidget);
+      // App bar subtitle shows "English to Spanish"
+      expect(find.text('English to Spanish'), findsOneWidget);
 
       // Change native language to Spanish ('es') and target to English ('en')
       await controller.setLanguagePair(nativeCode: 'es', targetCode: 'en');
