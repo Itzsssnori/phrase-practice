@@ -98,13 +98,15 @@ class QuizGenerator {
       final originalPhrase = isNativeToTarget ? nativeTrans.text : targetTrans.text;
       final correctAnswer = isNativeToTarget ? targetTrans.text : nativeTrans.text;
       final pronunciation = targetTrans.pronunciation;
-      final explanation = (targetTrans.meaningNote != null && targetTrans.meaningNote!.isNotEmpty)
-          ? targetTrans.meaningNote!
+      // Explanation should always be in the native language so the user
+      // understands the meaning in terms they already know.
+      final explanation = (nativeTrans.meaningNote != null && nativeTrans.meaningNote!.isNotEmpty)
+          ? nativeTrans.meaningNote!
           : (phrase.contextNote != null && phrase.contextNote!.isNotEmpty)
               ? phrase.contextNote!
               : (isNativeToTarget
-                  ? 'Translation: ${targetTrans.text}'
-                  : 'Meaning: ${nativeTrans.text}');
+                  ? 'Meaning: ${nativeTrans.text}'
+                  : 'Translation: ${targetTrans.text}');
 
       // 4. Gather 3 unique distractors:
       // Category candidates first, then other categories fallback
