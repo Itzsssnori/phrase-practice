@@ -670,7 +670,7 @@ void main() {
       expect(find.text('See all'), findsNothing);
     });
 
-    testWidgets('Signed in with favorites displays phrase cards and See all link', (tester) async {
+    testWidgets('Signed in with favorites displays phrase card and See all link', (tester) async {
       SharedPreferences.setMockInitialValues({});
       final testPhrases = [
         _makePhrase('fav-1', categoryId: 'greetings'),
@@ -696,10 +696,10 @@ void main() {
 
       expect(find.text('FAVORITES'), findsOneWidget);
       expect(find.text('See all'), findsOneWidget);
-      expect(find.byType(PhraseCard), findsNWidgets(2));
+      expect(find.byType(PhraseCard), findsOneWidget);
     });
 
-    testWidgets('Signed in with 5 favorites displays at most 3 on Home screen', (tester) async {
+    testWidgets('Signed in with multiple favorites displays only 1 on Home screen', (tester) async {
       SharedPreferences.setMockInitialValues({});
       final testPhrases = [
         _makePhrase('fav-1', categoryId: 'greetings'),
@@ -728,8 +728,8 @@ void main() {
 
       expect(find.text('FAVORITES'), findsOneWidget);
       expect(find.text('See all'), findsOneWidget);
-      // Only 3 phrase cards should be displayed on Home, while all 5 are in the controller/favorites
-      expect(find.byType(PhraseCard), findsNWidgets(3));
+      // Only 1 phrase card should be displayed on Home, while all 5 are stored in favorites
+      expect(find.byType(PhraseCard), findsOneWidget);
       expect(userPhraseCtrl.favoritePhraseIds.length, 5);
     });
   });
