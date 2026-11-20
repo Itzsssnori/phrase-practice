@@ -93,6 +93,22 @@ class FakeAuthRepository implements AuthRepository {
     return const RepoResult.success(null);
   }
 
+  @override
+  Future<RepoResult<void>> sendEmailVerification() async => const RepoResult.success(null);
+
+  @override
+  Future<RepoResult<AuthUser?>> reloadUser() async => RepoResult.success(_current);
+
+  @override
+  Future<RepoResult<void>> reauthenticateWithPassword(String password) async =>
+      const RepoResult.success(null);
+
+  @override
+  Future<RepoResult<void>> deleteAccount() async {
+    emitUser(null);
+    return const RepoResult.success(null);
+  }
+
   void dispose() {
     _authController.close();
   }
@@ -159,6 +175,21 @@ class FakeProfileRepository implements ProfileRepository {
         targetLanguageCode: targetLanguageCode,
       );
     }
+    return const RepoResult.success(null);
+  }
+
+  @override
+  Future<RepoResult<void>> updateDisplayName(String uid, String displayName) async {
+    final existing = profiles[uid];
+    if (existing != null) {
+      profiles[uid] = existing.copyWith(displayName: displayName);
+    }
+    return const RepoResult.success(null);
+  }
+
+  @override
+  Future<RepoResult<void>> deleteUserData(String uid) async {
+    profiles.remove(uid);
     return const RepoResult.success(null);
   }
 
