@@ -135,8 +135,10 @@
     "iconKey": "transportation",
     "group": "travel",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Transporte Público",
+      "fil": "Transportasyon at Sakayan",
       "en": "Transportation"
     }
   },
@@ -146,8 +148,10 @@
     "iconKey": "airport-immigration",
     "group": "travel",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Aeropuerto y Migración",
+      "fil": "Paliparan at Immigration",
       "en": "Airport & Immigration"
     }
   },
@@ -157,8 +161,10 @@
     "iconKey": "accommodation",
     "group": "travel",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Alojamiento y Hoteles",
+      "fil": "Tuluyan at Hotel",
       "en": "Accommodation"
     }
   },
@@ -168,8 +174,10 @@
     "iconKey": "restrooms",
     "group": "travel",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Baños y Servicios",
+      "fil": "Palikuran at Banyo",
       "en": "Restrooms"
     }
   },
@@ -179,8 +187,10 @@
     "iconKey": "sightseeing",
     "group": "travel",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Turismo y Paseos",
+      "fil": "Pamamasyal at Turismo",
       "en": "Sightseeing"
     }
   },
@@ -190,8 +200,10 @@
     "iconKey": "money-payments",
     "group": "travel",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Dinero y Pagos",
+      "fil": "Pera at Pagbabayad",
       "en": "Money & Payments"
     }
   },
@@ -201,8 +213,10 @@
     "iconKey": "weather",
     "group": "travel",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Clima y Tiempo",
+      "fil": "Panahon at Klima",
       "en": "Weather"
     }
   },
@@ -212,8 +226,10 @@
     "iconKey": "police-safety",
     "group": "safety",
     "priority": "critical",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Policía y Seguridad",
+      "fil": "Pulis at Kaligtasan",
       "en": "Police & Safety"
     }
   },
@@ -223,8 +239,10 @@
     "iconKey": "health-pharmacy",
     "group": "safety",
     "priority": "critical",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Salud y Farmacia",
+      "fil": "Kalusugan at Botika",
       "en": "Health & Pharmacy"
     }
   },
@@ -234,8 +252,10 @@
     "iconKey": "lost-found",
     "group": "safety",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Objetos Perdidos",
+      "fil": "Nawawala at Nahanap",
       "en": "Lost & Found"
     }
   }

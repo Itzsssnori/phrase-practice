@@ -490,6 +490,706 @@
     "isActive": true
   },
   {
+    "slug": "does-this-bus-stop-here",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-subway-entrance",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "where-can-i-buy-a-transit-card",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "how-much-is-the-fare",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "which-bus-goes-to-the-city-center",
+    "categoryId": "transportation",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "does-this-train-go-to-the-airport",
+    "categoryId": "transportation",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "what-time-does-the-next-train-arrive",
+    "categoryId": "transportation",
+    "difficulty": 2,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "where-should-i-get-off",
+    "categoryId": "transportation",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-the-right-platform",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "please-take-me-to-this-address",
+    "categoryId": "transportation",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-check-in-counter",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-departure-gate",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-immigration",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "here-is-my-passport",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-here-for-tourism",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "how-long-can-i-stay",
+    "categoryId": "airport-immigration",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-nothing-to-declare",
+    "categoryId": "airport-immigration",
+    "difficulty": 2,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "my-luggage-is-missing",
+    "categoryId": "airport-immigration",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "is-my-flight-delayed",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "could-i-have-a-window-seat",
+    "categoryId": "airport-immigration",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-check-in-early",
+    "categoryId": "accommodation",
+    "difficulty": 2,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "i-would-like-to-book-a-room",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-any-available-rooms",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "i-would-like-to-check-in",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-would-like-to-check-out",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "what-time-is-breakfast-served",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "is-breakfast-included",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "how-do-i-use-the-air-conditioning",
+    "categoryId": "accommodation",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "could-i-have-an-extra-towel",
+    "categoryId": "accommodation",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "there-is-a-problem-with-my-room",
+    "categoryId": "accommodation",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-toilet-paper",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-baby-changing-table",
+    "categoryId": "restrooms",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-public-restroom-nearby",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-restroom-free",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-restroom-for-men-or-women",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "may-i-use-your-restroom",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-wheelchair-accessible-restroom",
+    "categoryId": "restrooms",
+    "difficulty": 2,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "where-can-i-wash-my-hands",
+    "categoryId": "restrooms",
+    "difficulty": 1,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-shower-available",
+    "categoryId": "restrooms",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-a-drinking-fountain",
+    "categoryId": "restrooms",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-nearest-tourist-attraction",
+    "categoryId": "sightseeing",
+    "difficulty": 2,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "how-much-is-the-entrance-fee",
+    "categoryId": "sightseeing",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "do-i-need-to-book-in-advance",
+    "categoryId": "sightseeing",
+    "difficulty": 2,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "is-photography-allowed",
+    "categoryId": "sightseeing",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "could-you-take-a-photo-of-us",
+    "categoryId": "sightseeing",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-guided-tour",
+    "categoryId": "sightseeing",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-ticket-office",
+    "categoryId": "sightseeing",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-place-open-today",
+    "categoryId": "sightseeing",
+    "difficulty": 1,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "how-long-does-the-tour-take",
+    "categoryId": "sightseeing",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "can-you-recommend-a-place-to-visit",
+    "categoryId": "sightseeing",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-nearest-atm",
+    "categoryId": "money-payments",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-change-for-this",
+    "categoryId": "money-payments",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "what-is-the-exchange-rate",
+    "categoryId": "money-payments",
+    "difficulty": 2,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "can-we-split-the-bill",
+    "categoryId": "money-payments",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "my-card-is-not-working",
+    "categoryId": "money-payments",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-accept-cash",
+    "categoryId": "money-payments",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-pay-with-my-phone",
+    "categoryId": "money-payments",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "could-i-have-a-receipt",
+    "categoryId": "money-payments",
+    "difficulty": 1,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "i-think-i-was-charged-twice",
+    "categoryId": "money-payments",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-an-additional-fee",
+    "categoryId": "money-payments",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "what-is-the-weather-like",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "is-it-going-to-rain",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "it-is-very-hot-today",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-storm-coming",
+    "categoryId": "weather",
+    "difficulty": 2,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "should-i-bring-an-umbrella",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "what-is-the-weather-forecast",
+    "categoryId": "weather",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "it-is-very-cold-today",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "is-the-air-quality-okay",
+    "categoryId": "weather",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "is-it-going-to-be-sunny-tomorrow",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "do-i-need-a-jacket",
+    "categoryId": "weather",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-nearest-police-station",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "what-is-the-emergency-number",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "please-leave-me-alone",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "someone-stole-my-belongings",
+    "categoryId": "police-safety",
+    "difficulty": 2,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-need-a-police-report",
+    "categoryId": "police-safety",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "my-wallet-was-stolen",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-been-robbed",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "i-do-not-feel-safe-here",
+    "categoryId": "police-safety",
+    "difficulty": 1,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "i-need-to-report-an-incident",
+    "categoryId": "police-safety",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "help-me-contact-the-embassy",
+    "categoryId": "police-safety",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "do-i-need-a-prescription",
+    "categoryId": "health-pharmacy",
+    "difficulty": 2,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "how-often-should-i-take-this-medicine",
+    "categoryId": "health-pharmacy",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-travel-insurance",
+    "categoryId": "health-pharmacy",
+    "difficulty": 2,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "i-do-not-feel-well",
+    "categoryId": "health-pharmacy",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-a-headache",
+    "categoryId": "health-pharmacy",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-a-fever",
+    "categoryId": "health-pharmacy",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-stomach-pain",
+    "categoryId": "health-pharmacy",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-allergic-to-this-medicine",
+    "categoryId": "health-pharmacy",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-pain-relievers",
+    "categoryId": "health-pharmacy",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "i-need-medical-assistance",
+    "categoryId": "health-pharmacy",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "i-lost-my-bag",
+    "categoryId": "lost-found",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "has-anyone-found-my-phone",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-the-lost-and-found-office",
+    "categoryId": "lost-found",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "i-left-something-here",
+    "categoryId": "lost-found",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-cannot-find-my-belongings",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "i-lost-my-keys",
+    "categoryId": "lost-found",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "i-left-my-bag-on-the-train",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "please-call-me-if-you-find-it",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-describe-it-to-you",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-fill-out-a-form",
+    "categoryId": "lost-found",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
     "slug": "where-is-the-bathroom",
     "categoryId": "directions",
     "difficulty": 1,
