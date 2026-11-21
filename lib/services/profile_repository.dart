@@ -4,8 +4,21 @@ import '../models/user_profile.dart';
 
 /// Abstract contract for reading and modifying user profile settings.
 abstract interface class ProfileRepository {
+  /// Single source of truth for all private user subcollections deleted during account removal.
+  /// Later stages can add new user subcollection names here.
+  static const List<String> userSubcollections = [
+    'favorites',
+    'learnedPhrases',
+    'recentPhrases',
+    'quizAttempts',
+    'translationHistory',
+  ];
+
   /// Retrieves the user profile document for [uid].
   Future<RepoResult<UserProfile>> getUserProfile(String uid);
+
+  /// Updates ONLY the `displayName` field in `users/{uid}`.
+  Future<RepoResult<void>> updateDisplayName(String uid, String displayName);
 
   /// Updates the user's active native and target language codes.
   Future<RepoResult<void>> updateUserLanguages(
@@ -30,6 +43,10 @@ abstract interface class ProfileRepository {
 
   /// Saves or creates a full user profile document with merge.
   Future<RepoResult<void>> createOrUpdateProfile(UserProfile profile);
+
+  /// Permanently deletes all documents in every subcollection in [userSubcollections]
+  /// (using batched writes up to 500 per batch) and then deletes the `users/{uid}` document.
+  Future<RepoResult<void>> deleteUserData(String uid);
 }
 
 /// Cloud Firestore implementation of [ProfileRepository].
@@ -60,6 +77,29 @@ class FirestoreProfileRepository implements ProfileRepository {
       );
     } catch (e, stack) {
       return RepoResult.error('Unexpected error fetching profile: $e', e, stack);
+    }
+  }
+
+  @override
+  Future<RepoResult<void>> updateDisplayName(String uid, String displayName) async {
+    try {
+      await _firestore.collection('users').doc(uid).set({
+        'displayName': displayName.trim(),
+      }, SetOptions(merge: true));
+
+      return const RepoResult.success(null);
+    } on FirebaseException catch (e, stack) {
+      return RepoResult.error(
+        'Could not update your display name. Please try again.',
+        e,
+        stack,
+      );
+    } catch (e, stack) {
+      return RepoResult.error(
+        'Could not update your display name. Please try again.',
+        e,
+        stack,
+      );
     }
   }
 
@@ -166,6 +206,45 @@ class FirestoreProfileRepository implements ProfileRepository {
       );
     } catch (e, stack) {
       return RepoResult.error('Unexpected error saving profile: $e', e, stack);
+    }
+  }
+
+  @override
+  Future<RepoResult<void>> deleteUserData(String uid) async {
+    const int batchLimit = 500;
+    try {
+      final userDocRef = _firestore.collection('users').doc(uid);
+
+      for (final subcollection in ProfileRepository.userSubcollections) {
+        final colRef = userDocRef.collection(subcollection);
+        while (true) {
+          final snapshot = await colRef.limit(batchLimit).get();
+          if (snapshot.docs.isEmpty) break;
+
+          final batch = _firestore.batch();
+          for (final doc in snapshot.docs) {
+            batch.delete(doc.reference);
+          }
+          await batch.commit();
+
+          if (snapshot.docs.length < batchLimit) break;
+        }
+      }
+
+      await userDocRef.delete();
+      return const RepoResult.success(null);
+    } on FirebaseException catch (e, stack) {
+      return RepoResult.error(
+        'Could not delete all of your saved data (${e.code}). Please check your connection and try again.',
+        e,
+        stack,
+      );
+    } catch (e, stack) {
+      return RepoResult.error(
+        'Could not delete all of your saved data. Please try again.',
+        e,
+        stack,
+      );
     }
   }
 }

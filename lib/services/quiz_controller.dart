@@ -26,6 +26,7 @@ class QuizController extends ChangeNotifier {
   bool _isSavingAttempt = false;
   String? _saveAttemptError;
   bool _attemptSaved = false;
+  int _savedAttemptVersion = 0;
 
   QuizController({
     QuizAttemptRepository? repository,
@@ -55,6 +56,7 @@ class QuizController extends ChangeNotifier {
   bool get isSavingAttempt => _isSavingAttempt;
   String? get saveAttemptError => _saveAttemptError;
   bool get attemptSaved => _attemptSaved;
+  int get savedAttemptVersion => _savedAttemptVersion;
 
   // ─── Session Setup ────────────────────────────────────────────────────
 
@@ -211,6 +213,7 @@ class QuizController extends ChangeNotifier {
     if (saveRes.isSuccess) {
       _attemptSaved = true;
       _saveAttemptError = null;
+      _savedAttemptVersion++;
     } else {
       _saveAttemptError = saveRes.errorMessageOrNull ?? 'Failed to save quiz attempt.';
     }
@@ -270,6 +273,20 @@ class QuizController extends ChangeNotifier {
     _currentIndex = 0;
     _selectedOptions.clear();
     _isAnswerSubmitted = false;
+    notifyListeners();
+  }
+
+  /// Clears all in-memory quiz state (active session and last result), e.g. on sign-out or account deletion.
+  void clear() {
+    _questions = const [];
+    _currentIndex = 0;
+    _selectedOptions.clear();
+    _isAnswerSubmitted = false;
+    _lastResult = null;
+    _currentCategoryId = null;
+    _isSavingAttempt = false;
+    _saveAttemptError = null;
+    _attemptSaved = false;
     notifyListeners();
   }
 }

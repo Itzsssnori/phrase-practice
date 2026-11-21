@@ -99,6 +99,22 @@ class FakeAuthRepository implements AuthRepository {
     _currentUser = null;
     return RepoResult.success(null);
   }
+
+  @override
+  Future<RepoResult<void>> sendEmailVerification() async => const RepoResult.success(null);
+
+  @override
+  Future<RepoResult<AuthUser?>> reloadUser() async => RepoResult.success(_currentUser);
+
+  @override
+  Future<RepoResult<void>> reauthenticateWithPassword(String password) async =>
+      const RepoResult.success(null);
+
+  @override
+  Future<RepoResult<void>> deleteAccount() async {
+    _currentUser = null;
+    return const RepoResult.success(null);
+  }
 }
 
 // ─── Test Fixture Helpers ───────────────────────────────────────────────────

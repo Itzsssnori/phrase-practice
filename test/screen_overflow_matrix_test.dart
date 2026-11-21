@@ -1,30 +1,42 @@
 import 'dart:math';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:phrase_practice/models/auth_user.dart';
 import 'package:phrase_practice/models/category.dart';
 import 'package:phrase_practice/models/language.dart';
 import 'package:phrase_practice/models/phrase.dart';
 import 'package:phrase_practice/models/phrase_translation.dart';
+import 'package:phrase_practice/models/quiz_attempt.dart';
+import 'package:phrase_practice/models/user_profile.dart';
 import 'package:phrase_practice/screens/categories_screen.dart';
 import 'package:phrase_practice/screens/category_phrases_screen.dart';
 import 'package:phrase_practice/screens/home_screen.dart';
 import 'package:phrase_practice/screens/onboarding_screen.dart';
 import 'package:phrase_practice/screens/phrase_study_screen.dart';
+import 'package:phrase_practice/screens/privacy_screen.dart';
+import 'package:phrase_practice/screens/profile_screen.dart';
+import 'package:phrase_practice/screens/progress_screen.dart';
 import 'package:phrase_practice/screens/quiz_result_screen.dart';
 import 'package:phrase_practice/screens/quiz_screen.dart';
 import 'package:phrase_practice/screens/quiz_setup_screen.dart';
 import 'package:phrase_practice/screens/review_mistakes_screen.dart';
 import 'package:phrase_practice/screens/search_screen.dart';
+import 'package:phrase_practice/services/auth_controller.dart';
 import 'package:phrase_practice/services/browse_data_service.dart';
 import 'package:phrase_practice/services/language_settings_controller.dart';
+import 'package:phrase_practice/services/progress_controller.dart';
 import 'package:phrase_practice/services/quiz_controller.dart';
 import 'package:phrase_practice/theme/app_theme.dart';
+import 'package:phrase_practice/widgets/app_auth_scope.dart';
+import 'package:phrase_practice/widgets/app_progress_scope.dart';
 import 'package:phrase_practice/widgets/app_quiz_scope.dart';
 import 'package:phrase_practice/widgets/app_settings_scope.dart';
 import 'package:phrase_practice/widgets/language_picker_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'stage_3_browse_test.dart';
+import 'stage_4_auth_test.dart' as auth_fakes;
+import 'stage_6_quiz_test.dart' as quiz_fakes;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -472,6 +484,138 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull, reason: 'Overflow on ReviewMistakesScreen');
+    });
+
+    testWidgets('ProgressScreen (signed in with stats) has zero overflow at 320px width and 1.5x scale', (tester) async {
+      final settings = LanguageSettingsController();
+      await settings.load();
+      final authRepo = auth_fakes.FakeAuthRepository(
+        initialUser: const AuthUser(uid: 'u1', email: 'ana@example.com', displayName: 'Ana'),
+      );
+      final profileRepo = auth_fakes.FakeProfileRepository()
+        ..profiles['u1'] = const UserProfile(
+          uid: 'u1',
+          displayName: 'Ana',
+          nativeLanguageCode: 'en',
+          targetLanguageCode: 'es',
+        );
+      final authCtrl = AuthController(
+        authRepository: authRepo,
+        profileRepository: profileRepo,
+      );
+      final attemptRepo = quiz_fakes.FakeQuizAttemptRepository(
+        recentAttemptsToReturn: [
+          QuizAttempt(
+            id: 'a1',
+            targetLanguageCode: 'es',
+            categoryId: 'emergencies',
+            score: 8,
+            total: 10,
+            takenAt: DateTime(2026, 11, 20),
+            answers: const [],
+          ),
+        ],
+      );
+      final progressCtrl = ProgressController(
+        repository: attemptRepo,
+        authController: authCtrl,
+      );
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320.0, 600.0),
+            textScaler: TextScaler.linear(1.5),
+          ),
+          child: AppAuthScope(
+            controller: authCtrl,
+            child: AppSettingsScope(
+              controller: settings,
+              child: AppProgressScope(
+                controller: progressCtrl,
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme.lightTheme,
+                  home: const ProgressScreen(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Overflow on ProgressScreen');
+
+      progressCtrl.dispose();
+      authCtrl.dispose();
+      authRepo.dispose();
+    });
+
+    testWidgets('ProfileScreen (signed in unverified) has zero overflow at 320px width and 1.5x scale', (tester) async {
+      final settings = LanguageSettingsController();
+      await settings.load();
+      final authRepo = auth_fakes.FakeAuthRepository(
+        initialUser: const AuthUser(
+          uid: 'u1',
+          email: 'very.long.email.address@example.com',
+          displayName: 'Maria Clara De Los Santos',
+          emailVerified: false,
+        ),
+      );
+      final profileRepo = auth_fakes.FakeProfileRepository()
+        ..profiles['u1'] = const UserProfile(
+          uid: 'u1',
+          displayName: 'Maria Clara De Los Santos',
+          nativeLanguageCode: 'en',
+          targetLanguageCode: 'es',
+        );
+      final authCtrl = AuthController(
+        authRepository: authRepo,
+        profileRepository: profileRepo,
+      );
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320.0, 600.0),
+            textScaler: TextScaler.linear(1.5),
+          ),
+          child: AppAuthScope(
+            controller: authCtrl,
+            child: AppSettingsScope(
+              controller: settings,
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.darkTheme,
+                home: const ProfileScreen(),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Overflow on ProfileScreen');
+
+      authCtrl.dispose();
+      authRepo.dispose();
+    });
+
+    testWidgets('PrivacyScreen has zero overflow at 320px width and 1.5x scale', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320.0, 600.0),
+            textScaler: TextScaler.linear(1.5),
+          ),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            home: const PrivacyScreen(),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Overflow on PrivacyScreen');
     });
   });
 }
