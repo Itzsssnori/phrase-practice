@@ -160,6 +160,9 @@ document ID so seeding is repeatable. Full details are in
 - `users/{uid}/recentPhrases/{phraseId}`: recently studied phrases
 - `users/{uid}/quizAttempts/{attemptId}`: session scores and per-phrase answers
 - `users/{uid}/translationHistory/{id}`: personal AI translation history
+  (`inputText`, `sourceLanguageCode`, `targetLanguageCode`, `translatedText`,
+  `pronunciation`, `exampleSentence`, `exampleTranslation`, `note`, `isSaved`,
+  `createdAt`)
 
 ### Design notes
 
@@ -201,6 +204,30 @@ lead's approval.
 - [x] **Stage 2 code:** Firestore schema, security rules, indexes, seed tools
   with 50 phrases in three languages, models, repositories, debug data route,
   and unit tests. `flutter analyze` and `flutter test` pass.
+- [x] **Stage 3: Real data and browse.** Categories, Category Phrases, Phrase
+  Study, Search (accent-insensitive), Onboarding, and language picker wired to
+  Firestore via `BrowseDataService` with `shared_preferences` language
+  persistence.
+- [x] **Stage 4: Auth.** Email/password registration and login, forgot
+  password, Firestore profile sync, guest mode, `requireSignIn`, and route
+  guards.
+- [x] **Stage 5: Favorites and progress sync.** Favorites (including Home
+  Favorites section), mark as learned per target language, and recently studied
+  phrases synced to the user's account.
+- [x] **Stage 6: Practice quiz.** Multiple-choice quiz setup, active quiz with
+  feedback and pronunciation reveal, quiz results, review mistakes drill, and
+  saved `quizAttempts`.
+- [x] **Stage 7: Progress, settings, privacy, and account deletion.** Real
+  per-language and per-category progress, last-20 quiz stats, display name
+  editing, local theme/reading settings synced with Phrase Study, email
+  verification status with cooldown, Privacy screen, and full batched account +
+  data deletion.
+- [x] **Stage 8: AI translator.** Gemini via Firebase AI Logic
+  (`FirebaseAI.googleAI()`) and Firebase App Check, structured output
+  (translation, pronunciation, example + translation, note), 3s rate-limit &
+  60s quota cooldown, history-first lookup, verified-email gate, Translator
+  History (All/Saved, star toggle, delete with Undo, clear all), and Home /
+  Search entry points.
 
 ### Stage 2 checklist (lead)
 
@@ -214,10 +241,8 @@ lead's approval.
 
 ### Not started
 
-- [ ] Stage 3 onward (see the roadmap)
-
-> Screens still use clearly marked **placeholder** data until Stage 3 wires
-> them to Firestore.
+- [ ] Stage 9: Text-to-speech (`flutter_tts`)
+- [ ] Stage 10: Final design and QA
 
 ---
 
@@ -225,25 +250,26 @@ lead's approval.
 
 | Screen | Purpose | Stage | Status |
 |---|---|---|---|
-| Splash / Loading | App start, session check | 4 | Shell |
-| Onboarding (language picker) | Choose native and target language on first launch | 3 | Shell |
-| Login | Sign in | 4 | Shell |
-| Register | Create account | 4 | Shell |
-| Forgot Password | Reset password | 4 | Shell |
-| Home | Entry point, continue studying, search | 3 | Shell |
-| Categories | Browse all categories | 3 | Shell |
-| Category Phrases | Phrases in one category | 3 | Shell |
-| Phrase Study | Translation, pronunciation, example, language; recall mode | 3 | Shell (recall mode and text size done) |
-| Search | Keyword search, filtered by language | 3 | Shell |
-| Favorites | Saved phrases | 5 | Shell |
-| Quiz Setup | Pick category, language, number of questions | 6 | Shell |
-| Quiz | Multiple-choice questions | 6 | Shell |
-| Quiz Result | Score and missed phrases | 6 | Shell |
-| Review Mistakes | Practice missed phrases again | 6 | Shell |
-| Progress | Phrases learned, quiz history | 7 | Shell |
-| Profile / Settings | Account, language, theme, text size | 7 | Shell |
-| Translator | Type any phrase, get an AI result | 8 | Shell |
-| Translator History | Past AI translations, save to favorites | 8 | Shell |
+| Splash / Loading | App start, session check | 4 | Done |
+| Onboarding (language picker) | Choose native and target language on first launch | 3 | Done |
+| Login | Sign in | 4 | Done |
+| Register | Create account | 4 | Done |
+| Forgot Password | Reset password | 4 | Done |
+| Home | Entry point, continue studying, favorites, translator card, search | 3, 5, 8 | Done |
+| Categories | Browse all categories | 3 | Done |
+| Category Phrases | Phrases in one category | 3 | Done |
+| Phrase Study | Translation, pronunciation, example, language; recall mode | 3, 5, 7 | Done |
+| Search | Keyword search, filtered by language, "Translate it" prefill | 3, 8 | Done |
+| Favorites | Saved phrases | 5 | Done |
+| Quiz Setup | Pick category, language, number of questions, recent quizzes | 6 | Done |
+| Quiz | Multiple-choice questions | 6 | Done |
+| Quiz Result | Score and missed phrases | 6 | Done |
+| Review Mistakes | Practice missed phrases again | 6 | Done |
+| Progress | Phrases learned, category breakdown, quiz history, recent phrases | 7 | Done |
+| Profile / Settings | Account, email verification, language, theme, reading, delete account | 7 | Done |
+| Privacy | Plain-language summary of stored data and account deletion | 7 | Done |
+| Translator | Type any phrase, get an AI result | 8 | Done |
+| Translator History | Past AI translations (All / Saved, star, delete with Undo, clear) | 8 | Done |
 | Error / No Connection | Offline and failure state | 10 | Shell |
 | Debug Data (debug builds only) | Verify the data layer; remove later | 2 | Done |
 
@@ -259,12 +285,12 @@ merged into `main`.
 | 1 | Foundation | Theme, navigation, placeholder screens, widgets | none (**done**) |
 | 1.5 | Visual refinement | Warm editorial theme, icons, Phrase Study with recall mode | 1 (**done**) |
 | 2 | Data foundation | Firestore schema, rules, seed data, models, repositories | 1 (**code done**, see checklist) |
-| 3 | Real data and browse | Wire categories, category phrases, phrase study, search, and the language picker to Firestore; persist the language choice | 2 |
-| 4 | Auth | Email/password registration and login, forgot password, profile document, guest mode, route guards | 2 |
-| 5 | Favorites and progress sync | Favorites, mark as learned, recently studied, sync to the user's account | 3, 4 |
-| 6 | Practice quiz | Quiz setup, quiz, result, review mistakes, attempt history | 3 |
-| 7 | Progress and settings | Progress screen, profile and settings, preferences | 4, 5, 6 |
-| 8 | AI translator | Gemini through Firebase AI Logic: contextual translation, grammatical breakdown, cultural notes, example, pronunciation hint; translator screen, history, save to favorites | 2, 4 |
+| 3 | Real data and browse | Wire categories, category phrases, phrase study, search, and the language picker to Firestore; persist the language choice | 2 (**done**) |
+| 4 | Auth | Email/password registration and login, forgot password, profile document, guest mode, route guards | 2 (**done**) |
+| 5 | Favorites and progress sync | Favorites, mark as learned, recently studied, sync to the user's account | 3, 4 (**done**) |
+| 6 | Practice quiz | Quiz setup, quiz, result, review mistakes, attempt history | 3 (**done**) |
+| 7 | Progress and settings | Progress screen, profile and settings, preferences, privacy, account deletion | 4, 5, 6 (**done**) |
+| 8 | AI translator | Gemini through Firebase AI Logic: contextual translation, cultural notes, example, pronunciation hint; translator screen, history, save to favorites | 2, 4 (**done**) |
 | 9 | Text-to-speech | Audio buttons using `flutter_tts` | 3 |
 | 10 | Final design and QA | Design pass, loading/empty/error states everywhere, accessibility, App Check, testing | all |
 
@@ -467,3 +493,4 @@ Deliberately skipped for now: streaks, badges, and leaderboards. A simple
 | Date | Change |
 |---|---|
 | 2026-11-19 | Stage 1 and 1.5 completed; Stage 2 data foundation implemented (Firestore, rules, seed data, repositories); README merged into one team guide |
+| 2026-11-21 | Stages 3 to 8 completed: real Firestore browsing & search, Firebase Auth with guest mode & email verification, favorites & learned/recent sync, practice quiz, progress & settings with privacy & account deletion, and Gemini AI translator with App Check & translation history |
