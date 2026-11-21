@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/phrase.dart';
 import '../models/phrase_translation.dart';
 import '../services/browse_data_service.dart';
@@ -32,9 +31,6 @@ class PhraseStudyScreen extends StatefulWidget {
 }
 
 class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
-  static const String _keyTextSize = 'study_text_size_index';
-  static const String _keyRecallMode = 'study_recall_mode';
-
   final _browseService = BrowseDataService.instance;
 
   bool _isLoading = true;
@@ -42,9 +38,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   List<Phrase> _categoryPhrases = [];
   int _currentIndex = 0;
 
-  // Study screen state
-  int _textSizeIndex = 0; // 0: Default, 1: Large (+4), 2: Extra Large (+8)
-  bool _recallMode = false;
+  // Study screen reveal state
   bool _isTranslationRevealed = false;
   bool _isPronunciationRevealed = false;
   final Set<String> _recordedRecentPhrases = {};
@@ -52,18 +46,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   @override
   void initState() {
     super.initState();
-    _loadPreferences();
     _loadStudyPhrases();
-  }
-
-  Future<void> _loadPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (mounted) {
-      setState(() {
-        _textSizeIndex = prefs.getInt(_keyTextSize) ?? 0;
-        _recallMode = prefs.getBool(_keyRecallMode) ?? false;
-      });
-    }
   }
 
   Future<void> _loadStudyPhrases({bool forceRefresh = false}) async {
@@ -135,21 +118,17 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   }
 
   Future<void> _cycleTextSize() async {
-    final next = (_textSizeIndex + 1) % 3;
-    setState(() => _textSizeIndex = next);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_keyTextSize, next);
+    final settings = AppSettingsScope.of(context);
+    await settings.cycleStudyTextSize();
   }
 
   Future<void> _toggleRecallMode() async {
-    final next = !_recallMode;
+    final settings = AppSettingsScope.of(context);
     setState(() {
-      _recallMode = next;
       _isTranslationRevealed = false;
       _isPronunciationRevealed = false;
     });
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_keyRecallMode, next);
+    await settings.setStudyRecallMode(!settings.studyRecallMode);
   }
 
   void _nextPhrase() {
@@ -172,8 +151,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     }
   }
 
-  double get _translationOffset {
-    switch (_textSizeIndex) {
+  double _translationOffsetFor(int textSizeIndex) {
+    switch (textSizeIndex) {
       case 1:
         return 4.0;
       case 2:
@@ -183,8 +162,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     }
   }
 
-  double get _pronunciationOffset {
-    switch (_textSizeIndex) {
+  double _pronunciationOffsetFor(int textSizeIndex) {
+    switch (textSizeIndex) {
       case 1:
         return 2.0;
       case 2:
@@ -194,8 +173,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     }
   }
 
-  double get _exampleOffset {
-    switch (_textSizeIndex) {
+  double _exampleOffsetFor(int textSizeIndex) {
+    switch (textSizeIndex) {
       case 1:
         return 2.0;
       case 2:
@@ -205,8 +184,8 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
     }
   }
 
-  String get _textSizeTooltip {
-    switch (_textSizeIndex) {
+  String _textSizeTooltipFor(int textSizeIndex) {
+    switch (textSizeIndex) {
       case 1:
         return 'Text size: Large';
       case 2:
@@ -224,6 +203,12 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
 
     final targetLangCode = settings.targetLanguageCode;
     final nativeLangCode = settings.nativeLanguageCode;
+    final textSizeIndex = settings.studyTextSizeIndex;
+    final recallMode = settings.studyRecallMode;
+    final translationOffset = _translationOffsetFor(textSizeIndex);
+    final pronunciationOffset = _pronunciationOffsetFor(textSizeIndex);
+    final exampleOffset = _exampleOffsetFor(textSizeIndex);
+    final textSizeTooltip = _textSizeTooltipFor(textSizeIndex);
 
     if (_isLoading) {
       return Scaffold(
@@ -294,7 +279,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
         title: Text('${targetLangCode.toUpperCase()} Study'),
         actions: [
           Tooltip(
-            message: _textSizeTooltip,
+            message: textSizeTooltip,
             child: TextButton(
               onPressed: _cycleTextSize,
               style: TextButton.styleFrom(
@@ -306,18 +291,18 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                 'Aa',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 15.0 + (_textSizeIndex * 2),
+                  fontSize: 15.0 + (textSizeIndex * 2),
                 ),
               ),
             ),
           ),
           Semantics(
-            label: _recallMode ? 'Show translation' : 'Hide translation for recall practice',
+            label: recallMode ? 'Show translation' : 'Hide translation for recall practice',
             child: IconButton(
               icon: Icon(
-                _recallMode ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                recallMode ? Icons.visibility_off_outlined : Icons.visibility_outlined,
               ),
-              tooltip: _recallMode ? 'Recall mode ON' : 'Recall mode OFF',
+              tooltip: recallMode ? 'Recall mode ON' : 'Recall mode OFF',
               onPressed: _toggleRecallMode,
             ),
           ),
@@ -394,7 +379,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           const SizedBox(height: AppSpacing.lg),
 
                           // Translation / Recall display (Field 1: Target language in largest text)
-                          if (_recallMode && !_isTranslationRevealed) ...[
+                          if (recallMode && !_isTranslationRevealed) ...[
                             Semantics(
                               label: 'Translation hidden. Tap to reveal.',
                               button: true,
@@ -444,7 +429,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                               child: Text(
                                 mainTranslatedText,
                                 style: (theme.textTheme.displaySmall ?? const TextStyle()).copyWith(
-                                  fontSize: (theme.textTheme.displaySmall?.fontSize ?? 26.0) + _translationOffset,
+                                  fontSize: (theme.textTheme.displaySmall?.fontSize ?? 26.0) + translationOffset,
                                   color: theme.colorScheme.primary,
                                   fontWeight: FontWeight.w700,
                                   height: 1.25,
@@ -489,7 +474,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           // Field 3: Pronunciation (hide if empty or null)
                           if (pronunciation != null && pronunciation.isNotEmpty) ...[
                             const SizedBox(height: AppSpacing.sm),
-                            if (_recallMode && !_isPronunciationRevealed) ...[
+                            if (recallMode && !_isPronunciationRevealed) ...[
                               Semantics(
                                 label: 'Pronunciation hidden. Tap to reveal.',
                                 button: true,
@@ -538,7 +523,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                                 child: Text(
                                   pronunciation,
                                   style: (theme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                                    fontSize: (theme.textTheme.bodySmall?.fontSize ?? 13.0) + _pronunciationOffset,
+                                    fontSize: (theme.textTheme.bodySmall?.fontSize ?? 13.0) + pronunciationOffset,
                                     fontStyle: FontStyle.italic,
                                     color: theme.colorScheme.onSurfaceVariant,
                                   ),
@@ -582,7 +567,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                               Text(
                                 '“$targetExample”',
                                 style: (theme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
-                                  fontSize: (theme.textTheme.bodyMedium?.fontSize ?? 15.0) + _exampleOffset,
+                                  fontSize: (theme.textTheme.bodyMedium?.fontSize ?? 15.0) + exampleOffset,
                                   color: theme.colorScheme.onSurface,
                                   height: 1.45,
                                   fontWeight: FontWeight.w500,

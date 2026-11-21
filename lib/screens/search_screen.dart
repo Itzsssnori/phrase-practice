@@ -272,11 +272,35 @@ class _SearchScreenState extends State<SearchScreen> {
     }
 
     if (_results.isEmpty) {
+      final canTranslateQuery = _currentQuery.length >= 2;
       return Center(
-        child: AppEmptyState(
-          icon: Icons.search_off_rounded,
-          title: 'No phrases found',
-          message: 'No phrases matched "$_currentQuery". Try another keyword or category filter.',
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSpacing.xl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppEmptyState(
+                icon: Icons.search_off_rounded,
+                title: 'No phrases found',
+                message: 'No phrases matched "$_currentQuery". Try another keyword or category filter.',
+              ),
+              if (canTranslateQuery) ...[
+                const SizedBox(height: AppSpacing.md),
+                Semantics(
+                  button: true,
+                  label: "Can't find it? Translate it",
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      final encoded = Uri.encodeQueryComponent(_currentQuery);
+                      context.push('/translator?q=$encoded');
+                    },
+                    icon: const Icon(Icons.translate_rounded, size: 18),
+                    label: const Text("Can't find it? Translate it"),
+                  ),
+                ),
+              ],
+            ],
+          ),
         ),
       );
     }

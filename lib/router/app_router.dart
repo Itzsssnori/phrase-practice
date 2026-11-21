@@ -12,6 +12,7 @@ import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/phrase_study_screen.dart';
+import '../screens/privacy_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/progress_screen.dart';
 import '../screens/quiz_result_screen.dart';
@@ -182,6 +183,11 @@ GoRouter createAppRouter({
         builder: (context, state) => const FavoritesScreen(),
       ),
       GoRoute(
+        path: '/privacy',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const PrivacyScreen(),
+      ),
+      GoRoute(
         path: '/quiz/play',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const QuizScreen(),
@@ -199,7 +205,9 @@ GoRouter createAppRouter({
       GoRoute(
         path: '/translator',
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => const TranslatorScreen(),
+        builder: (context, state) => TranslatorScreen(
+          initialQuery: state.uri.queryParameters['q'],
+        ),
       ),
       GoRoute(
         path: '/translator/history',
