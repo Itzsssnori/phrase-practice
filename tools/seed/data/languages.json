@@ -34,7 +34,7 @@
     "name": "French",
     "nativeName": "Français",
     "script": "Latin",
-    "isActive": false,
+    "isActive": true,
     "sortOrder": 4,
     "ttsLocale": "fr-FR",
     "pronunciationSystem": "Respelling"

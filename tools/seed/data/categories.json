@@ -7,6 +7,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Salutations",
       "en": "Greetings",
       "es": "Saludos",
       "fil": "Mga Pagbati"
@@ -20,6 +21,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Repas et Restaurants",
       "en": "Food and Dining",
       "es": "Comida y Restaurantes",
       "fil": "Pagkain at Kainan"
@@ -33,6 +35,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Orientation et Itinéraires",
       "en": "Directions",
       "es": "Direcciones",
       "fil": "Direksyon"
@@ -46,6 +49,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Voyages",
       "en": "Travel",
       "es": "Viajes",
       "fil": "Paglalakbay"
@@ -59,6 +63,7 @@
     "priority": "critical",
     "isActive": true,
     "names": {
+      "fr": "Urgences",
       "en": "Emergencies",
       "es": "Emergencias",
       "fil": "Mga Emergency"
@@ -72,6 +77,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Conversations Sociales",
       "es": "Conversaciones Sociales",
       "fil": "Pakikipag-usap at Kwentuhan",
       "en": "Social Conversations"
@@ -85,6 +91,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Achats et Marchés",
       "es": "Compras y Mercados",
       "fil": "Pamimili at Palengke",
       "en": "Shopping"
@@ -98,6 +105,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Heure, Dates et Nombres",
       "es": "Hora, Fechas y Números",
       "fil": "Oras, Petsa at Numero",
       "en": "Time, Dates & Numbers"
@@ -111,6 +119,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Communication et Aide",
       "es": "Comunicación y Ayuda",
       "fil": "Komunikasyon at Tulong",
       "en": "Communication & Help"
@@ -124,6 +133,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Famille et Relations",
       "es": "Familia y Relaciones",
       "fil": "Pamilya at Relasyon",
       "en": "Family & Relationships"
@@ -137,6 +147,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Transports en Commun",
       "es": "Transporte Público",
       "fil": "Transportasyon at Sakayan",
       "en": "Transportation"
@@ -150,6 +161,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Aéroport et Contrôle",
       "es": "Aeropuerto y Migración",
       "fil": "Paliparan at Immigration",
       "en": "Airport & Immigration"
@@ -163,6 +175,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Hébergement et Hôtels",
       "es": "Alojamiento y Hoteles",
       "fil": "Tuluyan at Hotel",
       "en": "Accommodation"
@@ -176,6 +189,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Toilettes et Installations",
       "es": "Baños y Servicios",
       "fil": "Palikuran at Banyo",
       "en": "Restrooms"
@@ -189,6 +203,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Tourisme et Visites",
       "es": "Turismo y Paseos",
       "fil": "Pamamasyal at Turismo",
       "en": "Sightseeing"
@@ -202,6 +217,7 @@
     "priority": "essential",
     "isActive": true,
     "names": {
+      "fr": "Argent et Paiements",
       "es": "Dinero y Pagos",
       "fil": "Pera at Pagbabayad",
       "en": "Money & Payments"
@@ -215,6 +231,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Météo et Climat",
       "es": "Clima y Tiempo",
       "fil": "Panahon at Klima",
       "en": "Weather"
@@ -228,6 +245,7 @@
     "priority": "critical",
     "isActive": true,
     "names": {
+      "fr": "Police et Sécurité",
       "es": "Policía y Seguridad",
       "fil": "Pulis at Kaligtasan",
       "en": "Police & Safety"
@@ -241,6 +259,7 @@
     "priority": "critical",
     "isActive": true,
     "names": {
+      "fr": "Santé et Pharmacie",
       "es": "Salud y Farmacia",
       "fil": "Kalusugan at Botika",
       "en": "Health & Pharmacy"
@@ -254,6 +273,7 @@
     "priority": "high",
     "isActive": true,
     "names": {
+      "fr": "Objets Trouvés",
       "es": "Objetos Perdidos",
       "fil": "Nawawala at Nahanap",
       "en": "Lost & Found"
