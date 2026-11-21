@@ -29,12 +29,14 @@ import 'package:phrase_practice/services/browse_data_service.dart';
 import 'package:phrase_practice/services/language_settings_controller.dart';
 import 'package:phrase_practice/services/progress_controller.dart';
 import 'package:phrase_practice/services/quiz_controller.dart';
+import 'package:phrase_practice/services/speech_service.dart';
 import 'package:phrase_practice/services/translator_controller.dart';
 import 'package:phrase_practice/theme/app_theme.dart';
 import 'package:phrase_practice/widgets/app_auth_scope.dart';
 import 'package:phrase_practice/widgets/app_progress_scope.dart';
 import 'package:phrase_practice/widgets/app_quiz_scope.dart';
 import 'package:phrase_practice/widgets/app_settings_scope.dart';
+import 'package:phrase_practice/widgets/app_speech_scope.dart';
 import 'package:phrase_practice/widgets/app_translator_scope.dart';
 import 'package:phrase_practice/widgets/language_picker_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +45,7 @@ import 'stage_3_browse_test.dart';
 import 'stage_4_auth_test.dart' as auth_fakes;
 import 'stage_6_quiz_test.dart' as quiz_fakes;
 import 'stage_8_translator_test.dart' as translator_fakes;
+import 'stage_9_tts_test.dart' as tts_fakes;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -156,6 +159,10 @@ void main() {
     required bool isDark,
     required LanguageSettingsController controller,
   }) {
+    final speechService = SpeechService(
+      engine: tts_fakes.FakeTtsEngine(),
+      settingsController: controller,
+    );
     return MediaQuery(
       data: MediaQueryData(
         size: Size(width, height),
@@ -163,12 +170,15 @@ void main() {
       ),
       child: AppSettingsScope(
         controller: controller,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-          home: child,
+        child: AppSpeechScope(
+          controller: speechService,
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+            home: child,
+          ),
         ),
       ),
     );

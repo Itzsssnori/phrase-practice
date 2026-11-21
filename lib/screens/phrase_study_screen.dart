@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 import '../models/category.dart';
 import '../models/language.dart';
 import '../models/phrase.dart';
 import '../models/phrase_translation.dart';
 import '../services/browse_data_service.dart';
+import '../services/speech_service.dart';
+import '../services/tts_voice_selector.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
@@ -15,6 +18,7 @@ import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_speech_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/localized_phrase_text.dart';
 import '../widgets/require_sign_in.dart';
@@ -46,11 +50,27 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   bool _isTranslationRevealed = false;
   bool _isPronunciationRevealed = false;
   final Set<String> _recordedRecentPhrases = {};
+  SpeechService? _speechService;
 
   @override
   void initState() {
     super.initState();
     _loadStudyPhrases();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _speechService = AppSpeechScope.maybeOf(context);
+  }
+
+  @override
+  void dispose() {
+    final speech = _speechService;
+    if (speech != null) {
+      unawaited(speech.stop());
+    }
+    super.dispose();
   }
 
   @override
@@ -146,6 +166,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
 
   void _nextPhrase() {
     if (_currentIndex < _categoryPhrases.length - 1) {
+      unawaited(_speechService?.stop());
       setState(() {
         _currentIndex++;
         _isTranslationRevealed = false;
@@ -156,6 +177,7 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
 
   void _previousPhrase() {
     if (_currentIndex > 0) {
+      unawaited(_speechService?.stop());
       setState(() {
         _currentIndex--;
         _isTranslationRevealed = false;
@@ -453,7 +475,20 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           ],
 
                           const SizedBox(height: AppSpacing.md),
-                          const AppAudioButton(isAvailable: false),
+                          Wrap(
+                            spacing: AppSpacing.sm,
+                            runSpacing: AppSpacing.xs,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              AppAudioButton(
+                                text: mainTranslatedText,
+                                languageCode: targetLangCode,
+                                utteranceId:
+                                    'study-main-${phrase.id}-$targetLangCode',
+                              ),
+                              _buildSpeechSpeedToggle(theme, settings),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -581,13 +616,29 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Example',
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.4,
-                              ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Example',
+                                    style: theme.textTheme.labelMedium?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 0.4,
+                                    ),
+                                  ),
+                                ),
+                                if (targetExample != null &&
+                                    targetExample.isNotEmpty)
+                                  AppAudioButton(
+                                    text: targetExample,
+                                    languageCode: targetLangCode,
+                                    utteranceId:
+                                        'study-example-${phrase.id}-$targetLangCode',
+                                    isCompact: true,
+                                    actionPrefix: 'Play example',
+                                  ),
+                              ],
                             ),
                             const SizedBox(height: AppSpacing.xs),
 
@@ -746,6 +797,48 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
         userPhraseCtrl?.recordRecentView(phraseId);
       }
     });
+  }
+
+  Widget _buildSpeechSpeedToggle(
+    ThemeData theme,
+    dynamic settings,
+  ) {
+    final SpeechSpeed currentSpeed = settings.speechSpeed as SpeechSpeed;
+    final bool isSlow = currentSpeed == SpeechSpeed.slow;
+    final String speedLabel = isSlow ? 'Slow' : 'Normal';
+    final String semanticsLabel =
+        'Speech speed: $speedLabel. Tap to switch to ${isSlow ? "Normal" : "Slow"}';
+
+    return Semantics(
+      button: true,
+      label: semanticsLabel,
+      excludeSemantics: true,
+      child: Tooltip(
+        message: 'Speech speed: $speedLabel',
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minHeight: AppSpacing.minTouchTarget,
+          ),
+          child: OutlinedButton.icon(
+            onPressed: () => settings.toggleSpeechSpeed(),
+            icon: Icon(
+              isSlow ? Icons.slow_motion_video_rounded : Icons.speed_rounded,
+              size: 16,
+            ),
+            label: Text(speedLabel),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.xs,
+              ),
+              textStyle: theme.textTheme.labelMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildLearnedToggle(

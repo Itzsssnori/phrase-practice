@@ -4,6 +4,8 @@ import 'package:material_ui/material_ui.dart';
 import '../models/language.dart';
 import '../services/auth_controller.dart';
 import '../services/browse_data_service.dart';
+import '../services/speech_service.dart';
+import '../services/tts_voice_selector.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_auth_scope.dart';
@@ -12,6 +14,7 @@ import '../widgets/app_progress_scope.dart';
 import '../widgets/app_quiz_scope.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_speech_scope.dart';
 import '../widgets/app_translator_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
@@ -36,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _loadLanguages();
+    _ensureVoicesChecked(_effectiveActiveLanguages);
   }
 
   @override
@@ -47,8 +51,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadLanguages() async {
     final res = await BrowseDataService.instance.getLanguages();
     if (mounted && res.isSuccess && res.dataOrNull != null) {
-      setState(() => _languages = res.dataOrNull!);
+      final loaded = res.dataOrNull!;
+      setState(() => _languages = loaded);
+      _ensureVoicesChecked(loaded);
     }
+  }
+
+  List<Language> get _effectiveActiveLanguages {
+    final active = _languages.where((l) => l.isActive).toList();
+    if (active.isNotEmpty) return active;
+    return const [
+      Language(code: 'en', name: 'English', nativeName: 'English', sortOrder: 1),
+      Language(code: 'es', name: 'Spanish', nativeName: 'Español', sortOrder: 2),
+      Language(code: 'fil', name: 'Filipino', nativeName: 'Filipino', sortOrder: 3),
+    ];
+  }
+
+  void _ensureVoicesChecked(List<Language> langs) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final speech = AppSpeechScope.maybeOf(context);
+      if (speech == null) return;
+      for (final lang in langs.where((l) => l.isActive)) {
+        unawaited(
+          speech.ensureLanguageChecked(
+            lang.code,
+            ttsLocale: lang.effectiveTtsLocale,
+          ),
+        );
+      }
+    });
   }
 
   String _languageName(String code) {
@@ -948,7 +980,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   value: settings.studyRecallMode,
                   onChanged: (value) => settings.setStudyRecallMode(value),
                 ),
+                Divider(height: 1, color: dividerColor),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.lg,
+                    AppSpacing.md,
+                    AppSpacing.lg,
+                    AppSpacing.lg,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Speech Speed',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: primaryText,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Wrap(
+                        spacing: AppSpacing.sm,
+                        runSpacing: AppSpacing.xs,
+                        children: [
+                          ChoiceChip(
+                            label: const Text('Normal'),
+                            selected: settings.speechSpeed == SpeechSpeed.normal,
+                            onSelected: (_) =>
+                                settings.setSpeechSpeed(SpeechSpeed.normal),
+                          ),
+                          ChoiceChip(
+                            label: const Text('Slow'),
+                            selected: settings.speechSpeed == SpeechSpeed.slow,
+                            onSelected: (_) =>
+                                settings.setSpeechSpeed(SpeechSpeed.slow),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
+            ),
+
+            // --- Audio Voices Section ---
+            const SizedBox(height: AppSpacing.xl),
+            _SectionHeading(title: 'Audio voices'),
+            const SizedBox(height: AppSpacing.sm),
+            _buildAudioVoicesCard(
+              context,
+              theme: theme,
+              isDark: isDark,
+              primaryText: primaryText,
+              secondaryText: secondaryText,
+              borderColor: borderColor,
+              dividerColor: dividerColor,
             ),
 
             // --- Privacy & Account Data Section ---
@@ -999,6 +1085,131 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildAudioVoicesCard(
+    BuildContext context, {
+    required ThemeData theme,
+    required bool isDark,
+    required Color primaryText,
+    required Color secondaryText,
+    required Color borderColor,
+    required Color dividerColor,
+  }) {
+    final speech = AppSpeechScope.maybeOf(context);
+    final activeLangs = _effectiveActiveLanguages;
+
+    final bool anyChecking = speech != null &&
+        activeLangs.any(
+          (l) => speech.availabilityFor(l.code) == VoiceAvailability.checking,
+        );
+
+    return _SettingsCard(
+      borderColor: borderColor,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.sm,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.xs,
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    'Availability depends on the device or browser.',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: secondaryText,
+                      height: 1.4,
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: (speech == null || anyChecking)
+                        ? null
+                        : () {
+                            unawaited(
+                              speech.recheckLanguages(
+                                activeLangs.map((l) => l.code),
+                              ),
+                            );
+                          },
+                    icon: const Icon(Icons.refresh_rounded, size: 16),
+                    label: const Text('Recheck'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        for (int i = 0; i < activeLangs.length; i++) ...[
+          Divider(height: 1, color: dividerColor),
+          Builder(
+            builder: (context) {
+              final lang = activeLangs[i];
+              final status = speech != null
+                  ? speech.availabilityFor(lang.code)
+                  : VoiceAvailability.unavailable;
+
+              late final String statusText;
+              late final Color statusColor;
+              switch (status) {
+                case VoiceAvailability.checking:
+                  statusText = 'Checking...';
+                  statusColor = secondaryText;
+                  break;
+                case VoiceAvailability.available:
+                  statusText = 'Available';
+                  statusColor =
+                      isDark ? AppColors.darkSuccess : AppColors.lightSuccess;
+                  break;
+                case VoiceAvailability.unavailable:
+                  statusText = 'Not available on this device';
+                  statusColor = secondaryText;
+                  break;
+              }
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg,
+                  vertical: AppSpacing.sm,
+                ),
+                child: Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: 4,
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      lang.name,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: primaryText,
+                      ),
+                    ),
+                    Text(
+                      statusText,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: status == VoiceAvailability.available
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                        color: statusColor,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ],
     );
   }
 }

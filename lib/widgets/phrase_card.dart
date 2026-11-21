@@ -3,7 +3,6 @@ import '../models/language.dart';
 import '../models/phrase.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
-import 'app_audio_button.dart';
 import 'app_auth_scope.dart';
 import 'app_favorite_button.dart';
 import 'app_settings_scope.dart';
@@ -147,7 +146,6 @@ class _PhraseCardState extends State<PhraseCard> {
                           ),
                           const SizedBox(width: AppSpacing.xs),
                         ],
-                        const AppAudioButton(isAvailable: false),
                         AppFavoriteButton(
                           isFavorite: isFavorite,
                           onToggle: (fav) async {

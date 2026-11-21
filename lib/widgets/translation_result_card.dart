@@ -164,14 +164,20 @@ class TranslationResultCard extends StatelessWidget {
                 ),
               ],
 
-              // Action row: disabled Audio button + Copy button
+              // Action row: Audio button + Copy button
               const SizedBox(height: AppSpacing.md),
               Wrap(
                 spacing: AppSpacing.sm,
                 runSpacing: AppSpacing.xs,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  const AppAudioButton(isAvailable: false),
+                  AppAudioButton(
+                    text: result.translatedText,
+                    languageCode: result.targetLanguageCode,
+                    languageName: result.targetLanguageName,
+                    utteranceId:
+                        'translator-main-${result.targetLanguageCode}-${result.translatedText}',
+                  ),
                   Semantics(
                     button: true,
                     label: 'Copy translation',
@@ -198,12 +204,27 @@ class TranslationResultCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Example',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: theme.colorScheme.primary,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Example',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          AppAudioButton(
+                            text: result.exampleSentence,
+                            languageCode: result.targetLanguageCode,
+                            languageName: result.targetLanguageName,
+                            utteranceId:
+                                'translator-example-${result.targetLanguageCode}-${result.exampleSentence}',
+                            isCompact: true,
+                            actionPrefix: 'Play example',
+                          ),
+                        ],
                       ),
                       const SizedBox(height: AppSpacing.xs),
                       LocalizedPhraseText(

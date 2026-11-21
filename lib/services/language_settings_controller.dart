@@ -1,15 +1,17 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'tts_voice_selector.dart';
 
 /// Central state manager for user language settings, onboarding state,
-/// appearance (theme mode), and reading preferences (text size & recall mode).
+/// appearance (theme mode), reading preferences (text size & recall mode),
+/// and speech speed (Normal / Slow).
 ///
 /// Defaults on first launch: English ('en') as native and Spanish ('es') as target.
 /// Enforces that native and target languages are never the same; selecting the same
 /// language swaps them automatically.
 ///
-/// Appearance and reading preferences are stored locally only and are not synced
-/// to the cloud.
+/// Appearance, reading, and speech speed preferences are stored locally only
+/// and are not synced to the cloud.
 class LanguageSettingsController extends ChangeNotifier {
   static const String keyNativeLanguage = 'pref_native_language';
   static const String keyTargetLanguage = 'pref_target_language';
@@ -17,6 +19,7 @@ class LanguageSettingsController extends ChangeNotifier {
   static const String keyThemeMode = 'pref_theme_mode';
   static const String keyStudyTextSize = 'study_text_size_index';
   static const String keyStudyRecallMode = 'study_recall_mode';
+  static const String keySpeechSpeed = 'speech_speed';
 
   String _nativeLanguageCode = 'en';
   String _targetLanguageCode = 'es';
@@ -24,6 +27,7 @@ class LanguageSettingsController extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
   int _studyTextSizeIndex = 0; // 0: Default, 1: Large, 2: Extra Large
   bool _studyRecallMode = false;
+  SpeechSpeed _speechSpeed = SpeechSpeed.normal;
   bool _isLoaded = false;
 
   LanguageSettingsController({SharedPreferences? preferences}) {
@@ -38,6 +42,7 @@ class LanguageSettingsController extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   int get studyTextSizeIndex => _studyTextSizeIndex;
   bool get studyRecallMode => _studyRecallMode;
+  SpeechSpeed get speechSpeed => _speechSpeed;
   bool get isLoaded => _isLoaded;
 
   /// Loads persisted settings from SharedPreferences.
@@ -54,6 +59,7 @@ class LanguageSettingsController extends ChangeNotifier {
     final rawSize = prefs.getInt(keyStudyTextSize) ?? 0;
     _studyTextSizeIndex = rawSize.clamp(0, 2);
     _studyRecallMode = prefs.getBool(keyStudyRecallMode) ?? false;
+    _speechSpeed = _parseSpeechSpeed(prefs.getString(keySpeechSpeed));
 
     // Safety fallback: ensure they are never the same upon load
     if (_nativeLanguageCode == _targetLanguageCode) {
@@ -66,6 +72,25 @@ class LanguageSettingsController extends ChangeNotifier {
 
     _isLoaded = true;
     notifyListeners();
+  }
+
+  static SpeechSpeed _parseSpeechSpeed(String? raw) {
+    switch (raw) {
+      case 'slow':
+        return SpeechSpeed.slow;
+      case 'normal':
+      default:
+        return SpeechSpeed.normal;
+    }
+  }
+
+  static String _serializeSpeechSpeed(SpeechSpeed speed) {
+    switch (speed) {
+      case SpeechSpeed.slow:
+        return 'slow';
+      case SpeechSpeed.normal:
+        return 'normal';
+    }
   }
 
   static ThemeMode _parseThemeMode(String? raw) {
@@ -122,6 +147,22 @@ class LanguageSettingsController extends ChangeNotifier {
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(keyStudyRecallMode, enabled);
+  }
+
+  /// Sets the speech playback speed (`normal` or `slow`) locally.
+  Future<void> setSpeechSpeed(SpeechSpeed speed) async {
+    if (speed == _speechSpeed) return;
+    _speechSpeed = speed;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(keySpeechSpeed, _serializeSpeechSpeed(speed));
+  }
+
+  /// Toggles speech speed between `normal` and `slow`.
+  Future<void> toggleSpeechSpeed() async {
+    await setSpeechSpeed(
+      _speechSpeed == SpeechSpeed.normal ? SpeechSpeed.slow : SpeechSpeed.normal,
+    );
   }
 
   /// Sets the native language code. If set to the current target language, swaps them.
