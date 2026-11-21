@@ -70,8 +70,10 @@
     "iconKey": "social-conversations",
     "group": "everyday",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Conversaciones Sociales",
+      "fil": "Pakikipag-usap at Kwentuhan",
       "en": "Social Conversations"
     }
   },
@@ -81,8 +83,10 @@
     "iconKey": "shopping",
     "group": "everyday",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Compras y Mercados",
+      "fil": "Pamimili at Palengke",
       "en": "Shopping"
     }
   },
@@ -92,8 +96,10 @@
     "iconKey": "time-dates-numbers",
     "group": "everyday",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Hora, Fechas y Números",
+      "fil": "Oras, Petsa at Numero",
       "en": "Time, Dates & Numbers"
     }
   },
@@ -103,8 +109,10 @@
     "iconKey": "communication-help",
     "group": "everyday",
     "priority": "essential",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Comunicación y Ayuda",
+      "fil": "Komunikasyon at Tulong",
       "en": "Communication & Help"
     }
   },
@@ -114,8 +122,10 @@
     "iconKey": "family-relationships",
     "group": "everyday",
     "priority": "high",
-    "isActive": false,
+    "isActive": true,
     "names": {
+      "es": "Familia y Relaciones",
+      "fil": "Pamilya at Relasyon",
       "en": "Family & Relationships"
     }
   },

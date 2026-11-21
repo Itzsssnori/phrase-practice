@@ -139,6 +139,356 @@
     "exampleSentence": "We could not finish our meal; can I have this to go, please?",
     "verified": false
   },
+  "what-is-your-name": {
+    "text": "What is your name?",
+    "pronunciation": "",
+    "meaningNote": "Polite question when introducing yourself to someone new.",
+    "exampleSentence": "Hello, my name is Alex; what is your name?",
+    "verified": false
+  },
+  "it-is-my-first-time-here": {
+    "text": "It is my first time visiting here.",
+    "pronunciation": "",
+    "meaningNote": "Friendly icebreaker when chatting with locals.",
+    "exampleSentence": "It is my first time visiting here, and the city is beautiful.",
+    "verified": false
+  },
+  "where-are-you-from": {
+    "text": "Where are you from?",
+    "pronunciation": "",
+    "meaningNote": "Common small-talk question about someone's hometown or country.",
+    "exampleSentence": "We are visiting from Canada; where are you from?",
+    "verified": false
+  },
+  "is-this-your-hometown": {
+    "text": "Is this your hometown?",
+    "pronunciation": "",
+    "meaningNote": "Asking whether someone grew up in the current city or town.",
+    "exampleSentence": "You know the neighborhood so well; is this your hometown?",
+    "verified": false
+  },
+  "what-do-you-do-for-a-living": {
+    "text": "What do you do for a living?",
+    "pronunciation": "",
+    "meaningNote": "Polite question about someone's profession or occupation.",
+    "exampleSentence": "I work as a teacher; what do you do for a living?",
+    "verified": false
+  },
+  "how-long-have-you-lived-here": {
+    "text": "How long have you lived here?",
+    "pronunciation": "",
+    "meaningNote": "Asking a resident how long they have lived in the area.",
+    "exampleSentence": "It is a wonderful neighborhood; how long have you lived here?",
+    "verified": false
+  },
+  "what-do-you-like-to-do": {
+    "text": "What do you like to do in your free time?",
+    "pronunciation": "",
+    "meaningNote": "Asking about hobbies and personal interests.",
+    "exampleSentence": "I enjoy hiking; what do you like to do in your free time?",
+    "verified": false
+  },
+  "that-is-interesting": {
+    "text": "That's interesting!",
+    "pronunciation": "",
+    "meaningNote": "Warm conversational response showing active interest.",
+    "exampleSentence": "That's interesting! I did not know that about the city.",
+    "verified": false
+  },
+  "it-was-nice-talking-to-you": {
+    "text": "It was nice talking to you.",
+    "pronunciation": "",
+    "meaningNote": "Polite way to wrap up a conversation before leaving.",
+    "exampleSentence": "I have to catch my train now, but it was nice talking to you.",
+    "verified": false
+  },
+  "have-a-nice-day": {
+    "text": "Have a nice day!",
+    "pronunciation": "",
+    "meaningNote": "Friendly everyday parting wish.",
+    "exampleSentence": "Thank you for your time, have a nice day!",
+    "verified": false
+  },
+  "how-much-is-this": {
+    "text": "How much is this?",
+    "pronunciation": "",
+    "meaningNote": "Essential question when checking the price of an item.",
+    "exampleSentence": "Excuse me, how much is this handmade bag?",
+    "verified": false
+  },
+  "is-this-available-in-another-size": {
+    "text": "Is this available in another size?",
+    "pronunciation": "",
+    "meaningNote": "Asking a clerk for a larger or smaller clothing or shoe size.",
+    "exampleSentence": "This shirt is a bit small; is this available in another size?",
+    "verified": false
+  },
+  "do-you-have-another-color": {
+    "text": "Do you have another color?",
+    "pronunciation": "",
+    "meaningNote": "Checking whether an item comes in other colors.",
+    "exampleSentence": "I like this style; do you have another color?",
+    "verified": false
+  },
+  "can-i-try-this-on": {
+    "text": "Can I try this on?",
+    "pronunciation": "",
+    "meaningNote": "Asking permission to use the fitting room for clothing or shoes.",
+    "exampleSentence": "Excuse me, can I try this on? Where is the fitting room?",
+    "verified": false
+  },
+  "is-there-a-discount": {
+    "text": "Is there a discount?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about current promotions or cash discounts.",
+    "exampleSentence": "Is there a discount if I pay in cash?",
+    "verified": false
+  },
+  "can-you-lower-the-price": {
+    "text": "Can you lower the price?",
+    "pronunciation": "",
+    "meaningNote": "Used for friendly bargaining at open-air markets and souvenir stalls.",
+    "exampleSentence": "I would like to buy two; can you lower the price a little?",
+    "verified": false
+  },
+  "i-am-just-looking-thank-you": {
+    "text": "I am just looking, thank you.",
+    "pronunciation": "",
+    "meaningNote": "Polite response to a salesperson when browsing without needing help yet.",
+    "exampleSentence": "I am just looking right now, thank you.",
+    "verified": false
+  },
+  "where-can-i-find-this-item": {
+    "text": "Where can I find this item?",
+    "pronunciation": "",
+    "meaningNote": "Asking store staff which aisle or section carries a product.",
+    "exampleSentence": "Excuse me, where can I find this item in the store?",
+    "verified": false
+  },
+  "can-i-return-this": {
+    "text": "Can I return this?",
+    "pronunciation": "",
+    "meaningNote": "Asking about the store's return or exchange policy.",
+    "exampleSentence": "If it does not fit, can I return this tomorrow with the receipt?",
+    "verified": false
+  },
+  "can-i-get-a-shopping-bag": {
+    "text": "Can I get a shopping bag?",
+    "pronunciation": "",
+    "meaningNote": "Requesting a carrier bag at checkout.",
+    "exampleSentence": "Can I get a shopping bag for these groceries, please?",
+    "verified": false
+  },
+  "what-time-is-it": {
+    "text": "What time is it?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the current time of day.",
+    "exampleSentence": "Excuse me, what time is it right now?",
+    "verified": false
+  },
+  "what-day-is-today": {
+    "text": "What day is today?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the day of the week.",
+    "exampleSentence": "What day is today? Is the museum open on Mondays?",
+    "verified": false
+  },
+  "what-is-todays-date": {
+    "text": "What is today's date?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the calendar date (month and day).",
+    "exampleSentence": "I need to fill out this form; what is today's date?",
+    "verified": false
+  },
+  "when-does-it-open": {
+    "text": "When does it open?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the opening hour of a business, museum, or office.",
+    "exampleSentence": "The door is still locked; when does it open?",
+    "verified": false
+  },
+  "when-does-it-close": {
+    "text": "When does it close?",
+    "pronunciation": "",
+    "meaningNote": "Checking closing hours so you can plan your visit.",
+    "exampleSentence": "We want to visit this evening; when does it close?",
+    "verified": false
+  },
+  "how-long-will-it-take": {
+    "text": "How long will it take?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the estimated duration of a trip, wait, or service.",
+    "exampleSentence": "How long will it take to get there by bus?",
+    "verified": false
+  },
+  "can-we-meet-tomorrow": {
+    "text": "Can we meet tomorrow?",
+    "pronunciation": "",
+    "meaningNote": "Arranging an appointment or meetup for the next day.",
+    "exampleSentence": "I am busy this afternoon; can we meet tomorrow instead?",
+    "verified": false
+  },
+  "what-time-should-i-come-back": {
+    "text": "What time should I come back?",
+    "pronunciation": "",
+    "meaningNote": "Useful when dropping off laundry, waiting for a table, or returning for a tour.",
+    "exampleSentence": "I will leave my bags now; what time should I come back?",
+    "verified": false
+  },
+  "two-tickets-please": {
+    "text": "Two tickets, please.",
+    "pronunciation": "",
+    "meaningNote": "Useful number phrase for buying admission or transit tickets.",
+    "exampleSentence": "Good morning, two tickets for the ten o'clock tour, please.",
+    "verified": false
+  },
+  "for-how-many-people": {
+    "text": "For how many people?",
+    "pronunciation": "",
+    "meaningNote": "Common quantity question heard or asked at restaurants, tours, and hotels.",
+    "exampleSentence": "We need a reservation for tonight—for how many people?",
+    "verified": false
+  },
+  "do-you-speak-english": {
+    "text": "Do you speak English?",
+    "pronunciation": "",
+    "meaningNote": "Polite question before switching to English with a stranger.",
+    "exampleSentence": "Excuse me, do you speak English?",
+    "verified": false
+  },
+  "i-do-not-understand": {
+    "text": "I don't understand.",
+    "pronunciation": "",
+    "meaningNote": "Letting the speaker know you did not catch their meaning.",
+    "exampleSentence": "I am sorry, I don't understand what that means.",
+    "verified": false
+  },
+  "could-you-speak-more-slowly": {
+    "text": "Could you speak more slowly?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to slow down so you can follow along.",
+    "exampleSentence": "Could you speak more slowly, please? I am still learning.",
+    "verified": false
+  },
+  "could-you-repeat-that": {
+    "text": "Could you repeat that?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to say the last sentence again.",
+    "exampleSentence": "I missed the last part; could you repeat that, please?",
+    "verified": false
+  },
+  "could-you-write-it-down": {
+    "text": "Could you write it down?",
+    "pronunciation": "",
+    "meaningNote": "Helpful for addresses, prices, or unfamiliar place names.",
+    "exampleSentence": "Could you write it down on this paper so I don't forget?",
+    "verified": false
+  },
+  "how-do-you-say-this": {
+    "text": "How do you say this in your language?",
+    "pronunciation": "",
+    "meaningNote": "Useful when pointing to an object or word to learn its local name.",
+    "exampleSentence": "How do you say this in your language?",
+    "verified": false
+  },
+  "what-does-this-mean": {
+    "text": "What does this word mean?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the meaning of an unfamiliar word on a sign or menu.",
+    "exampleSentence": "Excuse me, what does this word mean on the sign?",
+    "verified": false
+  },
+  "i-am-learning-your-language": {
+    "text": "I am learning your language.",
+    "pronunciation": "",
+    "meaningNote": "Encourages patience and warm conversation from locals.",
+    "exampleSentence": "Please forgive my mistakes; I am learning your language.",
+    "verified": false
+  },
+  "please-wait-a-moment": {
+    "text": "Please wait a moment.",
+    "pronunciation": "",
+    "meaningNote": "Polite way to ask someone to pause while you check your bag or phone.",
+    "exampleSentence": "Please wait a moment while I look up the address.",
+    "verified": false
+  },
+  "can-you-show-me": {
+    "text": "Can you show me?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to demonstrate or point something out directly.",
+    "exampleSentence": "I am not sure how this ticket machine works; can you show me?",
+    "verified": false
+  },
+  "this-is-my-family": {
+    "text": "This is my family.",
+    "pronunciation": "",
+    "meaningNote": "Introducing family members or showing a family photo.",
+    "exampleSentence": "Hello, this is my family visiting with me.",
+    "verified": false
+  },
+  "i-am-traveling-with-my-parents": {
+    "text": "I am traveling with my parents.",
+    "pronunciation": "",
+    "meaningNote": "Explaining that you are on a trip with your mother and father.",
+    "exampleSentence": "I am traveling with my parents on their first trip abroad.",
+    "verified": false
+  },
+  "do-you-have-children": {
+    "text": "Do you have children?",
+    "pronunciation": "",
+    "meaningNote": "Common family conversation question.",
+    "exampleSentence": "We have two kids; do you have children?",
+    "verified": false
+  },
+  "where-is-your-family": {
+    "text": "Where is your family?",
+    "pronunciation": "",
+    "meaningNote": "Asking where someone's family is located or lives.",
+    "exampleSentence": "Do they live nearby, or where is your family?",
+    "verified": false
+  },
+  "i-am-here-with-a-friend": {
+    "text": "I am here with a friend.",
+    "pronunciation": "",
+    "meaningNote": "Mentioning that you are visiting with a companion.",
+    "exampleSentence": "I am here with a friend from college.",
+    "verified": false
+  },
+  "this-is-my-friend": {
+    "text": "This is my friend.",
+    "pronunciation": "",
+    "meaningNote": "Used to introduce a friend to someone.",
+    "exampleSentence": "Hello, this is my friend Elena.",
+    "verified": false
+  },
+  "this-is-my-partner": {
+    "text": "This is my partner.",
+    "pronunciation": "",
+    "meaningNote": "Introducing your romantic partner or spouse.",
+    "exampleSentence": "Nice to meet you; this is my partner, Sam.",
+    "verified": false
+  },
+  "i-have-a-brother-and-a-sister": {
+    "text": "I have a brother and a sister.",
+    "pronunciation": "",
+    "meaningNote": "Sharing how many siblings you have.",
+    "exampleSentence": "I come from a small family; I have a brother and a sister.",
+    "verified": false
+  },
+  "do-you-have-brothers-or-sisters": {
+    "text": "Do you have brothers or sisters?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone if they have siblings.",
+    "exampleSentence": "Do you have brothers or sisters, or are you an only child?",
+    "verified": false
+  },
+  "how-old-are-your-children": {
+    "text": "How old are your children?",
+    "pronunciation": "",
+    "meaningNote": "Friendly follow-up question when someone mentions their children.",
+    "exampleSentence": "How old are your children now?",
+    "verified": false
+  },
   "where-is-the-bathroom": {
     "text": "Where is the bathroom?",
     "pronunciation": "",

@@ -139,6 +139,356 @@
     "exampleSentence": "No pudimos terminar, ¿me lo puede poner para llevar, por favor?",
     "verified": false
   },
+  "what-is-your-name": {
+    "text": "¿Cómo se llama usted?",
+    "pronunciation": "KOH-moh seh YAH-mah oos-TEHD",
+    "meaningNote": "Polite form with \"usted\". In casual settings with peers, people say \"¿Cómo te llamas?\".",
+    "exampleSentence": "Mucho gusto, soy Alex, ¿cómo se llama usted?",
+    "verified": false
+  },
+  "it-is-my-first-time-here": {
+    "text": "Es mi primera vez visitando este lugar.",
+    "pronunciation": "ehs mee pree-MEH-rah vehs vee-see-TAHN-doh EHS-teh loo-GAHR",
+    "meaningNote": "Natural icebreaker across Latin America; you can also say \"Es la primera vez que vengo aquí\".",
+    "exampleSentence": "Es mi primera vez visitando este lugar y me encanta la ciudad.",
+    "verified": false
+  },
+  "where-are-you-from": {
+    "text": "¿De dónde es usted?",
+    "pronunciation": "deh DOHN-deh ehs oos-TEHD",
+    "meaningNote": "Polite form using \"usted\". With peers of the same age, \"¿De dónde eres?\" is also common.",
+    "exampleSentence": "Nosotros venimos de Canadá, ¿de dónde es usted?",
+    "verified": false
+  },
+  "is-this-your-hometown": {
+    "text": "¿Esta es su ciudad natal?",
+    "pronunciation": "EHS-tah ehs soo syoo-DAHD nah-TAHL",
+    "meaningNote": "Uses polite \"su\" (your). In everyday conversation, people also simply ask \"¿Usted es de aquí?\" or \"¿Aquí creció usted?\".",
+    "exampleSentence": "Conoce muy bien el barrio, ¿esta es su ciudad natal?",
+    "verified": false
+  },
+  "what-do-you-do-for-a-living": {
+    "text": "¿A qué se dedica usted?",
+    "pronunciation": "ah keh seh deh-DEE-kah oos-TEHD",
+    "meaningNote": "Polite and natural way across Latin America to ask about someone's profession using \"usted\".",
+    "exampleSentence": "Yo soy profesor de historia, ¿a qué se dedica usted?",
+    "verified": false
+  },
+  "how-long-have-you-lived-here": {
+    "text": "¿Cuánto tiempo lleva viviendo aquí?",
+    "pronunciation": "KWAHN-toh TYEHM-poh YEH-bvah vee-BVYEHN-doh ah-KEE",
+    "meaningNote": "In Latin America, \"¿Desde hace cuánto vive aquí?\" is also widely used with \"usted\".",
+    "exampleSentence": "Es una zona muy tranquila, ¿cuánto tiempo lleva viviendo aquí?",
+    "verified": false
+  },
+  "what-do-you-like-to-do": {
+    "text": "¿Qué le gusta hacer en su tiempo libre?",
+    "pronunciation": "keh leh GOOS-tah ah-SEHR ehn soo TYEHM-poh LEE-breh",
+    "meaningNote": "Uses the polite \"usted\" pronouns \"le\" and \"su\".",
+    "exampleSentence": "A mí me gusta caminar, ¿qué le gusta hacer en su tiempo libre?",
+    "verified": false
+  },
+  "that-is-interesting": {
+    "text": "¡Qué interesante!",
+    "pronunciation": "keh een-teh-reh-SAHN-teh",
+    "meaningNote": "Natural, enthusiastic response in conversation across all Spanish-speaking countries.",
+    "exampleSentence": "¡Qué interesante! No conocía esa historia sobre la ciudad.",
+    "verified": false
+  },
+  "it-was-nice-talking-to-you": {
+    "text": "Fue un gusto conversar con usted.",
+    "pronunciation": "fweh oon GOOS-toh kohn-vehr-SAHR kohn oos-TEHD",
+    "meaningNote": "Polite closing phrase with \"usted\"; in Mexico, \"platicar con usted\" is also very common.",
+    "exampleSentence": "Ya debo irme al hotel, pero fue un gusto conversar con usted.",
+    "verified": false
+  },
+  "have-a-nice-day": {
+    "text": "¡Que tenga un buen día!",
+    "pronunciation": "keh TEHN-gah oon bwehn DEE-ah",
+    "meaningNote": "Polite subjunctive form using \"usted\" (\"que tenga\"), commonly used when leaving shops or ending a conversation.",
+    "exampleSentence": "Muchas gracias por todo, ¡que tenga un buen día!",
+    "verified": false
+  },
+  "how-much-is-this": {
+    "text": "¿Cuánto cuesta esto?",
+    "pronunciation": "KWAHN-toh KWEHS-tah EHS-toh",
+    "meaningNote": "Universal across Latin America; in markets, \"¿Qué precio tiene?\" or \"¿A cuánto está?\" is also common.",
+    "exampleSentence": "Disculpe, ¿cuánto cuesta esto que está en la vitrina?",
+    "verified": false
+  },
+  "is-this-available-in-another-size": {
+    "text": "¿Tiene esto en otra talla?",
+    "pronunciation": "TYEH-neh EHS-toh ehn OH-trah TAH-yah",
+    "meaningNote": "Use \"talla\" for clothing across most of Latin America (\"talle\" in Argentina and Uruguay); for shoes, \"número\" is also common.",
+    "exampleSentence": "Esta camisa me queda pequeña, ¿tiene esto en otra talla?",
+    "verified": false
+  },
+  "do-you-have-another-color": {
+    "text": "¿Lo tiene en otro color?",
+    "pronunciation": "loh TYEH-neh ehn OH-troh koh-LOHR",
+    "meaningNote": "Polite singular \"usted\" form addressed to a salesperson (plural \"¿Lo tienen...?\" also works).",
+    "exampleSentence": "Me gusta mucho este diseño, ¿lo tiene en otro color?",
+    "verified": false
+  },
+  "can-i-try-this-on": {
+    "text": "¿Me lo puedo probar?",
+    "pronunciation": "meh loh PWEH-doh proh-BVAHR",
+    "meaningNote": "Use \"¿Me la puedo probar?\" for feminine nouns like \"la camisa\" or \"la chaqueta\".",
+    "exampleSentence": "Disculpe, ¿me lo puedo probar en el probador?",
+    "verified": false
+  },
+  "is-there-a-discount": {
+    "text": "¿Tiene algún descuento?",
+    "pronunciation": "TYEH-neh ahl-GOON dehs-KWEHN-toh",
+    "meaningNote": "Polite question suitable for both retail stores and local markets.",
+    "exampleSentence": "Disculpe, ¿este artículo tiene algún descuento si pago en efectivo?",
+    "verified": false
+  },
+  "can-you-lower-the-price": {
+    "text": "¿Me puede dejar un mejor precio?",
+    "pronunciation": "meh PWEH-deh deh-HAHR oon meh-HOHR PREH-syoh",
+    "meaningNote": "Polite, friendly way to bargain at Latin American craft markets (literally \"Can you give me a better price?\").",
+    "exampleSentence": "Si llevo tres recuerdos, ¿me puede dejar un mejor precio?",
+    "verified": false
+  },
+  "i-am-just-looking-thank-you": {
+    "text": "Solo estoy mirando, muchas gracias.",
+    "pronunciation": "SOH-loh ehs-TOY mee-RAHN-doh, MOO-chahs GRAH-syahs",
+    "meaningNote": "In Mexico, \"Solo estoy viendo, gracias\" is also very common.",
+    "exampleSentence": "Por ahora solo estoy mirando, muchas gracias.",
+    "verified": false
+  },
+  "where-can-i-find-this-item": {
+    "text": "¿Dónde puedo encontrar este producto?",
+    "pronunciation": "DOHN-deh PWEH-doh ehn-kohn-TRAHR EHS-teh proh-DOOK-toh",
+    "meaningNote": "Useful when showing a photo or name of a product to a store clerk.",
+    "exampleSentence": "Disculpe, ¿en qué pasillo puedo encontrar este producto?",
+    "verified": false
+  },
+  "can-i-return-this": {
+    "text": "¿Puedo devolver o cambiar esto?",
+    "pronunciation": "PWEH-doh deh-bvohl-BVEHR oh kahm-BYAHR EHS-toh",
+    "meaningNote": "\"Devolver\" means to return for a refund; \"cambiar\" means to exchange for another item.",
+    "exampleSentence": "Si no me queda bien, ¿puedo devolver o cambiar esto con el recibo?",
+    "verified": false
+  },
+  "can-i-get-a-shopping-bag": {
+    "text": "¿Me podría dar una bolsa, por favor?",
+    "pronunciation": "meh poh-DREE-ah dahr OO-nah BOHL-sah, pohr fah-BVOHR",
+    "meaningNote": "\"Bolsa\" is the universal word for a shopping bag across Latin America.",
+    "exampleSentence": "¿Me podría dar una bolsa para llevar estas compras, por favor?",
+    "verified": false
+  },
+  "what-time-is-it": {
+    "text": "¿Qué hora es?",
+    "pronunciation": "keh OH-rah ehs",
+    "meaningNote": "In Mexico and parts of Central America, \"¿Qué horas son?\" is also heard colloquially, though \"¿Qué hora es?\" is universal.",
+    "exampleSentence": "Disculpe, ¿me puede decir qué hora es, por favor?",
+    "verified": false
+  },
+  "what-day-is-today": {
+    "text": "¿Qué día es hoy?",
+    "pronunciation": "keh DEE-ah ehs oy",
+    "meaningNote": "Asks for the day of the week (lunes, martes, etc.).",
+    "exampleSentence": "¿Qué día es hoy? Quiero saber si el mercado está abierto.",
+    "verified": false
+  },
+  "what-is-todays-date": {
+    "text": "¿Cuál es la fecha de hoy?",
+    "pronunciation": "kwahl ehs lah FEH-chah deh oy",
+    "meaningNote": "People also commonly ask \"¿A cómo estamos hoy?\" or \"¿Qué fecha es hoy?\" across Latin America.",
+    "exampleSentence": "Necesito firmar este formulario, ¿cuál es la fecha de hoy?",
+    "verified": false
+  },
+  "when-does-it-open": {
+    "text": "¿A qué hora abren?",
+    "pronunciation": "ah keh OH-rah AH-bvrehn",
+    "meaningNote": "Uses plural \"abren\" (or singular \"abre\") to ask what time a shop or attraction opens.",
+    "exampleSentence": "Buenos días, ¿a qué hora abren la tienda mañana?",
+    "verified": false
+  },
+  "when-does-it-close": {
+    "text": "¿A qué hora cierran?",
+    "pronunciation": "ah keh OH-rah SYEH-rrahn",
+    "meaningNote": "Standard way across Latin America to ask what time a business closes.",
+    "exampleSentence": "Disculpe, ¿a qué hora cierran el restaurante esta noche?",
+    "verified": false
+  },
+  "how-long-will-it-take": {
+    "text": "¿Cuánto tiempo va a tardar?",
+    "pronunciation": "KWAHN-toh TYEHM-poh vah ah tahr-DAHR",
+    "meaningNote": "In Colombia and the Andean region, \"¿Cuánto tiempo se demora?\" is also very common.",
+    "exampleSentence": "¿Cuánto tiempo va a tardar el viaje hasta el centro?",
+    "verified": false
+  },
+  "can-we-meet-tomorrow": {
+    "text": "¿Podemos vernos mañana?",
+    "pronunciation": "poh-DEH-mohs BVEHR-nohs mahn-YAH-nah",
+    "meaningNote": "\"Vernos\" or \"reunirnos\" are both natural across Latin America.",
+    "exampleSentence": "Hoy tengo un compromiso, ¿podemos vernos mañana por la mañana?",
+    "verified": false
+  },
+  "what-time-should-i-come-back": {
+    "text": "¿A qué hora debo regresar?",
+    "pronunciation": "ah keh OH-rah DEH-bvoh reh-greh-SAHR",
+    "meaningNote": "\"Regresar\" and \"volver\" are both universally understood across Latin America.",
+    "exampleSentence": "Dejo la ropa aquí, ¿a qué hora debo regresar por ella?",
+    "verified": false
+  },
+  "two-tickets-please": {
+    "text": "Dos boletos, por favor.",
+    "pronunciation": "dohs boh-LEH-tohs, pohr fah-BVOHR",
+    "meaningNote": "Use \"boletos\" or \"entradas\" for events and museums across Latin America (for transit in South America, \"pasajes\" is also common).",
+    "exampleSentence": "Buenas tardes, dos boletos para adultos, por favor.",
+    "verified": false
+  },
+  "for-how-many-people": {
+    "text": "¿Para cuántas personas es?",
+    "pronunciation": "PAH-rah KWAHN-tahs pehr-SOH-nahs ehs",
+    "meaningNote": "Essential for understanding hosts or booking tours; reply with \"Para dos personas\" (for two) or \"Somos tres\" (there are three of us).",
+    "exampleSentence": "Disculpe, ¿para cuántas personas es la reservación?",
+    "verified": false
+  },
+  "do-you-speak-english": {
+    "text": "¿Habla usted inglés?",
+    "pronunciation": "AH-bvlah oos-TEHD een-GLEHS",
+    "meaningNote": "Polite form using \"usted\".",
+    "exampleSentence": "Disculpe, ¿habla usted inglés un poco?",
+    "verified": false
+  },
+  "i-do-not-understand": {
+    "text": "Disculpe, no entiendo.",
+    "pronunciation": "dees-KOOL-peh, noh ehn-TYEHN-doh",
+    "meaningNote": "Adding \"Disculpe\" softens the statement into a polite apology.",
+    "exampleSentence": "Disculpe, no entiendo bien lo que me dice.",
+    "verified": false
+  },
+  "could-you-speak-more-slowly": {
+    "text": "¿Podría hablar más despacio, por favor?",
+    "pronunciation": "poh-DREE-ah ah-BVLAHR mahs dehs-PAH-syoh, pohr fah-BVOHR",
+    "meaningNote": "Polite request using \"usted\" and \"más despacio\" (more slowly).",
+    "exampleSentence": "¿Podría hablar más despacio, por favor? Todavía estoy aprendiendo.",
+    "verified": false
+  },
+  "could-you-repeat-that": {
+    "text": "¿Podría repetir eso, por favor?",
+    "pronunciation": "poh-DREE-ah reh-peh-TEER EH-soh, pohr fah-BVOHR",
+    "meaningNote": "You can also say \"¿Me lo puede repetir, por favor?\" across Latin America.",
+    "exampleSentence": "No escuché bien la dirección, ¿podría repetir eso, por favor?",
+    "verified": false
+  },
+  "could-you-write-it-down": {
+    "text": "¿Me lo podría escribir, por favor?",
+    "pronunciation": "meh loh poh-DREE-ah ehs-kree-BVEER, pohr fah-BVOHR",
+    "meaningNote": "In Latin America, \"¿Me lo puede anotar?\" (Could you jot it down?) is also very common.",
+    "exampleSentence": "¿Me lo podría escribir en este papel para no olvidarlo, por favor?",
+    "verified": false
+  },
+  "how-do-you-say-this": {
+    "text": "¿Cómo se dice esto en español?",
+    "pronunciation": "KOH-moh seh DEE-seh EHS-toh ehn ehs-pahn-YOHL",
+    "meaningNote": "Specifically asks \"How do you say this in Spanish?\", which sounds much more natural than \"in your language\".",
+    "exampleSentence": "Disculpe, ¿cómo se dice esto en español?",
+    "verified": false
+  },
+  "what-does-this-mean": {
+    "text": "¿Qué significa esta palabra?",
+    "pronunciation": "keh seeg-nee-FEE-kah EHS-tah pah-LAH-bvrah",
+    "meaningNote": "You can also simply point and ask \"¿Qué significa esto?\" (What does this mean?).",
+    "exampleSentence": "Disculpe, ¿qué significa esta palabra en el cartel?",
+    "verified": false
+  },
+  "i-am-learning-your-language": {
+    "text": "Estoy aprendiendo a hablar español.",
+    "pronunciation": "ehs-TOY ah-prehn-DYEHN-doh ah ah-BVLAHR ehs-pahn-YOHL",
+    "meaningNote": "Saying \"Estoy aprendiendo español\" is warmer and more idiomatic than literally saying \"your language\".",
+    "exampleSentence": "Hablo solo un poco, todavía estoy aprendiendo a hablar español.",
+    "verified": false
+  },
+  "please-wait-a-moment": {
+    "text": "Un momento, por favor.",
+    "pronunciation": "oon moh-MEHN-toh, pohr fah-BVOHR",
+    "meaningNote": "You can also say \"Permítame un momento, por favor\" for extra politeness with \"usted\".",
+    "exampleSentence": "Un momento, por favor, voy a buscar la dirección en mi teléfono.",
+    "verified": false
+  },
+  "can-you-show-me": {
+    "text": "¿Me puede mostrar cómo se hace?",
+    "pronunciation": "meh PWEH-deh mohs-TRAHR KOH-moh seh AH-seh",
+    "meaningNote": "Uses \"mostrar\" (or \"enseñar\") with formal \"usted\".",
+    "exampleSentence": "No sé usar esta máquina de boletos, ¿me puede mostrar cómo se hace?",
+    "verified": false
+  },
+  "this-is-my-family": {
+    "text": "Le presento a mi familia.",
+    "pronunciation": "leh preh-SEHN-toh ah mee fah-MEE-lyah",
+    "meaningNote": "In Spanish, \"Le presento a mi familia\" (I introduce my family to you) is used when introducing people in person; \"Esta es mi familia\" is also used, especially when showing a photo.",
+    "exampleSentence": "Buenas tardes, le presento a mi familia.",
+    "verified": false
+  },
+  "i-am-traveling-with-my-parents": {
+    "text": "Estoy viajando con mis padres.",
+    "pronunciation": "ehs-TOY vyah-HAHN-doh kohn mees PAH-drehs",
+    "meaningNote": "In everyday Latin American speech, \"mis papás\" is also very frequently used instead of \"mis padres\".",
+    "exampleSentence": "Esta semana estoy viajando con mis padres por la costa.",
+    "verified": false
+  },
+  "do-you-have-children": {
+    "text": "¿Tiene usted hijos?",
+    "pronunciation": "TYEH-neh oos-TEHD EE-hohs",
+    "meaningNote": "Polite form with \"usted\". \"Hijos\" refers to children of any age (sons and daughters).",
+    "exampleSentence": "Nosotros tenemos una hija, ¿tiene usted hijos?",
+    "verified": false
+  },
+  "where-is-your-family": {
+    "text": "¿Dónde está su familia?",
+    "pronunciation": "DOHN-deh ehs-TAH soo fah-MEE-lyah",
+    "meaningNote": "To ask where someone's family lives permanently, you can also ask \"¿Dónde vive su familia?\".",
+    "exampleSentence": "¿Dónde está su familia, viven también en esta ciudad?",
+    "verified": false
+  },
+  "i-am-here-with-a-friend": {
+    "text": "Estoy aquí con un amigo.",
+    "pronunciation": "ehs-TOY ah-KEE kohn oon ah-MEE-goh",
+    "meaningNote": "If your friend is female, say \"con una amiga\".",
+    "exampleSentence": "No viajo solo, estoy aquí con un amigo del trabajo.",
+    "verified": false
+  },
+  "this-is-my-friend": {
+    "text": "Este es mi amigo.",
+    "pronunciation": "EHS-teh ehs mee ah-MEE-goh",
+    "meaningNote": "When introducing a female friend, say \"Esta es mi amiga\". A more formal introduction is \"Le presento a mi amigo\".",
+    "exampleSentence": "Buenas tardes, este es mi amigo Daniel.",
+    "verified": false
+  },
+  "this-is-my-partner": {
+    "text": "Esta es mi pareja.",
+    "pronunciation": "EHS-tah ehs mee pah-REH-hah",
+    "meaningNote": "\"Mi pareja\" is grammatically feminine regardless of your partner's gender. For spouse, \"mi esposo\" (husband) or \"mi esposa\" (wife) is also common.",
+    "exampleSentence": "Mucho gusto, esta es mi pareja, estamos de vacaciones.",
+    "verified": false
+  },
+  "i-have-a-brother-and-a-sister": {
+    "text": "Tengo un hermano y una hermana.",
+    "pronunciation": "TEHN-goh oon ehr-MAH-noh ee OO-nah ehr-MAH-nah",
+    "meaningNote": "\"Hermano\" means brother and \"hermana\" means sister.",
+    "exampleSentence": "Somos tres en total: tengo un hermano y una hermana.",
+    "verified": false
+  },
+  "do-you-have-brothers-or-sisters": {
+    "text": "¿Tiene usted hermanos?",
+    "pronunciation": "TYEH-neh oos-TEHD ehr-MAH-nohs",
+    "meaningNote": "In Spanish, plural \"hermanos\" naturally means \"brothers and sisters / siblings\".",
+    "exampleSentence": "¿Tiene usted hermanos o es hijo único?",
+    "verified": false
+  },
+  "how-old-are-your-children": {
+    "text": "¿Cuántos años tienen sus hijos?",
+    "pronunciation": "KWAHN-tohs AHN-yohs TYEH-nehn soos EE-hohs",
+    "meaningNote": "Uses polite \"sus\" (your, formal) and literally asks \"How many years do your children have?\".",
+    "exampleSentence": "¡Qué linda familia! ¿Cuántos años tienen sus hijos?",
+    "verified": false
+  },
   "where-is-the-bathroom": {
     "text": "¿Dónde está el baño?",
     "pronunciation": "DOHN-deh ehs-TAH ehl BAHN-yoh",

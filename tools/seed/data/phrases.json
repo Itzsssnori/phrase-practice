@@ -140,6 +140,356 @@
     "isActive": true
   },
   {
+    "slug": "what-is-your-name",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "it-is-my-first-time-here",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "where-are-you-from",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-your-hometown",
+    "categoryId": "social-conversations",
+    "difficulty": 2,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "what-do-you-do-for-a-living",
+    "categoryId": "social-conversations",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "how-long-have-you-lived-here",
+    "categoryId": "social-conversations",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "what-do-you-like-to-do",
+    "categoryId": "social-conversations",
+    "difficulty": 2,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "that-is-interesting",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "it-was-nice-talking-to-you",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "have-a-nice-day",
+    "categoryId": "social-conversations",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "how-much-is-this",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "is-this-available-in-another-size",
+    "categoryId": "shopping",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-another-color",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-try-this-on",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "is-there-a-discount",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "can-you-lower-the-price",
+    "categoryId": "shopping",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-just-looking-thank-you",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "where-can-i-find-this-item",
+    "categoryId": "shopping",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-return-this",
+    "categoryId": "shopping",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "can-i-get-a-shopping-bag",
+    "categoryId": "shopping",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "what-time-is-it",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "what-day-is-today",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "what-is-todays-date",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "when-does-it-open",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "when-does-it-close",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "how-long-will-it-take",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "can-we-meet-tomorrow",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "what-time-should-i-come-back",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "two-tickets-please",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "for-how-many-people",
+    "categoryId": "time-dates-numbers",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-speak-english",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "i-do-not-understand",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "could-you-speak-more-slowly",
+    "categoryId": "communication-help",
+    "difficulty": 2,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "could-you-repeat-that",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "could-you-write-it-down",
+    "categoryId": "communication-help",
+    "difficulty": 2,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "how-do-you-say-this",
+    "categoryId": "communication-help",
+    "difficulty": 2,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "what-does-this-mean",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-learning-your-language",
+    "categoryId": "communication-help",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "please-wait-a-moment",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "can-you-show-me",
+    "categoryId": "communication-help",
+    "difficulty": 1,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "slug": "this-is-my-family",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-traveling-with-my-parents",
+    "categoryId": "family-relationships",
+    "difficulty": 2,
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-children",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "slug": "where-is-your-family",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "slug": "i-am-here-with-a-friend",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "slug": "this-is-my-friend",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "slug": "this-is-my-partner",
+    "categoryId": "family-relationships",
+    "difficulty": 1,
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "slug": "i-have-a-brother-and-a-sister",
+    "categoryId": "family-relationships",
+    "difficulty": 2,
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "slug": "do-you-have-brothers-or-sisters",
+    "categoryId": "family-relationships",
+    "difficulty": 2,
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "slug": "how-old-are-your-children",
+    "categoryId": "family-relationships",
+    "difficulty": 2,
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
     "slug": "where-is-the-bathroom",
     "categoryId": "directions",
     "difficulty": 1,
