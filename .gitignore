@@ -54,6 +54,7 @@ app.*.map.json
 tools/seed/serviceAccountKey.json
 tools/seed/keys/
 tools/seed/node_modules/
+tools/seed/review/*.csv
 .env
 .env.*
 

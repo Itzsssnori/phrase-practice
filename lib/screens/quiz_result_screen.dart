@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import '../models/phrase.dart';
+import '../models/quiz.dart';
 import '../services/browse_data_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
@@ -9,6 +10,7 @@ import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_quiz_scope.dart';
 import '../widgets/app_secondary_button.dart';
+import '../widgets/localized_phrase_text.dart';
 import '../widgets/require_sign_in.dart';
 
 /// Result summary screen shown after concluding a quiz round.
@@ -327,8 +329,12 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          LocalizedPhraseText(
                             mistake.question.originalPhrase,
+                            languageCode:
+                                mistake.question.direction == QuizDirection.nativeToTarget
+                                    ? mistake.question.nativeLanguageCode
+                                    : mistake.question.targetLanguageCode,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w700,
                               color: isDark ? AppColors.darkText : AppColors.lightText,
@@ -345,8 +351,12 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
                               ),
                               const SizedBox(width: 6),
                               Expanded(
-                                child: Text(
+                                child: LocalizedPhraseText(
                                   'Correct: ${mistake.correctAnswer}',
+                                  languageCode:
+                                      mistake.question.direction == QuizDirection.nativeToTarget
+                                          ? mistake.question.targetLanguageCode
+                                          : mistake.question.nativeLanguageCode,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: isDark ? AppColors.darkSuccess : AppColors.lightSuccess,
@@ -366,8 +376,12 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
                               ),
                               const SizedBox(width: 6),
                               Expanded(
-                                child: Text(
+                                child: LocalizedPhraseText(
                                   'Your answer: ${mistake.selectedAnswer}',
+                                  languageCode:
+                                      mistake.question.direction == QuizDirection.nativeToTarget
+                                          ? mistake.question.targetLanguageCode
+                                          : mistake.question.nativeLanguageCode,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: isDark ? AppColors.darkError : AppColors.lightError,
                                   ),

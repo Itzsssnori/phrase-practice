@@ -1,0 +1,352 @@
+{
+  "hello-polite": {
+    "text": "Magandang araw po",
+    "pronunciation": "mah-gahn-DAHNG AH-raw poh",
+    "meaningNote": "Polite morning or afternoon greeting; \"po\" shows respect toward elders or strangers.",
+    "exampleSentence": "Magandang araw po sa inyo.",
+    "verified": false
+  },
+  "good-morning": {
+    "text": "Magandang umaga po",
+    "pronunciation": "mah-gahn-DAHNG oo-MAH-gah poh",
+    "meaningNote": "Greeting used before noon.",
+    "exampleSentence": "Magandang umaga po, kumusta po kayo?",
+    "verified": false
+  },
+  "good-evening": {
+    "text": "Magandang gabi po",
+    "pronunciation": "mah-gahn-DAHNG gah-BEE poh",
+    "meaningNote": "Greeting used after sunset or once evening falls.",
+    "exampleSentence": "Magandang gabi po, may bakanteng mesa pa po ba?",
+    "verified": false
+  },
+  "how-are-you": {
+    "text": "Kumusta po kayo?",
+    "pronunciation": "koo-moos-TAH poh kah-YOH",
+    "meaningNote": "Derived from Spanish \"¿Cómo está?\". \"Kayo\" is the plural or polite singular pronoun.",
+    "exampleSentence": "Kumusta po kayo ngayong araw?",
+    "verified": false
+  },
+  "nice-to-meet-you": {
+    "text": "Ikinagagalak ko po kayong makilala",
+    "pronunciation": "ee-kee-nah-gah-gah-LAHK koh poh kah-YOHNG mah-kee-LAH-lah",
+    "meaningNote": "Traditional, highly respectful expression when meeting someone new.",
+    "exampleSentence": "Ikinagagalak ko po kayong makilala, Ginoong Ramos.",
+    "verified": false
+  },
+  "thank-you-very-much": {
+    "text": "Maraming salamat po",
+    "pronunciation": "mah-rah-MEENG sah-LAH-maht poh",
+    "meaningNote": "Standard warm expression of gratitude in Filipino culture.",
+    "exampleSentence": "Maraming salamat po sa inyong tulong.",
+    "verified": false
+  },
+  "you-are-welcome": {
+    "text": "Walang anuman po",
+    "pronunciation": "wah-LAHNG ah-noo-MAHN poh",
+    "meaningNote": "Reply to thanks meaning \"it is nothing / do not mention it\".",
+    "exampleSentence": "Walang anuman po, masaya akong nakatulong sa inyo.",
+    "verified": false
+  },
+  "please": {
+    "text": "Pakiusap po",
+    "pronunciation": "pah-kee-OO-sahp poh",
+    "meaningNote": "The polite prefix \"paki-\" (such as \"pakikuha\" or \"pakidala\") is also frequently used for requests.",
+    "exampleSentence": "Pakiusap po, pakisuyo naman po ng baso.",
+    "verified": false
+  },
+  "excuse-me-pardon": {
+    "text": "Makikiraan po / Paumanhin po",
+    "pronunciation": "mah-kee-kee-RAH-ahn poh / pow-mahn-HEEN poh",
+    "meaningNote": "Use \"Makikiraan po\" when asking to pass through; use \"paumanhin\" when apologizing.",
+    "exampleSentence": "Makikiraan po sandali, kailangan ko lang lumabas.",
+    "verified": false
+  },
+  "goodbye-take-care": {
+    "text": "Paalam po, mag-iingat kayo",
+    "pronunciation": "pah-AH-lahm poh, mahg-EENG-aht kah-YOH",
+    "meaningNote": "Polite farewell wishing the other person safety.",
+    "exampleSentence": "Paalam po, mag-iingat kayo sa inyong biyahe.",
+    "verified": false
+  },
+  "a-table-for-two-please": {
+    "text": "Mesa po para sa dalawa",
+    "pronunciation": "MEH-sah poh PAH-rah sah dah-lah-WAH",
+    "meaningNote": "Polite request to a host or server when entering a restaurant.",
+    "exampleSentence": "Magandang gabi po, mesa po para sa dalawa sa may bintana.",
+    "verified": false
+  },
+  "can-i-see-the-menu": {
+    "text": "Puwede po bang makahingi ng menu?",
+    "pronunciation": "pweh-DEH poh bahng mah-kah-HEENG-ee nahng MEH-nyoo",
+    "meaningNote": "Polite request for the list of available dishes.",
+    "exampleSentence": "Puwede po bang makahingi ng menu at listahan ng inumin?",
+    "verified": false
+  },
+  "what-do-you-recommend": {
+    "text": "Ano po ang specialty o masarap dito?",
+    "pronunciation": "ah-NOH poh ahng SPEH-shahl-tee oh mah-sah-RAHP DEE-toh",
+    "meaningNote": "Asking about the restaurant's specialty or best-selling dish.",
+    "exampleSentence": "Bago lang po kami rito, ano po ang pinakamasarap na ulam dito?",
+    "verified": false
+  },
+  "the-check-please": {
+    "text": "Puwede na po bang makuha ang bill?",
+    "pronunciation": "pweh-DEH nah poh bahng mah-KOO-hah ahng beel",
+    "meaningNote": "In casual restaurants across the Philippines, saying \"Bill out po\" is also very common.",
+    "exampleSentence": "Tapos na po kaming kumain, puwede na po bang makuha ang bill?",
+    "verified": false
+  },
+  "i-am-allergic-to-peanuts": {
+    "text": "May allergy po ako sa mani",
+    "pronunciation": "my AH-lehr-jee poh ah-KOH sah mah-NEE",
+    "meaningNote": "Important to tell the server immediately before your food is prepared.",
+    "exampleSentence": "Pakisabihan po ang kusina na may allergy po ako sa mani.",
+    "verified": false
+  },
+  "is-this-dish-spicy": {
+    "text": "Maanghang po ba ang pagkaing ito?",
+    "pronunciation": "mah-ahng-HAHNG poh bah ahng pahg-kah-EENG ee-TOH",
+    "meaningNote": "Asking whether the dish contains bird's eye chili (siling labuyo) or spicy ingredients.",
+    "exampleSentence": "Hindi po ako sanay sa sili, maanghang po ba ito?",
+    "verified": false
+  },
+  "water-without-ice-please": {
+    "text": "Tubig po na walang yelo",
+    "pronunciation": "TOO-beeg poh nah wah-LAHNG YEH-loh",
+    "meaningNote": "Request for room-temperature or unchilled water.",
+    "exampleSentence": "Medyo masama ang lalamunan ko, tubig na lang po na walang yelo.",
+    "verified": false
+  },
+  "delicious-compliment": {
+    "text": "Napakasarap po ng pagkain, salamat!",
+    "pronunciation": "nah-pah-kah-sah-RAHP poh nahng pahg-kah-EEN, sah-LAH-maht",
+    "meaningNote": "Heartfelt compliment for the cook and kitchen staff.",
+    "exampleSentence": "Napakasarap po ng pagkain, tiyak na babalik kami rito.",
+    "verified": false
+  },
+  "is-this-vegetarian": {
+    "text": "Wala po ba itong karne o isda?",
+    "pronunciation": "wah-LAH poh bah ee-TOHNG kahr-NEH oh ees-DAH",
+    "meaningNote": "Explicitly saying \"no meat or fish\" is clearer in the Philippines than simply saying \"vegetarian\".",
+    "exampleSentence": "Gulay lang po ang kinakain ko, wala po ba itong halong karne?",
+    "verified": false
+  },
+  "can-i-have-this-to-go": {
+    "text": "Puwede po bang ipabalot ito?",
+    "pronunciation": "pweh-DEH poh bahng ee-pah-BAH-loht ee-TOH",
+    "meaningNote": "Both \"ipabalot\" (have it wrapped) and \"take-out\" are commonly understood in the Philippines.",
+    "exampleSentence": "Medyo marami pa pong natira, puwede po bang ipabalot ito?",
+    "verified": false
+  },
+  "where-is-the-bathroom": {
+    "text": "Saan po ang banyo (palikuran)?",
+    "pronunciation": "sah-AHN poh ahng BAHN-yoh",
+    "meaningNote": "Restrooms are commonly called \"banyo\" or \"CR\" (Comfort Room) in the Philippines.",
+    "exampleSentence": "Mawalang-galang na po, saan po ang banyo rito?",
+    "verified": false
+  },
+  "how-do-i-get-to-the-station": {
+    "text": "Paano po pumunta sa istasyon ng tren?",
+    "pronunciation": "pah-AH-noh poh poo-moon-TAH sah ees-tahs-YOHN nahng trehn",
+    "meaningNote": "Asking for directions to a train station (such as the LRT, MRT, or commuter rail).",
+    "exampleSentence": "Naliligaw po ako, paano po pumunta sa istasyon ng tren?",
+    "verified": false
+  },
+  "is-it-far-from-here": {
+    "text": "Malayo po ba mula rito?",
+    "pronunciation": "mah-LAH-yoh poh bah MOO-lah REE-toh",
+    "meaningNote": "Checking whether a destination is walkable or requires taking a ride.",
+    "exampleSentence": "Malayo po ba mula rito ang pamilihan kung lalakarin?",
+    "verified": false
+  },
+  "turn-left-at-the-corner": {
+    "text": "Kumaliwa po kayo pagdating sa kanto",
+    "pronunciation": "koo-mah-lee-WAH poh kah-YOH pahg-dah-TEENG sah KAHN-toh",
+    "meaningNote": "\"Kumaliwa\" is the verb for turning left.",
+    "exampleSentence": "Kumaliwa po kayo pagdating sa kanto sa tapat ng botika.",
+    "verified": false
+  },
+  "turn-right-after-the-bank": {
+    "text": "Kumanan po kayo paglampas ng bangko",
+    "pronunciation": "koo-MAH-nahn poh kah-YOH pahg-lahm-PAHS nahng BAHNG-koh",
+    "meaningNote": "\"Kumanan\" is the verb for turning right using a landmark.",
+    "exampleSentence": "Kumanan po kayo paglampas ng malaking bangko sa kanto.",
+    "verified": false
+  },
+  "go-straight-ahead": {
+    "text": "Dire-diretso lang po kayo",
+    "pronunciation": "dee-reh-dee-REHT-soh lahng poh kah-YOH",
+    "meaningNote": "Continue walking in the same direction without turning.",
+    "exampleSentence": "Dire-diretso lang po kayo hanggang makita ninyo ang arko.",
+    "verified": false
+  },
+  "where-am-i-on-the-map": {
+    "text": "Nasaan po ako rito sa mapa?",
+    "pronunciation": "nah-SAH-ahn poh ah-KOH REE-toh sah MAH-pah",
+    "meaningNote": "Asking someone to point out your current location on a map.",
+    "exampleSentence": "Medyo nalilito po ako, nasaan po ako rito sa mapa?",
+    "verified": false
+  },
+  "is-it-within-walking-distance": {
+    "text": "Kaya po bang lakarin mula rito?",
+    "pronunciation": "KAH-yah poh bahng lah-kah-REEN MOO-lah REE-toh",
+    "meaningNote": "Checking if the distance is short enough that you do not need public transit.",
+    "exampleSentence": "Kaya po bang lakarin mula rito papunta sa museo?",
+    "verified": false
+  },
+  "where-is-the-bus-stop": {
+    "text": "Saan po ang sakayan ng bus o dyip?",
+    "pronunciation": "sah-AHN poh ahng sah-kah-YAHN nahng boos oh jeep",
+    "meaningNote": "In the Philippines, travelers commonly ask for the bus or jeepney stop (\"sakayan\").",
+    "exampleSentence": "Saan po ang sakayan ng bus papuntang kabayanan?",
+    "verified": false
+  },
+  "i-am-lost-can-you-help": {
+    "text": "Naliligaw po ako, puwede po bang magpatulong?",
+    "pronunciation": "nah-lee-lee-GOW poh ah-KOH, pweh-DEH poh bahng mahg-pah-TOO-lohng",
+    "meaningNote": "Polite request for help when you have lost your way.",
+    "exampleSentence": "Magandang araw po, naliligaw po ako, puwede po bang magpatulong?",
+    "verified": false
+  },
+  "where-is-baggage-claim": {
+    "text": "Saan po ang kuhanin ng bagahe?",
+    "pronunciation": "sah-AHN poh ahng koo-HAH-neen nahng bah-GAH-heh",
+    "meaningNote": "Area where checked luggage is picked up at an airport or seaport.",
+    "exampleSentence": "Kakarating lang po namin, saan po ang kuhanin ng bagahe?",
+    "verified": false
+  },
+  "i-have-a-hotel-reservation": {
+    "text": "May reservation po ako sa pangalang ito",
+    "pronunciation": "my reh-sehr-bahs-YOHN poh ah-KOH sah pah-NGAH-lahng ee-TOH",
+    "meaningNote": "Spoken to the hotel front desk receptionist at check-in.",
+    "exampleSentence": "Magandang hapon po, may reservation po ako sa pangalang Juan Cruz.",
+    "verified": false
+  },
+  "what-time-is-checkout": {
+    "text": "Anong oras po ang check-out bukas?",
+    "pronunciation": "ah-NOHNG OH-rahs poh ahng chehk-owt BOO-kahs",
+    "meaningNote": "Confirming the time by which you need to vacate your room.",
+    "exampleSentence": "Anong oras po ang check-out bukas para maihanda ang gamit?",
+    "verified": false
+  },
+  "how-much-is-a-ticket-to": {
+    "text": "Magkano po ang pamasahe papuntang sentro?",
+    "pronunciation": "mahg-KAH-noh poh ahng pah-mah-SAH-heh pah-poon-TAHNG SEHN-troh",
+    "meaningNote": "\"Pamasahe\" refers to the fare for transportation such as a train, bus, or jeepney.",
+    "exampleSentence": "Magkano po ang pamasahe papuntang kabayanan o sentro?",
+    "verified": false
+  },
+  "which-platform-for-the-airport": {
+    "text": "Saang platform po sasakay papuntang paliparan?",
+    "pronunciation": "sah-AHNG PLAHT-fohrm poh sah-SAH-kye pah-poon-TAHNG pah-lee-PAH-rahn",
+    "meaningNote": "\"Paliparan\" is the formal Filipino word for airport, though \"airport\" is also universally used.",
+    "exampleSentence": "Saang platform po sasakay papuntang paliparan (airport)?",
+    "verified": false
+  },
+  "can-you-call-a-taxi": {
+    "text": "Puwede po ba ninyo akong tawagan ng taksi?",
+    "pronunciation": "pweh-DEH poh bah neen-YOH ah-KOHNG tah-wah-GAHN nahng TAHK-see",
+    "meaningNote": "Polite request asking a guard or receptionist to hail or book a taxi.",
+    "exampleSentence": "Medyo maulan po, puwede po ba ninyo akong tawagan ng taksi?",
+    "verified": false
+  },
+  "do-you-have-wifi": {
+    "text": "May Wi-Fi po ba rito at ano po ang password?",
+    "pronunciation": "my WAI-fai poh bah REE-toh aht ah-NOH poh ahng PAHS-wohrd",
+    "meaningNote": "Everyday question at cafés, hotels, and guesthouses.",
+    "exampleSentence": "Puwede po bang magtanong, may Wi-Fi po ba rito at ano ang password?",
+    "verified": false
+  },
+  "can-i-leave-my-luggage-here": {
+    "text": "Puwede ko po bang iwan muna ang aking bagahe nang ilang oras?",
+    "pronunciation": "pweh-DEH koh poh bahng EE-wahn MOO-nah ahng AH-keeng bah-GAH-heh nahng EE-lahng OH-rahs",
+    "meaningNote": "Polite request asking concierge or front desk staff to hold your bags temporarily.",
+    "exampleSentence": "Mamayang gabi pa po ang biyahe ko, puwede ko po bang iwan muna ang bagahe ko rito?",
+    "verified": false
+  },
+  "do-you-accept-credit-cards": {
+    "text": "Tumatanggap po ba kayo ng card o cash lang?",
+    "pronunciation": "too-mahn-tahng-GAHP poh bah kah-YOH nahng kahrd oh kahsh lahng",
+    "meaningNote": "Checking whether cash is required or if cards and e-wallets are accepted.",
+    "exampleSentence": "Bago po ako bumili, tumatanggap po ba kayo ng card o cash lang po?",
+    "verified": false
+  },
+  "where-can-i-exchange-currency": {
+    "text": "Saan po puwedeng magpapalit ng pera nang ligtas?",
+    "pronunciation": "sah-AHN poh pweh-DEHNG mahg-pah-pah-LEET nahng PEH-rah nahng leeg-TAHS",
+    "meaningNote": "Looking for an authorized money changer or bank to exchange foreign currency.",
+    "exampleSentence": "May dalang dolyar po ako, saan po puwedeng magpapalit ng pera nang ligtas?",
+    "verified": false
+  },
+  "help-me-please": {
+    "text": "Saklolo po! / Tulungan po ninyo ako!",
+    "pronunciation": "sahk-LOH-loh poh / too-LOO-ngahn poh neen-YOH ah-KOH",
+    "meaningNote": "\"Saklolo\" is the traditional urgent cry for help during an emergency.",
+    "exampleSentence": "Saklolo po! Tulungan po ninyo ako, may magnanakaw!",
+    "verified": false
+  },
+  "call-an-ambulance": {
+    "text": "Tumawag po kayo ng ambulansya agad!",
+    "pronunciation": "too-MAH-wahg poh kah-YOH nahng ahm-boo-LAHN-syah AH-gahd",
+    "meaningNote": "Urgent request to bystanders during a serious accident or medical emergency.",
+    "exampleSentence": "May nawalan ng malay, tumawag po kayo ng ambulansya agad!",
+    "verified": false
+  },
+  "call-the-police": {
+    "text": "Tumawag po kayo ng pulis ngayon din!",
+    "pronunciation": "too-MAH-wahg poh kah-YOH nahng poo-LEES ngah-YOHN deen",
+    "meaningNote": "Calling for police assistance during a crime or dangerous situation.",
+    "exampleSentence": "May nanggugulo po sa labas, tumawag po kayo ng pulis ngayon din!",
+    "verified": false
+  },
+  "where-is-the-nearest-hospital": {
+    "text": "Saan po ang pinakamalapit na ospital o klinika?",
+    "pronunciation": "sah-AHN poh ahng pee-nah-kah-mah-LAH-peet nah ohs-pee-TAHL oh KLEE-nee-kah",
+    "meaningNote": "Asking for the location of the closest hospital.",
+    "exampleSentence": "Masama po ang pakiramdam ko, saan po ang pinakamalapit na ospital?",
+    "verified": false
+  },
+  "i-need-a-doctor": {
+    "text": "Kailangan ko po ng doktor ngayon din",
+    "pronunciation": "kye-lah-NGAHN koh poh nahng dohk-TOHR ngah-YOHN deen",
+    "meaningNote": "Requesting a medical doctor for an examination.",
+    "exampleSentence": "Mataas po ang lagnat ng kasama ko, kailangan ko po ng doktor ngayon din.",
+    "verified": false
+  },
+  "where-is-a-pharmacy": {
+    "text": "Saan po may bukas na botika o parmasya?",
+    "pronunciation": "sah-AHN poh my BOO-kahs nah boh-TEE-kah oh pahr-MAHS-yah",
+    "meaningNote": "Pharmacies are commonly called \"botika\" or \"drugstore\" in the Philippines.",
+    "exampleSentence": "Kailangan ko po ng gamot sa ubo, saan po may bukas na botika rito?",
+    "verified": false
+  },
+  "i-lost-my-passport": {
+    "text": "Nawala po ang aking pasaporte at pitaka",
+    "pronunciation": "nah-wah-LAH poh ahng AH-keeng pah-sah-POHR-teh aht pee-TAH-kah",
+    "meaningNote": "Should be reported immediately to the local police and your embassy.",
+    "exampleSentence": "Naiwan ko po sa taksi kanina, nawala po ang aking pasaporte at pitaka.",
+    "verified": false
+  },
+  "i-cannot-breathe": {
+    "text": "Nahihirapan po akong huminga",
+    "pronunciation": "nah-hee-hee-RAH-pahn poh ah-KOHNG hoo-MEE-ngah",
+    "meaningNote": "Critical medical emergency requiring immediate air and medical attention.",
+    "exampleSentence": "Pakiusap, bigyan ninyo ako ng espasyo, nahihirapan po akong huminga.",
+    "verified": false
+  },
+  "there-is-a-fire": {
+    "text": "May sunog po, lumikas na tayo sa gusali!",
+    "pronunciation": "my SOO-nohg poh, loo-MEE-kahs nah TAH-yoh sah goo-SAH-lee",
+    "meaningNote": "Urgent warning to evacuate immediately toward the fire exit.",
+    "exampleSentence": "May makapal na usok sa kusina, may sunog po, lumikas na tayo!",
+    "verified": false
+  },
+  "i-feel-very-dizzy": {
+    "text": "Nahihilo po ako at nanghihina",
+    "pronunciation": "nah-hee-HEE-loh poh ah-KOH aht nahng-hee-HEE-nah",
+    "meaningNote": "Warning sign of possible fainting or dehydration.",
+    "exampleSentence": "Puwede po bang makahingi ng upuan? Nahihilo po ako at nanghihina.",
+    "verified": false
+  }
+}

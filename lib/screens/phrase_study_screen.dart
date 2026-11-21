@@ -1,7 +1,10 @@
 import 'package:material_ui/material_ui.dart';
+import '../models/category.dart';
+import '../models/language.dart';
 import '../models/phrase.dart';
 import '../models/phrase_translation.dart';
 import '../services/browse_data_service.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_audio_button.dart';
 import '../widgets/app_auth_scope.dart';
@@ -13,6 +16,7 @@ import '../widgets/app_primary_button.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_settings_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
+import '../widgets/localized_phrase_text.dart';
 import '../widgets/require_sign_in.dart';
 
 /// Interactive study screen with recall mode, text-size scaling, and full-context cards.
@@ -47,6 +51,15 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
   void initState() {
     super.initState();
     _loadStudyPhrases();
+  }
+
+  @override
+  void didUpdateWidget(covariant PhraseStudyScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialPhraseSlug != widget.initialPhraseSlug ||
+        oldWidget.categoryId != widget.categoryId) {
+      _loadStudyPhrases();
+    }
   }
 
   Future<void> _loadStudyPhrases({bool forceRefresh = false}) async {
@@ -426,15 +439,15 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                           ] else ...[
                             Semantics(
                               label: 'Translation: $mainTranslatedText',
-                              child: Text(
+                              child: LocalizedPhraseText(
                                 mainTranslatedText,
+                                languageCode: targetLangCode,
                                 style: (theme.textTheme.displaySmall ?? const TextStyle()).copyWith(
                                   fontSize: (theme.textTheme.displaySmall?.fontSize ?? 26.0) + translationOffset,
                                   color: theme.colorScheme.primary,
                                   fontWeight: FontWeight.w700,
                                   height: 1.25,
                                 ),
-                                softWrap: true,
                               ),
                             ),
                           ],
@@ -461,17 +474,17 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          LocalizedPhraseText(
                             nativePhraseText,
+                            languageCode: nativeLangCode,
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: theme.colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w600,
                               height: 1.35,
                             ),
-                            softWrap: true,
                           ),
 
-                          // Field 3: Pronunciation (hide if empty or null)
+                          // Field 3: Pronunciation (hide if empty or null), labeled with pronunciationSystem
                           if (pronunciation != null && pronunciation.isNotEmpty) ...[
                             const SizedBox(height: AppSpacing.sm),
                             if (recallMode && !_isPronunciationRevealed) ...[
@@ -519,15 +532,30 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                               ),
                             ] else ...[
                               Semantics(
-                                label: 'Pronunciation: $pronunciation',
-                                child: Text(
-                                  pronunciation,
-                                  style: (theme.textTheme.bodySmall ?? const TextStyle()).copyWith(
-                                    fontSize: (theme.textTheme.bodySmall?.fontSize ?? 13.0) + pronunciationOffset,
-                                    fontStyle: FontStyle.italic,
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
-                                  softWrap: true,
+                                label:
+                                    '${Language.defaultPronunciationSystemFor(targetLangCode)}: $pronunciation',
+                                child: Wrap(
+                                  spacing: AppSpacing.xs,
+                                  runSpacing: 2,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${Language.defaultPronunciationSystemFor(targetLangCode)}:',
+                                      style: theme.textTheme.labelSmall?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: theme.colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                    Text(
+                                      pronunciation,
+                                      style: (theme.textTheme.bodySmall ?? const TextStyle()).copyWith(
+                                        fontSize: (theme.textTheme.bodySmall?.fontSize ?? 13.0) + pronunciationOffset,
+                                        fontStyle: FontStyle.italic,
+                                        color: theme.colorScheme.onSurfaceVariant,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -564,27 +592,27 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                             const SizedBox(height: AppSpacing.xs),
 
                             if (targetExample != null && targetExample.isNotEmpty)
-                              Text(
+                              LocalizedPhraseText(
                                 '“$targetExample”',
+                                languageCode: targetLangCode,
                                 style: (theme.textTheme.bodyMedium ?? const TextStyle()).copyWith(
                                   fontSize: (theme.textTheme.bodyMedium?.fontSize ?? 15.0) + exampleOffset,
                                   color: theme.colorScheme.onSurface,
                                   height: 1.45,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                softWrap: true,
                               ),
 
                             // Smaller line for native example if present
                             if (nativeExample != null && nativeExample.isNotEmpty) ...[
                               const SizedBox(height: AppSpacing.xs),
-                              Text(
+                              LocalizedPhraseText(
                                 nativeExample,
+                                languageCode: nativeLangCode,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: theme.colorScheme.onSurfaceVariant,
                                   height: 1.35,
                                 ),
-                                softWrap: true,
                               ),
                             ],
                           ],
@@ -628,6 +656,36 @@ class _PhraseStudyScreenState extends State<PhraseStudyScreen> {
                             ),
                           ],
                         ),
+                      ),
+                    ],
+
+                    // Draft-translation notice when target translation's verified is not true
+                    if (!targetTrans.verified) ...[
+                      const SizedBox(height: AppSpacing.md),
+                      Builder(
+                        builder: (context) {
+                          final isCriticalCategory =
+                              Category.defaultPriorityFor(phrase.categoryId) ==
+                                  Category.priorityCritical;
+                          final captionColor = isCriticalCategory
+                              ? theme.colorScheme.warning
+                              : theme.colorScheme.onSurfaceVariant;
+                          return Semantics(
+                            label:
+                                'Draft translation. Not yet reviewed by a native speaker. For health, safety, or legal situations, confirm with a person.',
+                            child: Text(
+                              'Draft translation. Not yet reviewed by a native speaker. For health, safety, or legal situations, confirm with a person.',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: captionColor,
+                                fontWeight: isCriticalCategory
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                                height: 1.4,
+                              ),
+                              softWrap: true,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ],

@@ -1,11 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import '../models/language.dart';
+import '../models/quiz.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/app_auth_scope.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_quiz_scope.dart';
+import '../widgets/localized_phrase_text.dart';
 
 /// Active practice quiz screen featuring immediate constructive feedback.
 class QuizScreen extends StatefulWidget {
@@ -133,14 +136,16 @@ class _QuizScreenState extends State<QuizScreen> {
                       const SizedBox(height: AppSpacing.xs),
 
                       // Original phrase
-                      Text(
+                      LocalizedPhraseText(
                         question.originalPhrase,
+                        languageCode: question.direction == QuizDirection.nativeToTarget
+                            ? question.nativeLanguageCode
+                            : question.targetLanguageCode,
                         style: theme.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: isDark ? AppColors.darkText : AppColors.lightText,
                           height: 1.3,
                         ),
-                        softWrap: true,
                       ),
 
                       // Target-language pronunciation revealed after answering
@@ -148,13 +153,29 @@ class _QuizScreenState extends State<QuizScreen> {
                           question.pronunciation != null &&
                           question.pronunciation!.isNotEmpty) ...[
                         const SizedBox(height: AppSpacing.xs),
-                        Text(
-                          question.pronunciation!,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontStyle: FontStyle.italic,
-                            color: theme.colorScheme.primary,
-                          ),
-                          softWrap: true,
+                        Wrap(
+                          spacing: AppSpacing.xs,
+                          runSpacing: 2,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            Text(
+                              '${Language.defaultPronunciationSystemFor(question.targetLanguageCode)}:',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: isDark
+                                    ? AppColors.darkTextSecondary
+                                    : AppColors.lightTextSecondary,
+                              ),
+                            ),
+                            Text(
+                              question.pronunciation!,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontStyle: FontStyle.italic,
+                                color: theme.colorScheme.primary,
+                              ),
+                              softWrap: true,
+                            ),
+                          ],
                         ),
                       ],
 
@@ -270,13 +291,16 @@ class _QuizScreenState extends State<QuizScreen> {
 
                                   // Option text
                                   Expanded(
-                                    child: Text(
+                                    child: LocalizedPhraseText(
                                       optionText,
+                                      languageCode:
+                                          question.direction == QuizDirection.nativeToTarget
+                                              ? question.targetLanguageCode
+                                              : question.nativeLanguageCode,
                                       style: theme.textTheme.bodyMedium?.copyWith(
                                         fontWeight: FontWeight.w500,
                                         color: isDark ? AppColors.darkText : AppColors.lightText,
                                       ),
-                                      softWrap: true,
                                     ),
                                   ),
 

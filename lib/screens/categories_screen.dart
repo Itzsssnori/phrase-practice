@@ -183,8 +183,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         ),
         const SizedBox(height: AppSpacing.lg),
 
-        // Grid / List of Category Cards
-        if (_categories.isEmpty)
+        // Grouped Category Sections ("Everyday Conversations", "Travel & Navigation", "Safety & Essential Needs")
+        if (_categories.where((c) => c.isActive).isEmpty)
           const AppEmptyState(
             icon: Icons.folder_open_rounded,
             title: 'No Categories Available',
@@ -195,55 +195,97 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             builder: (context, constraints) {
               final textScale = MediaQuery.textScalerOf(context).scale(1.0);
               final useSingleColumn = constraints.maxWidth < 520 || textScale >= 1.35;
+              final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
+              final childRatio = constraints.maxWidth > 800 ? 1.6 : 1.35;
 
               final auth = AppAuthScope.maybeOf(context);
               final userPhraseCtrl = AppUserPhraseScope.maybeOf(context);
               final isSignedIn = auth != null && auth.isSignedIn;
 
-              if (useSingleColumn) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _categories.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
-                  itemBuilder: (context, index) {
-                    final cat = _categories[index];
-                    final learnedCount = isSignedIn && userPhraseCtrl != null
-                        ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetLang.code)
-                        : null;
-                    return CategoryCard(
-                      category: cat,
-                      learnedCount: learnedCount,
-                      onTap: () => context.push('/categories/${cat.id}'),
-                    );
-                  },
+              final sections = <Widget>[];
+
+              for (final groupKey in Category.groupOrder) {
+                final groupCats = Category.activeInGroup(_categories, groupKey);
+                if (groupCats.isEmpty) continue;
+
+                sections.add(
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: sections.isEmpty ? 0 : AppSpacing.xl,
+                      bottom: AppSpacing.md,
+                    ),
+                    child: Semantics(
+                      header: true,
+                      child: Text(
+                        Category.groupTitleFor(groupKey),
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                        ),
+                      ),
+                    ),
+                  ),
                 );
+
+                if (useSingleColumn) {
+                  sections.add(
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: groupCats.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
+                      itemBuilder: (context, index) {
+                        final cat = groupCats[index];
+                        final learnedCount = isSignedIn && userPhraseCtrl != null
+                            ? userPhraseCtrl.getLearnedCountForCategory(
+                                cat.id,
+                                _allPhrases,
+                                targetLang.code,
+                              )
+                            : null;
+                        return CategoryCard(
+                          category: cat,
+                          learnedCount: learnedCount,
+                          onTap: () => context.push('/categories/${cat.id}'),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  sections.add(
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: AppSpacing.md,
+                        mainAxisSpacing: AppSpacing.md,
+                        childAspectRatio: childRatio,
+                      ),
+                      itemCount: groupCats.length,
+                      itemBuilder: (context, index) {
+                        final cat = groupCats[index];
+                        final learnedCount = isSignedIn && userPhraseCtrl != null
+                            ? userPhraseCtrl.getLearnedCountForCategory(
+                                cat.id,
+                                _allPhrases,
+                                targetLang.code,
+                              )
+                            : null;
+                        return CategoryCard(
+                          category: cat,
+                          learnedCount: learnedCount,
+                          onTap: () => context.push('/categories/${cat.id}'),
+                        );
+                      },
+                    ),
+                  );
+                }
               }
 
-              final crossAxisCount = constraints.maxWidth > 800 ? 3 : 2;
-              final childRatio = constraints.maxWidth > 800 ? 1.6 : 1.35;
-
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: AppSpacing.md,
-                  mainAxisSpacing: AppSpacing.md,
-                  childAspectRatio: childRatio,
-                ),
-                itemCount: _categories.length,
-                itemBuilder: (context, index) {
-                  final cat = _categories[index];
-                  final learnedCount = isSignedIn && userPhraseCtrl != null
-                      ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetLang.code)
-                      : null;
-                  return CategoryCard(
-                    category: cat,
-                    learnedCount: learnedCount,
-                    onTap: () => context.push('/categories/${cat.id}'),
-                  );
-                },
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: sections,
               );
             },
           ),

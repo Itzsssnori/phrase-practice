@@ -3,6 +3,8 @@
     "slug": "greetings",
     "sortOrder": 1,
     "iconKey": "greetings",
+    "group": "everyday",
+    "priority": "essential",
     "isActive": true,
     "names": {
       "en": "Greetings",
@@ -14,6 +16,8 @@
     "slug": "food",
     "sortOrder": 2,
     "iconKey": "food",
+    "group": "everyday",
+    "priority": "essential",
     "isActive": true,
     "names": {
       "en": "Food and Dining",
@@ -25,6 +29,8 @@
     "slug": "directions",
     "sortOrder": 3,
     "iconKey": "directions",
+    "group": "travel",
+    "priority": "essential",
     "isActive": true,
     "names": {
       "en": "Directions",
@@ -36,6 +42,8 @@
     "slug": "travel",
     "sortOrder": 4,
     "iconKey": "travel",
+    "group": "travel",
+    "priority": "essential",
     "isActive": true,
     "names": {
       "en": "Travel",
@@ -47,11 +55,178 @@
     "slug": "emergencies",
     "sortOrder": 5,
     "iconKey": "emergencies",
+    "group": "safety",
+    "priority": "critical",
     "isActive": true,
     "names": {
       "en": "Emergencies",
       "es": "Emergencias",
       "fil": "Mga Emergency"
+    }
+  },
+  {
+    "slug": "social-conversations",
+    "sortOrder": 6,
+    "iconKey": "social-conversations",
+    "group": "everyday",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Social Conversations"
+    }
+  },
+  {
+    "slug": "shopping",
+    "sortOrder": 7,
+    "iconKey": "shopping",
+    "group": "everyday",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Shopping"
+    }
+  },
+  {
+    "slug": "time-dates-numbers",
+    "sortOrder": 8,
+    "iconKey": "time-dates-numbers",
+    "group": "everyday",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Time, Dates & Numbers"
+    }
+  },
+  {
+    "slug": "communication-help",
+    "sortOrder": 9,
+    "iconKey": "communication-help",
+    "group": "everyday",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Communication & Help"
+    }
+  },
+  {
+    "slug": "family-relationships",
+    "sortOrder": 10,
+    "iconKey": "family-relationships",
+    "group": "everyday",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Family & Relationships"
+    }
+  },
+  {
+    "slug": "transportation",
+    "sortOrder": 11,
+    "iconKey": "transportation",
+    "group": "travel",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Transportation"
+    }
+  },
+  {
+    "slug": "airport-immigration",
+    "sortOrder": 12,
+    "iconKey": "airport-immigration",
+    "group": "travel",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Airport & Immigration"
+    }
+  },
+  {
+    "slug": "accommodation",
+    "sortOrder": 13,
+    "iconKey": "accommodation",
+    "group": "travel",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Accommodation"
+    }
+  },
+  {
+    "slug": "restrooms",
+    "sortOrder": 14,
+    "iconKey": "restrooms",
+    "group": "travel",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Restrooms"
+    }
+  },
+  {
+    "slug": "sightseeing",
+    "sortOrder": 15,
+    "iconKey": "sightseeing",
+    "group": "travel",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Sightseeing"
+    }
+  },
+  {
+    "slug": "money-payments",
+    "sortOrder": 16,
+    "iconKey": "money-payments",
+    "group": "travel",
+    "priority": "essential",
+    "isActive": false,
+    "names": {
+      "en": "Money & Payments"
+    }
+  },
+  {
+    "slug": "weather",
+    "sortOrder": 17,
+    "iconKey": "weather",
+    "group": "travel",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Weather"
+    }
+  },
+  {
+    "slug": "police-safety",
+    "sortOrder": 18,
+    "iconKey": "police-safety",
+    "group": "safety",
+    "priority": "critical",
+    "isActive": false,
+    "names": {
+      "en": "Police & Safety"
+    }
+  },
+  {
+    "slug": "health-pharmacy",
+    "sortOrder": 19,
+    "iconKey": "health-pharmacy",
+    "group": "safety",
+    "priority": "critical",
+    "isActive": false,
+    "names": {
+      "en": "Health & Pharmacy"
+    }
+  },
+  {
+    "slug": "lost-found",
+    "sortOrder": 20,
+    "iconKey": "lost-found",
+    "group": "safety",
+    "priority": "high",
+    "isActive": false,
+    "names": {
+      "en": "Lost & Found"
     }
   }
 ]

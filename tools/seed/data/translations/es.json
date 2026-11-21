@@ -1,0 +1,352 @@
+{
+  "hello-polite": {
+    "text": "Hola, buenos días",
+    "pronunciation": "OH-lah, BWEH-nohs DEE-ahs",
+    "meaningNote": "Standard polite morning greeting used across Latin America to start a conversation.",
+    "exampleSentence": "Hola, buenos días, ¿cómo está usted?",
+    "verified": false
+  },
+  "good-morning": {
+    "text": "Buenos días",
+    "pronunciation": "BWEH-nohs DEE-ahs",
+    "meaningNote": "Standard polite greeting used from dawn until noon.",
+    "exampleSentence": "Buenos días, ¿tienen café caliente listo?",
+    "verified": false
+  },
+  "good-evening": {
+    "text": "Buenas noches",
+    "pronunciation": "BWEH-nahs NOH-chehs",
+    "meaningNote": "Used both as an evening greeting after nightfall and as a polite farewell when leaving.",
+    "exampleSentence": "Buenas noches, tenemos una reservación para dos.",
+    "verified": false
+  },
+  "how-are-you": {
+    "text": "¿Cómo está usted?",
+    "pronunciation": "KOH-moh ehs-TAH oos-TEHD",
+    "meaningNote": "Formal, respectful form using \"usted\", suitable for strangers, shop clerks, and older people across Latin America. With friends, use \"¿cómo estás?\".",
+    "exampleSentence": "Buenas tardes, ¿cómo está usted hoy?",
+    "verified": false
+  },
+  "nice-to-meet-you": {
+    "text": "Mucho gusto en conocerlo",
+    "pronunciation": "MOO-choh GOOS-toh ehn koh-noh-SEHR-loh",
+    "meaningNote": "Formal expression with \"usted\" (when addressing a woman, say \"conocerla\"). The shorter neutral phrase \"Mucho gusto\" is also widely used.",
+    "exampleSentence": "Mucho gusto en conocerlo, bienvenido a la ciudad.",
+    "verified": false
+  },
+  "thank-you-very-much": {
+    "text": "Muchas gracias",
+    "pronunciation": "MOO-chahs GRAH-syahs",
+    "meaningNote": "Universal, warm expression of gratitude across all of Latin America.",
+    "exampleSentence": "Muchas gracias por ayudarme con el equipaje.",
+    "verified": false
+  },
+  "you-are-welcome": {
+    "text": "De nada",
+    "pronunciation": "deh NAH-dah",
+    "meaningNote": "Standard everyday reply to thanks (in Colombia and parts of Central America, \"con gusto\" is also very common).",
+    "exampleSentence": "De nada, fue un placer ayudarle.",
+    "verified": false
+  },
+  "please": {
+    "text": "Por favor",
+    "pronunciation": "pohr fah-BVOHR",
+    "meaningNote": "Essential polite expression for any request or service inquiry.",
+    "exampleSentence": "Un café con leche, por favor.",
+    "verified": false
+  },
+  "excuse-me-pardon": {
+    "text": "Disculpe / Con permiso",
+    "pronunciation": "dees-KOOL-peh / kohn pehr-MEE-soh",
+    "meaningNote": "Use \"Disculpe\" (with \"usted\") to politely get a stranger's attention; use \"con permiso\" to ask for physical room to pass.",
+    "exampleSentence": "Disculpe, ¿este asiento está libre?",
+    "verified": false
+  },
+  "goodbye-take-care": {
+    "text": "Adiós, cuídese mucho",
+    "pronunciation": "ah-DYOHS, KWEE-deh-seh MOO-choh",
+    "meaningNote": "Warm, polite farewell using \"usted\" (with close friends, use \"cuídate\").",
+    "exampleSentence": "Adiós, cuídese mucho en su viaje de regreso.",
+    "verified": false
+  },
+  "a-table-for-two-please": {
+    "text": "Una mesa para dos, por favor",
+    "pronunciation": "OO-nah MEH-sah PAH-rah dohs, pohr fah-BVOHR",
+    "meaningNote": "Essential request when arriving at a restaurant and speaking to the host or server.",
+    "exampleSentence": "Buenas tardes, una mesa para dos cerca de la ventana, por favor.",
+    "verified": false
+  },
+  "can-i-see-the-menu": {
+    "text": "¿Me permite ver el menú, por favor?",
+    "pronunciation": "meh pehr-MEE-teh vehr ehl meh-NOO, pohr fah-BVOHR",
+    "meaningNote": "Across Latin America, \"el menú\" is predominantly used (in parts of the Southern Cone, \"la carta\" is also understood).",
+    "exampleSentence": "Disculpe, ¿me permite ver el menú de bebidas, por favor?",
+    "verified": false
+  },
+  "what-do-you-recommend": {
+    "text": "¿Qué me recomienda de la casa?",
+    "pronunciation": "keh meh reh-koh-MYEHN-dah deh lah KAH-sah",
+    "meaningNote": "Polite question using \"usted\" to ask a server for their signature dish recommendation.",
+    "exampleSentence": "¿Qué me recomienda de la casa para la cena de hoy?",
+    "verified": false
+  },
+  "the-check-please": {
+    "text": "¿Nos trae la cuenta, por favor?",
+    "pronunciation": "nohs TRAH-eh lah KWEHN-tah, pohr fah-BVOHR",
+    "meaningNote": "Standard, respectful phrase across Latin America to ask the server for the bill.",
+    "exampleSentence": "¿Nos trae la cuenta, por favor? Vamos a pagar con tarjeta.",
+    "verified": false
+  },
+  "i-am-allergic-to-peanuts": {
+    "text": "Soy alérgico al maní",
+    "pronunciation": "soy ah-LEHR-hee-koh ahl mah-NEE",
+    "meaningNote": "\"Maní\" is used in South America, the Caribbean, and parts of Central America; in Mexico, use \"cacahuate\". Female speakers say \"alérgica\".",
+    "exampleSentence": "Por favor tenga cuidado al preparar el plato, soy alérgico al maní.",
+    "verified": false
+  },
+  "is-this-dish-spicy": {
+    "text": "¿Este plato es picante?",
+    "pronunciation": "EHS-teh PLAH-toh ehs pee-KAHN-teh",
+    "meaningNote": "Common question to check the chili heat level. In Mexico, people also frequently ask \"¿pica mucho?\".",
+    "exampleSentence": "¿Este plato es muy picante o tiene un aderezo suave?",
+    "verified": false
+  },
+  "water-without-ice-please": {
+    "text": "Agua sin hielo, por favor",
+    "pronunciation": "AH-gwah seen YEH-loh, pohr fah-BVOHR",
+    "meaningNote": "Useful for requesting unchilled or room-temperature water.",
+    "exampleSentence": "¿Me puede servir un vaso de agua sin hielo, por favor?",
+    "verified": false
+  },
+  "delicious-compliment": {
+    "text": "La comida estuvo deliciosa, muchas gracias",
+    "pronunciation": "lah koh-MEE-dah ehs-TOO-bvoh deh-lee-SYOH-sah, MOO-chahs GRAH-syahs",
+    "meaningNote": "Sincere, universal compliment appreciated by servers and kitchen staff.",
+    "exampleSentence": "La comida estuvo deliciosa, felicitaciones al cocinero.",
+    "verified": false
+  },
+  "is-this-vegetarian": {
+    "text": "¿Este plato es vegetariano?",
+    "pronunciation": "EHS-teh PLAH-toh ehs veh-heh-tah-RYAH-noh",
+    "meaningNote": "It is helpful to confirm with the server that the dish contains no meat broth, chicken stock, or lard.",
+    "exampleSentence": "¿Este plato es vegetariano o contiene caldo de carne?",
+    "verified": false
+  },
+  "can-i-have-this-to-go": {
+    "text": "¿Me lo puede poner para llevar, por favor?",
+    "pronunciation": "meh loh PWEH-deh poh-NEHR PAH-rah yeh-BVOHR, pohr fah-BVOHR",
+    "meaningNote": "\"Para llevar\" is the universal phrase across Latin America (in Colombia, \"¿me lo empaca para llevar?\" is also common).",
+    "exampleSentence": "No pudimos terminar, ¿me lo puede poner para llevar, por favor?",
+    "verified": false
+  },
+  "where-is-the-bathroom": {
+    "text": "¿Dónde está el baño?",
+    "pronunciation": "DOHN-deh ehs-TAH ehl BAHN-yoh",
+    "meaningNote": "Across Latin America, \"el baño\" is universally used (public signs may also read \"sanitarios\" or \"servicios\").",
+    "exampleSentence": "Disculpe, ¿dónde está el baño, por favor?",
+    "verified": false
+  },
+  "how-do-i-get-to-the-station": {
+    "text": "¿Cómo llego a la estación de tren?",
+    "pronunciation": "KOH-moh YEH-goh ah lah ehs-tah-SYOHN deh trehn",
+    "meaningNote": "Basic question for getting directions to subway, train, or bus stations.",
+    "exampleSentence": "¿Cómo llego a la estación de tren más cercana a pie?",
+    "verified": false
+  },
+  "is-it-far-from-here": {
+    "text": "¿Está lejos de aquí?",
+    "pronunciation": "ehs-TAH LEH-hohs deh ah-KEE",
+    "meaningNote": "Useful for deciding whether to walk or take a taxi.",
+    "exampleSentence": "¿Está lejos de aquí o se puede llegar fácil caminando?",
+    "verified": false
+  },
+  "turn-left-at-the-corner": {
+    "text": "Gire a la izquierda en la esquina",
+    "pronunciation": "HEE-reh ah lah ees-KYEHR-dah ehn lah ehs-KEE-nah",
+    "meaningNote": "Formal instruction with \"usted\" common across the region (in Mexico and Central America, \"dé vuelta a la izquierda\" is also used).",
+    "exampleSentence": "Camine una cuadra y gire a la izquierda en la esquina.",
+    "verified": false
+  },
+  "turn-right-after-the-bank": {
+    "text": "Gire a la derecha después del banco",
+    "pronunciation": "HEE-reh ah lah deh-REH-chah dehs-PWEHS dehl BAHN-koh",
+    "meaningNote": "Formal instruction with \"usted\". In Mexico, \"dé vuelta a la derecha pasando el banco\" is also frequently heard.",
+    "exampleSentence": "Siga derecho y gire a la derecha después del banco.",
+    "verified": false
+  },
+  "go-straight-ahead": {
+    "text": "Siga derecho",
+    "pronunciation": "SEE-gah deh-REH-choh",
+    "meaningNote": "In Latin America, always say \"siga derecho\" or \"vaya derecho\" (\"siga recto\" is used in Spain).",
+    "exampleSentence": "Siga derecho dos cuadras hasta llegar al semáforo.",
+    "verified": false
+  },
+  "where-am-i-on-the-map": {
+    "text": "¿Dónde estoy en este mapa?",
+    "pronunciation": "DOHN-deh ehs-TOY ehn EHS-teh MAH-pah",
+    "meaningNote": "Respectful question asking a passerby to point out your exact location.",
+    "exampleSentence": "¿Me puede indicar por favor dónde estoy en este mapa?",
+    "verified": false
+  },
+  "is-it-within-walking-distance": {
+    "text": "¿Se puede llegar caminando?",
+    "pronunciation": "seh PWEH-deh yeh-GAHR kah-mee-NAHN-doh",
+    "meaningNote": "Natural way to ask whether a destination is close enough to walk to comfortably.",
+    "exampleSentence": "¿Se puede llegar caminando al centro histórico desde aquí?",
+    "verified": false
+  },
+  "where-is-the-bus-stop": {
+    "text": "¿Dónde queda la parada de autobús?",
+    "pronunciation": "DOHN-deh KEH-dah lah pah-RAH-dah deh ow-toh-BOOS",
+    "meaningNote": "\"Autobús\" or \"bus\" is understood across Latin America (in Mexico \"camión\" is common, in Argentina \"colectivo\", and in the Caribbean \"guagua\").",
+    "exampleSentence": "Disculpe, ¿dónde queda la parada de autobús más cercana?",
+    "verified": false
+  },
+  "i-am-lost-can-you-help": {
+    "text": "Estoy perdido, ¿me puede ayudar?",
+    "pronunciation": "ehs-TOY pehr-DEE-doh, meh PWEH-deh ah-yoo-DAHR",
+    "meaningNote": "Polite formal phrase using \"usted\" (female speakers say \"estoy perdida\").",
+    "exampleSentence": "Buenas tardes, estoy perdido, ¿me puede ayudar a encontrar esta dirección?",
+    "verified": false
+  },
+  "where-is-baggage-claim": {
+    "text": "¿Dónde se recoge el equipaje?",
+    "pronunciation": "DOHN-deh seh reh-KOH-heh ehl eh-kee-PAH-heh",
+    "meaningNote": "In Latin American airports, \"recoger el equipaje\", \"reclamo de equipaje\", or \"entrega de equipaje\" are commonly used.",
+    "exampleSentence": "Acabamos de aterrizar, ¿dónde se recoge el equipaje del vuelo 304?",
+    "verified": false
+  },
+  "i-have-a-hotel-reservation": {
+    "text": "Tengo una reservación a este nombre",
+    "pronunciation": "TEHN-goh OO-nah reh-sehr-bvah-SYOHN ah EHS-teh NOHM-breh",
+    "meaningNote": "In Latin America, both \"reservación\" (especially Mexico and the Caribbean) and \"reserva\" (common in South America) are widely used.",
+    "exampleSentence": "Buenas tardes, tengo una reservación a este nombre por tres noches.",
+    "verified": false
+  },
+  "what-time-is-checkout": {
+    "text": "¿A qué hora es la salida (check-out) mañana?",
+    "pronunciation": "ah keh OH-rah ehs lah sah-LEE-dah mahn-YAH-nah",
+    "meaningNote": "Hotels across Latin America immediately understand both \"la hora de salida\" and \"el check-out\".",
+    "exampleSentence": "Disculpe, ¿a qué hora es la hora de salida de la habitación mañana?",
+    "verified": false
+  },
+  "how-much-is-a-ticket-to": {
+    "text": "¿Cuánto cuesta un boleto al centro?",
+    "pronunciation": "KWAHN-toh KWEHS-tah oon boh-LEH-toh ahl SEHN-troh",
+    "meaningNote": "In Latin America, use \"boleto\" (Mexico, Central America, Caribbean) or \"pasaje\" (South America). \"Billete\" is almost exclusive to Spain.",
+    "exampleSentence": "¿Cuánto cuesta un boleto de ida al centro de la ciudad?",
+    "verified": false
+  },
+  "which-platform-for-the-airport": {
+    "text": "¿De qué andén sale el tren al aeropuerto?",
+    "pronunciation": "deh keh ahn-DEHN SAH-leh ehl trehn ahl ah-eh-roh-PWEHR-toh",
+    "meaningNote": "\"Andén\" or \"plataforma\" is the standard term for train and metro platforms in Latin America.",
+    "exampleSentence": "¿De qué andén sale el próximo tren hacia el aeropuerto internacional?",
+    "verified": false
+  },
+  "can-you-call-a-taxi": {
+    "text": "¿Podría pedirme un taxi, por favor?",
+    "pronunciation": "poh-DREE-ah peh-DEER-meh oon TAHK-see, pohr fah-BVOHR",
+    "meaningNote": "Formal request addressed to hotel or business staff using \"usted\".",
+    "exampleSentence": "¿Podría pedirme un taxi para ir a la terminal de autobuses, por favor?",
+    "verified": false
+  },
+  "do-you-have-wifi": {
+    "text": "¿Tienen wifi aquí y cuál es la contraseña?",
+    "pronunciation": "TYEH-nehn WAI-fai ah-KEE ee kwahl ehs lah kohn-trah-SEHN-yah",
+    "meaningNote": "Across Latin America, \"wifi\" is pronounced \"uai-fai\" (\"güifi\" is used only in Spain). The password is called \"contraseña\" or \"clave de wifi\".",
+    "exampleSentence": "Disculpe, ¿tienen wifi para clientes y cuál es la contraseña?",
+    "verified": false
+  },
+  "can-i-leave-my-luggage-here": {
+    "text": "¿Puedo dejar mi equipaje aquí unas horas?",
+    "pronunciation": "PWEH-doh deh-HAHR mee eh-kee-PAH-heh ah-KEE OO-nahs OH-rahs",
+    "meaningNote": "In Latin American hotels, say \"guardar el equipaje\" (the term \"consigna\" is used in Spain).",
+    "exampleSentence": "¿Puedo dejar mi equipaje guardado aquí unas horas hasta mi vuelo?",
+    "verified": false
+  },
+  "do-you-accept-credit-cards": {
+    "text": "¿Aceptan tarjeta de crédito o solo efectivo?",
+    "pronunciation": "ah-SEHP-tahn tahr-HEH-tah deh KREH-dee-toh oh SOH-loh eh-fehk-TEE-bvoh",
+    "meaningNote": "Formal plural question addressed to shop or restaurant staff using \"ustedes\".",
+    "exampleSentence": "Disculpe, ¿aceptan tarjeta de crédito o solo pago en efectivo?",
+    "verified": false
+  },
+  "where-can-i-exchange-currency": {
+    "text": "¿Dónde puedo cambiar dinero de forma segura?",
+    "pronunciation": "DOHN-deh PWEH-doh kahm-BYAHR dee-NEH-roh deh FOHR-mah seh-GOO-rah",
+    "meaningNote": "Used to find an official \"casa de cambio\" or bank and avoid informal street exchange.",
+    "exampleSentence": "¿Dónde puedo cambiar dólares de forma segura por esta zona?",
+    "verified": false
+  },
+  "help-me-please": {
+    "text": "¡Ayúdeme, por favor! / ¡Necesito ayuda!",
+    "pronunciation": "ah-YOO-deh-meh, pohr fah-BVOHR / neh-seh-SEE-toh ah-YOO-dah",
+    "meaningNote": "Urgent cry for help phrased formally with \"usted\" (\"ayúdeme\").",
+    "exampleSentence": "¡Ayúdeme, por favor, alguien me robó la mochila!",
+    "verified": false
+  },
+  "call-an-ambulance": {
+    "text": "¡Llame a una ambulancia de inmediato!",
+    "pronunciation": "YAH-meh ah OO-nah ahm-boo-LAHN-syah deh een-meh-DYAH-toh",
+    "meaningNote": "Formal instruction with \"usted\" asking bystanders for urgent medical assistance.",
+    "exampleSentence": "¡Rápido, llame a una ambulancia, esta persona se desmayó!",
+    "verified": false
+  },
+  "call-the-police": {
+    "text": "¡Llame a la policía ahora mismo!",
+    "pronunciation": "YAH-meh ah lah poh-lee-SEE-ah ah-OH-rah MEES-moh",
+    "meaningNote": "Formal request with \"usted\" to alert law enforcement during a crime or emergency.",
+    "exampleSentence": "¡Nos acaban de robar, llame a la policía ahora mismo!",
+    "verified": false
+  },
+  "where-is-the-nearest-hospital": {
+    "text": "¿Dónde está el hospital más cercano?",
+    "pronunciation": "DOHN-deh ehs-TAH ehl ohs-pee-TAHL mahs sehr-KAH-noh",
+    "meaningNote": "Essential question for locating hospital care or an emergency room.",
+    "exampleSentence": "Tengo un dolor muy fuerte, ¿dónde está el hospital más cercano?",
+    "verified": false
+  },
+  "i-need-a-doctor": {
+    "text": "Necesito ver a un médico que hable inglés",
+    "pronunciation": "neh-seh-SEE-toh vehr ah oon MEH-dee-koh keh AH-bvleh een-GLEHS",
+    "meaningNote": "In Latin America, \"un doctor\" is also very common. Helpful for avoiding misunderstandings about symptoms or medication.",
+    "exampleSentence": "Me siento muy mal, necesito ver a un médico que hable inglés, por favor.",
+    "verified": false
+  },
+  "where-is-a-pharmacy": {
+    "text": "¿Dónde hay una farmacia abierta las 24 horas?",
+    "pronunciation": "DOHN-deh eye OO-nah fahr-MAH-syah ah-BVYEHR-tah lahs veyn-tee-KWAH-troh OH-rahs",
+    "meaningNote": "\"Farmacia abierta las 24 horas\" is understood everywhere in Latin America (also called \"farmacia de turno\" in the Southern Cone and \"farmacia de guardia\" in Mexico).",
+    "exampleSentence": "Disculpe, ¿dónde hay una farmacia abierta las 24 horas por aquí?",
+    "verified": false
+  },
+  "i-lost-my-passport": {
+    "text": "Perdí mi pasaporte y mi billetera",
+    "pronunciation": "pehr-DEE mee pah-sah-POHR-teh ee mee bee-yeh-TEH-rah",
+    "meaningNote": "In Latin America, \"billetera\" or \"cartera\" is used for wallet. Essential when filing a police report and contacting your consulate.",
+    "exampleSentence": "Por favor ayúdeme, perdí mi pasaporte y mi billetera en el autobús.",
+    "verified": false
+  },
+  "i-cannot-breathe": {
+    "text": "No puedo respirar bien / Me cuesta respirar",
+    "pronunciation": "noh PWEH-doh rehs-pee-RAHR byehn / meh KWEHS-tah rehs-pee-RAHR",
+    "meaningNote": "Urgent medical warning symptom for an asthma attack, severe allergic reaction, or cardiac issue.",
+    "exampleSentence": "Ayúdeme, por favor, no puedo respirar bien y me duele el pecho.",
+    "verified": false
+  },
+  "there-is-a-fire": {
+    "text": "¡Hay un incendio, salgan del edificio!",
+    "pronunciation": "eye oon een-SEHN-dyoh, SAHL-gahn dehl eh-dee-FEE-syoh",
+    "meaningNote": "Urgent warning addressed to a group using \"ustedes\" (\"salgan\", never the Peninsular \"salid\").",
+    "exampleSentence": "¡Cuidado a todos, hay un incendio en el segundo piso, salgan!",
+    "verified": false
+  },
+  "i-feel-very-dizzy": {
+    "text": "Me siento muy mareado y débil",
+    "pronunciation": "meh SYEHN-toh MOOY mah-reh-AH-doh ee DEH-beel",
+    "meaningNote": "Female speakers say \"mareada\". Important warning sign of possible fainting, dehydration, or heat exhaustion.",
+    "exampleSentence": "Necesito sentarme un momento a la sombra, me siento muy mareado.",
+    "verified": false
+  }
+}

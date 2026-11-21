@@ -1,9 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
+import '../models/language.dart';
 import '../models/translation_entry.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_audio_button.dart';
+import 'localized_phrase_text.dart';
 
 /// Shared plain-text result card for AI translations, reused on both
 /// [TranslatorScreen] and [TranslatorHistoryScreen].
@@ -104,42 +106,60 @@ class TranslationResultCard extends StatelessWidget {
 
               if (showInputPhrase && result.inputText.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.md),
-                Text(
+                LocalizedPhraseText(
                   result.inputText,
+                  languageCode: result.sourceLanguageCode,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: secondaryText,
                   ),
-                  softWrap: true,
                 ),
               ],
 
               const SizedBox(height: AppSpacing.md),
 
-              // Largest text: the translation (plain text only)
+              // Largest text: the translation (plain text only, localized font & locale)
               Semantics(
                 label: 'Translation in ${result.targetLanguageName}: ${result.translatedText}',
                 child: SelectableText(
                   result.translatedText,
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: primaryText,
-                    height: 1.3,
+                  style: LocalizedPhraseText.styleFor(
+                    theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: primaryText,
+                      height: 1.3,
+                    ),
+                    result.targetLanguageCode,
                   ),
                 ),
               ),
 
-              // Pronunciation hint
+              // Pronunciation hint labeled with target language's pronunciationSystem
               if (result.pronunciation.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.xs),
                 Semantics(
-                  label: 'Pronunciation: ${result.pronunciation}',
-                  child: Text(
-                    result.pronunciation,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontStyle: FontStyle.italic,
-                      color: theme.colorScheme.primary,
-                    ),
-                    softWrap: true,
+                  label:
+                      '${Language.defaultPronunciationSystemFor(result.targetLanguageCode)}: ${result.pronunciation}',
+                  child: Wrap(
+                    spacing: AppSpacing.xs,
+                    runSpacing: 2,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        '${Language.defaultPronunciationSystemFor(result.targetLanguageCode)}:',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: secondaryText,
+                        ),
+                      ),
+                      Text(
+                        result.pronunciation,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontStyle: FontStyle.italic,
+                          color: theme.colorScheme.primary,
+                        ),
+                        softWrap: true,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -186,24 +206,24 @@ class TranslationResultCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: AppSpacing.xs),
-                      Text(
+                      LocalizedPhraseText(
                         result.exampleSentence,
+                        languageCode: result.targetLanguageCode,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: primaryText,
                           height: 1.4,
                         ),
-                        softWrap: true,
                       ),
                       if (result.exampleTranslation.isNotEmpty) ...[
                         const SizedBox(height: AppSpacing.xs),
-                        Text(
+                        LocalizedPhraseText(
                           result.exampleTranslation,
+                          languageCode: result.sourceLanguageCode,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: secondaryText,
                             height: 1.4,
                           ),
-                          softWrap: true,
                         ),
                       ],
                     ],

@@ -5,6 +5,7 @@ import '../models/result.dart';
 import 'category_repository.dart';
 import 'language_repository.dart';
 import 'phrase_repository.dart';
+import 'search_normalizer.dart';
 
 /// Central data coordinator and in-memory cache for the browsing experience.
 ///
@@ -39,20 +40,25 @@ class BrowseDataService {
         _customCategoryRepo = categoryRepo,
         _customPhraseRepo = phraseRepo;
 
-  /// Fetches active languages, returning from in-memory cache when available.
+  /// Fetches active languages ordered by sortOrder, returning from in-memory cache when available.
   Future<RepoResult<List<Language>>> getLanguages({bool forceRefresh = false}) async {
     if (!forceRefresh && _cachedLanguages != null && _cachedLanguages!.isNotEmpty) {
       return RepoResult.success(_cachedLanguages!);
     }
 
     final result = await _languageRepo.getActiveLanguages(forceRefresh: forceRefresh);
-    if (result.isSuccess) {
-      _cachedLanguages = result.dataOrNull;
+    if (result.isSuccess && result.dataOrNull != null) {
+      final activeSorted = result.dataOrNull!
+          .where((l) => l.isActive)
+          .toList()
+        ..sort((a, b) => a.effectiveSortOrder.compareTo(b.effectiveSortOrder));
+      _cachedLanguages = activeSorted;
+      return RepoResult.success(activeSorted);
     }
     return result;
   }
 
-  /// Fetches categories with localized names resolved in [nativeLanguageCode].
+  /// Fetches active categories with localized names resolved in [nativeLanguageCode].
   Future<RepoResult<List<Category>>> getCategories(
     String nativeLanguageCode, {
     bool forceRefresh = false,
@@ -71,16 +77,12 @@ class BrowseDataService {
 
     final result = await _categoryRepo.getCategories(nativeLanguageCode, forceRefresh: forceRefresh);
     if (result.isSuccess && result.dataOrNull != null) {
-      final rawCategories = result.dataOrNull!;
-      // Attach accurate phrase counts from cached phrases
+      final rawCategories = result.dataOrNull!.where((c) => c.isActive).toList()
+        ..sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+      // Attach accurate phrase counts from cached phrases while preserving group & priority
       final enrichedCategories = rawCategories.map((cat) {
         final count = getCategoryPhraseCount(cat.id);
-        return Category(
-          id: cat.id,
-          sortOrder: cat.sortOrder,
-          iconKey: cat.iconKey,
-          isActive: cat.isActive,
-          names: cat.names,
+        return cat.copyWith(
           title: cat.nameFor(nativeLanguageCode),
           phraseCount: count,
         );
@@ -160,14 +162,14 @@ class BrowseDataService {
   }
 
   /// Performs local, debounced search against cached phrases matching keyword [query]
-  /// in both [nativeLang] and [targetLang], ignoring case and diacritical accents.
+  /// in both [nativeLang] and [targetLang], applying per-script normalization rules.
   Future<RepoResult<List<Phrase>>> searchPhrases({
     required String query,
     String? categoryId,
     required String nativeLang,
     required String targetLang,
   }) async {
-    final cleanQuery = normalize(query);
+    final trimmedQuery = query.trim();
 
     // If cache not loaded yet, fetch all phrases once
     if (_cachedPhrases == null) {
@@ -181,7 +183,7 @@ class BrowseDataService {
     }
 
     // If query is empty but a category is picked, return that category's phrases
-    if (cleanQuery.isEmpty) {
+    if (trimmedQuery.isEmpty) {
       if (categoryId != null && categoryId.isNotEmpty && categoryId != 'all') {
         final catMatches = all
             .where((p) => p.categoryId == categoryId && p.isActive)
@@ -200,33 +202,63 @@ class BrowseDataService {
         if (phrase.categoryId != categoryId) return false;
       }
 
-      // Check target language text
+      // 1. Check target language text using target language's script rules
       final targetText = phrase.translationFor(targetLang)?.text;
-      if (targetText != null && normalize(targetText).contains(cleanQuery)) {
+      if (targetText != null &&
+          SearchNormalizer.matchesText(
+            text: targetText,
+            query: trimmedQuery,
+            languageCode: targetLang,
+          )) {
         return true;
       }
 
-      // Check native language text
-      final nativeText = phrase.translationFor(nativeLang)?.text ?? phrase.originalText;
-      if (normalize(nativeText).contains(cleanQuery)) {
+      // 2. Check native language text using native language's script rules
+      final nativeText =
+          phrase.translationFor(nativeLang)?.text ?? phrase.originalText;
+      if (SearchNormalizer.matchesText(
+        text: nativeText,
+        query: trimmedQuery,
+        languageCode: nativeLang,
+      )) {
         return true;
       }
 
-      // Check pronunciation respelling
+      // 3. Check pronunciation (always Latin script: Respelling, Pinyin, Romaji, etc.)
       final pronunciation = phrase.translationFor(targetLang)?.pronunciation;
-      if (pronunciation != null && normalize(pronunciation).contains(cleanQuery)) {
+      if (pronunciation != null &&
+          SearchNormalizer.matchesPronunciation(
+            pronunciation: pronunciation,
+            query: trimmedQuery,
+          )) {
         return true;
       }
 
-      // Check meaning note
-      final note = phrase.translationFor(targetLang)?.meaningNote ??
-          phrase.translationFor(nativeLang)?.meaningNote;
-      if (note != null && normalize(note).contains(cleanQuery)) {
+      // 4. Check meaning notes (always written in English / Latin script)
+      final targetNote = phrase.translationFor(targetLang)?.meaningNote;
+      if (targetNote != null &&
+          SearchNormalizer.matchesText(
+            text: targetNote,
+            query: trimmedQuery,
+            languageCode: 'en',
+          )) {
+        return true;
+      }
+      final nativeNote = phrase.translationFor(nativeLang)?.meaningNote;
+      if (nativeNote != null &&
+          SearchNormalizer.matchesText(
+            text: nativeNote,
+            query: trimmedQuery,
+            languageCode: 'en',
+          )) {
         return true;
       }
 
-      // Check phrase slug
-      if (normalize(phrase.id).contains(cleanQuery)) {
+      // 5. Check phrase slug (Latin script)
+      if (SearchNormalizer.matchesPronunciation(
+        pronunciation: phrase.id,
+        query: trimmedQuery,
+      )) {
         return true;
       }
 
@@ -251,17 +283,16 @@ class BrowseDataService {
     _phraseRepo.invalidateSearchCache();
   }
 
-  /// Normalizes strings for accent-insensitive and case-insensitive comparison.
-  static String normalize(String input) {
-    return input
-        .toLowerCase()
-        .replaceAll(RegExp(r'[áàäâãå]'), 'a')
-        .replaceAll(RegExp(r'[éèëê]'), 'e')
-        .replaceAll(RegExp(r'[íìïî]'), 'i')
-        .replaceAll(RegExp(r'[óòöôõ]'), 'o')
-        .replaceAll(RegExp(r'[úùüû]'), 'u')
-        .replaceAll(RegExp(r'[ñ]'), 'n')
-        .replaceAll(RegExp(r'[ç]'), 'c')
-        .trim();
+  /// Normalizes strings for comparison using per-script rules (defaults to Latin when [languageCode] is omitted).
+  static String normalize(
+    String input, {
+    String? languageCode,
+    String? script,
+  }) {
+    return SearchNormalizer.normalize(
+      input,
+      languageCode: languageCode,
+      script: script,
+    );
   }
 }

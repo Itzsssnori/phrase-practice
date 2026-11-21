@@ -4,1499 +4,349 @@
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 1,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Hello / Good day",
-        "pronunciation": null,
-        "meaningNote": "Standard polite greeting suitable for any time of day.",
-        "exampleSentence": "Hello, nice to meet you.",
-        "verified": false
-      },
-      "es": {
-        "text": "Hola, buenos días",
-        "pronunciation": "OH-lah, BWEH-nohs DEE-ahs",
-        "meaningNote": "Saludo matutino estándar y cortés en toda América Latina para iniciar una conversación.",
-        "exampleSentence": "Hola, buenos días, ¿cómo está usted?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Magandang araw po",
-        "pronunciation": "mah-gahn-DAHNG AH-raw poh",
-        "meaningNote": "Magalang na pagbati sa umaga o hapon; ang 'po' ay tanda ng paggalang sa nakatatanda o estranghero.",
-        "exampleSentence": "Magandang araw po sa inyo.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "good-morning",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 2,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Good morning",
-        "pronunciation": null,
-        "meaningNote": "Spoken greeting before midday.",
-        "exampleSentence": "Good morning, everyone!",
-        "verified": false
-      },
-      "es": {
-        "text": "Buenos días",
-        "pronunciation": "BWEH-nohs DEE-ahs",
-        "meaningNote": "Fórmula cortés estándar utilizada desde el amanecer hasta el mediodía.",
-        "exampleSentence": "Buenos días, ¿tienen café caliente listo?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Magandang umaga po",
-        "pronunciation": "mah-gahn-DAHNG oo-MAH-gah poh",
-        "meaningNote": "Pagbati na ginagamit bago magtanghali.",
-        "exampleSentence": "Magandang umaga po, kumusta po kayo?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "good-evening",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 3,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Good evening",
-        "pronunciation": null,
-        "meaningNote": "Formal or polite greeting after sunset.",
-        "exampleSentence": "Good evening, we have a table reserved.",
-        "verified": false
-      },
-      "es": {
-        "text": "Buenas noches",
-        "pronunciation": "BWEH-nahs NOH-chehs",
-        "meaningNote": "Se usa tanto de saludo al anochecer como de despedida cordial al retirarse.",
-        "exampleSentence": "Buenas noches, tenemos una reservación para dos.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Magandang gabi po",
-        "pronunciation": "mah-gahn-DAHNG gah-BEE poh",
-        "meaningNote": "Pagbati kapag lumubog na ang araw o sumapit na ang dilim.",
-        "exampleSentence": "Magandang gabi po, may bakanteng mesa pa po ba?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "how-are-you",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 4,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "How are you doing?",
-        "pronunciation": null,
-        "meaningNote": "Casual and friendly check-in on someone's well-being.",
-        "exampleSentence": "Hi Maria, how are you doing today?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Cómo está usted?",
-        "pronunciation": "KOH-moh ehs-TAH oos-TEHD",
-        "meaningNote": "Tratamiento formal y respetuoso con 'usted' adecuado para desconocidos, dependientes y personas mayores en América Latina. Con amigos se usa '¿cómo estás?'.",
-        "exampleSentence": "Buenas tardes, ¿cómo está usted hoy?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Kumusta po kayo?",
-        "pronunciation": "koo-moos-TAH poh kah-YOH",
-        "meaningNote": "Galing sa Espanyol na '¿Cómo está?'. Ang 'kayo' ay maramihan o magalang na pormang isahan.",
-        "exampleSentence": "Kumusta po kayo ngayong araw?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "nice-to-meet-you",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 5,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Nice to meet you",
-        "pronunciation": null,
-        "meaningNote": "Courteous phrase when introduced to someone for the first time.",
-        "exampleSentence": "I am Carlos, nice to meet you.",
-        "verified": false
-      },
-      "es": {
-        "text": "Mucho gusto en conocerlo",
-        "pronunciation": "MOO-choh GOOS-toh ehn koh-noh-SEHR-loh",
-        "meaningNote": "Fórmula formal con 'usted' (a una mujer se dice 'conocerla'). También se usa ampliamente y de forma neutral solo 'Mucho gusto'.",
-        "exampleSentence": "Mucho gusto en conocerlo, bienvenido a la ciudad.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Ikinagagalak ko po kayong makilala",
-        "pronunciation": "ee-kee-nah-gah-gah-LAHK koh poh kah-YOHNG mah-kee-LAH-lah",
-        "meaningNote": "Tradisiyonal at mataas na antas ng paggalang sa bagong kakilala.",
-        "exampleSentence": "Ikinagagalak ko po kayong makilala, Ginoong Ramos.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "thank-you-very-much",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 6,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Thank you very much",
-        "pronunciation": null,
-        "meaningNote": "Expression of deep or sincere gratitude.",
-        "exampleSentence": "Thank you very much for your kind assistance.",
-        "verified": false
-      },
-      "es": {
-        "text": "Muchas gracias",
-        "pronunciation": "MOO-chahs GRAH-syahs",
-        "meaningNote": "Expresión universal y cálida de agradecimiento en toda América Latina.",
-        "exampleSentence": "Muchas gracias por ayudarme con el equipaje.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Maraming salamat po",
-        "pronunciation": "mah-rah-MEENG sah-LAH-maht poh",
-        "meaningNote": "Karaniwang pagpapasalamat sa kultura ng mga Pilipino.",
-        "exampleSentence": "Maraming salamat po sa inyong tulong.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "you-are-welcome",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 7,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "You are welcome",
-        "pronunciation": null,
-        "meaningNote": "Polite response to being thanked.",
-        "exampleSentence": "You are welcome, happy to help anytime.",
-        "verified": false
-      },
-      "es": {
-        "text": "De nada",
-        "pronunciation": "deh NAH-dah",
-        "meaningNote": "Respuesta cotidiana estándar a un agradecimiento (en Colombia y partes de Centroamérica también es muy común decir 'con gusto').",
-        "exampleSentence": "De nada, fue un placer ayudarle.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Walang anuman po",
-        "pronunciation": "wah-LAHNG ah-noo-MAHN poh",
-        "meaningNote": "Tugon sa pasasalamat na nangangahulugang 'walang anuman / bale-wala iyon'.",
-        "exampleSentence": "Walang anuman po, masaya akong nakatulong sa inyo.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "please",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 8,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Please",
-        "pronunciation": null,
-        "meaningNote": "Fundamental marker of politeness when requesting anything.",
-        "exampleSentence": "Could you please pass the water?",
-        "verified": false
-      },
-      "es": {
-        "text": "Por favor",
-        "pronunciation": "pohr fah-BVOHR",
-        "meaningNote": "Palabra esencial de cortesía para cualquier petición o solicitud de servicio.",
-        "exampleSentence": "Un café con leche, por favor.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Pakiusap po",
-        "pronunciation": "pah-kee-OO-sahp poh",
-        "meaningNote": "Ginagamit din madalas ang panlaping 'paki-' tulad ng 'pakikuha' o 'pakidala'.",
-        "exampleSentence": "Pakiusap po, pakisuyo naman po ng baso.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "excuse-me-pardon",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 9,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Excuse me / Pardon me",
-        "pronunciation": null,
-        "meaningNote": "Used to capture attention politely or to pass through a crowd.",
-        "exampleSentence": "Excuse me, may I get past?",
-        "verified": false
-      },
-      "es": {
-        "text": "Disculpe / Con permiso",
-        "pronunciation": "dees-KOOL-peh / kohn pehr-MEE-soh",
-        "meaningNote": "'Disculpe' (con usted) para llamar la atención de un desconocido; 'con permiso' para pedir paso físico entre personas.",
-        "exampleSentence": "Disculpe, ¿este asiento está libre?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Makikiraan po / Paumanhin po",
-        "pronunciation": "mah-kee-kee-RAH-ahn poh / pow-mahn-HEEN poh",
-        "meaningNote": "'Makikiraan' kapag may dadaanan; 'paumanhin' kapag humihingi ng patawad.",
-        "exampleSentence": "Makikiraan po sandali, kailangan ko lang lumabas.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "goodbye-take-care",
     "categoryId": "greetings",
     "difficulty": 1,
     "sortOrder": 10,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Goodbye, take care",
-        "pronunciation": null,
-        "meaningNote": "Warm parting phrase wishing safety to the other person.",
-        "exampleSentence": "Goodbye, take care on your flight home!",
-        "verified": false
-      },
-      "es": {
-        "text": "Adiós, cuídese mucho",
-        "pronunciation": "ah-DYOHS, KWEE-deh-seh MOO-choh",
-        "meaningNote": "Despedida cordial y protectora con 'usted' (para amigos o confianza se usa 'cuídate').",
-        "exampleSentence": "Adiós, cuídese mucho en su viaje de regreso.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Paalam po, mag-iingat kayo",
-        "pronunciation": "pah-AH-lahm poh, mahg-EENG-aht kah-YOH",
-        "meaningNote": "Magalang na pamamaalam na may kasamang hiling na kaligtasan.",
-        "exampleSentence": "Paalam po, mag-iingat kayo sa inyong biyahe.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "a-table-for-two-please",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 1,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "A table for two, please",
-        "pronunciation": null,
-        "meaningNote": "Standard request when entering a restaurant.",
-        "exampleSentence": "Good evening, a table for two inside, please.",
-        "verified": false
-      },
-      "es": {
-        "text": "Una mesa para dos, por favor",
-        "pronunciation": "OO-nah MEH-sah PAH-rah dohs, pohr fah-BVOHR",
-        "meaningNote": "Petición indispensable al llegar al restaurante y dirigirse al recepcionista o mesero.",
-        "exampleSentence": "Buenas tardes, una mesa para dos cerca de la ventana, por favor.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Mesa po para sa dalawa",
-        "pronunciation": "MEH-sah poh PAH-rah sah dah-lah-WAH",
-        "meaningNote": "Pakiusap sa serbidor o receptionist pagpasok sa kainan.",
-        "exampleSentence": "Magandang gabi po, mesa po para sa dalawa sa may bintana.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "can-i-see-the-menu",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 2,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "May I see the menu, please?",
-        "pronunciation": null,
-        "meaningNote": "Requesting the printed or digital food selection.",
-        "exampleSentence": "Excuse me, may I see the menu and drink specials?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Me permite ver el menú, por favor?",
-        "pronunciation": "meh pehr-MEE-teh vehr ehl meh-NOO, pohr fah-BVOHR",
-        "meaningNote": "En toda América Latina se dice predominantemente 'el menú' (en algunos países del Cono Sur también se comprende 'la carta').",
-        "exampleSentence": "Disculpe, ¿me permite ver el menú de bebidas, por favor?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Puwede po bang makahingi ng menu?",
-        "pronunciation": "pweh-DEH poh bahng mah-kah-HEENG-ee nahng MEH-nyoo",
-        "meaningNote": "Magalang na paghingi ng listahan ng mga inihahaing pagkain.",
-        "exampleSentence": "Puwede po bang makahingi ng menu at listahan ng inumin?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "what-do-you-recommend",
     "categoryId": "food",
     "difficulty": 2,
     "sortOrder": 3,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "What do you recommend here?",
-        "pronunciation": null,
-        "meaningNote": "Inquiring about house specialties or popular local delicacies.",
-        "exampleSentence": "Everything looks tasty; what do you recommend here?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Qué me recomienda de la casa?",
-        "pronunciation": "keh meh reh-koh-MYEHN-dah deh lah KAH-sah",
-        "meaningNote": "Pregunta de cortesía con usted dirigida al mesero para pedir su recomendación del plato estrella.",
-        "exampleSentence": "¿Qué me recomienda de la casa para la cena de hoy?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Ano po ang specialty o masarap dito?",
-        "pronunciation": "ah-NOH poh ahng SPEH-shahl-tee oh mah-sah-RAHP DEE-toh",
-        "meaningNote": "Pagtatanong kung ano ang pinagmamalaking lutuin ng kainan.",
-        "exampleSentence": "Bago lang po kami rito, ano po ang pinakamasarap na ulam dito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "the-check-please",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 4,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Could we have the check, please?",
-        "pronunciation": null,
-        "meaningNote": "Signaling the server that you are ready to settle payment.",
-        "exampleSentence": "We are all done, could we have the check, please?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Nos trae la cuenta, por favor?",
-        "pronunciation": "nohs TRAH-eh lah KWEHN-tah, pohr fah-BVOHR",
-        "meaningNote": "Fórmula general y respetuosa en toda América Latina para solicitar la cuenta al mesero.",
-        "exampleSentence": "¿Nos trae la cuenta, por favor? Vamos a pagar con tarjeta.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Puwede na po bang makuha ang bill?",
-        "pronunciation": "pweh-DEH nah poh bahng mah-KOO-hah ahng beel",
-        "meaningNote": "Ginagamit din sa pang-araw-araw na kainan ang katagang 'Bill out po'.",
-        "exampleSentence": "Tapos na po kaming kumain, puwede na po bang makuha ang bill?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-am-allergic-to-peanuts",
     "categoryId": "food",
     "difficulty": 2,
     "sortOrder": 5,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I am allergic to peanuts",
-        "pronunciation": null,
-        "meaningNote": "Vital health safety advisory for food preparers.",
-        "exampleSentence": "Please ensure there are no nuts in this; I am allergic to peanuts.",
-        "verified": false
-      },
-      "es": {
-        "text": "Soy alérgico al maní",
-        "pronunciation": "soy ah-LEHR-hee-koh ahl mah-NEE",
-        "meaningNote": "'Maní' se usa en Sudamérica, el Caribe y partes de Centroamérica. En México se dice 'cacahuate'. Si es mujer, diga 'alérgica'.",
-        "exampleSentence": "Por favor tenga cuidado al preparar el plato, soy alérgico al maní.",
-        "verified": false
-      },
-      "fil": {
-        "text": "May allergy po ako sa mani",
-        "pronunciation": "my AH-lehr-jee poh ah-KOH sah mah-NEE",
-        "meaningNote": "Mahalagang sabihin kaagad sa naghahain bago simulan ang pagluluto.",
-        "exampleSentence": "Pakisabihan po ang kusina na may allergy po ako sa mani.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "is-this-dish-spicy",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 6,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Is this dish spicy?",
-        "pronunciation": null,
-        "meaningNote": "Clarifying the chili or heat level of a meal.",
-        "exampleSentence": "I have a delicate stomach; is this dish spicy?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Este plato es picante?",
-        "pronunciation": "EHS-teh PLAH-toh ehs pee-KAHN-teh",
-        "meaningNote": "Pregunta habitual para medir el nivel de ají o chile. En México se pregunta comúnmente '¿pica mucho?'.",
-        "exampleSentence": "¿Este plato es muy picante o tiene un aderezo suave?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Maanghang po ba ang pagkaing ito?",
-        "pronunciation": "mah-ahng-HAHNG poh bah ahng pahg-kah-EENG ee-TOH",
-        "meaningNote": "Pagtatanong kung ginamitan ng maraming siling labuyo o maanghang na sangkap.",
-        "exampleSentence": "Hindi po ako sanay sa sili, maanghang po ba ito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "water-without-ice-please",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 7,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Water without ice, please",
-        "pronunciation": null,
-        "meaningNote": "Specifying room-temperature or unchilled water.",
-        "exampleSentence": "Just a glass of tap or bottled water without ice, please.",
-        "verified": false
-      },
-      "es": {
-        "text": "Agua sin hielo, por favor",
-        "pronunciation": "AH-gwah seen YEH-loh, pohr fah-BVOHR",
-        "meaningNote": "Útil para pedir agua al clima o a temperatura ambiente.",
-        "exampleSentence": "¿Me puede servir un vaso de agua sin hielo, por favor?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Tubig po na walang yelo",
-        "pronunciation": "TOO-beeg poh nah wah-LAHNG YEH-loh",
-        "meaningNote": "Pakiusap para sa tubig na katamtaman o hindi pinalamig.",
-        "exampleSentence": "Medyo masama ang lalamunan ko, tubig na lang po na walang yelo.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "delicious-compliment",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 8,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "The food was delicious, thank you",
-        "pronunciation": null,
-        "meaningNote": "Hearty praise for the cook and dining staff.",
-        "exampleSentence": "Compliments to the chef, the food was delicious!",
-        "verified": false
-      },
-      "es": {
-        "text": "La comida estuvo deliciosa, muchas gracias",
-        "pronunciation": "lah koh-MEE-dah ehs-TOO-bvoh deh-lee-SYOH-sah, MOO-chahs GRAH-syahs",
-        "meaningNote": "Cumplido sincero y universal muy apreciado por el mesero y el personal de cocina.",
-        "exampleSentence": "La comida estuvo deliciosa, felicitaciones al cocinero.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Napakasarap po ng pagkain, salamat!",
-        "pronunciation": "nah-pah-kah-sah-RAHP poh nahng pahg-kah-EEN, sah-LAH-maht",
-        "meaningNote": "Taos-pusong papuri sa naghanda at nagluto ng pagkain.",
-        "exampleSentence": "Napakasarap po ng pagkain, tiyak na babalik kami rito.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "is-this-vegetarian",
     "categoryId": "food",
     "difficulty": 2,
     "sortOrder": 9,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Is this dish vegetarian?",
-        "pronunciation": null,
-        "meaningNote": "Verifying lack of meat, poultry, or seafood broth.",
-        "exampleSentence": "Does this soup contain meat broth, or is it strictly vegetarian?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Este plato es vegetariano?",
-        "pronunciation": "EHS-teh PLAH-toh ehs veh-heh-tah-RYAH-noh",
-        "meaningNote": "Conviene confirmar con el mesero que no contenga caldo de carne, pollo ni manteca animal.",
-        "exampleSentence": "¿Este plato es vegetariano o contiene caldo de carne?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Wala po ba itong karne o isda?",
-        "pronunciation": "wah-LAH poh bah ee-TOHNG kahr-NEH oh ees-DAH",
-        "meaningNote": "Mas tiyak at maliwanag sa Pilipinas kaysa sa simpleng 'vegetarian'.",
-        "exampleSentence": "Gulay lang po ang kinakain ko, wala po ba itong halong karne?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "can-i-have-this-to-go",
     "categoryId": "food",
     "difficulty": 1,
     "sortOrder": 10,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Can I have this to go, please?",
-        "pronunciation": null,
-        "meaningNote": "Requesting a takeout box for remaining food.",
-        "exampleSentence": "We could not finish our meal; can I have this to go, please?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Me lo puede poner para llevar, por favor?",
-        "pronunciation": "meh loh PWEH-deh poh-NEHR PAH-rah yeh-BVOHR, pohr fah-BVOHR",
-        "meaningNote": "'Para llevar' es la frase universal en toda América Latina (en Colombia también se usa '¿me lo empaca para llevar?').",
-        "exampleSentence": "No pudimos terminar, ¿me lo puede poner para llevar, por favor?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Puwede po bang ipabalot ito?",
-        "pronunciation": "pweh-DEH poh bahng ee-pah-BAH-loht ee-TOH",
-        "meaningNote": "Ang salitang 'ipabalot' o 'take-out' ang pamilyar na tawag sa Pilipinas.",
-        "exampleSentence": "Medyo marami pa pong natira, puwede po bang ipabalot ito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-is-the-bathroom",
     "categoryId": "directions",
     "difficulty": 1,
     "sortOrder": 1,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where is the bathroom?",
-        "pronunciation": null,
-        "meaningNote": "Essential navigational inquiry.",
-        "exampleSentence": "Excuse me, where is the bathroom located in this building?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde está el baño?",
-        "pronunciation": "DOHN-deh ehs-TAH ehl BAHN-yoh",
-        "meaningNote": "En toda América Latina se dice universalmente 'el baño' (en lugares comerciales a veces está rotulado como 'sanitarios' o 'servicios').",
-        "exampleSentence": "Disculpe, ¿dónde está el baño, por favor?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po ang banyo (palikuran)?",
-        "pronunciation": "sah-AHN poh ahng BAHN-yoh",
-        "meaningNote": "Banyo o 'CR' (Comfort Room) ang karaniwang tawag sa Pilipinas.",
-        "exampleSentence": "Mawalang-galang na po, saan po ang banyo rito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "how-do-i-get-to-the-station",
     "categoryId": "directions",
     "difficulty": 2,
     "sortOrder": 2,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "How do I get to the train station?",
-        "pronunciation": null,
-        "meaningNote": "Asking route guidance towards railway transit.",
-        "exampleSentence": "Pardon me, how do I get to the central train station from here?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Cómo llego a la estación de tren?",
-        "pronunciation": "KOH-moh YEH-goh ah lah ehs-tah-SYOHN deh trehn",
-        "meaningNote": "Pregunta básica para orientarse hacia estaciones de metro, tren o terminales de autobuses.",
-        "exampleSentence": "¿Cómo llego a la estación de tren más cercana a pie?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Paano po pumunta sa istasyon ng tren?",
-        "pronunciation": "pah-AH-noh poh poo-moon-TAH sah ees-tahs-YOHN nahng trehn",
-        "meaningNote": "Pagtatanong kung paano mararating ang estasyon ng tren (LRT/MRT o tren).",
-        "exampleSentence": "Naliligaw po ako, paano po pumunta sa istasyon ng tren?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "is-it-far-from-here",
     "categoryId": "directions",
     "difficulty": 1,
     "sortOrder": 3,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Is it far from here?",
-        "pronunciation": null,
-        "meaningNote": "Estimating walking feasibility versus vehicle hire.",
-        "exampleSentence": "Can we walk there, or is it far from here?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Está lejos de aquí?",
-        "pronunciation": "ehs-TAH LEH-hohs deh ah-KEE",
-        "meaningNote": "Útil para decidir si conviene caminar o tomar un taxi.",
-        "exampleSentence": "¿Está lejos de aquí o se puede llegar fácil caminando?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Malayo po ba mula rito?",
-        "pronunciation": "mah-LAH-yoh poh bah MOO-lah REE-toh",
-        "meaningNote": "Pagsukat kung kayang lakarin o dapat nang sumakay.",
-        "exampleSentence": "Malayo po ba mula rito ang pamilihan kung lalakarin?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "turn-left-at-the-corner",
     "categoryId": "directions",
     "difficulty": 1,
     "sortOrder": 4,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Turn left at the next corner",
-        "pronunciation": null,
-        "meaningNote": "Navigation command directing a left turn.",
-        "exampleSentence": "Walk two blocks, then turn left at the next corner.",
-        "verified": false
-      },
-      "es": {
-        "text": "Gire a la izquierda en la esquina",
-        "pronunciation": "HEE-reh ah lah ees-KYEHR-dah ehn lah ehs-KEE-nah",
-        "meaningNote": "Instrucción formal con 'usted' común en toda la región (en México y Centroamérica también se usa 'dé vuelta a la izquierda').",
-        "exampleSentence": "Camine una cuadra y gire a la izquierda en la esquina.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Kumaliwa po kayo pagdating sa kanto",
-        "pronunciation": "koo-mah-lee-WAH poh kah-YOH pahg-dah-TEENG sah KAHN-toh",
-        "meaningNote": "'Kumaliwa' ang salitang ugat para sa pagliko sa kaliwa.",
-        "exampleSentence": "Kumaliwa po kayo pagdating sa kanto sa tapat ng botika.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "turn-right-after-the-bank",
     "categoryId": "directions",
     "difficulty": 2,
     "sortOrder": 5,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Turn right after the bank",
-        "pronunciation": null,
-        "meaningNote": "Directional landmark instruction.",
-        "exampleSentence": "Keep going straight and turn right after the bank.",
-        "verified": false
-      },
-      "es": {
-        "text": "Gire a la derecha después del banco",
-        "pronunciation": "HEE-reh ah lah deh-REH-chah dehs-PWEHS dehl BAHN-koh",
-        "meaningNote": "Instrucción formal con 'usted'. En México también se escucha con frecuencia 'dé vuelta a la derecha pasando el banco'.",
-        "exampleSentence": "Siga derecho y gire a la derecha después del banco.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Kumanan po kayo paglampas ng bangko",
-        "pronunciation": "koo-MAH-nahn poh kah-YOH pahg-lahm-PAHS nahng BAHNG-koh",
-        "meaningNote": "'Kumanan' ang pagliko sa kanan gamit ang landmark.",
-        "exampleSentence": "Kumanan po kayo paglampas ng malaking bangko sa kanto.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "go-straight-ahead",
     "categoryId": "directions",
     "difficulty": 1,
     "sortOrder": 6,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Go straight ahead",
-        "pronunciation": null,
-        "meaningNote": "Instruction to maintain the current heading without turning.",
-        "exampleSentence": "Go straight ahead until you see the cathedral.",
-        "verified": false
-      },
-      "es": {
-        "text": "Siga derecho",
-        "pronunciation": "SEE-gah deh-REH-choh",
-        "meaningNote": "En América Latina se dice siempre 'siga derecho' o 'vaya derecho' ('siga recto' es de España).",
-        "exampleSentence": "Siga derecho dos cuadras hasta llegar al semáforo.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Dire-diretso lang po kayo",
-        "pronunciation": "dee-reh-dee-REHT-soh lahng poh kah-YOH",
-        "meaningNote": "Ipagpatuloy ang paglakad sa iisang direksyon nang hindi lumiliko.",
-        "exampleSentence": "Dire-diretso lang po kayo hanggang makita ninyo ang arko.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-am-i-on-the-map",
     "categoryId": "directions",
     "difficulty": 2,
     "sortOrder": 7,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where am I on this map?",
-        "pronunciation": null,
-        "meaningNote": "Asking a passerby to pinpoint your current location.",
-        "exampleSentence": "I lost my orientation; where am I on this map?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde estoy en este mapa?",
-        "pronunciation": "DOHN-deh ehs-TOY ehn EHS-teh MAH-pah",
-        "meaningNote": "Pregunta con respeto dirigida a un transeúnte para señalar la ubicación exacta.",
-        "exampleSentence": "¿Me puede indicar por favor dónde estoy en este mapa?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Nasaan po ako rito sa mapa?",
-        "pronunciation": "nah-SAH-ahn poh ah-KOH REE-toh sah MAH-pah",
-        "meaningNote": "Pagtatanong kung anong bahagi ng mapa ang kinaroroonan ngayon.",
-        "exampleSentence": "Medyo nalilito po ako, nasaan po ako rito sa mapa?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "is-it-within-walking-distance",
     "categoryId": "directions",
     "difficulty": 2,
     "sortOrder": 8,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Is it within walking distance?",
-        "pronunciation": null,
-        "meaningNote": "Inquiring if a destination can be reached comfortably by foot.",
-        "exampleSentence": "Is the museum within walking distance from our hotel?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Se puede llegar caminando?",
-        "pronunciation": "seh PWEH-deh yeh-GAHR kah-mee-NAHN-doh",
-        "meaningNote": "Frase natural para consultar si la distancia es apropiada para caminar.",
-        "exampleSentence": "¿Se puede llegar caminando al centro histórico desde aquí?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Kaya po bang lakarin mula rito?",
-        "pronunciation": "KAH-yah poh bahng lah-kah-REEN MOO-lah REE-toh",
-        "meaningNote": "Pag-alam kung maikli lang ang distansya at hindi kailangang mag-commute.",
-        "exampleSentence": "Kaya po bang lakarin mula rito papunta sa museo?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-is-the-bus-stop",
     "categoryId": "directions",
     "difficulty": 1,
     "sortOrder": 9,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where is the nearest bus stop?",
-        "pronunciation": null,
-        "meaningNote": "Locating local surface transit.",
-        "exampleSentence": "Could you tell me where the nearest bus stop is?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde queda la parada de autobús?",
-        "pronunciation": "DOHN-deh KEH-dah lah pah-RAH-dah deh ow-toh-BOOS",
-        "meaningNote": "'Autobús' o 'bus' se entiende en toda América Latina (en México se dice frecuentemente 'camión', en Argentina 'colectivo', y en el Caribe 'guagua').",
-        "exampleSentence": "Disculpe, ¿dónde queda la parada de autobús más cercana?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po ang sakayan ng bus o dyip?",
-        "pronunciation": "sah-AHN poh ahng sah-kah-YAHN nahng boos oh jeep",
-        "meaningNote": "Karaniwang tinatanong sa Pilipinas ang sakayan ng bus o jeepney.",
-        "exampleSentence": "Saan po ang sakayan ng bus papuntang kabayanan?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-am-lost-can-you-help",
     "categoryId": "directions",
     "difficulty": 2,
     "sortOrder": 10,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I am lost, can you help me?",
-        "pronunciation": null,
-        "meaningNote": "Courteous plea for navigational help when disoriented.",
-        "exampleSentence": "Excuse me, I am lost, can you help me find my hotel?",
-        "verified": false
-      },
-      "es": {
-        "text": "Estoy perdido, ¿me puede ayudar?",
-        "pronunciation": "ehs-TOY pehr-DEE-doh, meh PWEH-deh ah-yoo-DAHR",
-        "meaningNote": "Fórmula cortés formal con usted (una mujer dice 'estoy perdida').",
-        "exampleSentence": "Buenas tardes, estoy perdido, ¿me puede ayudar a encontrar esta dirección?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Naliligaw po ako, puwede po bang magpatulong?",
-        "pronunciation": "nah-lee-lee-GOW poh ah-KOH, pweh-DEH poh bahng mahg-pah-TOO-lohng",
-        "meaningNote": "Magalang na paghiling ng tulong kapag hindi alam ang direksyon.",
-        "exampleSentence": "Magandang araw po, naliligaw po ako, puwede po bang magpatulong?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-is-baggage-claim",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 1,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where is the baggage claim area?",
-        "pronunciation": null,
-        "meaningNote": "Inquiring about carousel location upon flight landing.",
-        "exampleSentence": "Our flight just landed; where is the baggage claim area?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde se recoge el equipaje?",
-        "pronunciation": "DOHN-deh seh reh-KOH-heh ehl eh-kee-PAH-heh",
-        "meaningNote": "En aeropuertos latinoamericanos se utiliza comúnmente 'recoger el equipaje', 'reclamo de equipaje' o 'entrega de equipaje'.",
-        "exampleSentence": "Acabamos de aterrizar, ¿dónde se recoge el equipaje del vuelo 304?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po ang kuhanin ng bagahe?",
-        "pronunciation": "sah-AHN poh ahng koo-HAH-neen nahng bah-GAH-heh",
-        "meaningNote": "Lugar kung saan kinukuha ang mga maleta sa airport o daungan.",
-        "exampleSentence": "Kakarating lang po namin, saan po ang kuhanin ng bagahe?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-have-a-hotel-reservation",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 2,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I have a reservation under this name",
-        "pronunciation": null,
-        "meaningNote": "Standard introduction at hotel front desk check-in.",
-        "exampleSentence": "Good afternoon, I have a reservation under Sarah Jenkins.",
-        "verified": false
-      },
-      "es": {
-        "text": "Tengo una reservación a este nombre",
-        "pronunciation": "TEHN-goh OO-nah reh-sehr-bvah-SYOHN ah EHS-teh NOHM-breh",
-        "meaningNote": "En América Latina se usa ampliamente 'reservación' (especialmente en México y el Caribe) y también 'reserva' (común en Sudamérica).",
-        "exampleSentence": "Buenas tardes, tengo una reservación a este nombre por tres noches.",
-        "verified": false
-      },
-      "fil": {
-        "text": "May reservation po ako sa pangalang ito",
-        "pronunciation": "my reh-sehr-bahs-YOHN poh ah-KOH sah pah-NGAH-lahng ee-TOH",
-        "meaningNote": "Pagsasabi sa receptionist ng hotel sa oras ng check-in.",
-        "exampleSentence": "Magandang hapon po, may reservation po ako sa pangalang Juan Cruz.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "what-time-is-checkout",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 3,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "What time is checkout tomorrow?",
-        "pronunciation": null,
-        "meaningNote": "Clarifying hotel departure hour rules.",
-        "exampleSentence": "Could you tell me what time checkout is tomorrow morning?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿A qué hora es la salida (check-out) mañana?",
-        "pronunciation": "ah keh OH-rah ehs lah sah-LEE-dah mahn-YAH-nah",
-        "meaningNote": "En la hotelería de América Latina se comprende de inmediato 'la hora de salida' o el anglicismo habitual 'el check-out'.",
-        "exampleSentence": "Disculpe, ¿a qué hora es la hora de salida de la habitación mañana?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Anong oras po ang check-out bukas?",
-        "pronunciation": "ah-NOHNG OH-rahs poh ahng chehk-owt BOO-kahs",
-        "meaningNote": "Pagtitiyak kung kailan dapat lisanin ang silid sa tuluyan.",
-        "exampleSentence": "Anong oras po ang check-out bukas para maihanda ang gamit?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "how-much-is-a-ticket-to",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 4,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "How much is a ticket to the city center?",
-        "pronunciation": null,
-        "meaningNote": "Inquiring about transit ticket fares.",
-        "exampleSentence": "Hello, how much is a one-way ticket to the city center?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Cuánto cuesta un boleto al centro?",
-        "pronunciation": "KWAHN-toh KWEHS-tah oon boh-LEH-toh ahl SEHN-troh",
-        "meaningNote": "En América Latina se usa universalmente 'boleto' (en México, Centroamérica y el Caribe) o 'pasaje' (en Sudamérica). La palabra 'billete' es casi exclusiva de España.",
-        "exampleSentence": "¿Cuánto cuesta un boleto de ida al centro de la ciudad?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Magkano po ang pamasahe papuntang sentro?",
-        "pronunciation": "mahg-KAH-noh poh ahng pah-mah-SAH-heh pah-poon-TAHNG SEHN-troh",
-        "meaningNote": "'Pamasahe' ang tawag sa bayad sa transportasyon tulad ng tren, bus, o dyip.",
-        "exampleSentence": "Magkano po ang pamasahe papuntang kabayanan o sentro?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "which-platform-for-the-airport",
     "categoryId": "travel",
     "difficulty": 2,
     "sortOrder": 5,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Which platform does the airport train leave from?",
-        "pronunciation": null,
-        "meaningNote": "Track or platform navigation in a rail station.",
-        "exampleSentence": "Excuse me, which platform does the airport express leave from?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿De qué andén sale el tren al aeropuerto?",
-        "pronunciation": "deh keh ahn-DEHN SAH-leh ehl trehn ahl ah-eh-roh-PWEHR-toh",
-        "meaningNote": "'Andén' o 'plataforma' es el término estándar para trenes y metros en América Latina.",
-        "exampleSentence": "¿De qué andén sale el próximo tren hacia el aeropuerto internacional?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saang platform po sasakay papuntang paliparan?",
-        "pronunciation": "sah-AHNG PLAHT-fohrm poh sah-SAH-kye pah-poon-TAHNG pah-lee-PAH-rahn",
-        "meaningNote": "Paliparan ang pormal na Tagalog ng airport.",
-        "exampleSentence": "Saang platform po sasakay papuntang paliparan (airport)?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "can-you-call-a-taxi",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 6,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Could you call a taxi for me, please?",
-        "pronunciation": null,
-        "meaningNote": "Requesting transport assistance from hotel staff or a business.",
-        "exampleSentence": "I have heavy bags; could you call a taxi for me, please?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Podría pedirme un taxi, por favor?",
-        "pronunciation": "poh-DREE-ah peh-DEER-meh oon TAHK-see, pohr fah-BVOHR",
-        "meaningNote": "Petición formal dirigida al personal del hotel o negocio empleando 'usted'.",
-        "exampleSentence": "¿Podría pedirme un taxi para ir a la terminal de autobuses, por favor?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Puwede po ba ninyo akong tawagan ng taksi?",
-        "pronunciation": "pweh-DEH poh bah neen-YOH ah-KOHNG tah-wah-GAHN nahng TAHK-see",
-        "meaningNote": "Pakiusap sa bantay o receptionist upang tumawag ng masasakyan.",
-        "exampleSentence": "Medyo maulan po, puwede po ba ninyo akong tawagan ng taksi?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "do-you-have-wifi",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 7,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Do you have Wi-Fi here, and what is the password?",
-        "pronunciation": null,
-        "meaningNote": "Requesting wireless internet access credentials.",
-        "exampleSentence": "Excuse me, do you have Wi-Fi here, and what is the password?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Tienen wifi aquí y cuál es la contraseña?",
-        "pronunciation": "TYEH-nehn WAI-fai ah-KEE ee kwahl ehs lah kohn-trah-SEHN-yah",
-        "meaningNote": "En toda América Latina se pronuncia 'uai-fai' ('güifi' se usa exclusivamente en España). La clave también se conoce coloquialmente como 'clave de wifi'.",
-        "exampleSentence": "Disculpe, ¿tienen wifi para clientes y cuál es la contraseña?",
-        "verified": false
-      },
-      "fil": {
-        "text": "May Wi-Fi po ba rito at ano po ang password?",
-        "pronunciation": "my WAI-fai poh bah REE-toh aht ah-NOH poh ahng PAHS-wohrd",
-        "meaningNote": "Pangkaraniwang tanong sa mga kapihan o panuluyan.",
-        "exampleSentence": "Puwede po bang magtanong, may Wi-Fi po ba rito at ano ang password?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "can-i-leave-my-luggage-here",
     "categoryId": "travel",
     "difficulty": 2,
     "sortOrder": 8,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Can I leave my luggage here for a few hours?",
-        "pronunciation": null,
-        "meaningNote": "Temporary baggage storage request before room readiness or after checkout.",
-        "exampleSentence": "Our flight departs late; can I leave my luggage here for a few hours?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Puedo dejar mi equipaje aquí unas horas?",
-        "pronunciation": "PWEH-doh deh-HAHR mee eh-kee-PAH-heh ah-KEE OO-nahs OH-rahs",
-        "meaningNote": "En hoteles latinoamericanos se dice 'guardar el equipaje' (el término 'consigna' se usa en España).",
-        "exampleSentence": "¿Puedo dejar mi equipaje guardado aquí unas horas hasta mi vuelo?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Puwede ko po bang iwan muna ang aking bagahe nang ilang oras?",
-        "pronunciation": "pweh-DEH koh poh bahng EE-wahn MOO-nah ahng AH-keeng bah-GAH-heh nahng EE-lahng OH-rahs",
-        "meaningNote": "Pakiusap sa concierge o staff na magtabi pansamantala ng maleta.",
-        "exampleSentence": "Mamayang gabi pa po ang biyahe ko, puwede ko po bang iwan muna ang bagahe ko rito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "do-you-accept-credit-cards",
     "categoryId": "travel",
     "difficulty": 1,
     "sortOrder": 9,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Do you accept credit cards or cash only?",
-        "pronunciation": null,
-        "meaningNote": "Clarifying payment methods before ordering goods or services.",
-        "exampleSentence": "Before we order, do you accept credit cards or cash only?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Aceptan tarjeta de crédito o solo efectivo?",
-        "pronunciation": "ah-SEHP-tahn tahr-HEH-tah deh KREH-dee-toh oh SOH-loh eh-fehk-TEE-bvoh",
-        "meaningNote": "Fórmula formal en plural dirigida al personal de una tienda o restaurante usando 'ustedes'.",
-        "exampleSentence": "Disculpe, ¿aceptan tarjeta de crédito o solo pago en efectivo?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Tumatanggap po ba kayo ng card o cash lang?",
-        "pronunciation": "too-mahn-tahng-GAHP poh bah kah-YOH nahng kahrd oh kahsh lahng",
-        "meaningNote": "Pagtitiyak kung kailangan ng perang papel o puwede ang card / e-wallet.",
-        "exampleSentence": "Bago po ako bumili, tumatanggap po ba kayo ng card o cash lang po?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-can-i-exchange-currency",
     "categoryId": "travel",
     "difficulty": 2,
     "sortOrder": 10,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where can I safely exchange currency?",
-        "pronunciation": null,
-        "meaningNote": "Locating an authorized foreign currency exchange office.",
-        "exampleSentence": "Excuse me, where can I safely exchange foreign currency nearby?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde puedo cambiar dinero de forma segura?",
-        "pronunciation": "DOHN-deh PWEH-doh kahm-BYAHR dee-NEH-roh deh FOHR-mah seh-GOO-rah",
-        "meaningNote": "Para ubicar una 'casa de cambio' oficial o banco y evitar el cambio informal en la calle.",
-        "exampleSentence": "¿Dónde puedo cambiar dólares de forma segura por esta zona?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po puwedeng magpapalit ng pera nang ligtas?",
-        "pronunciation": "sah-AHN poh pweh-DEHNG mahg-pah-pah-LEET nahng PEH-rah nahng leeg-TAHS",
-        "meaningNote": "Paghahanap ng lehitimong money changer o bangko para magpalit ng dayuhang salapi.",
-        "exampleSentence": "May dalang dolyar po ako, saan po puwedeng magpapalit ng pera nang ligtas?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "help-me-please",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 1,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Please help me! / I need help",
-        "pronunciation": null,
-        "meaningNote": "Urgent, universal cry for immediate assistance in distress.",
-        "exampleSentence": "Please help me, somebody grabbed my backpack!",
-        "verified": false
-      },
-      "es": {
-        "text": "¡Ayúdeme, por favor! / ¡Necesito ayuda!",
-        "pronunciation": "ah-YOO-deh-meh, pohr fah-BVOHR / neh-seh-SEE-toh ah-YOO-dah",
-        "meaningNote": "Grito urgente de socorro formulado formalmente con 'usted' ('ayúdeme').",
-        "exampleSentence": "¡Ayúdeme, por favor, alguien me robó la mochila!",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saklolo po! / Tulungan po ninyo ako!",
-        "pronunciation": "sahk-LOH-loh poh / too-LOO-ngahn poh neen-YOH ah-KOH",
-        "meaningNote": "Ang 'saklolo' ang tradisyonal na tawag sa oras ng matinding kapahamakan.",
-        "exampleSentence": "Saklolo po! Tulungan po ninyo ako, may magnanakaw!",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "call-an-ambulance",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 2,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Call an ambulance immediately!",
-        "pronunciation": null,
-        "meaningNote": "Direct medical emergency instruction to bystanders.",
-        "exampleSentence": "Someone collapsed; please call an ambulance immediately!",
-        "verified": false
-      },
-      "es": {
-        "text": "¡Llame a una ambulancia de inmediato!",
-        "pronunciation": "YAH-meh ah OO-nah ahm-boo-LAHN-syah deh een-meh-DYAH-toh",
-        "meaningNote": "Instrucción formal con 'usted' para pedir auxilio médico urgente a quienes estén presentes.",
-        "exampleSentence": "¡Rápido, llame a una ambulancia, esta persona se desmayó!",
-        "verified": false
-      },
-      "fil": {
-        "text": "Tumawag po kayo ng ambulansya agad!",
-        "pronunciation": "too-MAH-wahg poh kah-YOH nahng ahm-boo-LAHN-syah AH-gahd",
-        "meaningNote": "Pakiusap sa mga tao sa paligid kapag may malubhang aksidente o karamdaman.",
-        "exampleSentence": "May nawalan ng malay, tumawag po kayo ng ambulansya agad!",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "call-the-police",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 3,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Call the police right now!",
-        "pronunciation": null,
-        "meaningNote": "Instruction to contact law enforcement immediately.",
-        "exampleSentence": "There has been a break-in; please call the police right now!",
-        "verified": false
-      },
-      "es": {
-        "text": "¡Llame a la policía ahora mismo!",
-        "pronunciation": "YAH-meh ah lah poh-lee-SEE-ah ah-OH-rah MEES-moh",
-        "meaningNote": "Llamado formal con 'usted' para alertar a las fuerzas del orden ante un delito o riesgo.",
-        "exampleSentence": "¡Nos acaban de robar, llame a la policía ahora mismo!",
-        "verified": false
-      },
-      "fil": {
-        "text": "Tumawag po kayo ng pulis ngayon din!",
-        "pronunciation": "too-MAH-wahg poh kah-YOH nahng poo-LEES ngah-YOHN deen",
-        "meaningNote": "Paghingi ng saklolo sa mga pulis kapag may krimen o panganib.",
-        "exampleSentence": "May nanggugulo po sa labas, tumawag po kayo ng pulis ngayon din!",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-is-the-nearest-hospital",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 4,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where is the nearest hospital or clinic?",
-        "pronunciation": null,
-        "meaningNote": "Locating urgent medical attention facilities.",
-        "exampleSentence": "My companion has severe abdominal pain; where is the nearest hospital?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde está el hospital más cercano?",
-        "pronunciation": "DOHN-deh ehs-TAH ehl ohs-pee-TAHL mahs sehr-KAH-noh",
-        "meaningNote": "Pregunta básica para recibir atención hospitalaria o de urgencias médicas.",
-        "exampleSentence": "Tengo un dolor muy fuerte, ¿dónde está el hospital más cercano?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po ang pinakamalapit na ospital o klinika?",
-        "pronunciation": "sah-AHN poh ahng pee-nah-kah-mah-LAH-peet nah ohs-pee-TAHL oh KLEE-nee-kah",
-        "meaningNote": "Pagtatanong kung nasaan ang pinakamalapit na pagamutan.",
-        "exampleSentence": "Masama po ang pakiramdam ko, saan po ang pinakamalapit na ospital?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-need-a-doctor",
     "categoryId": "emergencies",
     "difficulty": 2,
     "sortOrder": 5,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I need to see a doctor who speaks English",
-        "pronunciation": null,
-        "meaningNote": "Requesting a bilingual physician to guarantee clear clinical diagnosis.",
-        "exampleSentence": "I feel unwell and need to see a doctor who speaks English.",
-        "verified": false
-      },
-      "es": {
-        "text": "Necesito ver a un médico que hable inglés",
-        "pronunciation": "neh-seh-SEE-toh vehr ah oon MEH-dee-koh keh AH-bvleh een-GLEHS",
-        "meaningNote": "En América Latina también se dice comúnmente 'a un doctor'. Esencial para evitar malentendidos en síntomas o medicamentos.",
-        "exampleSentence": "Me siento muy mal, necesito ver a un médico que hable inglés, por favor.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Kailangan ko po ng doktor ngayon din",
-        "pronunciation": "kye-lah-NGAHN koh poh nahng dohk-TOHR ngah-YOHN deen",
-        "meaningNote": "Pangangailangan ng ekspertong medikal upang magsagawa ng pagsusuri.",
-        "exampleSentence": "Mataas po ang lagnat ng kasama ko, kailangan ko po ng doktor ngayon din.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "where-is-a-pharmacy",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 6,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "Where is the nearest open pharmacy?",
-        "pronunciation": null,
-        "meaningNote": "Finding prescription or over-the-counter medicine.",
-        "exampleSentence": "I have a headache; where is the nearest open pharmacy?",
-        "verified": false
-      },
-      "es": {
-        "text": "¿Dónde hay una farmacia abierta las 24 horas?",
-        "pronunciation": "DOHN-deh eye OO-nah fahr-MAH-syah ah-BVYEHR-tah lahs veyn-tee-KWAH-troh OH-rahs",
-        "meaningNote": "'Farmacia abierta las 24 horas' es la expresión más clara en toda América Latina (en el Cono Sur también se entiende 'farmacia de turno', y en México 'farmacia de guardia').",
-        "exampleSentence": "Disculpe, ¿dónde hay una farmacia abierta las 24 horas por aquí?",
-        "verified": false
-      },
-      "fil": {
-        "text": "Saan po may bukas na botika o parmasya?",
-        "pronunciation": "sah-AHN poh my BOO-kahs nah boh-TEE-kah oh pahr-MAHS-yah",
-        "meaningNote": "'Botika' o 'drugstore' ang karaniwang bilihan ng gamot.",
-        "exampleSentence": "Kailangan ko po ng gamot sa ubo, saan po may bukas na botika rito?",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-lost-my-passport",
     "categoryId": "emergencies",
     "difficulty": 2,
     "sortOrder": 7,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I lost my passport and wallet",
-        "pronunciation": null,
-        "meaningNote": "Reporting missing legal identification and funds to authorities.",
-        "exampleSentence": "I need help reaching my embassy because I lost my passport.",
-        "verified": false
-      },
-      "es": {
-        "text": "Perdí mi pasaporte y mi billetera",
-        "pronunciation": "pehr-DEE mee pah-sah-POHR-teh ee mee bee-yeh-TEH-rah",
-        "meaningNote": "En América Latina se usa universalmente 'billetera' o 'cartera'. Es indispensable para hacer la denuncia policial y pedir salvoconducto consular.",
-        "exampleSentence": "Por favor ayúdeme, perdí mi pasaporte y mi billetera en el autobús.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Nawala po ang aking pasaporte at pitaka",
-        "pronunciation": "nah-wah-LAH poh ahng AH-keeng pah-sah-POHR-teh aht pee-TAH-kah",
-        "meaningNote": "Kailangang i-ulat agad sa pulisya at embahada.",
-        "exampleSentence": "Naiwan ko po sa taksi kanina, nawala po ang aking pasaporte at pitaka.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-cannot-breathe",
     "categoryId": "emergencies",
     "difficulty": 2,
     "sortOrder": 8,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I am having trouble breathing",
-        "pronunciation": null,
-        "meaningNote": "Critical indicator of asthma, allergic anaphylaxis, or cardiac issues.",
-        "exampleSentence": "Please sit me up and assist me, I am having trouble breathing.",
-        "verified": false
-      },
-      "es": {
-        "text": "No puedo respirar bien / Me cuesta respirar",
-        "pronunciation": "noh PWEH-doh rehs-pee-RAHR byehn / meh KWEHS-tah rehs-pee-RAHR",
-        "meaningNote": "Síntoma de alerta médica urgente en caso de crisis asmática, reacción alérgica o afección cardíaca.",
-        "exampleSentence": "Ayúdeme, por favor, no puedo respirar bien y me duele el pecho.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Nahihirapan po akong huminga",
-        "pronunciation": "nah-hee-hee-RAH-pahn poh ah-KOHNG hoo-MEE-ngah",
-        "meaningNote": "Kritikal na sitwasyon na kailangan agad ng hangin at tulong medikal.",
-        "exampleSentence": "Pakiusap, bigyan ninyo ako ng espasyo, nahihirapan po akong huminga.",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "there-is-a-fire",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 9,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "There is a fire, evacuate the building!",
-        "pronunciation": null,
-        "meaningNote": "Urgent hazard warning to prompt building evacuation.",
-        "exampleSentence": "I smell thick smoke; there is a fire, evacuate the building!",
-        "verified": false
-      },
-      "es": {
-        "text": "¡Hay un incendio, salgan del edificio!",
-        "pronunciation": "eye oon een-SEHN-dyoh, SAHL-gahn dehl eh-dee-FEE-syoh",
-        "meaningNote": "Voz de alerta dirigida a varias personas utilizando 'ustedes' ('salgan', nunca el vosotros peninsular 'salid').",
-        "exampleSentence": "¡Cuidado a todos, hay un incendio en el segundo piso, salgan!",
-        "verified": false
-      },
-      "fil": {
-        "text": "May sunog po, lumikas na tayo sa gusali!",
-        "pronunciation": "my SOO-nohg poh, loo-MEE-kahs nah TAH-yoh sah goo-SAH-lee",
-        "meaningNote": "Babala upang agad lumikas at pumunta sa fire exit.",
-        "exampleSentence": "May makapal na usok sa kusina, may sunog po, lumikas na tayo!",
-        "verified": false
-      }
-    }
+    "isActive": true
   },
   {
     "slug": "i-feel-very-dizzy",
     "categoryId": "emergencies",
     "difficulty": 1,
     "sortOrder": 10,
-    "isActive": true,
-    "translations": {
-      "en": {
-        "text": "I feel very dizzy and weak",
-        "pronunciation": null,
-        "meaningNote": "Pre-syncope or dehydration indicator.",
-        "exampleSentence": "I need to sit down immediately; I feel very dizzy and weak.",
-        "verified": false
-      },
-      "es": {
-        "text": "Me siento muy mareado y débil",
-        "pronunciation": "meh SYEHN-toh MOOY mah-reh-AH-doh ee DEH-beel",
-        "meaningNote": "Una mujer dice 'mareada'. Alerta ante posible desmayo, deshidratación o golpe de calor.",
-        "exampleSentence": "Necesito sentarme un momento a la sombra, me siento muy mareado.",
-        "verified": false
-      },
-      "fil": {
-        "text": "Nahihilo po ako at nanghihina",
-        "pronunciation": "nah-hee-HEE-loh poh ah-KOH aht nahng-hee-HEE-nah",
-        "meaningNote": "Babala na maaaring himatayin o nanunuyo ang lalamunan at katawan.",
-        "exampleSentence": "Puwede po bang makahingi ng upuan? Nahihilo po ako at nanghihina.",
-        "verified": false
-      }
-    }
+    "isActive": true
   }
 ]

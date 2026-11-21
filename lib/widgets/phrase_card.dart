@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import '../models/language.dart';
 import '../models/phrase.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
@@ -7,6 +8,7 @@ import 'app_auth_scope.dart';
 import 'app_favorite_button.dart';
 import 'app_settings_scope.dart';
 import 'app_user_phrase_scope.dart';
+import 'localized_phrase_text.dart';
 import 'require_sign_in.dart';
 
 /// Minimalist, approachable phrase card prioritizing legibility and context.
@@ -190,41 +192,56 @@ class _PhraseCardState extends State<PhraseCard> {
                     const SizedBox(height: AppSpacing.sm),
 
                     // Main Text: Target Language Translation (largest focus)
-                    Text(
+                    LocalizedPhraseText(
                       mainText,
+                      languageCode: targetCode,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.w700,
                         height: 1.3,
                       ),
-                      softWrap: true,
                     ),
 
                     // Sub Text: Native Language Phrase
                     if (subText.isNotEmpty && subText != mainText) ...[
                       const SizedBox(height: 2),
-                      Text(
+                      LocalizedPhraseText(
                         subText,
+                        languageCode: nativeCode,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.w500,
                           color: theme.colorScheme.onSurface,
                           height: 1.3,
                         ),
-                        softWrap: true,
                       ),
                     ],
 
-                    // Pronunciation in small text
+                    // Pronunciation in small text labeled with target language's pronunciationSystem
                     if (pronunciation != null && pronunciation.isNotEmpty) ...[
                       const SizedBox(height: 2),
-                      Text(
-                        pronunciation,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontSize: 12.0,
-                        ),
-                        softWrap: true,
+                      Wrap(
+                        spacing: AppSpacing.xs,
+                        runSpacing: 2,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            '${Language.defaultPronunciationSystemFor(targetCode)}:',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 11.0,
+                            ),
+                          ),
+                          Text(
+                            pronunciation,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: theme.colorScheme.onSurfaceVariant,
+                              fontSize: 12.0,
+                            ),
+                            softWrap: true,
+                          ),
+                        ],
                       ),
                     ],
 
