@@ -205,7 +205,9 @@ GoRouter createAppRouter({
       GoRoute(
         path: '/translator',
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => const TranslatorScreen(),
+        builder: (context, state) => TranslatorScreen(
+          initialQuery: state.uri.queryParameters['q'],
+        ),
       ),
       GoRoute(
         path: '/translator/history',

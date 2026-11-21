@@ -241,6 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // 6. Favorites (directly below the list or grid of categories)
           _buildFavoritesSection(theme, isDark, nativeCode, targetCode, auth, userPhraseCtrl, isSignedIn),
 
+          const SizedBox(height: AppSpacing.xl),
+
+          // 7. Translate a phrase entry point (below Favorites so existing layout is untouched)
+          _buildTranslatorEntryCard(theme, isDark, nativeLang, targetLang),
+
           const SizedBox(height: AppSpacing.xxl),
         ],
       ),
@@ -821,6 +826,80 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
       ],
+    );
+  }
+
+  Widget _buildTranslatorEntryCard(
+    ThemeData theme,
+    bool isDark,
+    Language nativeLang,
+    Language targetLang,
+  ) {
+    return Semantics(
+      button: true,
+      label: 'Translate a phrase from ${nativeLang.name} to ${targetLang.name}',
+      child: Material(
+        color: theme.colorScheme.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+          side: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () => context.push('/translator'),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+                  ),
+                  child: Icon(
+                    Icons.translate_rounded,
+                    color: theme.colorScheme.onPrimaryContainer,
+                    size: AppSpacing.iconMd,
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Translate a phrase',
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Get a ${targetLang.name} translation, pronunciation, and example',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                        softWrap: true,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

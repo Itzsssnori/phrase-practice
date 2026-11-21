@@ -7,6 +7,7 @@ import 'package:phrase_practice/models/language.dart';
 import 'package:phrase_practice/models/phrase.dart';
 import 'package:phrase_practice/models/phrase_translation.dart';
 import 'package:phrase_practice/models/quiz_attempt.dart';
+import 'package:phrase_practice/models/translation_entry.dart';
 import 'package:phrase_practice/models/user_profile.dart';
 import 'package:phrase_practice/screens/categories_screen.dart';
 import 'package:phrase_practice/screens/category_phrases_screen.dart';
@@ -21,22 +22,27 @@ import 'package:phrase_practice/screens/quiz_screen.dart';
 import 'package:phrase_practice/screens/quiz_setup_screen.dart';
 import 'package:phrase_practice/screens/review_mistakes_screen.dart';
 import 'package:phrase_practice/screens/search_screen.dart';
+import 'package:phrase_practice/screens/translator_history_screen.dart';
+import 'package:phrase_practice/screens/translator_screen.dart';
 import 'package:phrase_practice/services/auth_controller.dart';
 import 'package:phrase_practice/services/browse_data_service.dart';
 import 'package:phrase_practice/services/language_settings_controller.dart';
 import 'package:phrase_practice/services/progress_controller.dart';
 import 'package:phrase_practice/services/quiz_controller.dart';
+import 'package:phrase_practice/services/translator_controller.dart';
 import 'package:phrase_practice/theme/app_theme.dart';
 import 'package:phrase_practice/widgets/app_auth_scope.dart';
 import 'package:phrase_practice/widgets/app_progress_scope.dart';
 import 'package:phrase_practice/widgets/app_quiz_scope.dart';
 import 'package:phrase_practice/widgets/app_settings_scope.dart';
+import 'package:phrase_practice/widgets/app_translator_scope.dart';
 import 'package:phrase_practice/widgets/language_picker_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'stage_3_browse_test.dart';
 import 'stage_4_auth_test.dart' as auth_fakes;
 import 'stage_6_quiz_test.dart' as quiz_fakes;
+import 'stage_8_translator_test.dart' as translator_fakes;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -616,6 +622,116 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull, reason: 'Overflow on PrivacyScreen');
+    });
+
+    testWidgets('TranslatorScreen (with long result) has zero overflow at 320px width and 1.5x scale', (tester) async {
+      final settings = LanguageSettingsController();
+      await settings.load();
+      final authRepo = auth_fakes.FakeAuthRepository(
+        initialUser: const AuthUser(uid: 'u1', email: 'ana@example.com', emailVerified: true),
+      );
+      final authCtrl = AuthController(
+        authRepository: authRepo,
+        profileRepository: auth_fakes.FakeProfileRepository(),
+      );
+      final translatorCtrl = TranslatorController(
+        translatorRepository: translator_fakes.FakeTranslatorRepository(),
+        historyRepository: translator_fakes.FakeTranslationHistoryRepository(),
+        authController: authCtrl,
+        isAvailableOverride: () => true,
+      );
+      await translatorCtrl.translate(
+        rawInput: 'Excuse me, I have a severe allergy to peanuts and shellfish.',
+        sourceLanguage: const Language(code: 'en', name: 'English', nativeName: 'English'),
+        targetLanguage: const Language(code: 'es', name: 'Spanish', nativeName: 'Español'),
+      );
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320.0, 600.0),
+            textScaler: TextScaler.linear(1.5),
+          ),
+          child: AppAuthScope(
+            controller: authCtrl,
+            child: AppSettingsScope(
+              controller: settings,
+              child: AppTranslatorScope(
+                controller: translatorCtrl,
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme.lightTheme,
+                  home: const TranslatorScreen(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Overflow on TranslatorScreen');
+
+      translatorCtrl.dispose();
+      authCtrl.dispose();
+      authRepo.dispose();
+    });
+
+    testWidgets('TranslatorHistoryScreen has zero overflow at 320px width and 1.5x scale', (tester) async {
+      final settings = LanguageSettingsController();
+      await settings.load();
+      final authRepo = auth_fakes.FakeAuthRepository(
+        initialUser: const AuthUser(uid: 'u1', email: 'ana@example.com', emailVerified: true),
+      );
+      final authCtrl = AuthController(
+        authRepository: authRepo,
+        profileRepository: auth_fakes.FakeProfileRepository(),
+      );
+      final translatorCtrl = TranslatorController(
+        translatorRepository: translator_fakes.FakeTranslatorRepository(),
+        historyRepository: translator_fakes.FakeTranslationHistoryRepository(
+          initialItems: [
+            TranslationHistoryItem(
+              id: 'h1',
+              inputText: 'Could you please show me the way to the nearest pharmacy?',
+              sourceLanguageCode: 'en',
+              targetLanguageCode: 'fil',
+              translatedText: 'Maaari po ba ninyong ituro sa akin ang daan papunta sa pinakamalapit na botika?',
+              createdAt: DateTime(2026, 11, 21),
+            ),
+          ],
+        ),
+        authController: authCtrl,
+        isAvailableOverride: () => true,
+      );
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(
+            size: Size(320.0, 600.0),
+            textScaler: TextScaler.linear(1.5),
+          ),
+          child: AppAuthScope(
+            controller: authCtrl,
+            child: AppSettingsScope(
+              controller: settings,
+              child: AppTranslatorScope(
+                controller: translatorCtrl,
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme.darkTheme,
+                  home: const TranslatorHistoryScreen(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull, reason: 'Overflow on TranslatorHistoryScreen');
+
+      translatorCtrl.dispose();
+      authCtrl.dispose();
+      authRepo.dispose();
     });
   });
 }

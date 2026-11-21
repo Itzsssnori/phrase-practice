@@ -12,6 +12,7 @@ import '../widgets/app_progress_scope.dart';
 import '../widgets/app_quiz_scope.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_settings_scope.dart';
+import '../widgets/app_translator_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
 
@@ -414,6 +415,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final userPhrases = AppUserPhraseScope.maybeOf(context);
     final quizCtrl = AppQuizScope.maybeOf(context);
     final progressCtrl = AppProgressScope.maybeOf(context);
+    final translatorCtrl = AppTranslatorScope.maybeOf(context);
 
     bool isDeleting = false;
     String? errorMessage;
@@ -436,6 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 userPhrases?.clear();
                 quizCtrl?.clear();
                 progressCtrl?.clear();
+                translatorCtrl?.clear();
               },
             );
 

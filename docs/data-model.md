@@ -133,10 +133,13 @@ Personal history of translated queries. Auto-generated ID.
 
 | Field | Type | Description |
 |---|---|---|
-| `inputText` | string | Original input query |
-| `sourceLanguageCode` | string | Source language code |
-| `targetLanguageCode` | string | Target language code |
-| `translatedText` | string | Resulting translation |
-| `pronunciation` | string / null | Phonetic respelling if available |
-| `exampleSentence` | string / null | Generated example sentence |
-| `createdAt` | timestamp | Creation timestamp |
+| `inputText` | string | Original normalized input query |
+| `sourceLanguageCode` | string | Source language code (e.g., "en") |
+| `targetLanguageCode` | string | Target language code (e.g., "es") |
+| `translatedText` | string | Resulting AI translation |
+| `pronunciation` | string | Simple readable phonetic respelling (empty string if none) |
+| `exampleSentence` | string | Short example sentence in the target language |
+| `exampleTranslation` | string | Example sentence translated into the source language |
+| `note` | string | Optional short usage or regional note (empty string if none) |
+| `isSaved` | boolean | Whether the user starred/saved this translation (defaults to `false`) |
+| `createdAt` | timestamp | Server timestamp when the translation was saved |
