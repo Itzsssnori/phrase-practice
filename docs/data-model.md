@@ -13,31 +13,37 @@ This document specifies the complete Cloud Firestore database schema for Phrase 
 ## 1. Public Content Collections
 
 ### `languages/{code}`
-Document ID is the ISO language code (e.g. `en`, `es`, `fil`).
+Document ID is the ISO language code (`en`, `es`, `fil`, `fr`, `ru`, `ja`, `ko`, `zh`).
 
 | Field | Type | Description |
 |---|---|---|
-| `name` | string | English name of the language (e.g., "Spanish") |
-| `nativeName` | string | Endonym / native display name (e.g., "Español") |
-| `script` | string | Writing system / script (e.g., "Latin") |
+| `name` | string | English name of the language (e.g., "Spanish", "Chinese (Mandarin, Simplified)") |
+| `nativeName` | string | Endonym / native display name (e.g., "Español", "日本語", "中文（简体）") |
+| `script` | string | Writing system / script (`Latin`, `Cyrillic`, `Japanese`, `Hangul`, `Han (Simplified)`) |
 | `isActive` | boolean | Controls whether this language is selectable in the app |
+| `sortOrder` | number | Display order in language pickers (1-based integer) |
+| `ttsLocale` | string | BCP-47 locale tag for text-to-speech (`en-US`, `es-MX`, `fil-PH`, `fr-FR`, `ru-RU`, `ja-JP`, `ko-KR`, `zh-CN`) |
+| `pronunciationSystem` | string | Label for the pronunciation line (`Respelling`, `Latin transliteration`, `Romaji`, `Revised Romanization`, `Pinyin`) |
 
 ---
 
 ### `categories/{slug}`
-Document ID is the semantic category slug (e.g. `greetings`, `food`, `directions`, `travel`, `emergencies`).
+Document ID is the semantic category slug (20 categories across 3 groups).
 
 | Field | Type | Description |
 |---|---|---|
-| `sortOrder` | number | Display ordering in category lists (1-based integer) |
-| `iconKey` | string | Plain icon identifier (`greetings`, `food`, `directions`, `travel`, `emergencies`) |
+| `sortOrder` | number | Display ordering within its group (1-based integer) |
+| `iconKey` | string | Plain icon identifier matching the category slug |
+| `group` | string | Section group: `everyday` ("Everyday Conversations"), `travel` ("Travel & Navigation"), or `safety` ("Safety & Essential Needs") |
+| `priority` | string | Priority tier: `essential` (prioritized on Home), `critical` (safety/medical warning styling for unverified drafts), or `high` |
 | `isActive` | boolean | Whether the category is visible in the app |
-| `names` | map<string, string> | Map of language code to translated category title (`{"en": "Greetings", "es": "Saludos", "fil": "Pagbati"}`) |
+| `names` | map<string, string> | Map of language code to translated category title (`{"en": "Greetings", "es": "Saludos", "fil": "Mga Pagbati"}`) |
 
 ---
 
 ### `phrases/{slug}`
-Document ID is a unique English-derived kebab-case slug (e.g. `hello-formal`, `where-is-the-bathroom`).
+Document ID is a unique English-derived kebab-case slug (e.g. `hello-polite`, `where-is-the-bathroom`).
+In `tools/seed/data/`, phrase structure is stored in `data/phrases.json` and per-language translations live in `data/translations/<code>.json`; `tools/seed/seed.js` merges them into a single Firestore document with an embedded `translations` map.
 
 | Field | Type | Description |
 |---|---|---|
@@ -45,14 +51,14 @@ Document ID is a unique English-derived kebab-case slug (e.g. `hello-formal`, `w
 | `difficulty` | number | Complexity rating: `1` (Beginner), `2` (Intermediate), `3` (Advanced) |
 | `sortOrder` | number | Relative order within its category |
 | `isActive` | boolean | Visibility flag |
-| `translations` | map<string, object> | Map of language code (`en`, `es`, `fil`) to translation payload |
+| `translations` | map<string, object> | Map of language code (`en`, `es`, `fil`, etc.) to translation payload |
 
 #### Translation Object Structure:
 ```json
 {
   "text": "Where is the bathroom?",
-  "pronunciation": "ware iz the BATH-room",
-  "meaningNote": "Standard polite inquiry",
+  "pronunciation": "",
+  "meaningNote": "Essential navigational inquiry.",
   "exampleSentence": "Excuse me, where is the bathroom?",
   "verified": false
 }
@@ -60,11 +66,11 @@ Document ID is a unique English-derived kebab-case slug (e.g. `hello-formal`, `w
 
 | Subfield | Type | Nullable | Description |
 |---|---|---|---|
-| `text` | string | No | The phrase in the target language |
-| `pronunciation` | string | Yes | Simple, human-readable phonetic respelling (e.g. "OH-lah") |
-| `meaningNote` | string | Yes | Cultural context or nuance note |
-| `exampleSentence` | string | Yes | Practical context sentence in the same language |
-| `verified` | boolean | No | Human verification status (defaults to `false`) |
+| `text` | string | No | The phrase in the target language's native script (never romanized) |
+| `pronunciation` | string | Yes | Pronunciation in the language's `pronunciationSystem` (`Respelling`, `Pinyin`, `Romaji`, `Revised Romanization`, or `Latin transliteration`; may be empty only for English) |
+| `meaningNote` | string | Yes | Cultural context, politeness register, or regional note — **always written in English** |
+| `exampleSentence` | string | Yes | Practical context sentence in the target language's native script |
+| `verified` | boolean | No | Native-speaker verification status (defaults to `false`) |
 
 ---
 

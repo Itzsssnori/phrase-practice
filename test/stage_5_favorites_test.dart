@@ -667,7 +667,7 @@ void main() {
         find.text('Tap the heart on any phrase to save it here'),
         findsOneWidget,
       );
-      expect(find.text('See all'), findsNothing);
+      expect(find.widgetWithText(TextButton, 'See all'), findsNothing);
     });
 
     testWidgets('Signed in with favorites displays phrase card and See all link', (tester) async {

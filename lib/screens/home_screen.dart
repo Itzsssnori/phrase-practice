@@ -18,6 +18,7 @@ import '../widgets/app_auth_scope.dart';
 import '../widgets/app_user_phrase_scope.dart';
 import '../widgets/language_chip.dart';
 import '../widgets/language_picker_bottom_sheet.dart';
+import '../widgets/localized_phrase_text.dart';
 import '../widgets/phrase_card.dart';
 import '../widgets/require_sign_in.dart';
 
@@ -349,30 +350,47 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Target language phrase (large)
                     if (targetTranslation != null)
-                      Text(
+                      LocalizedPhraseText(
                         targetTranslation.text,
+                        languageCode: targetCode,
                         style: theme.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: theme.colorScheme.onSurface,
                           height: 1.3,
                         ),
                       ),
-                    if (targetTranslation?.pronunciation != null) ...[
+                    if (targetTranslation?.pronunciation != null &&
+                        targetTranslation!.pronunciation!.isNotEmpty) ...[
                       const SizedBox(height: AppSpacing.xs),
-                      Text(
-                        targetTranslation!.pronunciation!,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
+                      Wrap(
+                        spacing: AppSpacing.xs,
+                        runSpacing: 2,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            '${Language.defaultPronunciationSystemFor(targetCode)}:',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          Text(
+                            targetTranslation.pronunciation!,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                     const SizedBox(height: AppSpacing.sm),
 
                     // Native language translation
                     if (nativeTranslation != null)
-                      Text(
+                      LocalizedPhraseText(
                         '"${nativeTranslation.text}"',
+                        languageCode: nativeCode,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                         ),
@@ -753,6 +771,8 @@ class _HomeScreenState extends State<HomeScreen> {
     bool isSignedIn,
     dynamic userPhraseCtrl,
   ) {
+    final homeCategories = Category.selectForHome(_categories, maxCount: 6);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -769,21 +789,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () => context.go('/categories'),
-              child: Text(
-                'View all',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.primary,
+            if (homeCategories.isNotEmpty)
+              GestureDetector(
+                onTap: () => context.go('/categories'),
+                child: Text(
+                  'See all',
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.primary,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         const SizedBox(height: AppSpacing.md),
 
-        if (_categories.isEmpty)
+        if (homeCategories.isEmpty)
           const AppEmptyState(
             icon: Icons.folder_open_rounded,
             title: 'No Categories',
@@ -806,9 +827,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: spacing,
                   childAspectRatio: crossAxisCount == 1 ? 3.5 : 1.15,
                 ),
-                itemCount: _categories.length,
+                itemCount: homeCategories.length,
                 itemBuilder: (context, index) {
-                  final cat = _categories[index];
+                  final cat = homeCategories[index];
                   final learnedCount = isSignedIn && userPhraseCtrl != null
                       ? userPhraseCtrl.getLearnedCountForCategory(cat.id, _allPhrases, targetCode) as int
                       : null;

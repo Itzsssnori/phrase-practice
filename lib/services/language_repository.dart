@@ -48,7 +48,9 @@ class FirestoreLanguageRepository implements LanguageRepository {
 
       final languages = snapshot.docs
           .map((doc) => Language.fromMap(doc.id, doc.data()))
-          .toList();
+          .where((lang) => lang.isActive)
+          .toList()
+        ..sort((a, b) => a.effectiveSortOrder.compareTo(b.effectiveSortOrder));
 
       _cachedLanguages = languages;
       return RepoResult.success(languages);

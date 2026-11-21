@@ -4,20 +4,79 @@
     "name": "English",
     "nativeName": "English",
     "script": "Latin",
-    "isActive": true
+    "isActive": true,
+    "sortOrder": 1,
+    "ttsLocale": "en-US",
+    "pronunciationSystem": "Respelling"
   },
   {
     "code": "es",
     "name": "Spanish",
     "nativeName": "Español",
     "script": "Latin",
-    "isActive": true
+    "isActive": true,
+    "sortOrder": 2,
+    "ttsLocale": "es-MX",
+    "pronunciationSystem": "Respelling"
   },
   {
     "code": "fil",
     "name": "Filipino",
     "nativeName": "Filipino",
     "script": "Latin",
-    "isActive": true
+    "isActive": true,
+    "sortOrder": 3,
+    "ttsLocale": "fil-PH",
+    "pronunciationSystem": "Respelling"
+  },
+  {
+    "code": "fr",
+    "name": "French",
+    "nativeName": "Français",
+    "script": "Latin",
+    "isActive": true,
+    "sortOrder": 4,
+    "ttsLocale": "fr-FR",
+    "pronunciationSystem": "Respelling"
+  },
+  {
+    "code": "ru",
+    "name": "Russian",
+    "nativeName": "Русский",
+    "script": "Cyrillic",
+    "isActive": false,
+    "sortOrder": 5,
+    "ttsLocale": "ru-RU",
+    "pronunciationSystem": "Latin transliteration"
+  },
+  {
+    "code": "ja",
+    "name": "Japanese",
+    "nativeName": "日本語",
+    "script": "Japanese",
+    "isActive": false,
+    "sortOrder": 6,
+    "ttsLocale": "ja-JP",
+    "pronunciationSystem": "Romaji"
+  },
+  {
+    "code": "ko",
+    "name": "Korean",
+    "nativeName": "한국어",
+    "script": "Hangul",
+    "isActive": false,
+    "sortOrder": 7,
+    "ttsLocale": "ko-KR",
+    "pronunciationSystem": "Revised Romanization"
+  },
+  {
+    "code": "zh",
+    "name": "Chinese (Mandarin, Simplified)",
+    "nativeName": "中文（简体）",
+    "script": "Han (Simplified)",
+    "isActive": false,
+    "sortOrder": 8,
+    "ttsLocale": "zh-CN",
+    "pronunciationSystem": "Pinyin"
   }
 ]

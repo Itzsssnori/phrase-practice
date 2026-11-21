@@ -5,6 +5,7 @@ import '../services/language_settings_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'app_settings_scope.dart';
+import 'localized_phrase_text.dart';
 
 /// Bottom sheet dialog allowing the user to select their study or native language.
 class LanguagePickerBottomSheet extends StatefulWidget {
@@ -112,11 +113,17 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final filteredLanguages = _languages.where((lang) {
+    final activeSorted = _languages
+        .where((lang) => lang.isActive)
+        .toList()
+      ..sort((a, b) => a.effectiveSortOrder.compareTo(b.effectiveSortOrder));
+
+    final filteredLanguages = activeSorted.where((lang) {
       if (_query.isEmpty) return true;
       final q = BrowseDataService.normalize(_query);
       return BrowseDataService.normalize(lang.name).contains(q) ||
-          BrowseDataService.normalize(lang.nativeName).contains(q) ||
+          BrowseDataService.normalize(lang.nativeName, languageCode: lang.code)
+              .contains(BrowseDataService.normalize(_query, languageCode: lang.code)) ||
           BrowseDataService.normalize(lang.code).contains(q);
     }).toList();
 
@@ -203,8 +210,9 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
                             color: isCurrent ? theme.colorScheme.primary : null,
                           ),
                         ),
-                        subtitle: Text(
+                        subtitle: LocalizedPhraseText(
                           lang.nativeName,
+                          languageCode: lang.code,
                           style: theme.textTheme.bodySmall,
                         ),
                         trailing: isCurrent
@@ -228,8 +236,8 @@ class _LanguagePickerBottomSheetState extends State<LanguagePickerBottomSheet> {
   }
 }
 
-/// Fully scrollable interactive modal for managing both "I speak" and "I'm learning" languages.
-class _LanguagePairModalContent extends StatelessWidget {
+/// Fully scrollable, searchable interactive modal for managing both "I speak" and "I'm learning" languages.
+class _LanguagePairModalContent extends StatefulWidget {
   final LanguageSettingsController settings;
   final List<Language> languages;
 
@@ -238,10 +246,24 @@ class _LanguagePairModalContent extends StatelessWidget {
     required this.languages,
   });
 
+  @override
+  State<_LanguagePairModalContent> createState() => _LanguagePairModalContentState();
+}
+
+class _LanguagePairModalContentState extends State<_LanguagePairModalContent> {
+  String _query = '';
+
+  List<Language> get _activeLanguages {
+    final list = widget.languages.where((l) => l.isActive).toList()
+      ..sort((a, b) => a.effectiveSortOrder.compareTo(b.effectiveSortOrder));
+    return list;
+  }
+
   Language _findLang(String code, String fallbackCode) {
-    return languages.firstWhere(
+    final active = _activeLanguages;
+    return active.firstWhere(
       (l) => l.code == code,
-      orElse: () => languages.firstWhere(
+      orElse: () => active.firstWhere(
         (l) => l.code == fallbackCode,
         orElse: () => Language(code: code, name: code, nativeName: code),
       ),
@@ -252,6 +274,16 @@ class _LanguagePairModalContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final settings = widget.settings;
+    final active = _activeLanguages;
+    final filtered = active.where((lang) {
+      if (_query.trim().isEmpty) return true;
+      final q = BrowseDataService.normalize(_query);
+      return BrowseDataService.normalize(lang.name).contains(q) ||
+          BrowseDataService.normalize(lang.nativeName, languageCode: lang.code)
+              .contains(BrowseDataService.normalize(_query, languageCode: lang.code)) ||
+          BrowseDataService.normalize(lang.code).contains(q);
+    }).toList();
 
     return ListenableBuilder(
       listenable: settings,
@@ -413,8 +445,19 @@ class _LanguagePairModalContent extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
 
+                if (active.length > 3) ...[
+                  TextField(
+                    onChanged: (val) => setState(() => _query = val),
+                    decoration: const InputDecoration(
+                      hintText: 'Search language...',
+                      prefixIcon: Icon(Icons.search_rounded, size: AppSpacing.iconSm),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                ],
+
                 // Language selection list
-                ...languages.map((lang) {
+                ...filtered.map((lang) {
                   final isTarget = lang.code == targetLang.code;
                   final isNative = lang.code == nativeLang.code;
 
@@ -443,8 +486,9 @@ class _LanguagePairModalContent extends StatelessWidget {
                             color: isTarget ? theme.colorScheme.primary : null,
                           ),
                         ),
-                        subtitle: Text(
+                        subtitle: LocalizedPhraseText(
                           isNative ? 'Current: I speak (${lang.nativeName})' : lang.nativeName,
+                          languageCode: lang.code,
                           style: theme.textTheme.bodySmall,
                         ),
                         trailing: isTarget

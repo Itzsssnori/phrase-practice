@@ -1,0 +1,1402 @@
+{
+  "hello-polite": {
+    "text": "Bonjour, Madame / Monsieur",
+    "pronunciation": "bon-ZHOOR, mah-DAHM / muh-SYUH",
+    "meaningNote": "In polite French etiquette, adding \"Madame\" or \"Monsieur\" after \"Bonjour\" is customary when addressing a stranger or shopkeeper.",
+    "exampleSentence": "Bonjour Monsieur, comment allez-vous aujourd'hui ?",
+    "verified": false
+  },
+  "good-morning": {
+    "text": "Bonjour",
+    "pronunciation": "bon-ZHOOR",
+    "meaningNote": "Standard French uses \"Bonjour\" for both \"Hello\" and \"Good morning\" (in Quebec, \"Bon matin\" is also heard casually).",
+    "exampleSentence": "Bonjour, avez-vous du café chaud ?",
+    "verified": false
+  },
+  "good-evening": {
+    "text": "Bonsoir",
+    "pronunciation": "bon-SWAHR",
+    "meaningNote": "Used as a polite greeting from late afternoon (around 6 p.m.) onward.",
+    "exampleSentence": "Bonsoir, nous avons une réservation pour deux personnes.",
+    "verified": false
+  },
+  "how-are-you": {
+    "text": "Comment allez-vous ?",
+    "pronunciation": "koh-mahn tah-leh-VOO",
+    "meaningNote": "Polite form using \"vous\". In slightly more relaxed settings, \"Vous allez bien ?\" or \"Ça va bien ?\" is also common.",
+    "exampleSentence": "Bonjour Madame, comment allez-vous aujourd'hui ?",
+    "verified": false
+  },
+  "nice-to-meet-you": {
+    "text": "Enchanté de faire votre connaissance",
+    "pronunciation": "ahn-shahn-TEH duh fehr voh-truh koh-neh-SAHNS",
+    "meaningNote": "In writing, a female speaker spells it \"Enchantée\" (pronounced identically). Simply saying \"Enchanté\" is also very common.",
+    "exampleSentence": "Je m'appelle Marc, enchanté de faire votre connaissance.",
+    "verified": false
+  },
+  "thank-you-very-much": {
+    "text": "Merci beaucoup",
+    "pronunciation": "mehr-SEE boh-KOO",
+    "meaningNote": "Warm, universal expression of gratitude.",
+    "exampleSentence": "Merci beaucoup pour votre aide précieuse.",
+    "verified": false
+  },
+  "you-are-welcome": {
+    "text": "Je vous en prie",
+    "pronunciation": "zhuh voo zahn PREE",
+    "meaningNote": "Polite reply to \"merci\" using \"vous\". \"De rien\" is a common everyday alternative, and \"Bienvenue\" is also heard in Quebec.",
+    "exampleSentence": "Je vous en prie, c'est avec plaisir.",
+    "verified": false
+  },
+  "please": {
+    "text": "S'il vous plaît",
+    "pronunciation": "seel voo PLEH",
+    "meaningNote": "Polite form using \"vous\" (with close friends or family, \"s'il te plaît\" is used).",
+    "exampleSentence": "Un café allongé, s'il vous plaît.",
+    "verified": false
+  },
+  "excuse-me-pardon": {
+    "text": "Excusez-moi / Pardon",
+    "pronunciation": "ehk-skoo-zeh-MWAH / pahr-DON",
+    "meaningNote": "Use \"Excusez-moi\" (with \"vous\") to politely get someone's attention; use \"Pardon\" when squeezing past someone.",
+    "exampleSentence": "Excusez-moi, pourriez-vous m'indiquer la sortie ?",
+    "verified": false
+  },
+  "goodbye-take-care": {
+    "text": "Au revoir, prenez soin de vous",
+    "pronunciation": "oh ruh-VWAHR, pruh-neh swahn duh VOO",
+    "meaningNote": "Polite parting phrase using \"vous\".",
+    "exampleSentence": "Au revoir, prenez soin de vous et bon voyage !",
+    "verified": false
+  },
+  "a-table-for-two-please": {
+    "text": "Une table pour deux personnes, s'il vous plaît",
+    "pronunciation": "oon TAH-bluh poor duh pehr-SOHN, seel voo PLEH",
+    "meaningNote": "Standard polite request when arriving at a restaurant.",
+    "exampleSentence": "Bonsoir, une table pour deux personnes près de la fenêtre, s'il vous plaît.",
+    "verified": false
+  },
+  "can-i-see-the-menu": {
+    "text": "Puis-je voir le menu, s'il vous plaît ?",
+    "pronunciation": "pweezh vwahr luh muh-NOO, seel voo PLEH",
+    "meaningNote": "In France, \"la carte\" lists all individual dishes while \"le menu\" often refers to a fixed-price set meal; in Quebec, \"le menu\" is used for the full menu.",
+    "exampleSentence": "Excusez-moi, puis-je voir le menu et la carte des boissons, s'il vous plaît ?",
+    "verified": false
+  },
+  "what-do-you-recommend": {
+    "text": "Qu'est-ce que vous me recommandez ?",
+    "pronunciation": "kehs kuh voo muh ruh-koh-mahn-DEH",
+    "meaningNote": "Polite question using \"vous\" to ask a server for their specialty.",
+    "exampleSentence": "Tout a l'air bon ; qu'est-ce que vous me recommandez aujourd'hui ?",
+    "verified": false
+  },
+  "the-check-please": {
+    "text": "L'addition, s'il vous plaît",
+    "pronunciation": "lah-dee-SYON, seel voo PLEH",
+    "meaningNote": "\"L'addition\" is standard in France and understood everywhere; in Quebec, \"la facture, s'il vous plaît\" is very common.",
+    "exampleSentence": "Nous avons terminé, pourrions-nous avoir l'addition, s'il vous plaît ?",
+    "verified": false
+  },
+  "i-am-allergic-to-peanuts": {
+    "text": "Je suis allergique aux arachides",
+    "pronunciation": "zhuh swee zah-lehr-ZHEEK oh zah-rah-SHEED",
+    "meaningNote": "\"Arachides\" is the formal and food-label term in both France and Quebec; \"cacahuètes\" is also very common in everyday speech in France.",
+    "exampleSentence": "Attention s'il vous plaît, je suis allergique aux arachides.",
+    "verified": false
+  },
+  "is-this-dish-spicy": {
+    "text": "Est-ce que ce plat est épicé ?",
+    "pronunciation": "ehs kuh suh plah eh teh-pee-SEH",
+    "meaningNote": "\"Épicé\" means spiced or seasoned; to ask specifically if it is chili-hot, you can also ask \"Est-ce que c'est piquant ?\".",
+    "exampleSentence": "Excusez-moi, est-ce que ce plat est très épicé ?",
+    "verified": false
+  },
+  "water-without-ice-please": {
+    "text": "De l'eau sans glaçons, s'il vous plaît",
+    "pronunciation": "duh LOH sahn glah-SON, seel voo PLEH",
+    "meaningNote": "To ask for free tap water at a restaurant in France, ask for \"une carafe d'eau, s'il vous plaît\".",
+    "exampleSentence": "Je voudrais un verre d'eau sans glaçons, s'il vous plaît.",
+    "verified": false
+  },
+  "delicious-compliment": {
+    "text": "C'était délicieux, merci beaucoup",
+    "pronunciation": "seh-teh deh-lee-SYUH, mehr-SEE boh-KOO",
+    "meaningNote": "Warm compliment to the server or chef after a meal.",
+    "exampleSentence": "C'était délicieux, merci beaucoup pour votre accueil.",
+    "verified": false
+  },
+  "is-this-vegetarian": {
+    "text": "Est-ce que ce plat est végétarien ?",
+    "pronunciation": "ehs kuh suh plah eh veh-zheh-tah-RYAN",
+    "meaningNote": "Clarifies whether a dish is meat-free.",
+    "exampleSentence": "Est-ce que ce plat est végétarien, sans viande ni poisson ?",
+    "verified": false
+  },
+  "can-i-have-this-to-go": {
+    "text": "Puis-je emporter le reste, s'il vous plaît ?",
+    "pronunciation": "pweezh ahn-pohr-TEH luh REHST, seel voo PLEH",
+    "meaningNote": "In France, \"à emporter\" is standard; in Quebec, \"pour apporter\" or \"pour emporter\" is used.",
+    "exampleSentence": "C'était très copieux ; puis-je emporter le reste, s'il vous plaît ?",
+    "verified": false
+  },
+  "what-is-your-name": {
+    "text": "Comment vous appelez-vous ?",
+    "pronunciation": "koh-mahn voo zah-pleh-VOO",
+    "meaningNote": "Polite form using \"vous\" (in casual conversation with peers, \"Comment tu t'appelles ?\" is used).",
+    "exampleSentence": "Bonjour, je m'appelle Alex, comment vous appelez-vous ?",
+    "verified": false
+  },
+  "it-is-my-first-time-here": {
+    "text": "C'est la première fois que je viens ici.",
+    "pronunciation": "seh lah pruh-MYEHR fwah kuh zhuh vyan ee-SEE",
+    "meaningNote": "Uses the present tense \"je viens\" with \"c'est la première fois que\".",
+    "exampleSentence": "C'est la première fois que je viens ici et j'adore la ville.",
+    "verified": false
+  },
+  "where-are-you-from": {
+    "text": "D'où venez-vous ?",
+    "pronunciation": "doo vuh-neh-VOO",
+    "meaningNote": "Polite form using \"vous\" (informal is \"Tu viens d'où ?\").",
+    "exampleSentence": "Nous venons du Canada ; et vous, d'où venez-vous ?",
+    "verified": false
+  },
+  "is-this-your-hometown": {
+    "text": "Êtes-vous originaire d'ici ?",
+    "pronunciation": "eht-voo zoh-ree-zhee-NEHR dee-SEE",
+    "meaningNote": "\"Originaire\" has the same form for both masculine and feminine speakers.",
+    "exampleSentence": "Vous connaissez très bien le quartier, êtes-vous originaire d'ici ?",
+    "verified": false
+  },
+  "what-do-you-do-for-a-living": {
+    "text": "Que faites-vous dans la vie ?",
+    "pronunciation": "kuh feht-voo dahn lah VEE",
+    "meaningNote": "Idiomatic and polite way to ask about someone's occupation using \"vous\".",
+    "exampleSentence": "Je suis professeur, et vous, que faites-vous dans la vie ?",
+    "verified": false
+  },
+  "how-long-have-you-lived-here": {
+    "text": "Depuis combien de temps habitez-vous ici ?",
+    "pronunciation": "duh-pwee kon-BYAN duh tahn zah-bee-teh-voo ee-SEE",
+    "meaningNote": "In French, use the present tense (\"habitez-vous\") with \"depuis\" for an action that started in the past and continues now.",
+    "exampleSentence": "C'est une belle région ; depuis combien de temps habitez-vous ici ?",
+    "verified": false
+  },
+  "what-do-you-like-to-do": {
+    "text": "Qu'aimez-vous faire pendant votre temps libre ?",
+    "pronunciation": "keh-meh-voo FEHR pahn-dahn voh-truh tahn LEE-bruh",
+    "meaningNote": "Polite question using \"vous\" and \"votre\".",
+    "exampleSentence": "J'aime la randonnée ; qu'aimez-vous faire pendant votre temps libre ?",
+    "verified": false
+  },
+  "that-is-interesting": {
+    "text": "C'est très intéressant !",
+    "pronunciation": "seh treh zan-teh-reh-SAHN",
+    "meaningNote": "Note the liaison between \"très\" and \"intéressant\" (\"treh zan-teh-reh-SAHN\").",
+    "exampleSentence": "C'est très intéressant ! Je ne connaissais pas cette histoire.",
+    "verified": false
+  },
+  "it-was-nice-talking-to-you": {
+    "text": "C'était un plaisir de discuter avec vous.",
+    "pronunciation": "seh-teh tuhn pleh-ZEER duh dees-koo-TEH ah-vehk VOO",
+    "meaningNote": "Polite way to close a conversation using \"vous\".",
+    "exampleSentence": "Je dois prendre mon train, mais c'était un plaisir de discuter avec vous.",
+    "verified": false
+  },
+  "have-a-nice-day": {
+    "text": "Bonne journée !",
+    "pronunciation": "bohn zhoor-NEH",
+    "meaningNote": "Used when parting during the day (as opposed to \"Bonjour\", which is used on arrival).",
+    "exampleSentence": "Merci beaucoup pour votre aide, bonne journée !",
+    "verified": false
+  },
+  "how-much-is-this": {
+    "text": "Combien ça coûte ?",
+    "pronunciation": "kon-BYAN sah KOOT",
+    "meaningNote": "You can also ask \"Quel est le prix de ceci, s'il vous plaît ?\" in more formal shops.",
+    "exampleSentence": "Excusez-moi, combien ça coûte, s'il vous plaît ?",
+    "verified": false
+  },
+  "is-this-available-in-another-size": {
+    "text": "Avez-vous ceci dans une autre taille ?",
+    "pronunciation": "ah-veh-voo suh-SEE dahn zoon oh-truh TYE",
+    "meaningNote": "Use \"taille\" for clothing and \"pointure\" for shoe sizes (in Quebec, \"grandeur\" is also very common for clothing sizes).",
+    "exampleSentence": "Ce chandail est un peu petit ; avez-vous ceci dans une autre taille ?",
+    "verified": false
+  },
+  "do-you-have-another-color": {
+    "text": "L'avez-vous dans une autre couleur ?",
+    "pronunciation": "lah-veh-voo dahn zoon oh-truh koo-LUHR",
+    "meaningNote": "Polite \"vous\" form addressed to a shop clerk.",
+    "exampleSentence": "J'aime beaucoup ce modèle, l'avez-vous dans une autre couleur ?",
+    "verified": false
+  },
+  "can-i-try-this-on": {
+    "text": "Puis-je l'essayer ?",
+    "pronunciation": "pweezh leh-seh-YEH",
+    "meaningNote": "The fitting room is called \"la cabine d'essayage\".",
+    "exampleSentence": "Excusez-moi, puis-je l'essayer ? Où est la cabine d'essayage ?",
+    "verified": false
+  },
+  "is-there-a-discount": {
+    "text": "Y a-t-il une réduction ?",
+    "pronunciation": "ee ah-teel oon reh-dook-SYON",
+    "meaningNote": "\"Une réduction\" or \"une remise\" is common in France; in Quebec, \"un rabais\" is very frequently used.",
+    "exampleSentence": "Excusez-moi, y a-t-il une réduction sur cet article ?",
+    "verified": false
+  },
+  "can-you-lower-the-price": {
+    "text": "Pourriez-vous me faire un meilleur prix ?",
+    "pronunciation": "poo-ryeh-voo muh fehr uhn meh-yuhr PREE",
+    "meaningNote": "Appropriate at flea markets (\"marchés aux puces\") or craft stalls, not in regular retail shops.",
+    "exampleSentence": "Si j'en prends deux, pourriez-vous me faire un meilleur prix ?",
+    "verified": false
+  },
+  "i-am-just-looking-thank-you": {
+    "text": "Je regarde seulement, merci.",
+    "pronunciation": "zhuh ruh-GAHRD suhl-MAHN, mehr-SEE",
+    "meaningNote": "Polite response to a salesperson when browsing.",
+    "exampleSentence": "Pour l'instant je regarde seulement, merci beaucoup.",
+    "verified": false
+  },
+  "where-can-i-find-this-item": {
+    "text": "Où puis-je trouver cet article ?",
+    "pronunciation": "oo pweezh troo-VEH seh tahr-TEE-kluh",
+    "meaningNote": "In formal questions, \"puis-je\" is used for \"can I / may I\" instead of \"je peux\".",
+    "exampleSentence": "Excusez-moi, dans quel rayon puis-je trouver cet article ?",
+    "verified": false
+  },
+  "can-i-return-this": {
+    "text": "Puis-je retourner ou échanger cet article ?",
+    "pronunciation": "pweezh ruh-toor-NEH oo eh-shahn-ZHEH seh tahr-TEE-kluh",
+    "meaningNote": "Keep the receipt (\"le ticket de caisse\" in France, \"le reçu\" or \"la facture\" in Quebec).",
+    "exampleSentence": "Si la taille ne convient pas, puis-je retourner ou échanger cet article ?",
+    "verified": false
+  },
+  "can-i-get-a-shopping-bag": {
+    "text": "Pourrais-je avoir un sac, s'il vous plaît ?",
+    "pronunciation": "poo-rehzh ah-vwahr uhn SAHK, seel voo PLEH",
+    "meaningNote": "Many stores in France and Quebec charge a small fee for reusable carrier bags.",
+    "exampleSentence": "Pourrais-je avoir un sac pour transporter mes achats, s'il vous plaît ?",
+    "verified": false
+  },
+  "what-time-is-it": {
+    "text": "Quelle heure est-il, s'il vous plaît ?",
+    "pronunciation": "kehl uhr eh-TEEL, seel voo PLEH",
+    "meaningNote": "In France and Quebec, official schedules use the twenty-four-hour clock (e.g., \"quatorze heures\" for 2:00 p.m.).",
+    "exampleSentence": "Excusez-moi, quelle heure est-il, s'il vous plaît ?",
+    "verified": false
+  },
+  "what-day-is-today": {
+    "text": "Quel jour sommes-nous aujourd'hui ?",
+    "pronunciation": "kehl zhoor sohm-NOO oh-zhoor-DWEE",
+    "meaningNote": "Asks for the day of the week (lundi, mardi, etc.).",
+    "exampleSentence": "Quel jour sommes-nous aujourd'hui ? Le musée est-il ouvert ?",
+    "verified": false
+  },
+  "what-is-todays-date": {
+    "text": "Quelle est la date d'aujourd'hui ?",
+    "pronunciation": "kehl eh lah daht doh-zhoor-DWEE",
+    "meaningNote": "People also frequently ask \"Nous sommes le combien aujourd'hui ?\".",
+    "exampleSentence": "Je dois remplir ce formulaire ; quelle est la date d'aujourd'hui ?",
+    "verified": false
+  },
+  "when-does-it-open": {
+    "text": "À quelle heure est-ce que ça ouvre ?",
+    "pronunciation": "ah kehl uhr ehs kuh sah OO-vruh",
+    "meaningNote": "Using \"est-ce que\" is the most natural spoken way to form a polite question.",
+    "exampleSentence": "Bonjour, à quelle heure est-ce que la boutique ouvre demain ?",
+    "verified": false
+  },
+  "when-does-it-close": {
+    "text": "À quelle heure est-ce que ça ferme ?",
+    "pronunciation": "ah kehl uhr ehs kuh sah FEHRM",
+    "meaningNote": "You can also ask \"Vous fermez à quelle heure ?\" when speaking directly to staff.",
+    "exampleSentence": "Excusez-moi, à quelle heure est-ce que le musée ferme ce soir ?",
+    "verified": false
+  },
+  "how-long-will-it-take": {
+    "text": "Combien de temps est-ce que ça va prendre ?",
+    "pronunciation": "kon-BYAN duh tahn ehs kuh sah vah PRAHN-druh",
+    "meaningNote": "You can also ask \"Quelle est la durée du trajet ?\" for travel time.",
+    "exampleSentence": "Combien de temps est-ce que ça va prendre pour aller au centre-ville ?",
+    "verified": false
+  },
+  "can-we-meet-tomorrow": {
+    "text": "Pouvons-nous nous voir demain ?",
+    "pronunciation": "poo-von-noo noo vwahr duh-MAN",
+    "meaningNote": "\"Se voir\" literally means \"to see each other\" and is the standard phrase for meeting up.",
+    "exampleSentence": "Je suis occupé cet après-midi ; pouvons-nous nous voir demain ?",
+    "verified": false
+  },
+  "what-time-should-i-come-back": {
+    "text": "À quelle heure dois-je revenir ?",
+    "pronunciation": "ah kehl uhr dwahzh ruh-vuh-NEER",
+    "meaningNote": "\"Revenir\" means to come back to the place where you currently are.",
+    "exampleSentence": "Je vous laisse mes bagages ; à quelle heure dois-je revenir ?",
+    "verified": false
+  },
+  "two-tickets-please": {
+    "text": "Deux billets, s'il vous plaît.",
+    "pronunciation": "duh bee-YEH, seel voo PLEH",
+    "meaningNote": "\"Billet\" is used for trains, museums, and shows (for single metro or bus rides in France, \"deux tickets\" is also common).",
+    "exampleSentence": "Bonjour, deux billets pour la visite de dix heures, s'il vous plaît.",
+    "verified": false
+  },
+  "for-how-many-people": {
+    "text": "C'est pour combien de personnes ?",
+    "pronunciation": "seh poor kon-BYAN duh pehr-SOHN",
+    "meaningNote": "Reply with \"Pour deux personnes\" (for two) or \"Nous sommes trois\" (there are three of us).",
+    "exampleSentence": "Bonsoir, vous désirez une table ? C'est pour combien de personnes ?",
+    "verified": false
+  },
+  "do-you-speak-english": {
+    "text": "Parlez-vous anglais ?",
+    "pronunciation": "pahr-leh-voo ahn-GLEH",
+    "meaningNote": "Always preface with \"Bonjour, excusez-moi\" before asking a stranger if they speak English.",
+    "exampleSentence": "Bonjour, excusez-moi, parlez-vous anglais ?",
+    "verified": false
+  },
+  "i-do-not-understand": {
+    "text": "Désolé, je ne comprends pas.",
+    "pronunciation": "deh-zoh-LEH, zhuh nuh kon-prahn PAH",
+    "meaningNote": "In writing, a female speaker spells it \"Désolée\" (pronounced identically).",
+    "exampleSentence": "Désolé, je ne comprends pas bien ce que vous dites.",
+    "verified": false
+  },
+  "could-you-speak-more-slowly": {
+    "text": "Pourriez-vous parler plus lentement, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo pahr-LEH ploo lahnt-MAHN, seel voo PLEH",
+    "meaningNote": "Polite conditional form with \"vous\".",
+    "exampleSentence": "Pourriez-vous parler plus lentement, s'il vous plaît ? J'apprends le français.",
+    "verified": false
+  },
+  "could-you-repeat-that": {
+    "text": "Pourriez-vous répéter cela, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo reh-peh-TEH suh-LAH, seel voo PLEH",
+    "meaningNote": "Polite conditional \"pourriez-vous\" with \"vous\".",
+    "exampleSentence": "Je n'ai pas bien entendu l'adresse ; pourriez-vous répéter cela, s'il vous plaît ?",
+    "verified": false
+  },
+  "could-you-write-it-down": {
+    "text": "Pourriez-vous me l'écrire, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo muh leh-KREER, seel voo PLEH",
+    "meaningNote": "\"L'écrire\" contracts \"le\" (it) before the vowel in \"écrire\".",
+    "exampleSentence": "Pourriez-vous me l'écrire sur ce papier, s'il vous plaît ?",
+    "verified": false
+  },
+  "how-do-you-say-this": {
+    "text": "Comment dit-on cela en français ?",
+    "pronunciation": "koh-mahn dee-TON suh-LAH ahn frahn-SEH",
+    "meaningNote": "Specifically asks \"How do you say this in French?\".",
+    "exampleSentence": "Excusez-moi, comment dit-on cela en français ?",
+    "verified": false
+  },
+  "what-does-this-mean": {
+    "text": "Qu'est-ce que ce mot veut dire ?",
+    "pronunciation": "kehs kuh suh moh vuh DEER",
+    "meaningNote": "You can also ask \"Que signifie ce mot ?\".",
+    "exampleSentence": "Excusez-moi, qu'est-ce que ce mot veut dire sur le panneau ?",
+    "verified": false
+  },
+  "i-am-learning-your-language": {
+    "text": "J'apprends le français.",
+    "pronunciation": "zhah-PRAHN luh frahn-SEH",
+    "meaningNote": "Saying \"J'apprends le français\" (I am learning French) sounds much more natural than \"I am learning your language\".",
+    "exampleSentence": "Excusez mes erreurs, j'apprends encore le français.",
+    "verified": false
+  },
+  "please-wait-a-moment": {
+    "text": "Un instant, s'il vous plaît.",
+    "pronunciation": "uhn nan-STAHN, seel voo PLEH",
+    "meaningNote": "\"Un moment, s'il vous plaît\" is also very common.",
+    "exampleSentence": "Un instant, s'il vous plaît, je vérifie sur mon téléphone.",
+    "verified": false
+  },
+  "can-you-show-me": {
+    "text": "Pourriez-vous me montrer ?",
+    "pronunciation": "poo-ryeh-voo muh mon-TREH",
+    "meaningNote": "Polite conditional request using \"vous\".",
+    "exampleSentence": "Je ne sais pas comment fonctionne cette borne ; pourriez-vous me montrer ?",
+    "verified": false
+  },
+  "this-is-my-family": {
+    "text": "Je vous présente ma famille.",
+    "pronunciation": "zhuh voo preh-ZAHNT mah fah-MEE",
+    "meaningNote": "\"Je vous présente ma famille\" is used to introduce people in person; when pointing to a photo, say \"Voici ma famille\".",
+    "exampleSentence": "Bonjour, je vous présente ma famille.",
+    "verified": false
+  },
+  "i-am-traveling-with-my-parents": {
+    "text": "Je voyage avec mes parents.",
+    "pronunciation": "zhuh vwah-YAHZH ah-vehk meh pah-RAHN",
+    "meaningNote": "Note that the final \"-s\" in \"parents\" is silent.",
+    "exampleSentence": "Cette semaine, je voyage avec mes parents.",
+    "verified": false
+  },
+  "do-you-have-children": {
+    "text": "Avez-vous des enfants ?",
+    "pronunciation": "ah-veh-voo deh zahn-FAHN",
+    "meaningNote": "Note the liaison between \"des\" and \"enfants\" (\"deh zahn-FAHN\").",
+    "exampleSentence": "Nous avons deux enfants ; et vous, avez-vous des enfants ?",
+    "verified": false
+  },
+  "where-is-your-family": {
+    "text": "Où habite votre famille ?",
+    "pronunciation": "oo ah-BEET voh-truh fah-MEE",
+    "meaningNote": "Asks where someone's family lives (or \"Où est votre famille ?\" for where they are right now).",
+    "exampleSentence": "Où habite votre famille, est-elle aussi dans cette ville ?",
+    "verified": false
+  },
+  "i-am-here-with-a-friend": {
+    "text": "Je suis ici avec un ami.",
+    "pronunciation": "zhuh swee zee-SEE ah-vehk uhn nah-MEE",
+    "meaningNote": "For a female friend, spell it \"une amie\" (pronounced \"oon ah-MEE\").",
+    "exampleSentence": "Je ne voyage pas seul, je suis ici avec un ami.",
+    "verified": false
+  },
+  "this-is-my-friend": {
+    "text": "Je vous présente mon ami.",
+    "pronunciation": "zhuh voo preh-ZAHNT mon nah-MEE",
+    "meaningNote": "For a female friend, write \"mon amie\" (pronounced the same because \"mon\" is used before a feminine noun starting with a vowel).",
+    "exampleSentence": "Bonjour, je vous présente mon ami Daniel.",
+    "verified": false
+  },
+  "this-is-my-partner": {
+    "text": "Je vous présente mon conjoint.",
+    "pronunciation": "zhuh voo preh-ZAHNT mon kon-ZHWAN",
+    "meaningNote": "Use \"mon conjoint\" (or \"mon compagnon\") for a male partner and \"ma conjointe\" (or \"ma compagne\") for a female partner. In Quebec, \"mon chum\" (m) and \"ma blonde\" (f) are common in casual speech.",
+    "exampleSentence": "Enchanté, je vous présente mon conjoint.",
+    "verified": false
+  },
+  "i-have-a-brother-and-a-sister": {
+    "text": "J'ai un frère et une sœur.",
+    "pronunciation": "zheh uhn FREHR eh oon SUHR",
+    "meaningNote": "\"Sœur\" (sister) is written with the ligature \"œ\".",
+    "exampleSentence": "Dans ma famille, j'ai un frère et une sœur.",
+    "verified": false
+  },
+  "do-you-have-brothers-or-sisters": {
+    "text": "Avez-vous des frères et sœurs ?",
+    "pronunciation": "ah-veh-voo deh FREHR eh SUHR",
+    "meaningNote": "French uses \"et\" (\"des frères et sœurs\") where English uses \"or\".",
+    "exampleSentence": "Avez-vous des frères et sœurs, ou êtes-vous enfant unique ?",
+    "verified": false
+  },
+  "how-old-are-your-children": {
+    "text": "Quel âge ont vos enfants ?",
+    "pronunciation": "kehl ahzh on voh zahn-FAHN",
+    "meaningNote": "Literally asks \"What age do your children have?\".",
+    "exampleSentence": "Quelle belle famille ! Quel âge ont vos enfants ?",
+    "verified": false
+  },
+  "does-this-bus-stop-here": {
+    "text": "Est-ce que le bus s'arrête ici ?",
+    "pronunciation": "ehs kuh luh BOOS sah-REHT ee-SEE",
+    "meaningNote": "In Quebec, \"l'autobus\" is more common than \"le bus\".",
+    "exampleSentence": "Excusez-moi, est-ce que le bus pour la gare s'arrête ici ?",
+    "verified": false
+  },
+  "where-is-the-subway-entrance": {
+    "text": "Où est la station de métro la plus proche ?",
+    "pronunciation": "oo eh lah stah-SYON duh meh-TROH lah ploo PROHSH",
+    "meaningNote": "In both Paris and Montreal, the subway is called \"le métro\".",
+    "exampleSentence": "Excusez-moi, où est la station de métro la plus proche d'ici ?",
+    "verified": false
+  },
+  "where-can-i-buy-a-transit-card": {
+    "text": "Où puis-je acheter une carte de transport ?",
+    "pronunciation": "oo pweezh ahsh-TEH oon kahrt duh trahn-SPOHR",
+    "meaningNote": "A single ticket is \"un billet\" or \"un titre de transport\".",
+    "exampleSentence": "Où puis-je acheter une carte de transport pour le métro et le bus ?",
+    "verified": false
+  },
+  "how-much-is-the-fare": {
+    "text": "Quel est le prix du trajet ?",
+    "pronunciation": "kehl eh luh pree doo trah-ZHEH",
+    "meaningNote": "You can also ask \"C'est combien le billet ?\".",
+    "exampleSentence": "Bonjour, quel est le prix du trajet jusqu'au centre-ville ?",
+    "verified": false
+  },
+  "which-bus-goes-to-the-city-center": {
+    "text": "Quel bus va au centre-ville ?",
+    "pronunciation": "kehl BOOS vah oh sahn-truh-VEEL",
+    "meaningNote": "\"Le centre-ville\" means downtown or the city center.",
+    "exampleSentence": "Excusez-moi, quel bus va au centre-ville depuis cet arrêt ?",
+    "verified": false
+  },
+  "does-this-train-go-to-the-airport": {
+    "text": "Est-ce que ce train va à l'aéroport ?",
+    "pronunciation": "ehs kuh suh TRAN vah ah lah-eh-roh-POHR",
+    "meaningNote": "Question formed cleanly with \"Est-ce que\".",
+    "exampleSentence": "Excusez-moi, est-ce que ce train va directement à l'aéroport ?",
+    "verified": false
+  },
+  "what-time-does-the-next-train-arrive": {
+    "text": "À quelle heure arrive le prochain train ?",
+    "pronunciation": "ah kehl uhr ah-REEV luh proh-shan TRAN",
+    "meaningNote": "\"Le prochain train\" means the next train.",
+    "exampleSentence": "Pourriez-vous me dire à quelle heure arrive le prochain train ?",
+    "verified": false
+  },
+  "where-should-i-get-off": {
+    "text": "À quel arrêt dois-je descendre ?",
+    "pronunciation": "ah kehl ah-REH dwahzh deh-SAHN-druh",
+    "meaningNote": "For a train or metro, you can also ask \"À quelle station dois-je descendre ?\".",
+    "exampleSentence": "Je vais au musée des beaux-arts ; à quel arrêt dois-je descendre ?",
+    "verified": false
+  },
+  "is-this-the-right-platform": {
+    "text": "Est-ce le bon quai ?",
+    "pronunciation": "ehs luh bon KEH",
+    "meaningNote": "\"Le quai\" (or \"la voie\" for track number) is used for train and metro platforms.",
+    "exampleSentence": "Excusez-moi, est-ce le bon quai pour le train vers Lyon ?",
+    "verified": false
+  },
+  "please-take-me-to-this-address": {
+    "text": "Pourriez-vous m'emmener à cette adresse, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo mahn-mneh ah seht ah-DREHS, seel voo PLEH",
+    "meaningNote": "Polite request when showing a written address to a taxi driver.",
+    "exampleSentence": "Bonjour, pourriez-vous m'emmener à cette adresse, s'il vous plaît ?",
+    "verified": false
+  },
+  "where-is-the-check-in-counter": {
+    "text": "Où est le comptoir d'enregistrement ?",
+    "pronunciation": "oo eh luh kon-TWAHR dahn-ruh-zhees-truh-MAHN",
+    "meaningNote": "\"Enregistrement\" is the standard French term for airport check-in.",
+    "exampleSentence": "Excusez-moi, où est le comptoir d'enregistrement pour ce vol ?",
+    "verified": false
+  },
+  "where-is-the-departure-gate": {
+    "text": "Où est la porte d'embarquement ?",
+    "pronunciation": "oo eh lah pohrt dahn-bahr-kuh-MAHN",
+    "meaningNote": "\"La porte d'embarquement\" means the boarding or departure gate.",
+    "exampleSentence": "Pourriez-vous m'indiquer où est la porte d'embarquement B douze ?",
+    "verified": false
+  },
+  "where-is-immigration": {
+    "text": "Où est le contrôle des passeports ?",
+    "pronunciation": "oo eh luh kon-TROHL deh pahs-POHR",
+    "meaningNote": "In French-speaking airports, immigration is usually labeled \"Contrôle des passeports\" or \"Douanes et immigration\".",
+    "exampleSentence": "Excusez-moi, où est le contrôle des passeports pour les arrivées ?",
+    "verified": false
+  },
+  "here-is-my-passport": {
+    "text": "Voici mon passeport.",
+    "pronunciation": "vwah-SEE mon pahs-POHR",
+    "meaningNote": "A boarding pass is called \"une carte d'embarquement\".",
+    "exampleSentence": "Bonjour, voici mon passeport et ma carte d'embarquement.",
+    "verified": false
+  },
+  "i-am-here-for-tourism": {
+    "text": "Je suis ici pour le tourisme.",
+    "pronunciation": "zhuh swee zee-SEE poor luh too-REEZ-muh",
+    "meaningNote": "You can also say \"Je viens en vacances\" (I am here on vacation).",
+    "exampleSentence": "Je suis ici pour le tourisme pendant deux semaines.",
+    "verified": false
+  },
+  "how-long-can-i-stay": {
+    "text": "Combien de temps puis-je rester ?",
+    "pronunciation": "kon-BYAN duh tahn pweezh rehs-TEH",
+    "meaningNote": "Uses polite inverted \"puis-je\" (may I / can I).",
+    "exampleSentence": "Avec ce visa touristique, combien de temps puis-je rester ?",
+    "verified": false
+  },
+  "i-have-nothing-to-declare": {
+    "text": "Je n'ai rien à déclarer.",
+    "pronunciation": "zhuh neh ryan nah deh-klah-REH",
+    "meaningNote": "Standard statement at airport customs (\"la douane\").",
+    "exampleSentence": "Je n'ai que mes effets personnels ; je n'ai rien à déclarer.",
+    "verified": false
+  },
+  "my-luggage-is-missing": {
+    "text": "Mon bagage n'est pas arrivé.",
+    "pronunciation": "mon bah-GAHZH neh pah zah-ree-VEH",
+    "meaningNote": "You can also say \"Ma valise est perdue\" (My suitcase is lost).",
+    "exampleSentence": "Excusez-moi, mon bagage n'est pas arrivé sur le tapis.",
+    "verified": false
+  },
+  "is-my-flight-delayed": {
+    "text": "Est-ce que mon vol est retardé ?",
+    "pronunciation": "ehs kuh mon VOHL eh ruh-tahr-DEH",
+    "meaningNote": "\"En retard\" or \"retardé\" means delayed.",
+    "exampleSentence": "Excusez-moi, est-ce que mon vol est retardé ou à l'heure ?",
+    "verified": false
+  },
+  "could-i-have-a-window-seat": {
+    "text": "Puis-je avoir une place côté hublot, s'il vous plaît ?",
+    "pronunciation": "pweezh ah-vwahr oon plahs koh-teh oo-BLOH, seel voo PLEH",
+    "meaningNote": "\"Côté hublot\" is a window seat; for an aisle seat, ask for \"une place côté couloir\" (or \"côté allée\" in Quebec).",
+    "exampleSentence": "S'il en reste, puis-je avoir une place côté hublot, s'il vous plaît ?",
+    "verified": false
+  },
+  "can-i-check-in-early": {
+    "text": "Puis-je m'enregistrer plus tôt ?",
+    "pronunciation": "pweezh mahn-ruh-zhees-TREH ploo TOH",
+    "meaningNote": "You can also ask \"La chambre est-elle déjà prête ?\" (Is the room already ready?).",
+    "exampleSentence": "Notre vol est arrivé tôt ; puis-je m'enregistrer plus tôt ?",
+    "verified": false
+  },
+  "i-would-like-to-book-a-room": {
+    "text": "Je voudrais réserver une chambre.",
+    "pronunciation": "zhuh voo-DREH reh-zehr-VEH oon SHAHN-bruh",
+    "meaningNote": "\"Je voudrais\" (I would like) is the standard polite way to make a booking.",
+    "exampleSentence": "Bonjour, je voudrais réserver une chambre pour deux nuits.",
+    "verified": false
+  },
+  "do-you-have-any-available-rooms": {
+    "text": "Avez-vous des chambres disponibles ?",
+    "pronunciation": "ah-veh-voo deh SHAHN-bruh dees-poh-NEE-bluh",
+    "meaningNote": "Polite question using \"vous\" at hotel reception.",
+    "exampleSentence": "Bonsoir, avez-vous des chambres disponibles pour cette nuit ?",
+    "verified": false
+  },
+  "i-would-like-to-check-in": {
+    "text": "Je viens pour l'enregistrement, s'il vous plaît.",
+    "pronunciation": "zhuh vyan poor lahn-ruh-zhees-truh-MAHN, seel voo PLEH",
+    "meaningNote": "Saying \"Bonjour, j'ai une réservation\" is also very natural when checking in.",
+    "exampleSentence": "Bonjour, je viens pour l'enregistrement, j'ai une réservation.",
+    "verified": false
+  },
+  "i-would-like-to-check-out": {
+    "text": "Je voudrais régler ma note et rendre la clé, s'il vous plaît.",
+    "pronunciation": "zhuh voo-DREH reh-GLEH mah NOHT eh rahn-druh lah KLEH, seel voo PLEH",
+    "meaningNote": "French has no single native verb for \"to check out\"; \"libérer la chambre\" or \"rendre la clé\" (return the key) is used.",
+    "exampleSentence": "Bonjour, nous partons maintenant ; je voudrais rendre la clé, s'il vous plaît.",
+    "verified": false
+  },
+  "what-time-is-breakfast-served": {
+    "text": "À quelle heure le petit-déjeuner est-il servi ?",
+    "pronunciation": "ah kehl uhr luh puh-tee-deh-zhuh-NEH eh-teel sehr-VEE",
+    "meaningNote": "In France, breakfast is \"le petit-déjeuner\"; in Quebec, it is called \"le déjeuner\".",
+    "exampleSentence": "Excusez-moi, à quelle heure le petit-déjeuner est-il servi demain ?",
+    "verified": false
+  },
+  "is-breakfast-included": {
+    "text": "Le petit-déjeuner est-il compris ?",
+    "pronunciation": "luh puh-tee-deh-zhuh-NEH eh-teel kon-PREE",
+    "meaningNote": "\"Compris\" or \"inclus\" means included.",
+    "exampleSentence": "Le petit-déjeuner est-il compris dans le tarif de la chambre ?",
+    "verified": false
+  },
+  "how-do-i-use-the-air-conditioning": {
+    "text": "Comment fonctionne la climatisation ?",
+    "pronunciation": "koh-mahn fonk-SYOHN lah klee-mah-tee-zah-SYON",
+    "meaningNote": "In everyday speech, \"la climatisation\" is often shortened to \"la clim\".",
+    "exampleSentence": "Excusez-moi, comment fonctionne la climatisation dans la chambre ?",
+    "verified": false
+  },
+  "could-i-have-an-extra-towel": {
+    "text": "Pourrais-je avoir une serviette supplémentaire, s'il vous plaît ?",
+    "pronunciation": "poo-rehzh ah-vwahr oon sehr-VYEHT soo-pleh-mahn-TEHR, seel voo PLEH",
+    "meaningNote": "\"Une serviette\" (or \"une serviette de bain\") means a bath towel.",
+    "exampleSentence": "Bonjour, pourrais-je avoir une serviette supplémentaire, s'il vous plaît ?",
+    "verified": false
+  },
+  "there-is-a-problem-with-my-room": {
+    "text": "Il y a un problème dans ma chambre.",
+    "pronunciation": "eel ee ah uhn proh-BLEHM dahn mah SHAHN-bruh",
+    "meaningNote": "\"Il y a\" means \"there is\" or \"there are\".",
+    "exampleSentence": "Excusez-moi, il y a un problème dans ma chambre : il n'y a pas d'eau chaude.",
+    "verified": false
+  },
+  "is-there-toilet-paper": {
+    "text": "Excusez-moi, il n'y a plus de papier toilette.",
+    "pronunciation": "ehk-skoo-zeh-MWAH, eel nee ah ploo duh pah-PYEH twah-LEHT",
+    "meaningNote": "\"Il n'y a plus de\" means \"there is no more\".",
+    "exampleSentence": "Excusez-moi, il n'y a plus de papier toilette dans les toilettes.",
+    "verified": false
+  },
+  "is-there-a-baby-changing-table": {
+    "text": "Y a-t-il une table à langer ?",
+    "pronunciation": "ee ah-teel oon TAH-bluh ah lahn-ZHEH",
+    "meaningNote": "\"Une table à langer\" is a baby changing table.",
+    "exampleSentence": "Excusez-moi, y a-t-il une table à langer dans ces toilettes ?",
+    "verified": false
+  },
+  "is-there-a-public-restroom-nearby": {
+    "text": "Y a-t-il des toilettes publiques près d'ici ?",
+    "pronunciation": "ee ah-teel deh twah-LEHT poo-BLEEK preh dee-SEE",
+    "meaningNote": "In France, \"les toilettes\" is always plural; in Quebec, \"la toilette\" or \"la salle de bain\" is also common.",
+    "exampleSentence": "Excusez-moi, y a-t-il des toilettes publiques près d'ici dans le parc ?",
+    "verified": false
+  },
+  "is-this-restroom-free": {
+    "text": "Est-ce que l'accès aux toilettes est gratuit ?",
+    "pronunciation": "ehs kuh lahk-SEH oh twah-LEHT eh grah-TWEE",
+    "meaningNote": "Some public restrooms in European train stations require a small coin fee.",
+    "exampleSentence": "Excusez-moi, est-ce que l'accès aux toilettes est gratuit ?",
+    "verified": false
+  },
+  "is-this-restroom-for-men-or-women": {
+    "text": "Ces toilettes sont-elles pour les hommes ou pour les femmes ?",
+    "pronunciation": "seh twah-LEHT son-tehl poor leh ZOHM oo poor leh FAHM",
+    "meaningNote": "Doors may be marked \"Hommes / Messieurs\" (Men) and \"Femmes / Dames\" (Women).",
+    "exampleSentence": "Excusez-moi, ces toilettes sont-elles pour les hommes ou pour les femmes ?",
+    "verified": false
+  },
+  "may-i-use-your-restroom": {
+    "text": "Puis-je utiliser vos toilettes, s'il vous plaît ?",
+    "pronunciation": "pweezh oo-tee-lee-ZEH voh twah-LEHT, seel voo PLEH",
+    "meaningNote": "Polite request at a café or restaurant.",
+    "exampleSentence": "Bonjour, puis-je utiliser vos toilettes, s'il vous plaît ?",
+    "verified": false
+  },
+  "is-there-a-wheelchair-accessible-restroom": {
+    "text": "Y a-t-il des toilettes accessibles en fauteuil roulant ?",
+    "pronunciation": "ee ah-teel deh twah-LEHT ahk-seh-SEE-bluh ahn foh-tuhy roo-LAHN",
+    "meaningNote": "In France, accessible facilities are often marked \"PMR\" (Personnes à Mobilité Réduite).",
+    "exampleSentence": "Y a-t-il des toilettes accessibles en fauteuil roulant à cet étage ?",
+    "verified": false
+  },
+  "where-can-i-wash-my-hands": {
+    "text": "Où puis-je me laver les mains ?",
+    "pronunciation": "oo pweezh muh lah-VEH leh MAN",
+    "meaningNote": "In French, body parts with reflexive verbs use the definite article (\"me laver les mains\").",
+    "exampleSentence": "Avant de manger, où puis-je me laver les mains ?",
+    "verified": false
+  },
+  "is-there-a-shower-available": {
+    "text": "Y a-t-il une douche disponible ?",
+    "pronunciation": "ee ah-teel oon DOOSH dees-poh-NEE-bluh",
+    "meaningNote": "\"Une douche\" means a shower.",
+    "exampleSentence": "Excusez-moi, y a-t-il une douche disponible près de la plage ?",
+    "verified": false
+  },
+  "where-is-a-drinking-fountain": {
+    "text": "Où y a-t-il une fontaine d'eau potable ?",
+    "pronunciation": "oo ee ah-teel oon fon-TEHN doh poh-TAH-bluh",
+    "meaningNote": "In Quebec, a drinking fountain is also called \"un abreuvoir\".",
+    "exampleSentence": "Où y a-t-il une fontaine d'eau potable pour remplir ma bouteille ?",
+    "verified": false
+  },
+  "where-is-the-nearest-tourist-attraction": {
+    "text": "Où se trouve le site touristique le plus proche ?",
+    "pronunciation": "oo suh TROOV luh seet too-rees-TEEK luh ploo PROHSH",
+    "meaningNote": "\"Se trouve\" means \"is located\".",
+    "exampleSentence": "Nous avons l'après-midi libre ; où se trouve le site touristique le plus proche ?",
+    "verified": false
+  },
+  "how-much-is-the-entrance-fee": {
+    "text": "Quel est le prix de l'entrée ?",
+    "pronunciation": "kehl eh luh pree duh lahn-TREH",
+    "meaningNote": "You can also ask \"C'est combien l'entrée ?\".",
+    "exampleSentence": "Bonjour, quel est le prix de l'entrée pour un adulte ?",
+    "verified": false
+  },
+  "do-i-need-to-book-in-advance": {
+    "text": "Faut-il réserver à l'avance ?",
+    "pronunciation": "foh-teel reh-zehr-VEH ah lah-VAHNS",
+    "meaningNote": "\"Faut-il\" is the impersonal question form meaning \"Is it necessary to\".",
+    "exampleSentence": "Pour visiter le château, faut-il réserver à l'avance ?",
+    "verified": false
+  },
+  "is-photography-allowed": {
+    "text": "Est-il permis de prendre des photos ici ?",
+    "pronunciation": "eh-teel pehr-MEE duh prahn-druh deh foh-TOH ee-SEE",
+    "meaningNote": "\"Prendre des photos\" means to take photos.",
+    "exampleSentence": "Excusez-moi, est-il permis de prendre des photos dans cette salle ?",
+    "verified": false
+  },
+  "could-you-take-a-photo-of-us": {
+    "text": "Pourriez-vous nous prendre en photo, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo noo PRAHN-druh ahn foh-TOH, seel voo PLEH",
+    "meaningNote": "Polite request when handing your phone or camera to a passerby.",
+    "exampleSentence": "Excusez-moi, pourriez-vous nous prendre en photo devant le monument ?",
+    "verified": false
+  },
+  "is-there-a-guided-tour": {
+    "text": "Y a-t-il une visite guidée ?",
+    "pronunciation": "ee ah-teel oon vee-ZEET gee-DEH",
+    "meaningNote": "\"Une visite guidée\" means a guided tour.",
+    "exampleSentence": "Bonjour, y a-t-il une visite guidée en anglais cet après-midi ?",
+    "verified": false
+  },
+  "where-is-the-ticket-office": {
+    "text": "Où est la billetterie ?",
+    "pronunciation": "oo eh lah bee-yeht-REE",
+    "meaningNote": "\"La billetterie\" (or \"le guichet\") is the ticket office.",
+    "exampleSentence": "Excusez-moi, où est la billetterie pour acheter les entrées ?",
+    "verified": false
+  },
+  "is-this-place-open-today": {
+    "text": "Est-ce que cet endroit est ouvert aujourd'hui ?",
+    "pronunciation": "ehs kuh seh tahn-DRWAH eh too-VEHR oh-zhoor-DWEE",
+    "meaningNote": "Note the liaison in \"cet endroit\" (\"seh tahn-DRWAH\").",
+    "exampleSentence": "Excusez-moi, est-ce que cet endroit est ouvert aujourd'hui ?",
+    "verified": false
+  },
+  "how-long-does-the-tour-take": {
+    "text": "Combien de temps dure la visite ?",
+    "pronunciation": "kon-BYAN duh tahn door lah vee-ZEET",
+    "meaningNote": "The verb \"durer\" means to last.",
+    "exampleSentence": "Combien de temps dure la visite complète du musée ?",
+    "verified": false
+  },
+  "can-you-recommend-a-place-to-visit": {
+    "text": "Pouvez-vous me recommander un endroit à visiter ?",
+    "pronunciation": "poo-veh-voo muh ruh-koh-mahn-DEH uhn nahn-DRWAH ah vee-zee-TEH",
+    "meaningNote": "Polite request using \"vous\".",
+    "exampleSentence": "Nous aimons l'histoire ; pouvez-vous me recommander un endroit à visiter ?",
+    "verified": false
+  },
+  "where-is-the-nearest-atm": {
+    "text": "Où est le distributeur de billets le plus proche ?",
+    "pronunciation": "oo eh luh dees-tree-boo-TUHR duh bee-YEH luh ploo PROHSH",
+    "meaningNote": "In France, an ATM is called \"un distributeur de billets\" (or \"DAB\"); in Quebec, it is called \"un guichet automatique\".",
+    "exampleSentence": "Excusez-moi, où est le distributeur de billets le plus proche ?",
+    "verified": false
+  },
+  "do-you-have-change-for-this": {
+    "text": "Avez-vous la monnaie sur ce billet ?",
+    "pronunciation": "ah-veh-voo lah moh-NEH soor suh bee-YEH",
+    "meaningNote": "\"La monnaie\" means change (coins and smaller banknotes).",
+    "exampleSentence": "Je n'ai qu'une grosse coupure ; avez-vous la monnaie sur ce billet ?",
+    "verified": false
+  },
+  "what-is-the-exchange-rate": {
+    "text": "Quel est le taux de change aujourd'hui ?",
+    "pronunciation": "kehl eh luh toh duh SHAHNZH oh-zhoor-DWEE",
+    "meaningNote": "\"Le taux de change\" means the exchange rate.",
+    "exampleSentence": "Bonjour, quel est le taux de change pour le dollar aujourd'hui ?",
+    "verified": false
+  },
+  "can-we-split-the-bill": {
+    "text": "Pouvons-nous payer séparément ?",
+    "pronunciation": "poo-von-noo peh-YEH seh-pah-reh-MAHN",
+    "meaningNote": "You can also ask \"Pouvons-nous partager l'addition ?\".",
+    "exampleSentence": "Excusez-moi, pouvons-nous payer séparément par carte ?",
+    "verified": false
+  },
+  "my-card-is-not-working": {
+    "text": "Ma carte ne passe pas.",
+    "pronunciation": "mah kahrt nuh pahs PAH",
+    "meaningNote": "Idiomatic everyday phrase when a payment terminal rejects your card.",
+    "exampleSentence": "Ma carte ne passe pas sur ce terminal ; je vais essayer une autre carte.",
+    "verified": false
+  },
+  "do-you-accept-cash": {
+    "text": "Acceptez-vous les espèces ?",
+    "pronunciation": "ahk-sehp-teh-voo leh zehs-PEHS",
+    "meaningNote": "In France, cash is \"les espèces\" (or \"le liquide\"); in Quebec, \"l'argent comptant\" is standard.",
+    "exampleSentence": "Excusez-moi, acceptez-vous les espèces à cette caisse ?",
+    "verified": false
+  },
+  "can-i-pay-with-my-phone": {
+    "text": "Puis-je payer avec mon téléphone ?",
+    "pronunciation": "pweezh peh-YEH ah-vehk mon teh-leh-FOHN",
+    "meaningNote": "Contactless payment is called \"le paiement sans contact\".",
+    "exampleSentence": "Puis-je payer avec mon téléphone sans contact ?",
+    "verified": false
+  },
+  "could-i-have-a-receipt": {
+    "text": "Puis-je avoir un reçu, s'il vous plaît ?",
+    "pronunciation": "pweezh ah-vwahr uhn ruh-SOO, seel voo PLEH",
+    "meaningNote": "In France, a store or restaurant receipt is also called \"un ticket de caisse\" or \"une note\".",
+    "exampleSentence": "Merci, puis-je avoir un reçu pour cet achat, s'il vous plaît ?",
+    "verified": false
+  },
+  "i-think-i-was-charged-twice": {
+    "text": "Je crois que j'ai été débité deux fois.",
+    "pronunciation": "zhuh krwah kuh zheh eh-teh deh-bee-TEH duh FWAH",
+    "meaningNote": "In writing, a female speaker writes \"débitée\" (pronounced identically). You can also say \"On m'a facturé deux fois\".",
+    "exampleSentence": "Excusez-moi, je crois que j'ai été débité deux fois sur ma carte.",
+    "verified": false
+  },
+  "is-there-an-additional-fee": {
+    "text": "Y a-t-il des frais supplémentaires ?",
+    "pronunciation": "ee ah-teel deh freh soo-pleh-mahn-TEHR",
+    "meaningNote": "\"Des frais supplémentaires\" is plural in French.",
+    "exampleSentence": "Avant de confirmer, y a-t-il des frais supplémentaires ?",
+    "verified": false
+  },
+  "what-is-the-weather-like": {
+    "text": "Quel temps fait-il aujourd'hui ?",
+    "pronunciation": "kehl tahn feh-TEEL oh-zhoor-DWEE",
+    "meaningNote": "Standard French expression for asking about the weather.",
+    "exampleSentence": "Êtes-vous déjà sorti ? Quel temps fait-il aujourd'hui ?",
+    "verified": false
+  },
+  "is-it-going-to-rain": {
+    "text": "Est-ce qu'il va pleuvoir ?",
+    "pronunciation": "ehs keel vah pluh-VWAHR",
+    "meaningNote": "\"Pleuvoir\" is the impersonal verb \"to rain\".",
+    "exampleSentence": "Le ciel est gris ; pensez-vous qu'il va pleuvoir cet après-midi ?",
+    "verified": false
+  },
+  "it-is-very-hot-today": {
+    "text": "Il fait très chaud aujourd'hui.",
+    "pronunciation": "eel feh treh SHOH oh-zhoor-DWEE",
+    "meaningNote": "French uses \"Il fait + adjective\" for weather conditions.",
+    "exampleSentence": "Il fait très chaud aujourd'hui ; restons à l'ombre.",
+    "verified": false
+  },
+  "is-there-a-storm-coming": {
+    "text": "Y a-t-il un orage qui approche ?",
+    "pronunciation": "ee ah-teel uhn noh-RAHZH kee ah-PROHSH",
+    "meaningNote": "\"Un orage\" is a thunderstorm; \"une tempête\" is a severe wind or snow storm.",
+    "exampleSentence": "Le vent se lève ; y a-t-il un orage qui approche ?",
+    "verified": false
+  },
+  "should-i-bring-an-umbrella": {
+    "text": "Devrais-je prendre un parapluie ?",
+    "pronunciation": "duh-vrehzh PRAHN-druh uhn pah-rah-PLWEE",
+    "meaningNote": "\"Un parapluie\" means an umbrella.",
+    "exampleSentence": "Nous sortons à pied ; devrais-je prendre un parapluie ?",
+    "verified": false
+  },
+  "what-is-the-weather-forecast": {
+    "text": "Quelles sont les prévisions météo pour demain ?",
+    "pronunciation": "kehl son leh preh-vee-ZYON meh-teh-OH poor duh-MAN",
+    "meaningNote": "\"La météo\" is the universal everyday word for the weather forecast.",
+    "exampleSentence": "Nous partons tôt ; quelles sont les prévisions météo pour demain ?",
+    "verified": false
+  },
+  "it-is-very-cold-today": {
+    "text": "Il fait très froid aujourd'hui.",
+    "pronunciation": "eel feh treh FRWAH oh-zhoor-DWEE",
+    "meaningNote": "Notice that the final \"-d\" in \"froid\" is silent.",
+    "exampleSentence": "Il fait très froid aujourd'hui ce matin.",
+    "verified": false
+  },
+  "is-the-air-quality-okay": {
+    "text": "La qualité de l'air est-elle bonne aujourd'hui ?",
+    "pronunciation": "lah kah-lee-TEH duh lehr eh-tehl BOHN oh-zhoor-DWEE",
+    "meaningNote": "Asks whether outdoor air quality is good today.",
+    "exampleSentence": "La qualité de l'air est-elle bonne aujourd'hui pour marcher dehors ?",
+    "verified": false
+  },
+  "is-it-going-to-be-sunny-tomorrow": {
+    "text": "Va-t-il faire beau demain ?",
+    "pronunciation": "vah-teel fehr BOH duh-MAN",
+    "meaningNote": "\"Faire beau\" (or \"être ensoleillé\") is the natural way to say it will be sunny and clear.",
+    "exampleSentence": "Nous voulons aller au parc ; va-t-il faire beau demain ?",
+    "verified": false
+  },
+  "do-i-need-a-jacket": {
+    "text": "Ai-je besoin d'une veste ?",
+    "pronunciation": "ehzh buh-ZWAN doon VEHST",
+    "meaningNote": "In Quebec, a light jacket is also commonly called \"un manteau léger\" or \"un blouson\".",
+    "exampleSentence": "Fait-il frais le soir, ou ai-je besoin d'une veste ?",
+    "verified": false
+  },
+  "where-is-the-nearest-police-station": {
+    "text": "Où est le commissariat de police le plus proche ?",
+    "pronunciation": "oo eh luh koh-mee-sah-RYAH duh poh-LEES luh ploo PROHSH",
+    "meaningNote": "In France, a police station is \"un commissariat de police\" (or \"la gendarmerie\"); in Quebec, \"un poste de police\" is used.",
+    "exampleSentence": "Excusez-moi, où est le commissariat de police le plus proche ?",
+    "verified": false
+  },
+  "what-is-the-emergency-number": {
+    "text": "Quel est le numéro d'urgence ?",
+    "pronunciation": "kehl eh luh noo-meh-ROH door-ZHAHNS",
+    "meaningNote": "Asks for the local emergency telephone number.",
+    "exampleSentence": "S'il vous plaît, quel est le numéro d'urgence ici ?",
+    "verified": false
+  },
+  "please-leave-me-alone": {
+    "text": "S'il vous plaît, laissez-moi tranquille.",
+    "pronunciation": "seel voo PLEH, leh-seh-MWAH trahn-KEEL",
+    "meaningNote": "Firm, unambiguous command using \"vous\".",
+    "exampleSentence": "Ne me suivez pas ; s'il vous plaît, laissez-moi tranquille.",
+    "verified": false
+  },
+  "someone-stole-my-belongings": {
+    "text": "On a volé mes affaires.",
+    "pronunciation": "on nah voh-LEH meh zah-FEHR",
+    "meaningNote": "\"Mes affaires\" (or \"mes effets personnels\") means my belongings.",
+    "exampleSentence": "J'ai besoin de parler à un agent ; on a volé mes affaires.",
+    "verified": false
+  },
+  "i-need-a-police-report": {
+    "text": "J'ai besoin d'une copie du rapport de police.",
+    "pronunciation": "zheh buh-ZWAN doon koh-PEE doo rah-POHR duh poh-LEES",
+    "meaningNote": "In France, an official police complaint receipt is also called \"un récépissé de dépôt de plainte\".",
+    "exampleSentence": "J'ai besoin d'une copie du rapport de police, s'il vous plaît.",
+    "verified": false
+  },
+  "my-wallet-was-stolen": {
+    "text": "On m'a volé mon portefeuille.",
+    "pronunciation": "on mah voh-LEH mon pohr-tuh-FUHY",
+    "meaningNote": "Uses the idiomatic French construction \"On m'a volé\" (Someone stole from me).",
+    "exampleSentence": "On m'a volé mon portefeuille dans le métro.",
+    "verified": false
+  },
+  "i-have-been-robbed": {
+    "text": "Je viens de me faire voler.",
+    "pronunciation": "zhuh vyan duh muh fehr voh-LEH",
+    "meaningNote": "Gender-neutral construction meaning \"I have just been robbed\".",
+    "exampleSentence": "Aidez-moi s'il vous plaît, je viens de me faire voler.",
+    "verified": false
+  },
+  "i-do-not-feel-safe-here": {
+    "text": "Je ne me sens pas en sécurité ici.",
+    "pronunciation": "zhuh nuh muh sahn pah zahn seh-koo-ree-TEH ee-SEE",
+    "meaningNote": "Gender-neutral expression.",
+    "exampleSentence": "Je ne me sens pas en sécurité ici ; entrons dans l'hôtel.",
+    "verified": false
+  },
+  "i-need-to-report-an-incident": {
+    "text": "Je dois signaler un incident.",
+    "pronunciation": "zhuh dwah see-nyah-LEH uhn nan-see-DAHN",
+    "meaningNote": "To file an official criminal complaint at a police station, say \"Je voudrais déposer une plainte\".",
+    "exampleSentence": "Bonjour, je dois signaler un incident qui vient d'arriver.",
+    "verified": false
+  },
+  "help-me-contact-the-embassy": {
+    "text": "Pouvez-vous m'aider à contacter mon ambassade ?",
+    "pronunciation": "poo-veh-voo meh-DEH ah kon-tahk-TEH mon nahn-bah-SAHD",
+    "meaningNote": "Note the liaison in \"mon ambassade\" (\"mon nahn-bah-SAHD\").",
+    "exampleSentence": "J'ai perdu mon passeport ; pouvez-vous m'aider à contacter mon ambassade ?",
+    "verified": false
+  },
+  "do-i-need-a-prescription": {
+    "text": "Faut-il une ordonnance pour ce médicament ?",
+    "pronunciation": "foh-teel oon ohr-doh-NAHNS poor suh meh-dee-kah-MAHN",
+    "meaningNote": "\"Une ordonnance\" (or \"une prescription\" in Quebec) means a doctor's prescription.",
+    "exampleSentence": "Excusez-moi, faut-il une ordonnance pour ce médicament ?",
+    "verified": false
+  },
+  "how-often-should-i-take-this-medicine": {
+    "text": "Combien de fois par jour dois-je prendre ce médicament ?",
+    "pronunciation": "kon-BYAN duh fwah pahr ZHOOR dwahzh prahn-druh suh meh-dee-kah-MAHN",
+    "meaningNote": "Literally asks \"How many times per day should I take this medicine?\".",
+    "exampleSentence": "Excusez-moi, combien de fois par jour dois-je prendre ce médicament ?",
+    "verified": false
+  },
+  "i-have-travel-insurance": {
+    "text": "J'ai une assurance maladie de voyage.",
+    "pronunciation": "zheh oon ah-soo-RAHNS mah-lah-DEE duh vwah-YAHZH",
+    "meaningNote": "\"Une assurance maladie de voyage\" means travel health insurance.",
+    "exampleSentence": "Voici ma carte ; j'ai une assurance maladie de voyage.",
+    "verified": false
+  },
+  "i-do-not-feel-well": {
+    "text": "Je ne me sens pas bien.",
+    "pronunciation": "zhuh nuh muh sahn pah BYAN",
+    "meaningNote": "Direct, gender-neutral statement that you feel unwell.",
+    "exampleSentence": "J'ai besoin de m'asseoir un instant ; je ne me sens pas bien.",
+    "verified": false
+  },
+  "i-have-a-headache": {
+    "text": "J'ai mal à la tête.",
+    "pronunciation": "zheh mahl ah lah TEHT",
+    "meaningNote": "French uses \"avoir mal à\" + body part to express pain.",
+    "exampleSentence": "J'ai mal à la tête depuis ce matin.",
+    "verified": false
+  },
+  "i-have-a-fever": {
+    "text": "J'ai de la fièvre.",
+    "pronunciation": "zheh duh lah FYEH-vruh",
+    "meaningNote": "\"Avoir de la fièvre\" means to have a fever.",
+    "exampleSentence": "J'ai des frissons et j'ai de la fièvre.",
+    "verified": false
+  },
+  "i-have-stomach-pain": {
+    "text": "J'ai mal au ventre.",
+    "pronunciation": "zheh mahl oh VAHN-truh",
+    "meaningNote": "You can also say \"J'ai mal à l'estomac\" for upper stomach pain.",
+    "exampleSentence": "Je dois voir un médecin car j'ai mal au ventre.",
+    "verified": false
+  },
+  "i-am-allergic-to-this-medicine": {
+    "text": "Je suis allergique à ce médicament.",
+    "pronunciation": "zhuh swee zah-lehr-ZHEEK ah suh meh-dee-kah-MAHN",
+    "meaningNote": "\"Allergique\" has the same form for both masculine and feminine speakers.",
+    "exampleSentence": "Veuillez vérifier mon dossier ; je suis allergique à ce médicament.",
+    "verified": false
+  },
+  "do-you-have-pain-relievers": {
+    "text": "Avez-vous un médicament contre la douleur ?",
+    "pronunciation": "ah-veh-voo uhn meh-dee-kah-MAHN kon-truh lah doo-LUHR",
+    "meaningNote": "Pharmacists also use the term \"un antidouleur\" or \"un analgésique\".",
+    "exampleSentence": "Excusez-moi, avez-vous un médicament contre la douleur ?",
+    "verified": false
+  },
+  "i-need-medical-assistance": {
+    "text": "J'ai besoin d'une assistance médicale.",
+    "pronunciation": "zheh buh-ZWAN doon ah-sees-TAHNS meh-dee-KAHL",
+    "meaningNote": "Direct request for medical assistance.",
+    "exampleSentence": "Aidez-moi s'il vous plaît, j'ai besoin d'une assistance médicale.",
+    "verified": false
+  },
+  "i-lost-my-bag": {
+    "text": "J'ai perdu mon sac.",
+    "pronunciation": "zheh pehr-DOO mon SAHK",
+    "meaningNote": "For a backpack, say \"mon sac à dos\"; for a suitcase, \"ma valise\".",
+    "exampleSentence": "Excusez-moi, j'ai perdu mon sac il y a quelques minutes.",
+    "verified": false
+  },
+  "has-anyone-found-my-phone": {
+    "text": "Est-ce que quelqu'un a trouvé mon téléphone ?",
+    "pronunciation": "ehs kuh kehl-KUHN ah troo-VEH mon teh-leh-FOHN",
+    "meaningNote": "In France, a mobile phone is also called \"un portable\"; in Quebec, \"un cellulaire\".",
+    "exampleSentence": "J'étais assis à cette table ; est-ce que quelqu'un a trouvé mon téléphone ?",
+    "verified": false
+  },
+  "where-is-the-lost-and-found-office": {
+    "text": "Où est le bureau des objets trouvés ?",
+    "pronunciation": "oo eh luh boo-ROH deh zob-ZHEH troo-VEH",
+    "meaningNote": "In French, the lost and found office is literally called \"the found objects office\" (\"le bureau des objets trouvés\").",
+    "exampleSentence": "Excusez-moi, où est le bureau des objets trouvés dans cette gare ?",
+    "verified": false
+  },
+  "i-left-something-here": {
+    "text": "J'ai oublié quelque chose ici.",
+    "pronunciation": "zheh oo-blee-YEH kehl-kuh SHOHZ ee-SEE",
+    "meaningNote": "\"Oublier\" means both to forget and to leave an item behind accidentally.",
+    "exampleSentence": "Bonjour, j'étais ici il y a dix minutes et j'ai oublié quelque chose ici.",
+    "verified": false
+  },
+  "i-cannot-find-my-belongings": {
+    "text": "Je ne trouve pas mes affaires.",
+    "pronunciation": "zhuh nuh troov pah meh zah-FEHR",
+    "meaningNote": "\"Mes affaires\" refers to personal belongings.",
+    "exampleSentence": "J'ai vérifié mon casier et je ne trouve pas mes affaires.",
+    "verified": false
+  },
+  "i-lost-my-keys": {
+    "text": "J'ai perdu mes clés.",
+    "pronunciation": "zheh pehr-DOO meh KLEH",
+    "meaningNote": "\"Mes clés\" (also spelled \"clefs\") is plural.",
+    "exampleSentence": "Excusez-moi, j'ai perdu mes clés dans le hall.",
+    "verified": false
+  },
+  "i-left-my-bag-on-the-train": {
+    "text": "J'ai oublié mon sac dans le train.",
+    "pronunciation": "zheh oo-blee-YEH mon SAHK dahn luh TRAN",
+    "meaningNote": "In French, you are \"dans le train\" (in the train) rather than on it.",
+    "exampleSentence": "Je viens de descendre et j'ai oublié mon sac dans le train.",
+    "verified": false
+  },
+  "please-call-me-if-you-find-it": {
+    "text": "S'il vous plaît, appelez-moi si vous le trouvez.",
+    "pronunciation": "seel voo PLEH, ah-pleh-MWAH see voo luh troo-VEH",
+    "meaningNote": "For a feminine object like \"la valise\", say \"si vous la trouvez\".",
+    "exampleSentence": "Voici mon numéro ; s'il vous plaît, appelez-moi si vous le trouvez.",
+    "verified": false
+  },
+  "can-i-describe-it-to-you": {
+    "text": "Puis-je vous le décrire ?",
+    "pronunciation": "pweezh voo luh deh-KREER",
+    "meaningNote": "For a feminine item like \"la valise\", say \"Puis-je vous la décrire ?\".",
+    "exampleSentence": "C'est un petit sac à dos noir ; puis-je vous le décrire ?",
+    "verified": false
+  },
+  "can-i-fill-out-a-form": {
+    "text": "Puis-je remplir un formulaire ?",
+    "pronunciation": "pweezh rahn-PLEER uhn fohr-moo-LEHR",
+    "meaningNote": "\"Remplir un formulaire\" means to fill out a form.",
+    "exampleSentence": "Puis-je remplir un formulaire avec mes coordonnées ?",
+    "verified": false
+  },
+  "where-is-the-bathroom": {
+    "text": "Où sont les toilettes, s'il vous plaît ?",
+    "pronunciation": "oo son leh twah-LEHT, seel voo PLEH",
+    "meaningNote": "In France, always ask \"Où sont les toilettes ?\" (in Quebec, \"Où est la salle de bain / la toilette ?\" is also common).",
+    "exampleSentence": "Excusez-moi, où sont les toilettes, s'il vous plaît ?",
+    "verified": false
+  },
+  "how-do-i-get-to-the-station": {
+    "text": "Comment puis-je aller à la gare ?",
+    "pronunciation": "koh-mahn pweezh ah-LEH ah lah GAHR",
+    "meaningNote": "\"La gare\" refers to a train station (\"la station de métro\" is used for a subway station).",
+    "exampleSentence": "Excusez-moi, comment puis-je aller à la gare centrale ?",
+    "verified": false
+  },
+  "is-it-far-from-here": {
+    "text": "Est-ce que c'est loin d'ici ?",
+    "pronunciation": "ehs kuh seh LWAN dee-SEE",
+    "meaningNote": "\"Loin d'ici\" means far from here.",
+    "exampleSentence": "Peut-on y aller à pied, ou est-ce que c'est loin d'ici ?",
+    "verified": false
+  },
+  "turn-left-at-the-corner": {
+    "text": "Tournez à gauche au coin de la rue",
+    "pronunciation": "toor-neh ah GOHSH oh kwan duh lah ROO",
+    "meaningNote": "Polite imperative form using \"vous\".",
+    "exampleSentence": "Continuez un peu, puis tournez à gauche au coin de la rue.",
+    "verified": false
+  },
+  "turn-right-after-the-bank": {
+    "text": "Tournez à droite après la banque",
+    "pronunciation": "toor-neh ah DRWAHT ah-preh lah BAHNK",
+    "meaningNote": "Polite imperative form using \"vous\".",
+    "exampleSentence": "Allez tout droit et tournez à droite après la banque.",
+    "verified": false
+  },
+  "go-straight-ahead": {
+    "text": "Allez tout droit",
+    "pronunciation": "ah-leh too DRWAH",
+    "meaningNote": "Standard direction meaning \"Go straight ahead\".",
+    "exampleSentence": "Allez tout droit jusqu'au feu de circulation.",
+    "verified": false
+  },
+  "where-am-i-on-the-map": {
+    "text": "Où suis-je sur cette carte ?",
+    "pronunciation": "oo sweezh soor seht KAHRT",
+    "meaningNote": "A city street map is also called \"un plan\".",
+    "exampleSentence": "Excusez-moi, pourriez-vous m'indiquer où je suis sur cette carte ?",
+    "verified": false
+  },
+  "is-it-within-walking-distance": {
+    "text": "Peut-on y aller à pied ?",
+    "pronunciation": "puh-ton ee ah-LEH ah PYEH",
+    "meaningNote": "Literally asks \"Can one go there on foot?\".",
+    "exampleSentence": "Peut-on y aller à pied depuis notre hôtel ?",
+    "verified": false
+  },
+  "where-is-the-bus-stop": {
+    "text": "Où est l'arrêt de bus le plus proche ?",
+    "pronunciation": "oo eh lah-REH duh boos luh ploo PROHSH",
+    "meaningNote": "\"Un arrêt de bus\" (or \"arrêt d'autobus\" in Quebec) means a bus stop.",
+    "exampleSentence": "Pourriez-vous me dire où est l'arrêt de bus le plus proche ?",
+    "verified": false
+  },
+  "i-am-lost-can-you-help": {
+    "text": "Je suis perdu, pouvez-vous m'aider ?",
+    "pronunciation": "zhuh swee pehr-DOO, poo-veh-voo meh-DEH",
+    "meaningNote": "In writing, a female speaker spells it \"perdue\" (pronounced identically).",
+    "exampleSentence": "Excusez-moi, je suis perdu, pouvez-vous m'aider à trouver mon hôtel ?",
+    "verified": false
+  },
+  "where-is-baggage-claim": {
+    "text": "Où est la livraison des bagages ?",
+    "pronunciation": "oo eh lah lee-vreh-ZON deh bah-GAHZH",
+    "meaningNote": "In French airports, signs read \"Livraison des bagages\" or \"Retrait des bagages\" (in Quebec, \"Récupération des bagages\").",
+    "exampleSentence": "Notre avion vient d'atterrir ; où est la livraison des bagages ?",
+    "verified": false
+  },
+  "i-have-a-hotel-reservation": {
+    "text": "J'ai une réservation à ce nom",
+    "pronunciation": "zheh oon reh-zehr-vah-SYON ah suh NON",
+    "meaningNote": "Spoken at the hotel reception desk when presenting your name.",
+    "exampleSentence": "Bonjour, j'ai une réservation à ce nom pour trois nuits.",
+    "verified": false
+  },
+  "what-time-is-checkout": {
+    "text": "À quelle heure faut-il libérer la chambre demain ?",
+    "pronunciation": "ah kehl uhr foh-teel lee-beh-REH lah SHAHN-bruh duh-MAN",
+    "meaningNote": "\"Libérer la chambre\" is the idiomatic French way to say \"check out of the room\".",
+    "exampleSentence": "Pourriez-vous me dire à quelle heure faut-il libérer la chambre demain ?",
+    "verified": false
+  },
+  "how-much-is-a-ticket-to": {
+    "text": "Combien coûte un billet pour le centre-ville ?",
+    "pronunciation": "kon-BYAN koot uhn bee-YEH poor luh sahn-truh-VEEL",
+    "meaningNote": "A one-way ticket is \"un aller simple\" and a round-trip ticket is \"un aller-retour\".",
+    "exampleSentence": "Bonjour, combien coûte un billet aller simple pour le centre-ville ?",
+    "verified": false
+  },
+  "which-platform-for-the-airport": {
+    "text": "De quel quai part le train pour l'aéroport ?",
+    "pronunciation": "duh kehl keh pahr luh TRAN poor lah-eh-roh-POHR",
+    "meaningNote": "\"Le quai\" means the train platform.",
+    "exampleSentence": "Excusez-moi, de quel quai part le train pour l'aéroport ?",
+    "verified": false
+  },
+  "can-you-call-a-taxi": {
+    "text": "Pourriez-vous m'appeler un taxi, s'il vous plaît ?",
+    "pronunciation": "poo-ryeh-voo mah-PLEH uhn tahk-SEE, seel voo PLEH",
+    "meaningNote": "Polite conditional request using \"vous\".",
+    "exampleSentence": "J'ai des valises lourdes ; pourriez-vous m'appeler un taxi, s'il vous plaît ?",
+    "verified": false
+  },
+  "do-you-have-wifi": {
+    "text": "Avez-vous le Wi-Fi ici, et quel est le mot de passe ?",
+    "pronunciation": "ah-veh-voo luh wee-FEE ee-SEE, eh kehl eh luh moh duh PAHS",
+    "meaningNote": "In French, \"Wi-Fi\" is pronounced \"wee-fee\" and password is \"le mot de passe\" (or \"le code Wi-Fi\").",
+    "exampleSentence": "Excusez-moi, avez-vous le Wi-Fi ici, et quel est le mot de passe ?",
+    "verified": false
+  },
+  "can-i-leave-my-luggage-here": {
+    "text": "Puis-je laisser mes bagages ici pendant quelques heures ?",
+    "pronunciation": "pweezh leh-SEH meh bah-GAHZH ee-SEE pahn-dahn kehl-kuh ZUHR",
+    "meaningNote": "A hotel luggage room is called \"la bagagerie\" or \"la consigne\".",
+    "exampleSentence": "Mon train part ce soir ; puis-je laisser mes bagages ici pendant quelques heures ?",
+    "verified": false
+  },
+  "do-you-accept-credit-cards": {
+    "text": "Acceptez-vous la carte bancaire ou seulement les espèces ?",
+    "pronunciation": "ahk-sehp-teh-voo lah kahrt bahn-KEHR oo suhl-MAHN leh zehs-PEHS",
+    "meaningNote": "In France, payment cards are usually called \"la carte bancaire\" (or \"CB\"); in Quebec, \"la carte de crédit\" and \"l'argent comptant\" are used.",
+    "exampleSentence": "Avant de commander, acceptez-vous la carte bancaire ou seulement les espèces ?",
+    "verified": false
+  },
+  "where-can-i-exchange-currency": {
+    "text": "Où puis-je changer de l'argent en toute sécurité ?",
+    "pronunciation": "oo pweezh shahn-ZHEH duh lahr-ZHAHN ahn toot seh-koo-ree-TEH",
+    "meaningNote": "A currency exchange office is called \"un bureau de change\".",
+    "exampleSentence": "Excusez-moi, où puis-je changer de l'argent dans un bureau de change ?",
+    "verified": false
+  },
+  "help-me-please": {
+    "text": "Au secours ! / Aidez-moi, s'il vous plaît !",
+    "pronunciation": "oh suh-KOOR / eh-deh-MWAH, seel voo PLEH",
+    "meaningNote": "\"Au secours !\" is the urgent cry for help in an emergency; \"Aidez-moi\" means \"Help me\".",
+    "exampleSentence": "Au secours ! Aidez-moi, s'il vous plaît !",
+    "verified": false
+  },
+  "call-an-ambulance": {
+    "text": "Appelez une ambulance immédiatement !",
+    "pronunciation": "ah-pleh oon ahn-boo-LAHNS ee-meh-dyaht-MAHN",
+    "meaningNote": "Polite imperative form using \"vous\".",
+    "exampleSentence": "Cette personne a perdu connaissance ; appelez une ambulance immédiatement !",
+    "verified": false
+  },
+  "call-the-police": {
+    "text": "Appelez la police tout de suite !",
+    "pronunciation": "ah-pleh lah poh-LEES too duh SWEET",
+    "meaningNote": "Direct imperative command using \"vous\".",
+    "exampleSentence": "Il y a eu un vol ; appelez la police tout de suite !",
+    "verified": false
+  },
+  "where-is-the-nearest-hospital": {
+    "text": "Où est l'hôpital le plus proche ?",
+    "pronunciation": "oo eh loh-pee-TAHL luh ploo PROHSH",
+    "meaningNote": "The emergency room at a hospital is called \"les urgences\".",
+    "exampleSentence": "J'ai une douleur très forte ; où est l'hôpital le plus proche ?",
+    "verified": false
+  },
+  "i-need-a-doctor": {
+    "text": "J'ai besoin de voir un médecin qui parle anglais",
+    "pronunciation": "zheh buh-ZWAN duh vwahr uhn mehd-SAN kee pahrl ahn-GLEH",
+    "meaningNote": "\"Un médecin\" (or \"un docteur\") means a medical doctor.",
+    "exampleSentence": "Je me sens mal et j'ai besoin de voir un médecin qui parle anglais.",
+    "verified": false
+  },
+  "where-is-a-pharmacy": {
+    "text": "Où est la pharmacie ouverte la plus proche ?",
+    "pronunciation": "oo eh lah fahr-mah-SEE oo-VEHRT lah ploo PROHSH",
+    "meaningNote": "An after-hours or twenty-four-hour duty pharmacy is called \"une pharmacie de garde\".",
+    "exampleSentence": "Excusez-moi, où est la pharmacie ouverte la plus proche ?",
+    "verified": false
+  },
+  "i-lost-my-passport": {
+    "text": "J'ai perdu mon passeport et mon portefeuille",
+    "pronunciation": "zheh pehr-DOO mon pahs-POHR eh mon pohr-tuh-FUHY",
+    "meaningNote": "Direct statement reporting a lost passport and wallet.",
+    "exampleSentence": "J'ai besoin d'aide car j'ai perdu mon passeport et mon portefeuille.",
+    "verified": false
+  },
+  "i-cannot-breathe": {
+    "text": "J'ai du mal à respirer",
+    "pronunciation": "zheh doo mahl ah rehs-pee-REH",
+    "meaningNote": "You can also say \"Je n'arrive pas à respirer\" (I cannot breathe).",
+    "exampleSentence": "Aidez-moi s'il vous plaît, j'ai du mal à respirer.",
+    "verified": false
+  },
+  "there-is-a-fire": {
+    "text": "Au feu ! Évacuez le bâtiment !",
+    "pronunciation": "oh FUH / eh-vah-kweh luh bah-tee-MAHN",
+    "meaningNote": "\"Au feu !\" is the standard urgent warning cry for a fire.",
+    "exampleSentence": "Il y a de la fumée ; au feu ! Évacuez le bâtiment !",
+    "verified": false
+  },
+  "i-feel-very-dizzy": {
+    "text": "J'ai des vertiges et je me sens très faible",
+    "pronunciation": "zheh deh vehr-TEEZH eh zhuh muh sahn treh FEH-bluh",
+    "meaningNote": "\"Faible\" has the same form for both masculine and feminine speakers; in Quebec, \"Je me sens étourdi\" (f: \"étourdie\") is also common for feeling dizzy.",
+    "exampleSentence": "Je dois m'asseoir immédiatement ; j'ai des vertiges et je me sens très faible.",
+    "verified": false
+  }
+}

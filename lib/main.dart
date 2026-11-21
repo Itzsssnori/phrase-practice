@@ -8,6 +8,7 @@ import 'services/auth_controller.dart';
 import 'services/language_settings_controller.dart';
 import 'services/progress_controller.dart';
 import 'services/quiz_controller.dart';
+import 'services/speech_service.dart';
 import 'services/translator_controller.dart';
 import 'services/user_phrase_controller.dart';
 import 'theme/app_theme.dart';
@@ -16,6 +17,7 @@ import 'widgets/app_error_message.dart';
 import 'widgets/app_progress_scope.dart';
 import 'widgets/app_quiz_scope.dart';
 import 'widgets/app_settings_scope.dart';
+import 'widgets/app_speech_scope.dart';
 import 'widgets/app_translator_scope.dart';
 import 'widgets/app_user_phrase_scope.dart';
 
@@ -56,6 +58,10 @@ Future<void> main() async {
     authController: authController,
   );
 
+  final speechService = SpeechService(
+    settingsController: settingsController,
+  );
+
   runApp(PhrasePracticeApp(
     initializationError: initError,
     settingsController: settingsController,
@@ -64,6 +70,7 @@ Future<void> main() async {
     quizController: quizController,
     progressController: progressController,
     translatorController: translatorController,
+    speechService: speechService,
   ));
 }
 
@@ -76,6 +83,7 @@ class PhrasePracticeApp extends StatefulWidget {
   final QuizController? quizController;
   final ProgressController? progressController;
   final TranslatorController? translatorController;
+  final SpeechService? speechService;
 
   const PhrasePracticeApp({
     super.key,
@@ -86,6 +94,7 @@ class PhrasePracticeApp extends StatefulWidget {
     this.quizController,
     this.progressController,
     this.translatorController,
+    this.speechService,
   });
 
   @override
@@ -99,6 +108,7 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
   late final QuizController _quizController;
   late final ProgressController _progressController;
   late final TranslatorController _translatorController;
+  late final SpeechService _speechService;
   late final GoRouter _router;
 
   @override
@@ -117,6 +127,8 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
         );
     _translatorController = widget.translatorController ??
         TranslatorController(authController: _authController);
+    _speechService = widget.speechService ??
+        SpeechService(settingsController: _settingsController);
     _router = createAppRouter(
       authController: _authController,
       settingsController: _settingsController,
@@ -130,33 +142,36 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
         controller: _authController,
         child: AppSettingsScope(
           controller: _settingsController,
-          child: AppUserPhraseScope(
-            controller: _userPhraseController,
-            child: AppQuizScope(
-              controller: _quizController,
-              child: AppProgressScope(
-                controller: _progressController,
-                child: AppTranslatorScope(
-                  controller: _translatorController,
-                  child: ListenableBuilder(
-                    listenable: _settingsController,
-                    builder: (context, _) => MaterialApp(
-                      title: 'Phrase Practice',
-                      debugShowCheckedModeBanner: false,
-                      theme: AppTheme.lightTheme,
-                      darkTheme: AppTheme.darkTheme,
-                      themeMode: _settingsController.themeMode,
-                      home: Scaffold(
-                        appBar: AppBar(
-                          title: const Text('Offline Mode'),
-                        ),
-                        body: SafeArea(
-                          child: AppErrorMessage(
-                            title: 'Database Connection Notice',
-                            message:
-                                'Firebase could not be initialized on this platform:\n${widget.initializationError}\n\nYou can continue exploring offline screens.',
-                            retryLabel: 'Retry Initialization',
-                            onRetry: () => main(),
+          child: AppSpeechScope(
+            controller: _speechService,
+            child: AppUserPhraseScope(
+              controller: _userPhraseController,
+              child: AppQuizScope(
+                controller: _quizController,
+                child: AppProgressScope(
+                  controller: _progressController,
+                  child: AppTranslatorScope(
+                    controller: _translatorController,
+                    child: ListenableBuilder(
+                      listenable: _settingsController,
+                      builder: (context, _) => MaterialApp(
+                        title: 'Phrase Practice',
+                        debugShowCheckedModeBanner: false,
+                        theme: AppTheme.lightTheme,
+                        darkTheme: AppTheme.darkTheme,
+                        themeMode: _settingsController.themeMode,
+                        home: Scaffold(
+                          appBar: AppBar(
+                            title: const Text('Offline Mode'),
+                          ),
+                          body: SafeArea(
+                            child: AppErrorMessage(
+                              title: 'Database Connection Notice',
+                              message:
+                                  'Firebase could not be initialized on this platform:\n${widget.initializationError}\n\nYou can continue exploring offline screens.',
+                              retryLabel: 'Retry Initialization',
+                              onRetry: () => main(),
+                            ),
                           ),
                         ),
                       ),
@@ -174,23 +189,26 @@ class _PhrasePracticeAppState extends State<PhrasePracticeApp> {
       controller: _authController,
       child: AppSettingsScope(
         controller: _settingsController,
-        child: AppUserPhraseScope(
-          controller: _userPhraseController,
-          child: AppQuizScope(
-            controller: _quizController,
-            child: AppProgressScope(
-              controller: _progressController,
-              child: AppTranslatorScope(
-                controller: _translatorController,
-                child: ListenableBuilder(
-                  listenable: _settingsController,
-                  builder: (context, _) => MaterialApp.router(
-                    title: 'Phrase Practice',
-                    debugShowCheckedModeBanner: false,
-                    theme: AppTheme.lightTheme,
-                    darkTheme: AppTheme.darkTheme,
-                    themeMode: _settingsController.themeMode,
-                    routerConfig: _router,
+        child: AppSpeechScope(
+          controller: _speechService,
+          child: AppUserPhraseScope(
+            controller: _userPhraseController,
+            child: AppQuizScope(
+              controller: _quizController,
+              child: AppProgressScope(
+                controller: _progressController,
+                child: AppTranslatorScope(
+                  controller: _translatorController,
+                  child: ListenableBuilder(
+                    listenable: _settingsController,
+                    builder: (context, _) => MaterialApp.router(
+                      title: 'Phrase Practice',
+                      debugShowCheckedModeBanner: false,
+                      theme: AppTheme.lightTheme,
+                      darkTheme: AppTheme.darkTheme,
+                      themeMode: _settingsController.themeMode,
+                      routerConfig: _router,
+                    ),
                   ),
                 ),
               ),

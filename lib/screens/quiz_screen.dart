@@ -1,11 +1,18 @@
+import 'dart:async';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import '../models/language.dart';
+import '../models/quiz.dart';
+import '../services/speech_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/app_audio_button.dart';
 import '../widgets/app_auth_scope.dart';
 import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_quiz_scope.dart';
+import '../widgets/app_speech_scope.dart';
+import '../widgets/localized_phrase_text.dart';
 
 /// Active practice quiz screen featuring immediate constructive feedback.
 class QuizScreen extends StatefulWidget {
@@ -16,6 +23,23 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  SpeechService? _speechService;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _speechService = AppSpeechScope.maybeOf(context);
+  }
+
+  @override
+  void dispose() {
+    final speech = _speechService;
+    if (speech != null) {
+      unawaited(speech.stop());
+    }
+    super.dispose();
+  }
+
   Future<bool> _confirmExit(BuildContext context) async {
     final leave = await showDialog<bool>(
       context: context,
@@ -133,28 +157,57 @@ class _QuizScreenState extends State<QuizScreen> {
                       const SizedBox(height: AppSpacing.xs),
 
                       // Original phrase
-                      Text(
+                      LocalizedPhraseText(
                         question.originalPhrase,
+                        languageCode: question.direction == QuizDirection.nativeToTarget
+                            ? question.nativeLanguageCode
+                            : question.targetLanguageCode,
                         style: theme.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: isDark ? AppColors.darkText : AppColors.lightText,
                           height: 1.3,
                         ),
-                        softWrap: true,
                       ),
+
+                      // Audio button on question card when direction is target -> native
+                      if (question.direction == QuizDirection.targetToNative) ...[
+                        const SizedBox(height: AppSpacing.xs),
+                        AppAudioButton(
+                          text: question.originalPhrase,
+                          languageCode: question.targetLanguageCode,
+                          utteranceId:
+                              'quiz-question-${question.phrase.id}-${question.targetLanguageCode}',
+                        ),
+                      ],
 
                       // Target-language pronunciation revealed after answering
                       if (isAnswerSubmitted &&
                           question.pronunciation != null &&
                           question.pronunciation!.isNotEmpty) ...[
                         const SizedBox(height: AppSpacing.xs),
-                        Text(
-                          question.pronunciation!,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontStyle: FontStyle.italic,
-                            color: theme.colorScheme.primary,
-                          ),
-                          softWrap: true,
+                        Wrap(
+                          spacing: AppSpacing.xs,
+                          runSpacing: 2,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            Text(
+                              '${Language.defaultPronunciationSystemFor(question.targetLanguageCode)}:',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: isDark
+                                    ? AppColors.darkTextSecondary
+                                    : AppColors.lightTextSecondary,
+                              ),
+                            ),
+                            Text(
+                              question.pronunciation!,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontStyle: FontStyle.italic,
+                                color: theme.colorScheme.primary,
+                              ),
+                              softWrap: true,
+                            ),
+                          ],
                         ),
                       ],
 
@@ -270,13 +323,16 @@ class _QuizScreenState extends State<QuizScreen> {
 
                                   // Option text
                                   Expanded(
-                                    child: Text(
+                                    child: LocalizedPhraseText(
                                       optionText,
+                                      languageCode:
+                                          question.direction == QuizDirection.nativeToTarget
+                                              ? question.targetLanguageCode
+                                              : question.nativeLanguageCode,
                                       style: theme.textTheme.bodyMedium?.copyWith(
                                         fontWeight: FontWeight.w500,
                                         color: isDark ? AppColors.darkText : AppColors.lightText,
                                       ),
-                                      softWrap: true,
                                     ),
                                   ),
 
@@ -292,8 +348,10 @@ class _QuizScreenState extends State<QuizScreen> {
                         },
                       ),
 
-                      // Explanation note box after submitting
-                      if (isAnswerSubmitted && question.explanation.isNotEmpty) ...[
+                      // Feedback panel after submitting (includes audio button when answer is target-language text)
+                      if (isAnswerSubmitted &&
+                          (question.direction == QuizDirection.nativeToTarget ||
+                              question.explanation.isNotEmpty)) ...[
                         const SizedBox(height: AppSpacing.lg),
                         Container(
                           width: double.infinity,
@@ -308,22 +366,50 @@ class _QuizScreenState extends State<QuizScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Context & Meaning',
-                                style: theme.textTheme.labelSmall?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: theme.colorScheme.primary,
+                              if (question.direction == QuizDirection.nativeToTarget) ...[
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: LocalizedPhraseText(
+                                        question.options[question.correctIndex],
+                                        languageCode: question.targetLanguageCode,
+                                        style: theme.textTheme.titleSmall?.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: isDark ? AppColors.darkText : AppColors.lightText,
+                                        ),
+                                      ),
+                                    ),
+                                    AppAudioButton(
+                                      text: question.options[question.correctIndex],
+                                      languageCode: question.targetLanguageCode,
+                                      utteranceId:
+                                          'quiz-answer-${question.phrase.id}-${question.targetLanguageCode}',
+                                      isCompact: true,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                question.explanation,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: isDark ? AppColors.darkText : AppColors.lightText,
-                                  height: 1.4,
+                                if (question.explanation.isNotEmpty)
+                                  const SizedBox(height: AppSpacing.xs),
+                              ],
+                              if (question.explanation.isNotEmpty) ...[
+                                Text(
+                                  'Context & Meaning',
+                                  style: theme.textTheme.labelSmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: theme.colorScheme.primary,
+                                  ),
                                 ),
-                                softWrap: true,
-                              ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  question.explanation,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: isDark ? AppColors.darkText : AppColors.lightText,
+                                    height: 1.4,
+                                  ),
+                                  softWrap: true,
+                                ),
+                              ],
                             ],
                           ),
                         ),
@@ -349,6 +435,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       : (!isAnswerSubmitted
                           ? quizCtrl.submitAnswer
                           : () async {
+                              unawaited(_speechService?.stop());
                               if (currentIndex < total - 1) {
                                 quizCtrl.nextQuestion();
                               } else {

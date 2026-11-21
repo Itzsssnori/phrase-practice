@@ -1,0 +1,1402 @@
+{
+  "hello-polite": {
+    "text": "Hello / Good day",
+    "pronunciation": "",
+    "meaningNote": "Standard polite greeting suitable for any time of day.",
+    "exampleSentence": "Hello, nice to meet you.",
+    "verified": false
+  },
+  "good-morning": {
+    "text": "Good morning",
+    "pronunciation": "",
+    "meaningNote": "Spoken greeting before midday.",
+    "exampleSentence": "Good morning, everyone!",
+    "verified": false
+  },
+  "good-evening": {
+    "text": "Good evening",
+    "pronunciation": "",
+    "meaningNote": "Formal or polite greeting after sunset.",
+    "exampleSentence": "Good evening, we have a table reserved.",
+    "verified": false
+  },
+  "how-are-you": {
+    "text": "How are you doing?",
+    "pronunciation": "",
+    "meaningNote": "Casual and friendly check-in on someone's well-being.",
+    "exampleSentence": "Hi Maria, how are you doing today?",
+    "verified": false
+  },
+  "nice-to-meet-you": {
+    "text": "Nice to meet you",
+    "pronunciation": "",
+    "meaningNote": "Courteous phrase when introduced to someone for the first time.",
+    "exampleSentence": "I am Carlos, nice to meet you.",
+    "verified": false
+  },
+  "thank-you-very-much": {
+    "text": "Thank you very much",
+    "pronunciation": "",
+    "meaningNote": "Expression of deep or sincere gratitude.",
+    "exampleSentence": "Thank you very much for your kind assistance.",
+    "verified": false
+  },
+  "you-are-welcome": {
+    "text": "You are welcome",
+    "pronunciation": "",
+    "meaningNote": "Polite response to being thanked.",
+    "exampleSentence": "You are welcome, happy to help anytime.",
+    "verified": false
+  },
+  "please": {
+    "text": "Please",
+    "pronunciation": "",
+    "meaningNote": "Fundamental marker of politeness when requesting anything.",
+    "exampleSentence": "Could you please pass the water?",
+    "verified": false
+  },
+  "excuse-me-pardon": {
+    "text": "Excuse me / Pardon me",
+    "pronunciation": "",
+    "meaningNote": "Used to capture attention politely or to pass through a crowd.",
+    "exampleSentence": "Excuse me, may I get past?",
+    "verified": false
+  },
+  "goodbye-take-care": {
+    "text": "Goodbye, take care",
+    "pronunciation": "",
+    "meaningNote": "Warm parting phrase wishing safety to the other person.",
+    "exampleSentence": "Goodbye, take care on your flight home!",
+    "verified": false
+  },
+  "a-table-for-two-please": {
+    "text": "A table for two, please",
+    "pronunciation": "",
+    "meaningNote": "Standard request when entering a restaurant.",
+    "exampleSentence": "Good evening, a table for two inside, please.",
+    "verified": false
+  },
+  "can-i-see-the-menu": {
+    "text": "May I see the menu, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting the printed or digital food selection.",
+    "exampleSentence": "Excuse me, may I see the menu and drink specials?",
+    "verified": false
+  },
+  "what-do-you-recommend": {
+    "text": "What do you recommend here?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about house specialties or popular local delicacies.",
+    "exampleSentence": "Everything looks tasty; what do you recommend here?",
+    "verified": false
+  },
+  "the-check-please": {
+    "text": "Could we have the check, please?",
+    "pronunciation": "",
+    "meaningNote": "Signaling the server that you are ready to settle payment.",
+    "exampleSentence": "We are all done, could we have the check, please?",
+    "verified": false
+  },
+  "i-am-allergic-to-peanuts": {
+    "text": "I am allergic to peanuts",
+    "pronunciation": "",
+    "meaningNote": "Vital health safety advisory for food preparers.",
+    "exampleSentence": "Please ensure there are no nuts in this; I am allergic to peanuts.",
+    "verified": false
+  },
+  "is-this-dish-spicy": {
+    "text": "Is this dish spicy?",
+    "pronunciation": "",
+    "meaningNote": "Clarifying the chili or heat level of a meal.",
+    "exampleSentence": "I have a delicate stomach; is this dish spicy?",
+    "verified": false
+  },
+  "water-without-ice-please": {
+    "text": "Water without ice, please",
+    "pronunciation": "",
+    "meaningNote": "Specifying room-temperature or unchilled water.",
+    "exampleSentence": "Just a glass of tap or bottled water without ice, please.",
+    "verified": false
+  },
+  "delicious-compliment": {
+    "text": "The food was delicious, thank you",
+    "pronunciation": "",
+    "meaningNote": "Hearty praise for the cook and dining staff.",
+    "exampleSentence": "Compliments to the chef, the food was delicious!",
+    "verified": false
+  },
+  "is-this-vegetarian": {
+    "text": "Is this dish vegetarian?",
+    "pronunciation": "",
+    "meaningNote": "Verifying lack of meat, poultry, or seafood broth.",
+    "exampleSentence": "Does this soup contain meat broth, or is it strictly vegetarian?",
+    "verified": false
+  },
+  "can-i-have-this-to-go": {
+    "text": "Can I have this to go, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting a takeout box for remaining food.",
+    "exampleSentence": "We could not finish our meal; can I have this to go, please?",
+    "verified": false
+  },
+  "what-is-your-name": {
+    "text": "What is your name?",
+    "pronunciation": "",
+    "meaningNote": "Polite question when introducing yourself to someone new.",
+    "exampleSentence": "Hello, my name is Alex; what is your name?",
+    "verified": false
+  },
+  "it-is-my-first-time-here": {
+    "text": "It is my first time visiting here.",
+    "pronunciation": "",
+    "meaningNote": "Friendly icebreaker when chatting with locals.",
+    "exampleSentence": "It is my first time visiting here, and the city is beautiful.",
+    "verified": false
+  },
+  "where-are-you-from": {
+    "text": "Where are you from?",
+    "pronunciation": "",
+    "meaningNote": "Common small-talk question about someone's hometown or country.",
+    "exampleSentence": "We are visiting from Canada; where are you from?",
+    "verified": false
+  },
+  "is-this-your-hometown": {
+    "text": "Is this your hometown?",
+    "pronunciation": "",
+    "meaningNote": "Asking whether someone grew up in the current city or town.",
+    "exampleSentence": "You know the neighborhood so well; is this your hometown?",
+    "verified": false
+  },
+  "what-do-you-do-for-a-living": {
+    "text": "What do you do for a living?",
+    "pronunciation": "",
+    "meaningNote": "Polite question about someone's profession or occupation.",
+    "exampleSentence": "I work as a teacher; what do you do for a living?",
+    "verified": false
+  },
+  "how-long-have-you-lived-here": {
+    "text": "How long have you lived here?",
+    "pronunciation": "",
+    "meaningNote": "Asking a resident how long they have lived in the area.",
+    "exampleSentence": "It is a wonderful neighborhood; how long have you lived here?",
+    "verified": false
+  },
+  "what-do-you-like-to-do": {
+    "text": "What do you like to do in your free time?",
+    "pronunciation": "",
+    "meaningNote": "Asking about hobbies and personal interests.",
+    "exampleSentence": "I enjoy hiking; what do you like to do in your free time?",
+    "verified": false
+  },
+  "that-is-interesting": {
+    "text": "That's interesting!",
+    "pronunciation": "",
+    "meaningNote": "Warm conversational response showing active interest.",
+    "exampleSentence": "That's interesting! I did not know that about the city.",
+    "verified": false
+  },
+  "it-was-nice-talking-to-you": {
+    "text": "It was nice talking to you.",
+    "pronunciation": "",
+    "meaningNote": "Polite way to wrap up a conversation before leaving.",
+    "exampleSentence": "I have to catch my train now, but it was nice talking to you.",
+    "verified": false
+  },
+  "have-a-nice-day": {
+    "text": "Have a nice day!",
+    "pronunciation": "",
+    "meaningNote": "Friendly everyday parting wish.",
+    "exampleSentence": "Thank you for your time, have a nice day!",
+    "verified": false
+  },
+  "how-much-is-this": {
+    "text": "How much is this?",
+    "pronunciation": "",
+    "meaningNote": "Essential question when checking the price of an item.",
+    "exampleSentence": "Excuse me, how much is this handmade bag?",
+    "verified": false
+  },
+  "is-this-available-in-another-size": {
+    "text": "Is this available in another size?",
+    "pronunciation": "",
+    "meaningNote": "Asking a clerk for a larger or smaller clothing or shoe size.",
+    "exampleSentence": "This shirt is a bit small; is this available in another size?",
+    "verified": false
+  },
+  "do-you-have-another-color": {
+    "text": "Do you have another color?",
+    "pronunciation": "",
+    "meaningNote": "Checking whether an item comes in other colors.",
+    "exampleSentence": "I like this style; do you have another color?",
+    "verified": false
+  },
+  "can-i-try-this-on": {
+    "text": "Can I try this on?",
+    "pronunciation": "",
+    "meaningNote": "Asking permission to use the fitting room for clothing or shoes.",
+    "exampleSentence": "Excuse me, can I try this on? Where is the fitting room?",
+    "verified": false
+  },
+  "is-there-a-discount": {
+    "text": "Is there a discount?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about current promotions or cash discounts.",
+    "exampleSentence": "Is there a discount if I pay in cash?",
+    "verified": false
+  },
+  "can-you-lower-the-price": {
+    "text": "Can you lower the price?",
+    "pronunciation": "",
+    "meaningNote": "Used for friendly bargaining at open-air markets and souvenir stalls.",
+    "exampleSentence": "I would like to buy two; can you lower the price a little?",
+    "verified": false
+  },
+  "i-am-just-looking-thank-you": {
+    "text": "I am just looking, thank you.",
+    "pronunciation": "",
+    "meaningNote": "Polite response to a salesperson when browsing without needing help yet.",
+    "exampleSentence": "I am just looking right now, thank you.",
+    "verified": false
+  },
+  "where-can-i-find-this-item": {
+    "text": "Where can I find this item?",
+    "pronunciation": "",
+    "meaningNote": "Asking store staff which aisle or section carries a product.",
+    "exampleSentence": "Excuse me, where can I find this item in the store?",
+    "verified": false
+  },
+  "can-i-return-this": {
+    "text": "Can I return this?",
+    "pronunciation": "",
+    "meaningNote": "Asking about the store's return or exchange policy.",
+    "exampleSentence": "If it does not fit, can I return this tomorrow with the receipt?",
+    "verified": false
+  },
+  "can-i-get-a-shopping-bag": {
+    "text": "Can I get a shopping bag?",
+    "pronunciation": "",
+    "meaningNote": "Requesting a carrier bag at checkout.",
+    "exampleSentence": "Can I get a shopping bag for these groceries, please?",
+    "verified": false
+  },
+  "what-time-is-it": {
+    "text": "What time is it?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the current time of day.",
+    "exampleSentence": "Excuse me, what time is it right now?",
+    "verified": false
+  },
+  "what-day-is-today": {
+    "text": "What day is today?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the day of the week.",
+    "exampleSentence": "What day is today? Is the museum open on Mondays?",
+    "verified": false
+  },
+  "what-is-todays-date": {
+    "text": "What is today's date?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the calendar date (month and day).",
+    "exampleSentence": "I need to fill out this form; what is today's date?",
+    "verified": false
+  },
+  "when-does-it-open": {
+    "text": "When does it open?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the opening hour of a business, museum, or office.",
+    "exampleSentence": "The door is still locked; when does it open?",
+    "verified": false
+  },
+  "when-does-it-close": {
+    "text": "When does it close?",
+    "pronunciation": "",
+    "meaningNote": "Checking closing hours so you can plan your visit.",
+    "exampleSentence": "We want to visit this evening; when does it close?",
+    "verified": false
+  },
+  "how-long-will-it-take": {
+    "text": "How long will it take?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the estimated duration of a trip, wait, or service.",
+    "exampleSentence": "How long will it take to get there by bus?",
+    "verified": false
+  },
+  "can-we-meet-tomorrow": {
+    "text": "Can we meet tomorrow?",
+    "pronunciation": "",
+    "meaningNote": "Arranging an appointment or meetup for the next day.",
+    "exampleSentence": "I am busy this afternoon; can we meet tomorrow instead?",
+    "verified": false
+  },
+  "what-time-should-i-come-back": {
+    "text": "What time should I come back?",
+    "pronunciation": "",
+    "meaningNote": "Useful when dropping off laundry, waiting for a table, or returning for a tour.",
+    "exampleSentence": "I will leave my bags now; what time should I come back?",
+    "verified": false
+  },
+  "two-tickets-please": {
+    "text": "Two tickets, please.",
+    "pronunciation": "",
+    "meaningNote": "Useful number phrase for buying admission or transit tickets.",
+    "exampleSentence": "Good morning, two tickets for the ten o'clock tour, please.",
+    "verified": false
+  },
+  "for-how-many-people": {
+    "text": "For how many people?",
+    "pronunciation": "",
+    "meaningNote": "Common quantity question heard or asked at restaurants, tours, and hotels.",
+    "exampleSentence": "We need a reservation for tonight—for how many people?",
+    "verified": false
+  },
+  "do-you-speak-english": {
+    "text": "Do you speak English?",
+    "pronunciation": "",
+    "meaningNote": "Polite question before switching to English with a stranger.",
+    "exampleSentence": "Excuse me, do you speak English?",
+    "verified": false
+  },
+  "i-do-not-understand": {
+    "text": "I don't understand.",
+    "pronunciation": "",
+    "meaningNote": "Letting the speaker know you did not catch their meaning.",
+    "exampleSentence": "I am sorry, I don't understand what that means.",
+    "verified": false
+  },
+  "could-you-speak-more-slowly": {
+    "text": "Could you speak more slowly?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to slow down so you can follow along.",
+    "exampleSentence": "Could you speak more slowly, please? I am still learning.",
+    "verified": false
+  },
+  "could-you-repeat-that": {
+    "text": "Could you repeat that?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to say the last sentence again.",
+    "exampleSentence": "I missed the last part; could you repeat that, please?",
+    "verified": false
+  },
+  "could-you-write-it-down": {
+    "text": "Could you write it down?",
+    "pronunciation": "",
+    "meaningNote": "Helpful for addresses, prices, or unfamiliar place names.",
+    "exampleSentence": "Could you write it down on this paper so I don't forget?",
+    "verified": false
+  },
+  "how-do-you-say-this": {
+    "text": "How do you say this in your language?",
+    "pronunciation": "",
+    "meaningNote": "Useful when pointing to an object or word to learn its local name.",
+    "exampleSentence": "How do you say this in your language?",
+    "verified": false
+  },
+  "what-does-this-mean": {
+    "text": "What does this word mean?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the meaning of an unfamiliar word on a sign or menu.",
+    "exampleSentence": "Excuse me, what does this word mean on the sign?",
+    "verified": false
+  },
+  "i-am-learning-your-language": {
+    "text": "I am learning your language.",
+    "pronunciation": "",
+    "meaningNote": "Encourages patience and warm conversation from locals.",
+    "exampleSentence": "Please forgive my mistakes; I am learning your language.",
+    "verified": false
+  },
+  "please-wait-a-moment": {
+    "text": "Please wait a moment.",
+    "pronunciation": "",
+    "meaningNote": "Polite way to ask someone to pause while you check your bag or phone.",
+    "exampleSentence": "Please wait a moment while I look up the address.",
+    "verified": false
+  },
+  "can-you-show-me": {
+    "text": "Can you show me?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone to demonstrate or point something out directly.",
+    "exampleSentence": "I am not sure how this ticket machine works; can you show me?",
+    "verified": false
+  },
+  "this-is-my-family": {
+    "text": "This is my family.",
+    "pronunciation": "",
+    "meaningNote": "Introducing family members or showing a family photo.",
+    "exampleSentence": "Hello, this is my family visiting with me.",
+    "verified": false
+  },
+  "i-am-traveling-with-my-parents": {
+    "text": "I am traveling with my parents.",
+    "pronunciation": "",
+    "meaningNote": "Explaining that you are on a trip with your mother and father.",
+    "exampleSentence": "I am traveling with my parents on their first trip abroad.",
+    "verified": false
+  },
+  "do-you-have-children": {
+    "text": "Do you have children?",
+    "pronunciation": "",
+    "meaningNote": "Common family conversation question.",
+    "exampleSentence": "We have two kids; do you have children?",
+    "verified": false
+  },
+  "where-is-your-family": {
+    "text": "Where is your family?",
+    "pronunciation": "",
+    "meaningNote": "Asking where someone's family is located or lives.",
+    "exampleSentence": "Do they live nearby, or where is your family?",
+    "verified": false
+  },
+  "i-am-here-with-a-friend": {
+    "text": "I am here with a friend.",
+    "pronunciation": "",
+    "meaningNote": "Mentioning that you are visiting with a companion.",
+    "exampleSentence": "I am here with a friend from college.",
+    "verified": false
+  },
+  "this-is-my-friend": {
+    "text": "This is my friend.",
+    "pronunciation": "",
+    "meaningNote": "Used to introduce a friend to someone.",
+    "exampleSentence": "Hello, this is my friend Elena.",
+    "verified": false
+  },
+  "this-is-my-partner": {
+    "text": "This is my partner.",
+    "pronunciation": "",
+    "meaningNote": "Introducing your romantic partner or spouse.",
+    "exampleSentence": "Nice to meet you; this is my partner, Sam.",
+    "verified": false
+  },
+  "i-have-a-brother-and-a-sister": {
+    "text": "I have a brother and a sister.",
+    "pronunciation": "",
+    "meaningNote": "Sharing how many siblings you have.",
+    "exampleSentence": "I come from a small family; I have a brother and a sister.",
+    "verified": false
+  },
+  "do-you-have-brothers-or-sisters": {
+    "text": "Do you have brothers or sisters?",
+    "pronunciation": "",
+    "meaningNote": "Asking someone if they have siblings.",
+    "exampleSentence": "Do you have brothers or sisters, or are you an only child?",
+    "verified": false
+  },
+  "how-old-are-your-children": {
+    "text": "How old are your children?",
+    "pronunciation": "",
+    "meaningNote": "Friendly follow-up question when someone mentions their children.",
+    "exampleSentence": "How old are your children now?",
+    "verified": false
+  },
+  "where-is-the-bathroom": {
+    "text": "Where is the bathroom?",
+    "pronunciation": "",
+    "meaningNote": "Essential navigational inquiry.",
+    "exampleSentence": "Excuse me, where is the bathroom located in this building?",
+    "verified": false
+  },
+  "how-do-i-get-to-the-station": {
+    "text": "How do I get to the train station?",
+    "pronunciation": "",
+    "meaningNote": "Asking route guidance towards railway transit.",
+    "exampleSentence": "Pardon me, how do I get to the central train station from here?",
+    "verified": false
+  },
+  "is-it-far-from-here": {
+    "text": "Is it far from here?",
+    "pronunciation": "",
+    "meaningNote": "Estimating walking feasibility versus vehicle hire.",
+    "exampleSentence": "Can we walk there, or is it far from here?",
+    "verified": false
+  },
+  "turn-left-at-the-corner": {
+    "text": "Turn left at the next corner",
+    "pronunciation": "",
+    "meaningNote": "Navigation command directing a left turn.",
+    "exampleSentence": "Walk two blocks, then turn left at the next corner.",
+    "verified": false
+  },
+  "turn-right-after-the-bank": {
+    "text": "Turn right after the bank",
+    "pronunciation": "",
+    "meaningNote": "Directional landmark instruction.",
+    "exampleSentence": "Keep going straight and turn right after the bank.",
+    "verified": false
+  },
+  "go-straight-ahead": {
+    "text": "Go straight ahead",
+    "pronunciation": "",
+    "meaningNote": "Instruction to maintain the current heading without turning.",
+    "exampleSentence": "Go straight ahead until you see the cathedral.",
+    "verified": false
+  },
+  "where-am-i-on-the-map": {
+    "text": "Where am I on this map?",
+    "pronunciation": "",
+    "meaningNote": "Asking a passerby to pinpoint your current location.",
+    "exampleSentence": "I lost my orientation; where am I on this map?",
+    "verified": false
+  },
+  "is-it-within-walking-distance": {
+    "text": "Is it within walking distance?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring if a destination can be reached comfortably by foot.",
+    "exampleSentence": "Is the museum within walking distance from our hotel?",
+    "verified": false
+  },
+  "where-is-the-bus-stop": {
+    "text": "Where is the nearest bus stop?",
+    "pronunciation": "",
+    "meaningNote": "Locating local surface transit.",
+    "exampleSentence": "Could you tell me where the nearest bus stop is?",
+    "verified": false
+  },
+  "i-am-lost-can-you-help": {
+    "text": "I am lost, can you help me?",
+    "pronunciation": "",
+    "meaningNote": "Courteous plea for navigational help when disoriented.",
+    "exampleSentence": "Excuse me, I am lost, can you help me find my hotel?",
+    "verified": false
+  },
+  "where-is-baggage-claim": {
+    "text": "Where is the baggage claim area?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about carousel location upon flight landing.",
+    "exampleSentence": "Our flight just landed; where is the baggage claim area?",
+    "verified": false
+  },
+  "i-have-a-hotel-reservation": {
+    "text": "I have a reservation under this name",
+    "pronunciation": "",
+    "meaningNote": "Standard introduction at hotel front desk check-in.",
+    "exampleSentence": "Good afternoon, I have a reservation under Sarah Jenkins.",
+    "verified": false
+  },
+  "what-time-is-checkout": {
+    "text": "What time is checkout tomorrow?",
+    "pronunciation": "",
+    "meaningNote": "Clarifying hotel departure hour rules.",
+    "exampleSentence": "Could you tell me what time checkout is tomorrow morning?",
+    "verified": false
+  },
+  "how-much-is-a-ticket-to": {
+    "text": "How much is a ticket to the city center?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about transit ticket fares.",
+    "exampleSentence": "Hello, how much is a one-way ticket to the city center?",
+    "verified": false
+  },
+  "which-platform-for-the-airport": {
+    "text": "Which platform does the airport train leave from?",
+    "pronunciation": "",
+    "meaningNote": "Track or platform navigation in a rail station.",
+    "exampleSentence": "Excuse me, which platform does the airport express leave from?",
+    "verified": false
+  },
+  "can-you-call-a-taxi": {
+    "text": "Could you call a taxi for me, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting transport assistance from hotel staff or a business.",
+    "exampleSentence": "I have heavy bags; could you call a taxi for me, please?",
+    "verified": false
+  },
+  "do-you-have-wifi": {
+    "text": "Do you have Wi-Fi here, and what is the password?",
+    "pronunciation": "",
+    "meaningNote": "Requesting wireless internet access credentials.",
+    "exampleSentence": "Excuse me, do you have Wi-Fi here, and what is the password?",
+    "verified": false
+  },
+  "can-i-leave-my-luggage-here": {
+    "text": "Can I leave my luggage here for a few hours?",
+    "pronunciation": "",
+    "meaningNote": "Temporary baggage storage request before room readiness or after checkout.",
+    "exampleSentence": "Our flight departs late; can I leave my luggage here for a few hours?",
+    "verified": false
+  },
+  "do-you-accept-credit-cards": {
+    "text": "Do you accept credit cards or cash only?",
+    "pronunciation": "",
+    "meaningNote": "Clarifying payment methods before ordering goods or services.",
+    "exampleSentence": "Before we order, do you accept credit cards or cash only?",
+    "verified": false
+  },
+  "where-can-i-exchange-currency": {
+    "text": "Where can I safely exchange currency?",
+    "pronunciation": "",
+    "meaningNote": "Locating an authorized foreign currency exchange office.",
+    "exampleSentence": "Excuse me, where can I safely exchange foreign currency nearby?",
+    "verified": false
+  },
+  "does-this-bus-stop-here": {
+    "text": "Does the bus stop here?",
+    "pronunciation": "",
+    "meaningNote": "Confirming that you are waiting at an active bus stop.",
+    "exampleSentence": "Excuse me, does the bus to the station stop here?",
+    "verified": false
+  },
+  "where-is-the-subway-entrance": {
+    "text": "Where is the nearest subway station?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the entrance to the underground metro system.",
+    "exampleSentence": "Excuse me, where is the nearest subway station from this plaza?",
+    "verified": false
+  },
+  "where-can-i-buy-a-transit-card": {
+    "text": "Where can I buy a transit card?",
+    "pronunciation": "",
+    "meaningNote": "Asking where to purchase a reloadable public transit pass or ticket.",
+    "exampleSentence": "Where can I buy a transit card for the bus and metro?",
+    "verified": false
+  },
+  "how-much-is-the-fare": {
+    "text": "How much is the fare?",
+    "pronunciation": "",
+    "meaningNote": "Asking the driver or conductor for the ride price.",
+    "exampleSentence": "How much is the fare to the next stop?",
+    "verified": false
+  },
+  "which-bus-goes-to-the-city-center": {
+    "text": "Which bus goes to the city center?",
+    "pronunciation": "",
+    "meaningNote": "Confirming the route number or bus line heading downtown.",
+    "exampleSentence": "Excuse me, which bus goes to the city center from here?",
+    "verified": false
+  },
+  "does-this-train-go-to-the-airport": {
+    "text": "Does this train go to the airport?",
+    "pronunciation": "",
+    "meaningNote": "Verifying a train's destination before boarding.",
+    "exampleSentence": "Pardon me, does this train go to the international airport?",
+    "verified": false
+  },
+  "what-time-does-the-next-train-arrive": {
+    "text": "What time does the next train arrive?",
+    "pronunciation": "",
+    "meaningNote": "Checking the schedule for the upcoming train.",
+    "exampleSentence": "We missed the express; what time does the next train arrive?",
+    "verified": false
+  },
+  "where-should-i-get-off": {
+    "text": "Where should I get off?",
+    "pronunciation": "",
+    "meaningNote": "Asking the driver or a passenger which stop is closest to your destination.",
+    "exampleSentence": "I am going to the national museum; where should I get off?",
+    "verified": false
+  },
+  "is-this-the-right-platform": {
+    "text": "Is this the right platform?",
+    "pronunciation": "",
+    "meaningNote": "Confirming you are waiting on the correct track.",
+    "exampleSentence": "Is this the right platform for the train heading north?",
+    "verified": false
+  },
+  "please-take-me-to-this-address": {
+    "text": "Please take me to this address.",
+    "pronunciation": "",
+    "meaningNote": "Showing a written address or map to a taxi driver.",
+    "exampleSentence": "Good afternoon, please take me to this address on the card.",
+    "verified": false
+  },
+  "where-is-the-check-in-counter": {
+    "text": "Where is the check-in counter?",
+    "pronunciation": "",
+    "meaningNote": "Locating your airline's check-in desk at the airport terminal.",
+    "exampleSentence": "Excuse me, where is the check-in counter for international flights?",
+    "verified": false
+  },
+  "where-is-the-departure-gate": {
+    "text": "Where is the departure gate?",
+    "pronunciation": "",
+    "meaningNote": "Finding the boarding gate printed on your boarding pass.",
+    "exampleSentence": "Could you tell me where departure gate B12 is?",
+    "verified": false
+  },
+  "where-is-immigration": {
+    "text": "Where is passport control?",
+    "pronunciation": "",
+    "meaningNote": "Locating the immigration and passport inspection hall.",
+    "exampleSentence": "Excuse me, where is immigration and passport control?",
+    "verified": false
+  },
+  "here-is-my-passport": {
+    "text": "Here is my passport.",
+    "pronunciation": "",
+    "meaningNote": "Spoken when handing your passport to an officer or agent.",
+    "exampleSentence": "Good morning, here is my passport and boarding pass.",
+    "verified": false
+  },
+  "i-am-here-for-tourism": {
+    "text": "I am here for tourism.",
+    "pronunciation": "",
+    "meaningNote": "Stating the purpose of your visit at immigration control.",
+    "exampleSentence": "I am here for tourism for two weeks.",
+    "verified": false
+  },
+  "how-long-can-i-stay": {
+    "text": "How long can I stay?",
+    "pronunciation": "",
+    "meaningNote": "Confirming the permitted duration of stay on your entry stamp or visa.",
+    "exampleSentence": "With this tourist entry stamp, how long can I stay?",
+    "verified": false
+  },
+  "i-have-nothing-to-declare": {
+    "text": "I have nothing to declare.",
+    "pronunciation": "",
+    "meaningNote": "Standard statement at airport customs when carrying only personal items.",
+    "exampleSentence": "I only have personal clothes in my suitcase; I have nothing to declare.",
+    "verified": false
+  },
+  "my-luggage-is-missing": {
+    "text": "My luggage is missing.",
+    "pronunciation": "",
+    "meaningNote": "Reporting at the airport baggage service desk that your checked bag did not arrive.",
+    "exampleSentence": "All the bags came out on the carousel, but my luggage is missing.",
+    "verified": false
+  },
+  "is-my-flight-delayed": {
+    "text": "Is my flight delayed?",
+    "pronunciation": "",
+    "meaningNote": "Checking with gate agents about schedule changes.",
+    "exampleSentence": "Excuse me, is my flight delayed or boarding on time?",
+    "verified": false
+  },
+  "could-i-have-a-window-seat": {
+    "text": "Could I have a window seat, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting a window seat (or aisle seat) during check-in.",
+    "exampleSentence": "If one is available, could I have a window seat, please?",
+    "verified": false
+  },
+  "can-i-check-in-early": {
+    "text": "Can I check in early?",
+    "pronunciation": "",
+    "meaningNote": "Asking the hotel front desk if your room is ready before standard check-in time.",
+    "exampleSentence": "Our flight arrived early; can I check in early today?",
+    "verified": false
+  },
+  "i-would-like-to-book-a-room": {
+    "text": "I would like to book a room.",
+    "pronunciation": "",
+    "meaningNote": "Requesting a hotel room reservation for one or more nights.",
+    "exampleSentence": "Hello, I would like to book a room for two nights.",
+    "verified": false
+  },
+  "do-you-have-any-available-rooms": {
+    "text": "Do you have any available rooms?",
+    "pronunciation": "",
+    "meaningNote": "Asking about room vacancy when arriving without a booking.",
+    "exampleSentence": "Good evening, do you have any available rooms for tonight?",
+    "verified": false
+  },
+  "i-would-like-to-check-in": {
+    "text": "I would like to check in, please.",
+    "pronunciation": "",
+    "meaningNote": "Polite opening phrase upon arriving at your hotel reception.",
+    "exampleSentence": "Good afternoon, I would like to check in, please.",
+    "verified": false
+  },
+  "i-would-like-to-check-out": {
+    "text": "I would like to check out, please.",
+    "pronunciation": "",
+    "meaningNote": "Spoken at the hotel front desk when returning your room key and settling the bill.",
+    "exampleSentence": "Good morning, I am leaving now and would like to check out, please.",
+    "verified": false
+  },
+  "what-time-is-breakfast-served": {
+    "text": "What time is breakfast served?",
+    "pronunciation": "",
+    "meaningNote": "Asking hotel staff for morning dining hours.",
+    "exampleSentence": "What time is breakfast served in the dining room tomorrow?",
+    "verified": false
+  },
+  "is-breakfast-included": {
+    "text": "Is breakfast included?",
+    "pronunciation": "",
+    "meaningNote": "Checking whether morning meals are covered in the room rate.",
+    "exampleSentence": "Is breakfast included with our room reservation?",
+    "verified": false
+  },
+  "how-do-i-use-the-air-conditioning": {
+    "text": "How do I turn on the air conditioning?",
+    "pronunciation": "",
+    "meaningNote": "Asking hotel staff for help with the room climate controls.",
+    "exampleSentence": "Excuse me, how do I turn on the air conditioning in my room?",
+    "verified": false
+  },
+  "could-i-have-an-extra-towel": {
+    "text": "Could I have an extra towel, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting fresh towels or linens from housekeeping.",
+    "exampleSentence": "Hello, could I have an extra towel for room 302, please?",
+    "verified": false
+  },
+  "there-is-a-problem-with-my-room": {
+    "text": "There is a problem with my room.",
+    "pronunciation": "",
+    "meaningNote": "Alerting the front desk to a maintenance or plumbing issue.",
+    "exampleSentence": "Excuse me, there is a problem with my room; the hot water is not working.",
+    "verified": false
+  },
+  "is-there-toilet-paper": {
+    "text": "Excuse me, there is no toilet paper.",
+    "pronunciation": "",
+    "meaningNote": "Politely letting staff or an attendant know that a restroom needs paper.",
+    "exampleSentence": "Excuse me, there is no toilet paper in the restroom.",
+    "verified": false
+  },
+  "is-there-a-baby-changing-table": {
+    "text": "Is there a baby changing table?",
+    "pronunciation": "",
+    "meaningNote": "Asking whether the restroom has facilities for infants.",
+    "exampleSentence": "Excuse me, is there a baby changing table in this restroom?",
+    "verified": false
+  },
+  "is-there-a-public-restroom-nearby": {
+    "text": "Is there a public restroom nearby?",
+    "pronunciation": "",
+    "meaningNote": "Asking where to find the closest public restroom while outdoors.",
+    "exampleSentence": "Excuse me, is there a public restroom nearby in this park?",
+    "verified": false
+  },
+  "is-this-restroom-free": {
+    "text": "Is this restroom free?",
+    "pronunciation": "",
+    "meaningNote": "Checking whether a public toilet charges a small coin fee.",
+    "exampleSentence": "Is this restroom free, or do I need coins to enter?",
+    "verified": false
+  },
+  "is-this-restroom-for-men-or-women": {
+    "text": "Is this restroom for men or women?",
+    "pronunciation": "",
+    "meaningNote": "Clarifying unmarked or unfamiliar restroom door signs.",
+    "exampleSentence": "Excuse me, is this restroom for men or women?",
+    "verified": false
+  },
+  "may-i-use-your-restroom": {
+    "text": "May I use your restroom?",
+    "pronunciation": "",
+    "meaningNote": "Asking a café or shop employee for permission to use the customer restroom.",
+    "exampleSentence": "Excuse me, may I use your restroom, please?",
+    "verified": false
+  },
+  "is-there-a-wheelchair-accessible-restroom": {
+    "text": "Is there a wheelchair-accessible restroom?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about step-free, accessible restroom facilities.",
+    "exampleSentence": "Is there a wheelchair-accessible restroom on the ground floor?",
+    "verified": false
+  },
+  "where-can-i-wash-my-hands": {
+    "text": "Where can I wash my hands?",
+    "pronunciation": "",
+    "meaningNote": "Asking for a sink or handwashing station at a restaurant or market.",
+    "exampleSentence": "Before we eat, where can I wash my hands?",
+    "verified": false
+  },
+  "is-there-a-shower-available": {
+    "text": "Is there a shower available?",
+    "pronunciation": "",
+    "meaningNote": "Useful at beaches, hostels, campgrounds, and airport lounges.",
+    "exampleSentence": "Excuse me, is there a shower available near the beach?",
+    "verified": false
+  },
+  "where-is-a-drinking-fountain": {
+    "text": "Where can I find a drinking fountain?",
+    "pronunciation": "",
+    "meaningNote": "Locating potable drinking water to refill a bottle.",
+    "exampleSentence": "Where can I find a drinking fountain to refill my water bottle?",
+    "verified": false
+  },
+  "where-is-the-nearest-tourist-attraction": {
+    "text": "Where is the nearest tourist attraction?",
+    "pronunciation": "",
+    "meaningNote": "Asking locals about notable landmarks within easy reach.",
+    "exampleSentence": "We have a free afternoon; where is the nearest tourist attraction?",
+    "verified": false
+  },
+  "how-much-is-the-entrance-fee": {
+    "text": "How much is the entrance fee?",
+    "pronunciation": "",
+    "meaningNote": "Asking for admission prices at a museum, park, or monument.",
+    "exampleSentence": "Hello, how much is the entrance fee for adults?",
+    "verified": false
+  },
+  "do-i-need-to-book-in-advance": {
+    "text": "Do I need to book tickets in advance?",
+    "pronunciation": "",
+    "meaningNote": "Checking whether reservations are required before visiting an attraction.",
+    "exampleSentence": "Do I need to book tickets in advance, or can we buy them at the door?",
+    "verified": false
+  },
+  "is-photography-allowed": {
+    "text": "Is photography allowed here?",
+    "pronunciation": "",
+    "meaningNote": "Checking rules before taking photos inside a museum, temple, or church.",
+    "exampleSentence": "Excuse me, is photography allowed inside the exhibition hall?",
+    "verified": false
+  },
+  "could-you-take-a-photo-of-us": {
+    "text": "Could you take a photo of us, please?",
+    "pronunciation": "",
+    "meaningNote": "Polite request when asking a passerby to take your picture at a landmark.",
+    "exampleSentence": "Excuse me, could you take a photo of us in front of the monument?",
+    "verified": false
+  },
+  "is-there-a-guided-tour": {
+    "text": "Is there a guided tour available?",
+    "pronunciation": "",
+    "meaningNote": "Inquiring about scheduled tours or audio guides at a historic site.",
+    "exampleSentence": "Is there a guided tour available in English this afternoon?",
+    "verified": false
+  },
+  "where-is-the-ticket-office": {
+    "text": "Where is the ticket office?",
+    "pronunciation": "",
+    "meaningNote": "Locating the booth or counter where admission tickets are sold.",
+    "exampleSentence": "Excuse me, where is the ticket office for the castle tour?",
+    "verified": false
+  },
+  "is-this-place-open-today": {
+    "text": "Is this place open today?",
+    "pronunciation": "",
+    "meaningNote": "Confirming whether a museum or site is open on the current day.",
+    "exampleSentence": "Excuse me, is this place open today or closed for the holiday?",
+    "verified": false
+  },
+  "how-long-does-the-tour-take": {
+    "text": "How long does the tour take?",
+    "pronunciation": "",
+    "meaningNote": "Checking the total duration of a guided visit or boat tour.",
+    "exampleSentence": "How long does the tour take from start to finish?",
+    "verified": false
+  },
+  "can-you-recommend-a-place-to-visit": {
+    "text": "Can you recommend a place to visit?",
+    "pronunciation": "",
+    "meaningNote": "Asking a local resident or hotel clerk for sightseeing suggestions.",
+    "exampleSentence": "We love local history; can you recommend a place to visit nearby?",
+    "verified": false
+  },
+  "where-is-the-nearest-atm": {
+    "text": "Where is the nearest ATM?",
+    "pronunciation": "",
+    "meaningNote": "Locating a cash withdrawal machine.",
+    "exampleSentence": "Excuse me, where is the nearest ATM inside this shopping center?",
+    "verified": false
+  },
+  "do-you-have-change-for-this": {
+    "text": "Do you have change for this bill?",
+    "pronunciation": "",
+    "meaningNote": "Asking a cashier or driver if they can break a larger banknote.",
+    "exampleSentence": "I only have a large note; do you have change for this bill?",
+    "verified": false
+  },
+  "what-is-the-exchange-rate": {
+    "text": "What is the exchange rate?",
+    "pronunciation": "",
+    "meaningNote": "Checking the currency conversion rate before exchanging money.",
+    "exampleSentence": "Good morning, what is the exchange rate for US dollars today?",
+    "verified": false
+  },
+  "can-we-split-the-bill": {
+    "text": "Can we pay separately?",
+    "pronunciation": "",
+    "meaningNote": "Asking a server or cashier to divide payment among companions.",
+    "exampleSentence": "Excuse me, can we pay separately with two cards?",
+    "verified": false
+  },
+  "my-card-is-not-working": {
+    "text": "My card is not working.",
+    "pronunciation": "",
+    "meaningNote": "Explaining that a payment terminal rejected your card so you can try another.",
+    "exampleSentence": "My card is not working on this machine; let me try another card.",
+    "verified": false
+  },
+  "do-you-accept-cash": {
+    "text": "Do you accept cash?",
+    "pronunciation": "",
+    "meaningNote": "Confirming that a venue accepts banknotes and coins rather than card-only.",
+    "exampleSentence": "Do you accept cash here, or is it digital payment only?",
+    "verified": false
+  },
+  "can-i-pay-with-my-phone": {
+    "text": "Can I pay using my phone?",
+    "pronunciation": "",
+    "meaningNote": "Asking whether contactless mobile wallets or QR payments are accepted.",
+    "exampleSentence": "Can I pay using my phone at this register?",
+    "verified": false
+  },
+  "could-i-have-a-receipt": {
+    "text": "Could I have a receipt, please?",
+    "pronunciation": "",
+    "meaningNote": "Requesting printed proof of payment.",
+    "exampleSentence": "Thank you, could I have a receipt for this purchase, please?",
+    "verified": false
+  },
+  "i-think-i-was-charged-twice": {
+    "text": "I think I was charged twice.",
+    "pronunciation": "",
+    "meaningNote": "Politely pointing out a duplicate charge on a bill or card receipt.",
+    "exampleSentence": "Excuse me, could you check the bill? I think I was charged twice.",
+    "verified": false
+  },
+  "is-there-an-additional-fee": {
+    "text": "Is there an additional fee?",
+    "pronunciation": "",
+    "meaningNote": "Checking for extra service charges, taxes, or ATM withdrawal fees.",
+    "exampleSentence": "Before we confirm, is there an additional fee for paying by card?",
+    "verified": false
+  },
+  "what-is-the-weather-like": {
+    "text": "What's the weather like today?",
+    "pronunciation": "",
+    "meaningNote": "Everyday question about current outdoor conditions.",
+    "exampleSentence": "Have you been outside yet? What's the weather like today?",
+    "verified": false
+  },
+  "is-it-going-to-rain": {
+    "text": "Is it going to rain?",
+    "pronunciation": "",
+    "meaningNote": "Checking if rain is expected before heading out.",
+    "exampleSentence": "The sky looks dark; is it going to rain this afternoon?",
+    "verified": false
+  },
+  "it-is-very-hot-today": {
+    "text": "It's very hot today.",
+    "pronunciation": "",
+    "meaningNote": "Commenting on warm or humid weather.",
+    "exampleSentence": "It's very hot today; let's sit in the shade.",
+    "verified": false
+  },
+  "is-there-a-storm-coming": {
+    "text": "Is there a storm coming?",
+    "pronunciation": "",
+    "meaningNote": "Asking locals about approaching severe weather.",
+    "exampleSentence": "The wind is picking up; is there a storm coming?",
+    "verified": false
+  },
+  "should-i-bring-an-umbrella": {
+    "text": "Should I bring an umbrella?",
+    "pronunciation": "",
+    "meaningNote": "Asking advice on whether rain gear is needed.",
+    "exampleSentence": "We are walking to the market; should I bring an umbrella?",
+    "verified": false
+  },
+  "what-is-the-weather-forecast": {
+    "text": "What is the weather forecast for tomorrow?",
+    "pronunciation": "",
+    "meaningNote": "Checking next-day weather conditions to plan outdoor activities.",
+    "exampleSentence": "We want to hike early; what is the weather forecast for tomorrow?",
+    "verified": false
+  },
+  "it-is-very-cold-today": {
+    "text": "It is very cold today.",
+    "pronunciation": "",
+    "meaningNote": "Commenting on chilly weather.",
+    "exampleSentence": "It is very cold today compared to yesterday.",
+    "verified": false
+  },
+  "is-the-air-quality-okay": {
+    "text": "Is the air quality okay today?",
+    "pronunciation": "",
+    "meaningNote": "Checking for haze, smoke, or pollution levels before outdoor exercise.",
+    "exampleSentence": "It looks a little hazy; is the air quality okay today?",
+    "verified": false
+  },
+  "is-it-going-to-be-sunny-tomorrow": {
+    "text": "Is it going to be sunny tomorrow?",
+    "pronunciation": "",
+    "meaningNote": "Checking if clear skies are expected the next day.",
+    "exampleSentence": "We planned a beach trip; is it going to be sunny tomorrow?",
+    "verified": false
+  },
+  "do-i-need-a-jacket": {
+    "text": "Do I need a jacket?",
+    "pronunciation": "",
+    "meaningNote": "Asking if the evening or destination will be cool enough to need outerwear.",
+    "exampleSentence": "Does it get cool at night here, or do I need a jacket?",
+    "verified": false
+  },
+  "help-me-please": {
+    "text": "Please help me! / I need help",
+    "pronunciation": "",
+    "meaningNote": "Urgent, universal cry for immediate assistance in distress.",
+    "exampleSentence": "Please help me, somebody grabbed my backpack!",
+    "verified": false
+  },
+  "call-an-ambulance": {
+    "text": "Call an ambulance immediately!",
+    "pronunciation": "",
+    "meaningNote": "Direct medical emergency instruction to bystanders.",
+    "exampleSentence": "Someone collapsed; please call an ambulance immediately!",
+    "verified": false
+  },
+  "call-the-police": {
+    "text": "Call the police right now!",
+    "pronunciation": "",
+    "meaningNote": "Instruction to contact law enforcement immediately.",
+    "exampleSentence": "There has been a break-in; please call the police right now!",
+    "verified": false
+  },
+  "where-is-the-nearest-hospital": {
+    "text": "Where is the nearest hospital or clinic?",
+    "pronunciation": "",
+    "meaningNote": "Locating urgent medical attention facilities.",
+    "exampleSentence": "My companion has severe abdominal pain; where is the nearest hospital?",
+    "verified": false
+  },
+  "i-need-a-doctor": {
+    "text": "I need to see a doctor who speaks English",
+    "pronunciation": "",
+    "meaningNote": "Requesting a bilingual physician to guarantee clear clinical diagnosis.",
+    "exampleSentence": "I feel unwell and need to see a doctor who speaks English.",
+    "verified": false
+  },
+  "where-is-a-pharmacy": {
+    "text": "Where is the nearest open pharmacy?",
+    "pronunciation": "",
+    "meaningNote": "Finding prescription or over-the-counter medicine.",
+    "exampleSentence": "I have a headache; where is the nearest open pharmacy?",
+    "verified": false
+  },
+  "i-lost-my-passport": {
+    "text": "I lost my passport and wallet",
+    "pronunciation": "",
+    "meaningNote": "Reporting missing legal identification and funds to authorities.",
+    "exampleSentence": "I need help reaching my embassy because I lost my passport.",
+    "verified": false
+  },
+  "i-cannot-breathe": {
+    "text": "I am having trouble breathing",
+    "pronunciation": "",
+    "meaningNote": "Critical indicator of asthma, allergic anaphylaxis, or cardiac issues.",
+    "exampleSentence": "Please sit me up and assist me, I am having trouble breathing.",
+    "verified": false
+  },
+  "there-is-a-fire": {
+    "text": "There is a fire, evacuate the building!",
+    "pronunciation": "",
+    "meaningNote": "Urgent hazard warning to prompt building evacuation.",
+    "exampleSentence": "I smell thick smoke; there is a fire, evacuate the building!",
+    "verified": false
+  },
+  "where-is-the-nearest-police-station": {
+    "text": "Where is the nearest police station?",
+    "pronunciation": "",
+    "meaningNote": "Direct question to locate the closest police station.",
+    "exampleSentence": "Excuse me, where is the nearest police station?",
+    "verified": false
+  },
+  "what-is-the-emergency-number": {
+    "text": "What is the emergency phone number?",
+    "pronunciation": "",
+    "meaningNote": "Asking for the local emergency telephone number.",
+    "exampleSentence": "What is the emergency phone number in this country?",
+    "verified": false
+  },
+  "please-leave-me-alone": {
+    "text": "Please leave me alone.",
+    "pronunciation": "",
+    "meaningNote": "Firm, clear statement asking someone to step away.",
+    "exampleSentence": "Please leave me alone right now.",
+    "verified": false
+  },
+  "someone-stole-my-belongings": {
+    "text": "Someone stole my belongings.",
+    "pronunciation": "",
+    "meaningNote": "Reporting theft of personal property.",
+    "exampleSentence": "I need to speak to an officer; someone stole my belongings.",
+    "verified": false
+  },
+  "i-need-a-police-report": {
+    "text": "I need a copy of the police report.",
+    "pronunciation": "",
+    "meaningNote": "Requesting an official written report at a police station.",
+    "exampleSentence": "I need a copy of the police report for my records.",
+    "verified": false
+  },
+  "my-wallet-was-stolen": {
+    "text": "My wallet was stolen.",
+    "pronunciation": "",
+    "meaningNote": "Reporting that your wallet was taken.",
+    "exampleSentence": "My wallet was stolen on the crowded bus.",
+    "verified": false
+  },
+  "i-have-been-robbed": {
+    "text": "I have been robbed.",
+    "pronunciation": "",
+    "meaningNote": "Direct statement reporting a robbery to police or staff.",
+    "exampleSentence": "Please help me call the police; I have been robbed.",
+    "verified": false
+  },
+  "i-do-not-feel-safe-here": {
+    "text": "I don't feel safe here.",
+    "pronunciation": "",
+    "meaningNote": "Expressing concern about personal safety in a location.",
+    "exampleSentence": "I don't feel safe here; let's go inside the hotel.",
+    "verified": false
+  },
+  "i-need-to-report-an-incident": {
+    "text": "I need to report an incident.",
+    "pronunciation": "",
+    "meaningNote": "Spoken at a police desk to file an official statement.",
+    "exampleSentence": "Good afternoon, I need to report an incident that just happened.",
+    "verified": false
+  },
+  "help-me-contact-the-embassy": {
+    "text": "Can you help me contact my embassy?",
+    "pronunciation": "",
+    "meaningNote": "Asking for assistance reaching your country's embassy or consulate.",
+    "exampleSentence": "Can you help me contact my embassy by phone?",
+    "verified": false
+  },
+  "do-i-need-a-prescription": {
+    "text": "Do I need a prescription for this medicine?",
+    "pronunciation": "",
+    "meaningNote": "Asking a pharmacist whether a doctor's prescription is required.",
+    "exampleSentence": "Excuse me, do I need a prescription for this medicine?",
+    "verified": false
+  },
+  "how-often-should-i-take-this-medicine": {
+    "text": "How often should I take this medicine?",
+    "pronunciation": "",
+    "meaningNote": "Asking a doctor or pharmacist to clarify the dosage schedule.",
+    "exampleSentence": "How often should I take this medicine each day?",
+    "verified": false
+  },
+  "i-have-travel-insurance": {
+    "text": "I have travel health insurance.",
+    "pronunciation": "",
+    "meaningNote": "Informing hospital or clinic reception that you carry travel insurance.",
+    "exampleSentence": "Here is my policy card; I have travel health insurance.",
+    "verified": false
+  },
+  "i-do-not-feel-well": {
+    "text": "I don't feel well.",
+    "pronunciation": "",
+    "meaningNote": "General statement letting others know you are feeling ill.",
+    "exampleSentence": "I need to rest for a moment; I don't feel well.",
+    "verified": false
+  },
+  "i-have-a-headache": {
+    "text": "I have a headache.",
+    "pronunciation": "",
+    "meaningNote": "Describing head pain to a doctor or pharmacist.",
+    "exampleSentence": "I have had a headache since this morning.",
+    "verified": false
+  },
+  "i-have-a-fever": {
+    "text": "I have a fever.",
+    "pronunciation": "",
+    "meaningNote": "Describing an elevated body temperature.",
+    "exampleSentence": "I feel chills and I think I have a fever.",
+    "verified": false
+  },
+  "i-have-stomach-pain": {
+    "text": "I have stomach pain.",
+    "pronunciation": "",
+    "meaningNote": "Describing abdominal or stomach pain.",
+    "exampleSentence": "I need to see a doctor because I have stomach pain.",
+    "verified": false
+  },
+  "i-am-allergic-to-this-medicine": {
+    "text": "I am allergic to this medicine.",
+    "pronunciation": "",
+    "meaningNote": "Informing medical or pharmacy staff of a medication allergy.",
+    "exampleSentence": "Please check the chart; I am allergic to this medicine.",
+    "verified": false
+  },
+  "do-you-have-pain-relievers": {
+    "text": "Do you have pain relievers?",
+    "pronunciation": "",
+    "meaningNote": "Asking a pharmacist for pain relief medication.",
+    "exampleSentence": "Excuse me, do you have pain relievers at this counter?",
+    "verified": false
+  },
+  "i-need-medical-assistance": {
+    "text": "I need medical assistance.",
+    "pronunciation": "",
+    "meaningNote": "Clear request for professional medical care.",
+    "exampleSentence": "Please help me, I need medical assistance right away.",
+    "verified": false
+  },
+  "i-lost-my-bag": {
+    "text": "I lost my bag.",
+    "pronunciation": "",
+    "meaningNote": "Reporting a missing bag to staff or transit personnel.",
+    "exampleSentence": "Excuse me, I lost my bag a few minutes ago.",
+    "verified": false
+  },
+  "has-anyone-found-my-phone": {
+    "text": "Has anyone found my phone?",
+    "pronunciation": "",
+    "meaningNote": "Asking staff if a missing mobile phone was turned in.",
+    "exampleSentence": "I was sitting at that table; has anyone found my phone?",
+    "verified": false
+  },
+  "where-is-the-lost-and-found-office": {
+    "text": "Where is the lost and found office?",
+    "pronunciation": "",
+    "meaningNote": "Locating the office where recovered items are kept.",
+    "exampleSentence": "Excuse me, where is the lost and found office in this station?",
+    "verified": false
+  },
+  "i-left-something-here": {
+    "text": "I left something here.",
+    "pronunciation": "",
+    "meaningNote": "Explaining when returning to a shop or restaurant to look for a forgotten item.",
+    "exampleSentence": "Hello, I was here ten minutes ago and I left something here.",
+    "verified": false
+  },
+  "i-cannot-find-my-belongings": {
+    "text": "I can't find my belongings.",
+    "pronunciation": "",
+    "meaningNote": "Reporting that your personal items are missing.",
+    "exampleSentence": "I checked my locker, and I can't find my belongings.",
+    "verified": false
+  },
+  "i-lost-my-keys": {
+    "text": "I lost my keys.",
+    "pronunciation": "",
+    "meaningNote": "Reporting missing room or personal keys.",
+    "exampleSentence": "Excuse me, I lost my keys somewhere in the lobby.",
+    "verified": false
+  },
+  "i-left-my-bag-on-the-train": {
+    "text": "I left my bag on the train.",
+    "pronunciation": "",
+    "meaningNote": "Reporting an item accidentally left aboard a train.",
+    "exampleSentence": "Excuse me, I just got off and I left my bag on the train.",
+    "verified": false
+  },
+  "please-call-me-if-you-find-it": {
+    "text": "Please call me if you find it.",
+    "pronunciation": "",
+    "meaningNote": "Spoken when leaving your phone number with staff.",
+    "exampleSentence": "Here is my phone number; please call me if you find it.",
+    "verified": false
+  },
+  "can-i-describe-it-to-you": {
+    "text": "Can I describe it to you?",
+    "pronunciation": "",
+    "meaningNote": "Offering details of a lost item's color, brand, or size.",
+    "exampleSentence": "It is a small black backpack; can I describe it to you?",
+    "verified": false
+  },
+  "can-i-fill-out-a-form": {
+    "text": "Can I fill out a form?",
+    "pronunciation": "",
+    "meaningNote": "Asking to complete a written lost-property claim form.",
+    "exampleSentence": "Can I fill out a form with my contact details?",
+    "verified": false
+  },
+  "i-feel-very-dizzy": {
+    "text": "I feel very dizzy and weak",
+    "pronunciation": "",
+    "meaningNote": "Pre-syncope or dehydration indicator.",
+    "exampleSentence": "I need to sit down immediately; I feel very dizzy and weak.",
+    "verified": false
+  }
+}

@@ -43,7 +43,7 @@ class PrivacyCopy {
     PrivacySection(
       title: 'What stays on your device only',
       body:
-          'If you use the app as a guest, nothing is saved to an account. Display settings such as theme mode, study text size, and recall mode are stored only on your device.',
+          'If you use the app as a guest, nothing is saved to an account. Display settings such as theme mode, study text size, and recall mode are stored only on your device. Pronunciation audio is produced by your device\'s or browser\'s built-in speech engine, and depending on the browser the text may be processed by its provider.',
     ),
     PrivacySection(
       title: 'How to delete your data',

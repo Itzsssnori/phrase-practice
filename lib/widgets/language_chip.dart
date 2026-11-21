@@ -150,29 +150,24 @@ class LanguagePairChip extends StatelessWidget {
                 runSpacing: 4,
                 children: [
                   // Native part: "I speak [flag] [name]"
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'I speak ',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        nativeLanguage.flag,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        nativeLanguage.name,
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: theme.colorScheme.onSurface,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'I speak',
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    nativeLanguage.flag,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    nativeLanguage.name,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    softWrap: true,
                   ),
 
                   // Direction arrow
@@ -183,35 +178,29 @@ class LanguagePairChip extends StatelessWidget {
                   ),
 
                   // Target part: "I'm learning [flag] [name]"
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "I'm learning ",
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        targetLanguage.flag,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        targetLanguage.name,
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: theme.colorScheme.primary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.xs),
-                      Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        size: AppSpacing.iconSm,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ],
+                  Text(
+                    "I'm learning",
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    targetLanguage.flag,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    targetLanguage.name,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    softWrap: true,
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    size: AppSpacing.iconSm,
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),

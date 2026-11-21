@@ -12,6 +12,7 @@ import '../widgets/app_loading_indicator.dart';
 import '../widgets/app_primary_button.dart';
 import '../widgets/app_secondary_button.dart';
 import '../widgets/app_translator_scope.dart';
+import '../widgets/localized_phrase_text.dart';
 import '../widgets/translation_result_card.dart';
 
 /// Displays a signed-in user's private AI translation history with All/Saved filter,
@@ -444,22 +445,22 @@ class _TranslatorHistoryScreenState extends State<TranslatorHistoryScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                LocalizedPhraseText(
                                   item.inputText,
+                                  languageCode: item.sourceLanguageCode,
                                   style: theme.textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: primaryText,
                                   ),
-                                  softWrap: true,
                                 ),
                                 const SizedBox(height: 4),
-                                Text(
+                                LocalizedPhraseText(
                                   item.translatedText,
+                                  languageCode: item.targetLanguageCode,
                                   style: theme.textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.w700,
                                     color: theme.colorScheme.primary,
                                   ),
-                                  softWrap: true,
                                 ),
                               ],
                             ),
