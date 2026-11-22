@@ -15,6 +15,18 @@ class AppCheckService {
     defaultValue: '',
   );
 
+  /// Optional build-time opt-out for sideloaded / demo APKs when Firebase AI
+  /// Logic App Check enforcement is disabled in Firebase Console:
+  /// `--dart-define=DISABLE_APP_CHECK=true`
+  ///
+  /// Skipping [FirebaseAppCheck.instance.activate] prevents `firebase_ai` from
+  /// attempting a local token exchange that fails on unregistered debug tokens
+  /// or non-Play-Store Play Integrity checks.
+  static const bool disableAppCheck = bool.fromEnvironment(
+    'DISABLE_APP_CHECK',
+    defaultValue: false,
+  );
+
   static bool _isTranslatorAvailable = false;
 
   /// Whether App Check is properly configured so the AI Translator can run.
@@ -44,6 +56,11 @@ class AppCheckService {
   /// Failures are non-fatal for the rest of the app; they only mark the AI
   /// translator as unavailable.
   static Future<bool> initialize() async {
+    if (disableAppCheck) {
+      _isTranslatorAvailable = true;
+      return true;
+    }
+
     final configured = isConfiguredForEnvironment(
       isWeb: kIsWeb,
       isDebug: kDebugMode,
