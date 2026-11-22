@@ -12,7 +12,12 @@ class AppTypography {
     final textColor = isDark ? AppColors.darkText : AppColors.lightText;
     final secondaryColor = isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
 
-    final base = GoogleFonts.interTextTheme();
+    final base = GoogleFonts.interTextTheme(
+      isDark ? ThemeData.dark().textTheme : ThemeData.light().textTheme,
+    ).apply(
+      bodyColor: textColor,
+      displayColor: textColor,
+    );
 
     return base.copyWith(
       // Top screen heading
@@ -49,6 +54,15 @@ class AppTypography {
         color: textColor,
         letterSpacing: -0.5,
         height: 1.3,
+      ),
+
+      // Default input text (TextField / TextFormField)
+      bodyLarge: base.bodyLarge?.copyWith(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w400,
+        color: textColor,
+        letterSpacing: -0.1,
+        height: 1.45,
       ),
 
       // Standard body
