@@ -120,8 +120,13 @@ class _AppAudioButtonState extends State<AppAudioButton> {
   @override
   void dispose() {
     final service = _speechService;
+    final utteranceId = _resolvedUtteranceId;
     if (service != null) {
-      unawaited(service.stopIfPlayingUtterance(_resolvedUtteranceId));
+      // Defer stop until after unmount so notifyListeners never fires while
+      // the widget tree is locked.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        unawaited(service.stopIfPlayingUtterance(utteranceId));
+      });
     }
     super.dispose();
   }
